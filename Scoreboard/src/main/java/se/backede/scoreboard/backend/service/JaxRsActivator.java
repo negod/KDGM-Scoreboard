@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package se.backede.kggm.service;
+package se.backede.scoreboard.backend.service;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
-import se.backede.kggm.service.player.PlayerService;
+import se.backede.scoreboard.backend.service.player.PlayerService;
 
 /**
  *

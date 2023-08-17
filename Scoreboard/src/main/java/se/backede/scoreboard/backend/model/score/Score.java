@@ -2,9 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package se.backede.kggm.model.game;
+package se.backede.scoreboard.backend.model.score;
+
+
 
 import jakarta.persistence.Entity;
+import se.backede.scoreboard.backend.model.player.Team;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +18,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Game {
+public class Score {
 
-    private String name;
-    private GameType game;
+    private Team team;
+    private int score;
 
 }
