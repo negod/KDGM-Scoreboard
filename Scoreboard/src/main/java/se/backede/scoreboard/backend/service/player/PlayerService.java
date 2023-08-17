@@ -12,17 +12,20 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *
  * @author joaki
  */
+@Slf4j
 @Path("/player")
 public class PlayerService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllUsers() {
+        log.info("Getting stuff");
         // Return a list of users in JSON format
         // You can implement this part according to your needs
         return Response.ok("[]").build();

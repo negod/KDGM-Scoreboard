@@ -109,7 +109,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!--startClass>se.backede.scoreboard.backend.EmbeddedPayara</startClass-->
                     <payaraVersion>${version.payara}</payaraVersion>
                     <artifactItem>
                         <groupId>fish.payara.extras</groupId>
@@ -132,10 +131,17 @@
                             <artifactId>lombok</artifactId>
                             <version>${lombok.version}</version>
                         </artifactItem>
+                        <!-- LOGGING -->
+                        
                         <artifactItem>
                             <groupId>org.slf4j</groupId>
                             <artifactId>slf4j-api</artifactId>
                             <version>${slf4j.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>jul-to-slf4j</artifactId>
+                            <version>2.0.7</version>
                         </artifactItem>
                         <artifactItem>
                             <groupId>ch.qos.logback</groupId>
@@ -147,17 +153,38 @@
                             <artifactId>logback-classic</artifactId>
                             <version>${logback.version}</version>
                         </artifactItem>
+                        
                         <artifactItem>
                             <groupId>fish.payara.extras</groupId>
                             <artifactId>payara-embedded-all</artifactId>
                             <version>${version.payara}</version>
                         </artifactItem>
+                        
+                        <!-- Persistence -->
+                        
+                        <artifactItem>
+                            <groupId>com.h2database</groupId>
+                            <artifactId>h2</artifactId>
+                            <version>1.4.197</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>org.hibernate</groupId>
+                            <artifactId>hibernate-core</artifactId>
+                            <version>6.2.7.Final</version>
+                        </artifactItem>
+                        
                     </customJars>
                                        
                 </configuration>
             </plugin>
             
         </plugins>
+        
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         
     </build>
 
