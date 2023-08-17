@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+     http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+    
+    <persistence-unit name="PU" transaction-type="RESOURCE_LOCAL">
+        <!--persistence-unit name="PU" transaction-type="JTA"-->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            <!-- Configuring JDBC properties -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:./db/kggm"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <!-- Hibernate properties -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="false"/>
+            <!--property name="hbm2ddl.auto" value="create-drop"/-->
+            <property name="hbm2ddl.auto" value="create"/>
+            <!-- without below table was not created -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+            <property name="hibernate.cache.use_second_level_cache" value="false"/>
+        </properties>
+    </persistence-unit>
+    
+    
+</persistence>
