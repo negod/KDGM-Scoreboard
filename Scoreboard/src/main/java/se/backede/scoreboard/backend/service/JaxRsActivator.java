@@ -17,7 +17,7 @@ import se.backede.scoreboard.backend.service.player.PlayerService;
 @ApplicationPath("test")
 public class JaxRsActivator extends Application {
 
-    private Set<Object> singletons = new HashSet<Object>();
+    private final Set<Object> singletons = new HashSet<>();
 
     public JaxRsActivator() {
         singletons.add(new PlayerService());

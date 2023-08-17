@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
         <version.javaee>10.0.0</version.javaee>
-        <version.payara>6.2023.7</version.payara>
+        <version.payara>6.2023.8</version.payara>
         <version.java>20</version.java>
         <version.payara.maven.plugin>2.0</version.payara.maven.plugin>
         
@@ -36,7 +36,7 @@
             <groupId>fish.payara.extras</groupId>
             <artifactId>payara-embedded-all</artifactId>
             <version>${version.payara}</version>
-            <type>jar</type>
+            <scope>provided</scope>
         </dependency>
         
         <!-- LOGGING -->
@@ -44,22 +44,26 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>${logback.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
+            <scope>provided</scope>
         </dependency>
         
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
         
         <!-- DATABASE -->
@@ -81,21 +85,6 @@
                 <configuration>
                     <source>${version.java}</source>
                     <target>${version.java}</target>
-                    <compilerArguments>
-                        <endorseddirs>${endorsed.dir}</endorseddirs>
-                    </compilerArguments>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok-mapstruct-binding</artifactId>
-                            <version>0.2.0</version>
-                        </path>
-                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             
@@ -120,8 +109,14 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <startClass>se.backede.scoreboard.backend.MicroActivator</startClass>
+                    <!--startClass>se.backede.scoreboard.backend.EmbeddedPayara</startClass-->
                     <payaraVersion>${version.payara}</payaraVersion>
+                    <artifactItem>
+                        <groupId>fish.payara.extras</groupId>
+                        <artifactId>payara-micro</artifactId>
+                        <version>${version.payara}</version>
+                    </artifactItem>
+                    
                     <deployArtifacts>
                         <artifactItem>
                             <groupId>${project.groupId}</groupId>
@@ -129,16 +124,41 @@
                             <version>${project.version}</version>
                             <type>war</type>
                         </artifactItem>
-                    </deployArtifacts>
-                    <artifactItem>
-                        <groupId>fish.payara.extras</groupId>
-                        <artifactId>payara-micro</artifactId>
-                        <version>${version.payara}</version>
-                    </artifactItem>
+                    </deployArtifacts> 
+                    
+                    <customJars>
+                        <artifactItem>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-api</artifactId>
+                            <version>${slf4j.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>ch.qos.logback</groupId>
+                            <artifactId>logback-core</artifactId>
+                            <version>${logback.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>ch.qos.logback</groupId>
+                            <artifactId>logback-classic</artifactId>
+                            <version>${logback.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>fish.payara.extras</groupId>
+                            <artifactId>payara-embedded-all</artifactId>
+                            <version>${version.payara}</version>
+                        </artifactItem>
+                    </customJars>
+                                       
                 </configuration>
             </plugin>
             
         </plugins>
+        
     </build>
 
 </project>
