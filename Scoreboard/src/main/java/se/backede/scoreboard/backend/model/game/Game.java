@@ -6,7 +6,6 @@ package se.backede.scoreboard.backend.model.game;
 
 import lombok.Getter;
 import lombok.Setter;
-
 /**
  *
  * @author joaki
