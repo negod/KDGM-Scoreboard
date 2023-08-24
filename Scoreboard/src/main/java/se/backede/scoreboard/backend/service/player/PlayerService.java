@@ -12,6 +12,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import se.backede.scoreboard.backend.model.player.Player;
 import se.backede.scoreboard.backend.model.player.dao.PlayerDao;
 
@@ -31,6 +33,9 @@ public class PlayerService {
     public Response getPlayers() {
 
         List<Player> all = dao.getAll();
+
+        Logger.getLogger(PlayerService.class.getName()).log(Level.INFO, "testing");
+
         return Response.ok(all).build();
     }
 
