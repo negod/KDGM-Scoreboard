@@ -9,9 +9,10 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <!-- JDBC properties -->
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://192.168.2.131:5432/dev/kggn"/>
-            <property name="javax.persistence.jdbc.user" value="postgres"/>
-            <property name="javax.persistence.jdbc.password" value="admin"/>
+            <!-- Set these values in your main maven settings.xml -->
+            <property name="jakarta.persistence.jdbc.url" value="${postgres.url}/${postgres.defaultShema}"/>
+            <property name="javax.persistence.jdbc.user" value="${postgres.username}"/>
+            <property name="javax.persistence.jdbc.password" value="${postgres.password}"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create-tables"/>
             

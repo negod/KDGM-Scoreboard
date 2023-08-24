@@ -12,22 +12,27 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
-        <version.javaee>10.0.0</version.javaee>
-        <version.payara>6.2023.8</version.payara>
-        <version.java>20</version.java>
-        <version.payara.maven.plugin>2.0</version.payara.maven.plugin>
-        <version.jakarta.inject>2.0.1</version.jakarta.inject>
-        <version.eclipselink>4.0.2</version.eclipselink>
-        <version.javax.persistence>2.2.1</version.javax.persistence>
-        <version.postgre.sql.driver>42.6.0</version.postgre.sql.driver>
-        <version.liquibase.maven.plugin>4.2.0</version.liquibase.maven.plugin>
         <version.maven.compiler.plugin>3.11.0</version.maven.compiler.plugin>
         <version.maven.war.plugin>3.4.0</version.maven.war.plugin>
+
+        <!-- Java and Java EE -->
+        <version.java>20</version.java>
+                                
+        <version.javaee>10.0.0</version.javaee>
+        
+        <!-- Payara micro/embedded -->
+        <version.payara>6.2023.8</version.payara>
+        <version.payara.maven.plugin>2.0</version.payara.maven.plugin>
+        <version.jakarta.inject>2.0.1</version.jakarta.inject>
+        
+        <!-- Persistence -->
+        <version.postgre.sql.driver>42.6.0</version.postgre.sql.driver>
+        <version.liquibase.maven.plugin>4.2.0</version.liquibase.maven.plugin>
+        <version.eclipselink>4.0.2</version.eclipselink>
+        <version.javax.persistence>2.2.1</version.javax.persistence>
+        
         
         <lombok.version>1.18.28</lombok.version>
-        
-        
-        
     </properties>
     
     <dependencies>
@@ -59,7 +64,7 @@
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
-            <version>${version.eclipselink}}</version>
+            <version>${version.eclipselink}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -87,9 +92,22 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <propertyFileWillOverride>true</propertyFileWillOverride>
-                    <propertyFile>src/main/resources/liquibase.properties</propertyFile>
+                    <changeLogFile>src/main/resources/db/changelog-master.xml</changeLogFile>
+                    <driver>org.postgresql.Driver</driver>
+                    
+                    <!-- Set these properties in your main maven settings.xml -->
+                    <url>${postgres.url}</url>
+                    <username>${postgres.username}</username>
+                    <password>${postgres.password}</password>
+                    <defaultSchemaName>${postgres.defaultShema}</defaultSchemaName>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             
             <plugin>

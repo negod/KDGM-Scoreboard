@@ -1,8 +1,3 @@
-/**
- * Author:  Joakim Backede <joakim.backede@outlook.com>
- * Created: 24 aug. 2023
- */
-
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
@@ -13,13 +8,12 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
-    <changeSet id="1" author="Liquibase">
-    <createTable tableName="player">
-           <column name="player_id" type="int">
-                 <constraints primaryKey="true"/>
-           </column>
-           <column name="name" type="varchar"/>
-    </createTable>
+    <changeSet id="1" author="Joakim Backede">
+        <createTable tableName="player">
+            <column name="player_id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar"/>
+        </createTable>
     </changeSet>
 </databaseChangeLog>
-
