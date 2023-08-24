@@ -6,21 +6,22 @@ package se.backede.scoreboard.backend.model.score;
 
 
 
-import jakarta.persistence.Entity;
-import se.backede.scoreboard.backend.model.player.Team;
 import lombok.Getter;
 import lombok.Setter;
+import se.backede.scoreboard.backend.model.player.Team;
 
 /**
  *
  * @author joaki
  */
-@Entity
+
 @Getter
 @Setter
 public class Score {
 
-    private Team team;
+    private int id;
     private int score;
+    private Team team;
+    
 
 }

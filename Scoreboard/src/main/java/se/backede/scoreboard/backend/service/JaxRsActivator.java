@@ -6,26 +6,29 @@ package se.backede.scoreboard.backend.service;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
-import java.util.HashSet;
 import java.util.Set;
-import se.backede.scoreboard.backend.service.player.PlayerService;
 
 /**
  *
  * @author joaki
  */
-@ApplicationPath("test")
+@ApplicationPath("rest-service")
 public class JaxRsActivator extends Application {
 
-    private final Set<Object> singletons = new HashSet<>();
-
-    public JaxRsActivator() {
-        singletons.add(new PlayerService());
+    @Override
+    public Set<Class<?>> getClasses() {
+        Set<Class<?>> resources = new java.util.HashSet<>();
+        addRestResourceClasses(resources);
+        return resources;
     }
 
-    @Override
-    public Set<Object> getSingletons() {
-        return singletons;
+    /**
+     * Do not modify addRestResourceClasses() method. It is automatically
+     * populated with all resources defined in the project. If required, comment
+     * out calling this method in getClasses().
+     */
+    private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(se.backede.scoreboard.backend.service.player.PlayerService.class);
     }
 
 }

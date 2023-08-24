@@ -4,7 +4,6 @@
  */
 package se.backede.scoreboard.backend.model.player;
 
-import jakarta.persistence.Entity;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,11 +12,12 @@ import lombok.Setter;
  *
  * @author joaki
  */
-@Entity
+
 @Getter
 @Setter
 public class Team {
 
+    private int id;
     private Set<Player> players;
     private String name;
 

@@ -31,7 +31,19 @@
             <version>${version.javaee}</version>
             <scope>provided</scope>
         </dependency>
-        
+        <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+            <version>2.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>se.backede.generics</groupId>
+            <artifactId>persistence</artifactId>
+            <version>2.1-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>fish.payara.extras</groupId>
             <artifactId>payara-embedded-all</artifactId>
@@ -58,21 +70,34 @@
             <version>${slf4j.version}</version>
             <scope>provided</scope>
         </dependency>
-        
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
+        
         
         <!-- DATABASE -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.197</version>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>4.0.2</version>
+            <scope>provided</scope>
         </dependency>
         
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>javax.persistence</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+    
     </dependencies>
 
     <build>
@@ -81,7 +106,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.11.0</version>
                 <configuration>
                     <source>${version.java}</source>
                     <target>${version.java}</target>
@@ -110,20 +135,12 @@
                 </executions>
                 <configuration>
                     <payaraVersion>${version.payara}</payaraVersion>
+                    <contextRoot>/</contextRoot>
                     <artifactItem>
                         <groupId>fish.payara.extras</groupId>
                         <artifactId>payara-micro</artifactId>
                         <version>${version.payara}</version>
                     </artifactItem>
-                    
-                    <deployArtifacts>
-                        <artifactItem>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>${project.name}</artifactId>
-                            <version>${project.version}</version>
-                            <type>war</type>
-                        </artifactItem>
-                    </deployArtifacts> 
                     
                     <customJars>
                         <artifactItem>
@@ -131,8 +148,8 @@
                             <artifactId>lombok</artifactId>
                             <version>${lombok.version}</version>
                         </artifactItem>
-                        <!-- LOGGING -->
                         
+                        <!-- LOGGING -->
                         <artifactItem>
                             <groupId>org.slf4j</groupId>
                             <artifactId>slf4j-api</artifactId>
@@ -153,7 +170,6 @@
                             <artifactId>logback-classic</artifactId>
                             <version>${logback.version}</version>
                         </artifactItem>
-                        
                         <artifactItem>
                             <groupId>fish.payara.extras</groupId>
                             <artifactId>payara-embedded-all</artifactId>
@@ -161,16 +177,10 @@
                         </artifactItem>
                         
                         <!-- Persistence -->
-                        
                         <artifactItem>
-                            <groupId>com.h2database</groupId>
-                            <artifactId>h2</artifactId>
-                            <version>1.4.197</version>
-                        </artifactItem>
-                        <artifactItem>
-                            <groupId>org.hibernate</groupId>
-                            <artifactId>hibernate-core</artifactId>
-                            <version>6.2.7.Final</version>
+                            <groupId>org.postgresql</groupId>
+                            <artifactId>postgresql</artifactId>
+                            <version>42.6.0</version>
                         </artifactItem>
                         
                     </customJars>
@@ -183,6 +193,7 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <filtering>true</filtering>
             </resource>
         </resources>
         

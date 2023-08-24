@@ -4,47 +4,34 @@
  */
 package se.backede.scoreboard.backend.service.player;
 
-import jakarta.ws.rs.Consumes;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import se.backede.scoreboard.backend.model.player.Player;
+import se.backede.scoreboard.backend.model.player.dao.PlayerDao;
 
 /**
  *
  * @author joaki
  */
-@Slf4j
-@Path("/player")
+@Path("player")
+@ApplicationScoped
 public class PlayerService {
+
+    @Inject
+    PlayerDao dao;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllUsers() {
-        log.info("Getting stuff");
-        // Return a list of users in JSON format
-        // You can implement this part according to your needs
-        return Response.ok("[]").build();
-    }
+    public Response getPlayers() {
 
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateUser(String userJson) {
-        // Create a new user based on the provided JSON data
-        // You can implement this part according to your needs
-        return Response.status(Response.Status.CREATED).build();
-    }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response createUser(String userJson) {
-        // Create a new user based on the provided JSON data
-        // You can implement this part according to your needs
-        return Response.status(Response.Status.CREATED).build();
+        List<Player> all = dao.getAll();
+        return Response.ok(all).build();
     }
 
 }

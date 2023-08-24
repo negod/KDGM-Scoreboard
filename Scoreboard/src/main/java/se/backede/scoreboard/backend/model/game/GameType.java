@@ -4,7 +4,6 @@
  */
 package se.backede.scoreboard.backend.model.game;
 
-import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,12 +12,11 @@ import lombok.Setter;
  * @author joaki
  */
 
-@Entity
 @Getter
 @Setter
 public class GameType {
-    
-    
+
+    private int id;
     private String gametype;
-    
+
 }
