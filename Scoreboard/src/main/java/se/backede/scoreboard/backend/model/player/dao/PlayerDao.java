@@ -8,8 +8,14 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import se.backede.scoreboard.backend.common.PlayerConstants;
 import se.backede.scoreboard.backend.model.player.Player;
+import se.backede.scoreboard.backend.service.player.PlayerService;
 
 /**
  *
@@ -25,8 +31,27 @@ public class PlayerDao {
     public PlayerDao() {
     }
 
-    public List<Player> getAll() {
-        return em.createQuery("Select p from Player p", Player.class).getResultList();
+    public Optional<List<Player>> getAll() {
+
+        try {
+            return Optional.ofNullable(em.createNamedQuery(PlayerConstants.GET_ALL_PLAYERS, Player.class).getResultList());
+        } catch (Exception e) {
+            Logger.getLogger(PlayerService.class.getName()).log(Level.SEVERE, "Error when getting all players", e);
+        }
+        return Optional.empty();
+    }
+
+    public Optional createPlayer(Player player) {
+
+        System.out.println(player.getName());
+
+        try {
+            em.persist(player);
+            return Optional.of(player);
+        } catch (Exception e) {
+            Logger.getLogger(PlayerService.class.getName()).log(Level.SEVERE, "Error when persisting player", e);
+            return Optional.empty();
+        }
     }
 
 }

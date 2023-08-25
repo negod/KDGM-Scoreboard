@@ -17,7 +17,6 @@
 
         <!-- Java and Java EE -->
         <version.java>20</version.java>
-                                
         <version.javaee>10.0.0</version.javaee>
         
         <!-- Payara micro/embedded -->
@@ -31,8 +30,7 @@
         <version.eclipselink>4.0.2</version.eclipselink>
         <version.javax.persistence>2.2.1</version.javax.persistence>
         
-        
-        <lombok.version>1.18.28</lombok.version>
+        <version.lombok>1.18.28</version.lombok>
     </properties>
     
     <dependencies>
@@ -55,7 +53,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
+            <version>${version.lombok}</version>
             <scope>provided</scope>
         </dependency>
         
@@ -99,7 +97,7 @@
                     <url>${postgres.url}</url>
                     <username>${postgres.username}</username>
                     <password>${postgres.password}</password>
-                    <defaultSchemaName>${postgres.defaultShema}</defaultSchemaName>
+                    <defaultSchemaName>${postgres.defaultSchema}</defaultSchemaName>
                 </configuration>
                 <executions>
                     <execution>
@@ -117,6 +115,13 @@
                 <configuration>
                     <source>${version.java}</source>
                     <target>${version.java}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${version.lombok}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             

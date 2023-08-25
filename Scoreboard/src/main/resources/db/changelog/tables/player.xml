@@ -9,11 +9,20 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
     <changeSet id="1" author="Joakim Backede">
+        
         <createTable tableName="player">
-            <column name="player_id" type="int">
-                <constraints primaryKey="true"/>
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="player_pk"/>
             </column>
-            <column name="name" type="varchar"/>
+            <column name="name" type="varchar">
+                <constraints unique="true" nullable="false"/>
+            </column>
         </createTable>
+        
+        <rollback>
+            <dropTable tableName="player" cascadeConstraints="true" />
+        </rollback>
+        
     </changeSet>
+    
 </databaseChangeLog>
