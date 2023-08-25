@@ -43,8 +43,6 @@ public class PlayerDao {
 
     public Optional createPlayer(Player player) {
 
-        System.out.println(player.getName());
-
         try {
             em.persist(player);
             return Optional.of(player);

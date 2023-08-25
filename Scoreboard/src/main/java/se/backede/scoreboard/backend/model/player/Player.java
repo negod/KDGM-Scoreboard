@@ -6,32 +6,31 @@ package se.backede.scoreboard.backend.model.player;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import se.backede.scoreboard.backend.common.GenericEntity;
 import se.backede.scoreboard.backend.common.PlayerConstants;
 
 /**
  *
  * @author joaki
  */
+@Entity
+@EqualsAndHashCode
+@ToString
+@Table(schema = "kggn", name = "player")
+@NamedQuery(name = PlayerConstants.GET_ALL_PLAYERS, query = "SELECT p FROM Player p")
 @Getter
 @Setter
-@ToString
-@Entity(name = "Player")
-@NamedQuery(name = PlayerConstants.GET_ALL_PLAYERS, query = "SELECT p FROM Player p")
-public class Player {
+public class Player extends GenericEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private int id;
+    @NotNull(message = "Name cannot be NULL")
     @Column(name = "name")
     private String name;
-    //private Team team;
 
 }

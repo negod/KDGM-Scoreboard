@@ -131,6 +131,16 @@
                 <version>${version.maven.war.plugin}</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                            <filtering>true</filtering>
+                            <targetPath>WEB-INF</targetPath>
+                            <!--includes>
+                                <include>**/xmlgateway-context.xml</include>
+                            </includes-->
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
             

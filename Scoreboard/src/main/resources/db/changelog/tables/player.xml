@@ -11,8 +11,11 @@
     <changeSet id="1" author="Joakim Backede">
         
         <createTable tableName="player">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="varchar">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="player_pk"/>
+            </column>
+            <column name="updated" type="date">
+                <constraints nullable="false"/>
             </column>
             <column name="name" type="varchar">
                 <constraints unique="true" nullable="false"/>
