@@ -14,7 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import static jakarta.persistence.TemporalType.TIMESTAMP;
 import jakarta.validation.constraints.NotNull;
@@ -22,16 +21,13 @@ import jakarta.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  *
- * @author Joakim Backede ( joakim.backede@outlook.com )
+ * @author Joakim Backede <joakim.backede@outlook.com>
  */
-//@MappedSuperclass
 @Getter
 @Setter
 @MappedSuperclass

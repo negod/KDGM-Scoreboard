@@ -8,6 +8,6 @@ package se.backede.scoreboard.backend.common;
  */
 public class PlayerConstants {
 
-    public static final String GET_ALL_PLAYERS = "GetAllPlayers";
+    public static final String QUERY_GET_ALL_PLAYERS = "GetAllPlayers";
 
 }

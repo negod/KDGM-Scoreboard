@@ -30,7 +30,13 @@
         <version.eclipselink>4.0.2</version.eclipselink>
         <version.javax.persistence>2.2.1</version.javax.persistence>
         
+        <!-- Logging -->
+        <version.slf4j>2.0.7</version.slf4j>
+        <version.logback>1.4.8</version.logback>
+    
+            
         <version.lombok>1.18.28</version.lombok>
+    
     </properties>
     
     <dependencies>
@@ -136,9 +142,6 @@
                             <directory>${basedir}/src/main/webapp/WEB-INF</directory>
                             <filtering>true</filtering>
                             <targetPath>WEB-INF</targetPath>
-                            <!--includes>
-                                <include>**/xmlgateway-context.xml</include>
-                            </includes-->
                         </resource>
                     </webResources>
                 </configuration>
@@ -158,11 +161,6 @@
                 <configuration>
                     <payaraVersion>${version.payara}</payaraVersion>
                     <contextRoot></contextRoot>
-                    <artifactItem>
-                        <groupId>fish.payara.extras</groupId>
-                        <artifactId>payara-micro</artifactId>
-                        <version>${version.payara}</version>
-                    </artifactItem>
                     
                     <customJars>
                         <artifactItem>
@@ -175,6 +173,7 @@
                             <artifactId>postgresql</artifactId>
                             <version>${version.postgre.sql.driver}</version>
                         </artifactItem>
+                       
                     </customJars>
                                        
                 </configuration>

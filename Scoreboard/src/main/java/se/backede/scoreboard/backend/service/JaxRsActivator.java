@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package se.backede.scoreboard.backend.service;
 
 import jakarta.ws.rs.ApplicationPath;
@@ -10,7 +6,7 @@ import java.util.Set;
 
 /**
  *
- * @author joaki
+ * @author Joakim Backede <joakim.backede@outlook.com>
  */
 @ApplicationPath("rest-service")
 public class JaxRsActivator extends Application {
