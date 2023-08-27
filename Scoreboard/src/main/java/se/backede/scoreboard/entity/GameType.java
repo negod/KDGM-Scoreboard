@@ -1,4 +1,4 @@
-package se.backede.scoreboard.backend.model.game;
+package se.backede.scoreboard.entity;
 
 import lombok.Getter;
 import lombok.Setter;

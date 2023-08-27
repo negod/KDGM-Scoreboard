@@ -1,4 +1,4 @@
-package se.backede.scoreboard.backend.model.player;
+package se.backede.scoreboard.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,8 +10,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import se.backede.scoreboard.backend.common.GenericEntity;
-import se.backede.scoreboard.backend.common.PlayerConstants;
+import se.backede.scoreboard.common.GenericEntity;
+import se.backede.scoreboard.common.PlayerConstants;
 
 /**
  *

@@ -7,7 +7,7 @@
  * and open the template in the editor.
 
  */
-package se.backede.scoreboard.backend.common;
+package se.backede.scoreboard.common;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;

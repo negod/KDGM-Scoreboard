@@ -1,4 +1,4 @@
-package se.backede.scoreboard.backend.model.player.dao;
+package se.backede.scoreboard.control;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import se.backede.scoreboard.backend.common.PlayerConstants;
-import se.backede.scoreboard.backend.model.player.Player;
+import se.backede.scoreboard.common.PlayerConstants;
+import se.backede.scoreboard.entity.Player;
 
 /**
  *

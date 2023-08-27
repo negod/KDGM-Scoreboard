@@ -1,5 +1,6 @@
-package se.backede.scoreboard.backend.model.score;
+package se.backede.scoreboard.entity;
 
+import se.backede.scoreboard.entity.Player;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,11 +9,13 @@ import lombok.Setter;
  *
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
+
 @Getter
 @Setter
-public class Scoreboard {
+public class Team {
 
     private int id;
-    private Set<Score> scores;
+    private Set<Player> players;
+    private String name;
 
 }

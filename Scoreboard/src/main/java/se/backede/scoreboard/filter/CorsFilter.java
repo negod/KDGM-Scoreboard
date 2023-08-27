@@ -1,6 +1,6 @@
 /*
  */
-package se.backede.scoreboard.backend.filter;
+package se.backede.scoreboard.filter;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;

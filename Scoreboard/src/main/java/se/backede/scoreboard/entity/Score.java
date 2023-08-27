@@ -1,10 +1,10 @@
-package se.backede.scoreboard.backend.model.score;
+package se.backede.scoreboard.entity;
 
 
 
 import lombok.Getter;
 import lombok.Setter;
-import se.backede.scoreboard.backend.model.player.Team;
+import se.backede.scoreboard.entity.Team;
 
 /**
  *

@@ -77,7 +77,12 @@
             <version>${version.javax.persistence}</version>
             <scope>provided</scope>
         </dependency>
-        
+        <dependency>
+            <groupId>fish.payara.extras</groupId>
+            <artifactId>payara-embedded-all</artifactId>
+            <version>${version.payara}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -161,7 +166,6 @@
                 <configuration>
                     <payaraVersion>${version.payara}</payaraVersion>
                     <contextRoot></contextRoot>
-                    
                     <customJars>
                         <artifactItem>
                             <groupId>fish.payara.extras</groupId>
@@ -173,9 +177,7 @@
                             <artifactId>postgresql</artifactId>
                             <version>${version.postgre.sql.driver}</version>
                         </artifactItem>
-                       
                     </customJars>
-                                       
                 </configuration>
             </plugin>
             

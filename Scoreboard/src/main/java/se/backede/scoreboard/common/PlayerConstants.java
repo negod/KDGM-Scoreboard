@@ -1,6 +1,6 @@
 /*
  */
-package se.backede.scoreboard.backend.common;
+package se.backede.scoreboard.common;
 
 /**
  *

@@ -1,5 +1,6 @@
-package se.backede.scoreboard.backend.service.player;
+package se.backede.scoreboard.boundary;
 
+import se.backede.scoreboard.control.PlayerDao;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -15,8 +16,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import se.backede.scoreboard.backend.model.player.Player;
-import se.backede.scoreboard.backend.model.player.dao.PlayerDao;
+import se.backede.scoreboard.entity.Player;
 
 /**
  *

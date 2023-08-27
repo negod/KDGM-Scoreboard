@@ -1,4 +1,4 @@
-package se.backede.scoreboard.backend.service;
+package se.backede.scoreboard;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
@@ -24,7 +24,7 @@ public class JaxRsActivator extends Application {
      * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(se.backede.scoreboard.backend.service.player.PlayerService.class);
+        resources.add(se.backede.scoreboard.boundary.PlayerService.class);
     }
 
 }
