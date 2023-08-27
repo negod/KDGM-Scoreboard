@@ -5,4 +5,5 @@ module se.backede.scoreboard.backend {
     requires jakarta.ws.rs;
     requires jakarta.validation;
     requires jakarta.servlet;
+    requires com.fasterxml.jackson.annotation;
 }

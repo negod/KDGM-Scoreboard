@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <changeSet id="teamdata" author="Joakim Backede">
+        <insert tableName="team">
+            <column name="id" value="5A0FC1F5-028C-4BC1-BD86-AE1D47EB2D4B" />
+            <column name="name" value="Team One" />
+            <column name="updated" value="2023-08-27 00:00:00" />
+        </insert>
+        <insert tableName="team">
+            <column name="id" value="7B5BB9E4-94D0-4DFC-A0E4-83244E17C659" />
+            <column name="name" value="Team Two" />
+            <column name="updated" value="2023-08-27 00:00:00" />
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

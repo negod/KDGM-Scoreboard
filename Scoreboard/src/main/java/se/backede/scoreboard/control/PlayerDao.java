@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import se.backede.scoreboard.common.PlayerConstants;
+import se.backede.scoreboard.common.constants.PlayerConstants;
 import se.backede.scoreboard.entity.Player;
 
 /**
