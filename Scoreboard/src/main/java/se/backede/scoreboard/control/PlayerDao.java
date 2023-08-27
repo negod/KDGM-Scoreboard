@@ -26,7 +26,6 @@ public class PlayerDao {
     }
 
     public Optional<List<Player>> getAll() {
-        Logger.getLogger(PlayerDao.class.getName()).log(Level.INFO, "Getting all players");
 
         try {
             return Optional.ofNullable(em.createNamedQuery(PlayerConstants.QUERY_GET_ALL_PLAYERS, Player.class).getResultList());
@@ -37,7 +36,6 @@ public class PlayerDao {
     }
 
     public Optional<Player> createPlayer(Player player) {
-        Logger.getLogger(PlayerDao.class.getName()).log(Level.INFO, "Creating player", player.toString());
 
         try {
             em.persist(player);
@@ -49,7 +47,6 @@ public class PlayerDao {
     }
 
     public Optional<Player> getPlayerById(String id) {
-        Logger.getLogger(PlayerDao.class.getName()).log(Level.INFO, "Gettting player with ID", id);
 
         try {
             Player find = em.find(Player.class, id);
@@ -60,20 +57,13 @@ public class PlayerDao {
         }
     }
 
-    @Transactional
     public Optional<Boolean> deletePlayer(String id) {
-        Logger.getLogger(PlayerDao.class.getName()).log(Level.INFO, "Deleting player with ID", id);
 
         try {
 
             Player playerToRemove = em.find(Player.class, id);
 
-            Logger.getLogger(PlayerDao.class.getName()).log(Level.INFO, "Player to Remove", playerToRemove.toString());
-
             em.remove(playerToRemove);
-            em.flush();
-
-            Logger.getLogger(PlayerDao.class.getName()).log(Level.INFO, "Flushing");
 
             return Optional.of(Boolean.TRUE);
         } catch (Exception e) {
@@ -85,7 +75,6 @@ public class PlayerDao {
     }
 
     public Optional<Player> updatePlayer(Player player) {
-        Logger.getLogger(PlayerDao.class.getName()).log(Level.INFO, "Updating player", player.toString());
         try {
             Player find = em.find(Player.class, player.getId());
             find.setName(player.getName());

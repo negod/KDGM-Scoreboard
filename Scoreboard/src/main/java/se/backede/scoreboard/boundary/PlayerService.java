@@ -40,7 +40,7 @@ public class PlayerService {
     }
 
     @GET
-    @Path("/{id}")
+    @Path("{id}")
     public Response getPlayerbyIdD(@PathParam(value = "id") String id) {
 
         return (Response) dao.getPlayerById(id).map(x -> {
@@ -70,9 +70,9 @@ public class PlayerService {
     }
 
     @DELETE
-    @Path("/{id}")
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response deletePlayer(@PathParam(value = "id") String id) {
-        Logger.getLogger(PlayerService.class.getName()).log(Level.FINEST, "Deleting player with ID", id);
 
         return (Response) dao.deletePlayer(id).map(x -> {
             return Response.ok().build();
