@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import se.backede.scoreboard.common.constants.TeamConstants;
+import se.backede.scoreboard.entity.Player;
 import se.backede.scoreboard.entity.Team;
 
 /**
@@ -20,7 +21,7 @@ import se.backede.scoreboard.entity.Team;
 @ApplicationScoped
 @Transactional
 public class TeamDao {
-    
+
     @PersistenceContext(unitName = "PU")
     private EntityManager em;
 
@@ -79,13 +80,33 @@ public class TeamDao {
     public Optional<Team> updateTeam(Team team) {
         try {
             Team find = em.find(Team.class, team.getId());
-            find.setName(team.getName());
+
+            if (team.getName() != null) {
+                find.setName(team.getName());
+            }
+
             em.merge(find);
             return Optional.ofNullable(find);
         } catch (Exception e) {
-            Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, "Error when deleting team", e);
+            Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, "Error when deleting team {0}", new Object[]{team.toString()});
             return Optional.empty();
         }
     }
-    
+
+    public Optional<Team> addPlayer(String teamId, String playerId) {
+        try {
+            Team team = em.find(Team.class, teamId);
+            Player player = em.find(Player.class, playerId);
+
+            player.setTeam(team);
+            team.getPlayers().add(player);
+
+            em.merge(team);
+            return Optional.ofNullable(team);
+        } catch (Exception e) {
+            Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, "Error when adding player to Team", e);
+            return Optional.empty();
+        }
+    }
+
 }

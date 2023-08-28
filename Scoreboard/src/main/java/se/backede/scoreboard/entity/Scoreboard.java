@@ -13,6 +13,6 @@ import lombok.Setter;
 public class Scoreboard {
 
     private int id;
-    private Set<Score> scores;
+    private Set<Result> scores;
 
 }

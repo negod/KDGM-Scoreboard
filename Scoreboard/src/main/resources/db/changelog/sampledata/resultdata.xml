@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <changeSet id="teamdata" author="Joakim Backede">
+        <insert tableName="result">
+            <column name="updated" value="2023-08-27 00:00:00" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d479" />
+            <column name="player_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3" />
+            <column name="game_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3" />
+            <column name="score" value="100" />
+        </insert>
+        <insert tableName="result">
+            <column name="updated" value="2023-08-27 00:00:00" />
+            <column name="id" value="7a577f5a-9c68-4f15-bb07-1d430b5b2d91" />
+            <column name="player_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3" />
+            <column name="game_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3" />
+            <column name="time" value="PT2M30.025S" />
+        </insert>
+        
+    </changeSet>
+</databaseChangeLog>

@@ -14,8 +14,6 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import se.backede.scoreboard.entity.Player;
 
 /**
@@ -68,6 +66,8 @@ public class PlayerService {
         }).orElse(Response.notModified().build());
 
     }
+
+
 
     @DELETE
     @Path("{id}")

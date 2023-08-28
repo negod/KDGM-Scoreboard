@@ -77,7 +77,11 @@ public class PlayerDao {
     public Optional<Player> updatePlayer(Player player) {
         try {
             Player find = em.find(Player.class, player.getId());
-            find.setName(player.getName());
+
+            if (player.getName() != null) {
+                find.setName(player.getName());
+            }
+
             em.merge(find);
             return Optional.ofNullable(find);
         } catch (Exception e) {

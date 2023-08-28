@@ -26,6 +26,8 @@ public class JaxRsActivator extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(se.backede.scoreboard.boundary.PlayerService.class);
         resources.add(se.backede.scoreboard.boundary.TeamService.class);
+        resources.add(se.backede.scoreboard.boundary.GameService.class);
+        resources.add(se.backede.scoreboard.boundary.ResultService.class);
     }
 
 }

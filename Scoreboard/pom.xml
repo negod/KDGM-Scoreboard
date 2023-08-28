@@ -54,12 +54,6 @@
             <version>${version.jakarta.inject}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.15.2</version>
-            <scope>provided</scope>
-        </dependency>
 
         <!-- LOGGING -->
         <dependency>
@@ -71,6 +65,11 @@
         
         
         <!-- DATABASE -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${version.postgre.sql.driver}</version>
+        </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
@@ -182,21 +181,6 @@
                             <groupId>org.postgresql</groupId>
                             <artifactId>postgresql</artifactId>
                             <version>${version.postgre.sql.driver}</version>
-                        </artifactItem>
-                        <artifactItem>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-databind</artifactId>
-                            <version>2.15.2</version>
-                        </artifactItem>
-                        <artifactItem>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-core</artifactId>
-                            <version>2.15.2</version>
-                        </artifactItem>
-                        <artifactItem>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-annotations</artifactId>
-                            <version>2.15.2</version>
                         </artifactItem>
                     </customJars>
                 </configuration>

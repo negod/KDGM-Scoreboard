@@ -1,9 +1,8 @@
 package se.backede.scoreboard.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
@@ -34,8 +33,7 @@ import se.backede.scoreboard.common.constants.TeamConstants;
 @Setter
 public class Team extends GenericEntity {
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
     private Set<Player> players;
 
     @NotNull(message = "Name cannot be NULL")

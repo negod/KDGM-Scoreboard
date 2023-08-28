@@ -6,11 +6,14 @@
 
     <include file="tables/team.xml" relativeToChangelogFile="true"/>
     <include file="tables/player.xml" relativeToChangelogFile="true"/>
+    <include file="tables/game.xml" relativeToChangelogFile="true"/>
+    <include file="tables/result.xml" relativeToChangelogFile="true"/>
     
     
     <include file="sampledata/teamdata.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/playerdata.xml" relativeToChangelogFile="true"/>
+    <include file="sampledata/gamedata.xml" relativeToChangelogFile="true"/>
+    <include file="sampledata/resultdata.xml" relativeToChangelogFile="true"/>
     
-
 </databaseChangeLog>
 

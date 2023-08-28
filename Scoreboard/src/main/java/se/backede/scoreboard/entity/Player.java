@@ -1,9 +1,10 @@
 package se.backede.scoreboard.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
@@ -37,8 +38,8 @@ public class Player extends GenericEntity {
     @Column(name = "name")
     private String name;
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonbTransient
     private Team team;
 
 }

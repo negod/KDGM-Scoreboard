@@ -9,18 +9,4 @@
             30
         </session-timeout>
     </session-config>
-    <servlet>
-        <servlet-name>JacksonConfig</servlet-name>
-        <servlet-class>com.fasterxml.jackson.databind.ser.DefaultSerializerProvider</servlet-class>
-        <init-param>
-            <param-name>org.codehaus.jackson.JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>JacksonConfig</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping> 
 </web-app>

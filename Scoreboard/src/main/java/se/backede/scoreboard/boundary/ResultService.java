@@ -15,25 +15,25 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
-import se.backede.scoreboard.control.TeamDao;
-import se.backede.scoreboard.entity.Team;
+import se.backede.scoreboard.control.ResultDao;
+import se.backede.scoreboard.entity.Result;
 
 /**
  *
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
-@Path("team")
+@Path("result")
 @ApplicationScoped
-public class TeamService {
+public class ResultService {
 
     @Inject
-    TeamDao dao;
+    ResultDao dao;
 
     @Context
     private UriInfo uriInfo;
 
     @GET
-    public Response getTeams() {
+    public Response getResults() {
         return (Response) dao.getAll().map(x -> {
             return Response.ok(x).build();
         }).orElse(Response.noContent().build());
@@ -41,9 +41,9 @@ public class TeamService {
 
     @GET
     @Path("{id}")
-    public Response getTeambyIdD(@PathParam(value = "id") String id) {
+    public Response getResultbyIdD(@PathParam(value = "id") String id) {
 
-        return (Response) dao.getTeamById(id).map(x -> {
+        return (Response) dao.getResultById(id).map(x -> {
             return Response.ok(x).build();
         }).orElse(Response.noContent().build());
 
@@ -51,9 +51,9 @@ public class TeamService {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createTeam(Team team) {
+    public Response createResult(Result player) {
 
-        return (Response) dao.createTeam(team).map(x -> {
+        return (Response) dao.createResult(player).map(x -> {
             return Response.created(uriInfo.getAbsolutePath()).entity(x).build();
         }).orElse(Response.serverError().build());
 
@@ -61,21 +61,9 @@ public class TeamService {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateTeam(Team team) {
+    public Response updateResult(Result player) {
 
-        return (Response) dao.updateTeam(team).map(x -> {
-            return Response.ok(x).build();
-        }).orElse(Response.notModified().build());
-
-    }
-
-    // TODO
-    @PUT
-    @Path("{TeamId}/{playerId}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addPlayer(@PathParam(value = "TeamId") String teamId, @PathParam(value = "playerId") String playerId) {
-
-        return (Response) dao.addPlayer(teamId, playerId).map(x -> {
+        return (Response) dao.updateResult(player).map(x -> {
             return Response.ok(x).build();
         }).orElse(Response.notModified().build());
 
@@ -84,9 +72,9 @@ public class TeamService {
     @DELETE
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteTeam(@PathParam(value = "id") String id) {
+    public Response deleteResult(@PathParam(value = "id") String id) {
 
-        return (Response) dao.deleteTeam(id).map(x -> {
+        return (Response) dao.deleteResult(id).map(x -> {
             return Response.ok().build();
         }).orElse(Response.serverError().build());
     }
