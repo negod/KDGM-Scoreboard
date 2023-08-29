@@ -5,10 +5,7 @@ package se.backede.scoreboard.converter;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 import java.time.Duration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.postgresql.util.PGInterval;
-import se.backede.scoreboard.control.GameDao;
 
 /**
  *
@@ -19,7 +16,6 @@ public class DurationConverter implements AttributeConverter<Duration, PGInterva
 
     @Override
     public PGInterval convertToDatabaseColumn(Duration duration) {
-        Logger.getLogger(DurationConverter.class.getName()).log(Level.INFO, "Duration converter to Column");
         if (duration != null) {
             long toMillis = duration.toMillis();
             PGInterval interval = new PGInterval();
@@ -30,13 +26,17 @@ public class DurationConverter implements AttributeConverter<Duration, PGInterva
 
     @Override
     public Duration convertToEntityAttribute(PGInterval pgInterval) {
-        Logger.getLogger(DurationConverter.class.getName()).log(Level.INFO, "Duration converter to Attribute");
         if (pgInterval != null) {
-            Logger.getLogger(DurationConverter.class.getName()).log(Level.INFO, "Interval is not null seconds... -> {0}", new Object[]{pgInterval.getSeconds()});
+
             Double seconds = pgInterval.getSeconds();
-            return Duration.ofMillis(seconds.longValue() * 1000);
+            Integer minutes = pgInterval.getMinutes();
+            Integer hours = pgInterval.getHours();
+
+            Duration ofMillis = Duration.ofMillis(seconds.longValue() * 1000);
+            ofMillis.plusMinutes(minutes);
+            ofMillis.plusHours(hours);
+
         }
-        Logger.getLogger(DurationConverter.class.getName()).log(Level.INFO, "Interval is null");
         return Duration.ofMillis(0);
     }
 }

@@ -11,6 +11,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -33,6 +34,7 @@ public class ResultService {
     private UriInfo uriInfo;
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getResults() {
         return (Response) dao.getAll().map(x -> {
             return Response.ok(x).build();
@@ -41,6 +43,7 @@ public class ResultService {
 
     @GET
     @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getResultbyIdD(@PathParam(value = "id") String id) {
 
         return (Response) dao.getResultById(id).map(x -> {
@@ -51,6 +54,7 @@ public class ResultService {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response createResult(Result player) {
 
         return (Response) dao.createResult(player).map(x -> {
@@ -61,6 +65,7 @@ public class ResultService {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateResult(Result player) {
 
         return (Response) dao.updateResult(player).map(x -> {
@@ -72,6 +77,7 @@ public class ResultService {
     @DELETE
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response deleteResult(@PathParam(value = "id") String id) {
 
         return (Response) dao.deleteResult(id).map(x -> {

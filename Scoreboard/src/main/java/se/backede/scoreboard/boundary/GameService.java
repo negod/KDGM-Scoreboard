@@ -11,6 +11,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -34,6 +35,7 @@ public class GameService {
     private UriInfo uriInfo;
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getGames() {
         return (Response) dao.getAll().map(x -> {
             return Response.ok(x).build();
@@ -42,6 +44,7 @@ public class GameService {
 
     @GET
     @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getGamebyIdD(@PathParam(value = "id") String id) {
 
         return (Response) dao.getGameById(id).map(x -> {
@@ -52,6 +55,7 @@ public class GameService {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response createGame(Game game) {
 
         return (Response) dao.createGame(game).map(x -> {
@@ -62,6 +66,7 @@ public class GameService {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateGame(Game game) {
 
         return (Response) dao.updateGame(game).map(x -> {
@@ -75,6 +80,7 @@ public class GameService {
     @DELETE
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response deleteGame(@PathParam(value = "id") String id) {
 
         return (Response) dao.deleteGame(id).map(x -> {

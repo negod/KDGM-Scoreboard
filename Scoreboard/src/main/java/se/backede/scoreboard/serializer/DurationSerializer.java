@@ -8,7 +8,6 @@ import java.time.Duration;
 import jakarta.json.stream.JsonGenerator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import se.backede.scoreboard.control.GameDao;
 
 /**
  *

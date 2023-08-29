@@ -9,7 +9,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import java.util.Set;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,8 +21,7 @@ import se.backede.scoreboard.common.constants.TeamConstants;
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
 @Entity
-@EqualsAndHashCode(exclude = "players")
-@ToString
+@ToString(exclude = "players")
 @Table(schema = GlobalConstants.SCHEMA_NAME, name = TeamConstants.TABLE_NAME)
 @NamedQueries({
     @NamedQuery(name = TeamConstants.QUERY_GET_ALL_TEAMS, query = "SELECT t FROM Team t")

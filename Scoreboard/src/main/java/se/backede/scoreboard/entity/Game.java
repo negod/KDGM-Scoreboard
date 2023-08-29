@@ -6,7 +6,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,13 +18,11 @@ import se.backede.scoreboard.common.constants.GlobalConstants;
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
 @Entity
-@EqualsAndHashCode
 @ToString
 @Table(schema = GlobalConstants.SCHEMA_NAME, name = GameConstants.TABLE_NAME)
 @NamedQueries({
     @NamedQuery(name = GameConstants.QUERY_GET_ALL_GAMES, query = "SELECT g FROM Game g")
 })
-
 @Getter
 @Setter
 public class Game extends GenericEntity {

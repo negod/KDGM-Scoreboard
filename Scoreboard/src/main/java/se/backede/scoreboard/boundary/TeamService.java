@@ -11,6 +11,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -33,6 +34,7 @@ public class TeamService {
     private UriInfo uriInfo;
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getTeams() {
         return (Response) dao.getAll().map(x -> {
             return Response.ok(x).build();
@@ -41,6 +43,7 @@ public class TeamService {
 
     @GET
     @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getTeambyIdD(@PathParam(value = "id") String id) {
 
         return (Response) dao.getTeamById(id).map(x -> {
@@ -51,6 +54,7 @@ public class TeamService {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response createTeam(Team team) {
 
         return (Response) dao.createTeam(team).map(x -> {
@@ -61,6 +65,7 @@ public class TeamService {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateTeam(Team team) {
 
         return (Response) dao.updateTeam(team).map(x -> {
@@ -73,6 +78,7 @@ public class TeamService {
     @PUT
     @Path("{TeamId}/{playerId}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response addPlayer(@PathParam(value = "TeamId") String teamId, @PathParam(value = "playerId") String playerId) {
 
         return (Response) dao.addPlayer(teamId, playerId).map(x -> {
@@ -84,6 +90,7 @@ public class TeamService {
     @DELETE
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response deleteTeam(@PathParam(value = "id") String id) {
 
         return (Response) dao.deleteTeam(id).map(x -> {
