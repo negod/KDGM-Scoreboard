@@ -31,4 +31,11 @@ public class Game extends GenericEntity {
     @Enumerated(EnumType.STRING)
     private GameType gametype;
 
+    public Game() {
+    }
+
+    public Game(String id) {
+        super(id);
+    }
+
 }

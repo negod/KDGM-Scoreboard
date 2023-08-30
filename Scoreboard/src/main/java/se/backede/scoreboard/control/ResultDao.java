@@ -5,6 +5,7 @@ package se.backede.scoreboard.control;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,6 @@ import se.backede.scoreboard.common.constants.ResultConstants;
 import se.backede.scoreboard.entity.Game;
 import se.backede.scoreboard.entity.Player;
 import se.backede.scoreboard.entity.Result;
-import se.backede.scoreboard.exception.MissingFieldException;
 
 /**
  *
@@ -114,6 +114,14 @@ public class ResultDao {
             Logger.getLogger(ResultDao.class.getName()).log(Level.SEVERE, "Error when updating result", e);
             return Optional.empty();
         }
+    }
+
+    public Optional<List<Result>> getResultsByGame(String gameId) {
+        Logger.getLogger(ResultDao.class.getName()).log(Level.INFO, "Getting Results By Game {0}", new Object[]{gameId});
+        TypedQuery<Result> query = em.createNamedQuery(ResultConstants.QUERY_GET_BY_GAME, Result.class);
+        query.setParameter("game", new Game(gameId));
+        return Optional.ofNullable(query.getResultList());
+
     }
 
 }

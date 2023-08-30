@@ -2,6 +2,7 @@ package se.backede.scoreboard.entity;
 
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
@@ -24,17 +25,18 @@ import se.backede.scoreboard.converter.DurationConverter;
 @ToString
 @Table(schema = GlobalConstants.SCHEMA_NAME, name = ResultConstants.TABLE_NAME)
 @NamedQueries({
-    @NamedQuery(name = ResultConstants.QUERY_GET_ALL_RESULTS, query = "SELECT r FROM Result r")
+    @NamedQuery(name = ResultConstants.QUERY_GET_ALL_RESULTS, query = "SELECT r FROM Result r"),
+    @NamedQuery(name = ResultConstants.QUERY_GET_BY_GAME, query = "SELECT r FROM Result r where r.game = :game")
 })
 @Getter
 @Setter
 public class Result extends GenericEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "player_id", nullable = false)
     private Player player;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id", nullable = false)
     private Game game;
 

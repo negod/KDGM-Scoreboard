@@ -17,10 +17,13 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.core.UriInfo;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import se.backede.scoreboard.control.ResultDao;
+import se.backede.scoreboard.dto.ResultByGameDto;
+import se.backede.scoreboard.dto.mapper.ResultByGameMapper;
 import se.backede.scoreboard.entity.Result;
 
 /**
@@ -56,6 +59,20 @@ public class ResultService {
 
     }
 
+    @GET
+    @Path("game/{gameId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getResultbyGame(@PathParam(value = "gameId") String gameId) {
+
+        return (Response) dao.getResultsByGame(gameId).map(results -> {
+
+            List<ResultByGameDto> resultByGameDtoList = ResultByGameMapper.getResultByGameDtoList(results);
+            return Response.ok(resultByGameDtoList).build();
+
+        }).orElse(Response.serverError().build());
+
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -66,11 +83,11 @@ public class ResultService {
 
         if (gameId.isPresent() && playerId.isPresent()) {
             if (!gameId.isEmpty() && !playerId.isEmpty()) {
-                
+
                 return (Response) dao.createResult(result).map(x -> {
                     return Response.created(uriInfo.getAbsolutePath()).entity(x).build();
                 }).orElse(Response.serverError().build());
-                
+
             }
         }
 

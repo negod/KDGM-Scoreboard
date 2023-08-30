@@ -33,6 +33,13 @@ import lombok.Setter;
 @MappedSuperclass
 public class GenericEntity implements Serializable {
 
+    public GenericEntity() {
+    }
+
+    public GenericEntity(String id) {
+        this.id = id;
+    }
+
     @Id
     @NotNull(message = "External id cannot be null and should be set to UUID")
     @Column(unique = true, updatable = false, insertable = true, name = "id")
