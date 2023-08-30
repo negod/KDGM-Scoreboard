@@ -15,7 +15,11 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.core.UriInfo;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import se.backede.scoreboard.control.ResultDao;
 import se.backede.scoreboard.entity.Result;
 
@@ -38,7 +42,7 @@ public class ResultService {
     public Response getResults() {
         return (Response) dao.getAll().map(x -> {
             return Response.ok(x).build();
-        }).orElse(Response.noContent().build());
+        }).orElse(Response.serverError().build());
     }
 
     @GET
@@ -48,29 +52,40 @@ public class ResultService {
 
         return (Response) dao.getResultById(id).map(x -> {
             return Response.ok(x).build();
-        }).orElse(Response.noContent().build());
+        }).orElse(Response.serverError().build());
 
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createResult(Result player) {
+    public Response createResult(Result result) {
 
-        return (Response) dao.createResult(player).map(x -> {
-            return Response.created(uriInfo.getAbsolutePath()).entity(x).build();
-        }).orElse(Response.serverError().build());
+        Optional<String> gameId = Optional.of(result.getGame().getId());
+        Optional<String> playerId = Optional.of(result.getPlayer().getId());
+
+        if (gameId.isPresent() && playerId.isPresent()) {
+            if (!gameId.isEmpty() && !playerId.isEmpty()) {
+                
+                return (Response) dao.createResult(result).map(x -> {
+                    return Response.created(uriInfo.getAbsolutePath()).entity(x).build();
+                }).orElse(Response.serverError().build());
+                
+            }
+        }
+
+        return Response.status(Status.BAD_REQUEST).build();
 
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateResult(Result player) {
+    public Response updateResult(Result result) {
 
-        return (Response) dao.updateResult(player).map(x -> {
+        return (Response) dao.updateResult(result).map(x -> {
             return Response.ok(x).build();
-        }).orElse(Response.notModified().build());
+        }).orElse(Response.serverError().build());
 
     }
 

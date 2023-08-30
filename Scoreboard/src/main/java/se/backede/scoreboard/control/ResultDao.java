@@ -14,6 +14,7 @@ import se.backede.scoreboard.common.constants.ResultConstants;
 import se.backede.scoreboard.entity.Game;
 import se.backede.scoreboard.entity.Player;
 import se.backede.scoreboard.entity.Result;
+import se.backede.scoreboard.exception.MissingFieldException;
 
 /**
  *
@@ -42,10 +43,17 @@ public class ResultDao {
     public Optional<Result> createResult(Result result) {
 
         try {
+
+            Game game = em.find(Game.class, result.getGame().getId());
+            Player player = em.find(Player.class, result.getPlayer().getId());
+
+            result.setPlayer(player);
+            result.setGame(game);
+
             em.persist(result);
             return Optional.of(result);
         } catch (Exception e) {
-            Logger.getLogger(ResultDao.class.getName()).log(Level.SEVERE, "Error when persisting result", e);
+            Logger.getLogger(ResultDao.class.getName()).log(Level.SEVERE, "Error when persisting Entity Result {0} Exception {1}", new Object[]{result.toString(), e});
             return Optional.empty();
         }
     }
@@ -103,7 +111,7 @@ public class ResultDao {
             em.merge(find);
             return Optional.ofNullable(find);
         } catch (Exception e) {
-            Logger.getLogger(ResultDao.class.getName()).log(Level.SEVERE, "Error when deleting result", e);
+            Logger.getLogger(ResultDao.class.getName()).log(Level.SEVERE, "Error when updating result", e);
             return Optional.empty();
         }
     }

@@ -88,7 +88,7 @@ public class GameDao {
             em.merge(find);
             return Optional.ofNullable(find);
         } catch (Exception e) {
-            Logger.getLogger(GameDao.class.getName()).log(Level.SEVERE, "Error when deleting game", e);
+            Logger.getLogger(GameDao.class.getName()).log(Level.SEVERE, "Error when updating game", e);
             return Optional.empty();
         }
     }

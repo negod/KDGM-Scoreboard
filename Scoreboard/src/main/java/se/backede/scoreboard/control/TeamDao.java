@@ -104,7 +104,7 @@ public class TeamDao {
             em.merge(team);
             return Optional.ofNullable(team);
         } catch (Exception e) {
-            Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, "Error when adding player to Team", e);
+            Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, "Error when deleting player to Team", e);
             return Optional.empty();
         }
     }

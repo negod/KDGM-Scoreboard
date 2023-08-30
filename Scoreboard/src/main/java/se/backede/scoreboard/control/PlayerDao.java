@@ -85,7 +85,7 @@ public class PlayerDao {
             em.merge(find);
             return Optional.ofNullable(find);
         } catch (Exception e) {
-            Logger.getLogger(PlayerDao.class.getName()).log(Level.SEVERE, "Error when deleting player", e);
+            Logger.getLogger(PlayerDao.class.getName()).log(Level.SEVERE, "Error when updating player", e);
             return Optional.empty();
         }
     }
