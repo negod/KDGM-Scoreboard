@@ -84,7 +84,7 @@ public class GameService {
     public Response deleteGame(@PathParam(value = "id") String id) {
 
         return (Response) dao.deleteGame(id).map(x -> {
-            return Response.ok().build();
+            return Response.ok(x).build();
         }).orElse(Response.serverError().build());
     }
     

@@ -25,3 +25,4 @@ replay_pid*
 /backend/target/
 /Scoreboard/target/
 /view/target/
+/view/nbproject/

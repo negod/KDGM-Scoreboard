@@ -8,10 +8,10 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
         </session-timeout>
     </session-config>
     <display-name>Kode Gubbz Gaming Night</display-name>
-    <context-param>
+    <!--context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
-    </context-param>
+    </context-param-->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
@@ -36,4 +36,8 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>arya</param-value>
+    </context-param>
 </web-app>

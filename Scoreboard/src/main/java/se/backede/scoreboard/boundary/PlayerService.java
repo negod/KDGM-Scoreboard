@@ -15,6 +15,8 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import se.backede.scoreboard.entity.Player;
 
 /**
@@ -65,14 +67,12 @@ public class PlayerService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updatePlayer(Player player) {
-
+        Logger.getLogger(PlayerService.class.getName()).log(Level.SEVERE, "Updating player {0} {1}", new Object[]{player.getId(), player.toString()});
         return (Response) dao.updatePlayer(player).map(x -> {
             return Response.ok(x).build();
         }).orElse(Response.notModified().build());
 
     }
-
-
 
     @DELETE
     @Path("{id}")
@@ -81,7 +81,7 @@ public class PlayerService {
     public Response deletePlayer(@PathParam(value = "id") String id) {
 
         return (Response) dao.deletePlayer(id).map(x -> {
-            return Response.ok().build();
+            return Response.ok(x).build();
         }).orElse(Response.serverError().build());
     }
 

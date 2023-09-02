@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -84,10 +85,14 @@ public class PlayerDao {
 
             em.merge(find);
             return Optional.ofNullable(find);
+        } catch (ConstraintViolationException e) {
+            e.getConstraintViolations().forEach(err -> Logger.getLogger(PlayerDao.class.getName()).log(Level.SEVERE, "Constraint violation", e.toString()));
+            return Optional.empty();
         } catch (Exception e) {
             Logger.getLogger(PlayerDao.class.getName()).log(Level.SEVERE, "Error when updating player", e);
             return Optional.empty();
         }
+
     }
 
 }
