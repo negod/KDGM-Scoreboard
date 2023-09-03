@@ -5,16 +5,16 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    <h:form id="form">
+    <h:form id="form_team">
         <p:growl id="messages" showDetail="true" />
 
         <!-- CREATE NEW AND DELETE SELECTED -->
         <p:toolbar>
             <p:toolbarGroup>
                 <p:commandButton value="New" icon="pi pi-plus" actionListener="#{teamController.openNew}"
-                                 update=":dialogs:manage-team-content" oncomplete="PF('manageTeamDialog').show()"
+                                 update=":dialogs_team:manage-team-content" oncomplete="PF('manageTeamDialog').show()"
                                  styleClass="ui-button-success" style="margin-right: .5rem">
-                    <p:resetInput target=":dialogs:manage-team-content" />
+                    <p:resetInput target=":dialogs_team:manage-team-content" />
                 </p:commandButton>
                 <p:commandButton id="delete-teams-button" value="#{teamController.deleteButtonMessage}"
                                  icon="pi pi-trash" actionListener="#{teamController.deleteSelectedTeams}"
@@ -29,15 +29,15 @@
                      rowKey="#{team.id}" paginator="true" rows="10" paginatorPosition="bottom">
             <f:facet name="header">
                 <div class="teams-table-header">
-                    <span style="font-weight: bold">PLAYERS</span>
+                    <span style="font-weight: bold">TEAMS</span>
                 </div>
             </f:facet>
 
-            <p:ajax event="rowSelect" update=":form:delete-teams-button" />
-            <p:ajax event="rowUnselect" update=":form:delete-teams-button" />
-            <p:ajax event="rowSelectCheckbox" update=":form:delete-teams-button" />
-            <p:ajax event="rowUnselectCheckbox" update=":form:delete-teams-button" />
-            <p:ajax event="toggleSelect" update=":form:delete-teams-button" />
+            <p:ajax event="rowSelect" update=":form_team:delete-teams-button" />
+            <p:ajax event="rowUnselect" update=":form_team:delete-teams-button" />
+            <p:ajax event="rowSelectCheckbox" update=":form_team:delete-teams-button" />
+            <p:ajax event="rowUnselectCheckbox" update=":form_team:delete-teams-button" />
+            <p:ajax event="toggleSelect" update=":form_team:delete-teams-button" />
 
             <p:column selectionMode="multiple" exportable="false"></p:column>
 
@@ -45,12 +45,12 @@
                 <h:outputText value="#{team.name}" />
             </p:column>
             <p:column exportable="false">
-                <p:commandButton icon="pi pi-pencil" update=":dialogs:manage-team-content"
+                <p:commandButton icon="pi pi-pencil" update=":dialogs_team:manage-team-content"
                                  oncomplete="PF('manageTeamDialog').show()"
                                  styleClass="edit-button rounded-button ui-button-success" 
                                  process="@this">
                     <f:setPropertyActionListener value="#{team}" target="#{teamController.selectedTeam}" />
-                    <p:resetInput target=":dialogs:manage-team-content" />
+                    <p:resetInput target=":dialogs_team:manage-team-content" />
                 </p:commandButton>
                 <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"
                                  process="@this"
@@ -62,7 +62,7 @@
         </p:dataTable>
     </h:form>
 
-    <h:form id="dialogs">
+    <h:form id="dialogs_team">
         <p:dialog header="Team Details" showEffect="fade" modal="true" widgetVar="manageTeamDialog"
                   responsive="true">
             <p:outputPanel id="manage-team-content" class="ui-fluid">
@@ -85,7 +85,7 @@
         <p:confirmDialog widgetVar="deleteTeamDialog" showEffect="fade" width="300"
                          message="Delete the team?" header="Confirm" severity="warn">
             <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{teamController.deleteTeam}"
-                             process="@this" update=":form:delete-teams-button"
+                             process="@this" update=":form_team:delete-teams-button"
                              oncomplete="PF('deleteTeamDialog').hide()" />
             <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
                              onclick="PF('deleteTeamDialog').hide()" />

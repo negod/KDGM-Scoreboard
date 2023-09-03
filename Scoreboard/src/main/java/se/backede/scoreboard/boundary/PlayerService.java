@@ -15,8 +15,12 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import se.backede.scoreboard.dto.PlayerDto;
+import se.backede.scoreboard.dto.mapper.PlayerMapper;
 import se.backede.scoreboard.entity.Player;
 
 /**
@@ -36,8 +40,15 @@ public class PlayerService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPlayers() {
-        return (Response) dao.getAll().map(x -> {
-            return Response.ok(x).build();
+        return (Response) dao.getAll().map(fetchedPlayers -> {
+
+            List<PlayerDto> players = new ArrayList<>();
+
+            for (Player player : fetchedPlayers) {
+                players.add(PlayerMapper.mapToDto(player));
+            }
+
+            return Response.ok(players).build();
         }).orElse(Response.noContent().build());
     }
 
@@ -46,8 +57,8 @@ public class PlayerService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPlayerbyIdD(@PathParam(value = "id") String id) {
 
-        return (Response) dao.getPlayerById(id).map(x -> {
-            return Response.ok(x).build();
+        return (Response) dao.getPlayerById(id).map(fetchedPlayer -> {
+            return Response.ok(PlayerMapper.mapToDto(fetchedPlayer)).build();
         }).orElse(Response.noContent().build());
 
     }
@@ -67,21 +78,8 @@ public class PlayerService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updatePlayer(Player player) {
-        Logger.getLogger(PlayerService.class.getName()).log(Level.SEVERE, "Updating player {0} {1}", new Object[]{player.getId(), player.toString()});
-        return (Response) dao.updatePlayer(player).map(x -> {
-            return Response.ok(x).build();
-        }).orElse(Response.notModified().build());
-
-    }
-
-    @PUT
-    @Path("{playerId}/{teamId}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response addOrRemoveTeam(@PathParam(value = "playerId") String player, @PathParam(value = "teamId") String team) {
-
-        return (Response) dao.removeTeam(player, team).map(x -> {
-            return Response.ok(x).build();
+        return (Response) dao.updatePlayer(player).map(fetchedPlayer -> {
+            return Response.ok(PlayerMapper.mapToDto(fetchedPlayer)).build();
         }).orElse(Response.notModified().build());
 
     }

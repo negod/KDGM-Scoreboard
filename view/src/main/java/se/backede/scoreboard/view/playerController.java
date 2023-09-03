@@ -25,7 +25,7 @@ import se.backede.scoreboard.view.resources.controller.PlayerRestClientControlle
 @Setter
 @Named("playerController")
 @ViewScoped
-public class playerController implements Serializable {
+public class PlayerController implements Serializable {
 
     private Player selectedPlayer;
     private List<Player> players;

@@ -25,7 +25,7 @@ import se.backede.scoreboard.view.resources.dto.Team;
 @Setter
 @Named("teamController")
 @ViewScoped
-public class teamController implements Serializable{
+public class TeamController implements Serializable{
 
     private Team selectedTeam;
     private List<Team> teams;

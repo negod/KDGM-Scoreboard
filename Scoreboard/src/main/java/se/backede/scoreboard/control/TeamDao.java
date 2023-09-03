@@ -74,7 +74,7 @@ public class TeamDao {
             Team teamToRemove = em.find(Team.class, id);
 
             for (Player player : teamToRemove.getPlayers()) {
-                playerDao.removeTeam(player.getId(), teamToRemove.getId());
+                playerDao.removeTeam(player.getId());
             }
 
             teamToRemove.setPlayers(null);

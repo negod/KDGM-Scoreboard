@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @Named("indexController")
 @ApplicationScoped
-public class indexController {
+public class IndexController {
 
     private boolean showPlayer = false;
 

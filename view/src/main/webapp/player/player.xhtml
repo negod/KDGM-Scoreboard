@@ -5,16 +5,16 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    <h:form id="form">
+    <h:form id="form_player">
         <p:growl id="messages" showDetail="true" />
 
         <!-- CREATE NEW AND DELETE SELECTED -->
         <p:toolbar>
             <p:toolbarGroup>
                 <p:commandButton value="New" icon="pi pi-plus" actionListener="#{playerController.openNew}"
-                                 update=":dialogs:manage-player-content" oncomplete="PF('managePlayerDialog').show()"
+                                 update=":dialogs_player:manage-player-content" oncomplete="PF('managePlayerDialog').show()"
                                  styleClass="ui-button-success" style="margin-right: .5rem">
-                    <p:resetInput target=":dialogs:manage-player-content" />
+                    <p:resetInput target=":dialogs_player:manage-player-content" />
                 </p:commandButton>
                 <p:commandButton id="delete-players-button" value="#{playerController.deleteButtonMessage}"
                                  icon="pi pi-trash" actionListener="#{playerController.deleteSelectedPlayers}"
@@ -33,11 +33,11 @@
                 </div>
             </f:facet>
 
-            <p:ajax event="rowSelect" update=":form:delete-players-button" />
-            <p:ajax event="rowUnselect" update=":form:delete-players-button" />
-            <p:ajax event="rowSelectCheckbox" update=":form:delete-players-button" />
-            <p:ajax event="rowUnselectCheckbox" update=":form:delete-players-button" />
-            <p:ajax event="toggleSelect" update=":form:delete-players-button" />
+            <p:ajax event="rowSelect" update=":form_player:delete-players-button" />
+            <p:ajax event="rowUnselect" update=":form_player:delete-players-button" />
+            <p:ajax event="rowSelectCheckbox" update=":form_player:delete-players-button" />
+            <p:ajax event="rowUnselectCheckbox" update=":form_player:delete-players-button" />
+            <p:ajax event="toggleSelect" update=":form_player:delete-players-button" />
 
             <p:column selectionMode="multiple" exportable="false"></p:column>
 
@@ -45,12 +45,12 @@
                 <h:outputText value="#{player.name}" />
             </p:column>
             <p:column exportable="false">
-                <p:commandButton icon="pi pi-pencil" update=":dialogs:manage-player-content"
+                <p:commandButton icon="pi pi-pencil" update=":dialogs_player:manage-player-content"
                                  oncomplete="PF('managePlayerDialog').show()"
                                  styleClass="edit-button rounded-button ui-button-success" 
                                  process="@this">
                     <f:setPropertyActionListener value="#{player}" target="#{playerController.selectedPlayer}" />
-                    <p:resetInput target=":dialogs:manage-player-content" />
+                    <p:resetInput target=":dialogs_player:manage-player-content" />
                 </p:commandButton>
                 <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"
                                  process="@this"
@@ -62,7 +62,7 @@
         </p:dataTable>
     </h:form>
 
-    <h:form id="dialogs">
+    <h:form id="dialogs_player">
         <p:dialog header="Player Details" showEffect="fade" modal="true" widgetVar="managePlayerDialog"
                   responsive="true">
             <p:outputPanel id="manage-player-content" class="ui-fluid">
@@ -85,7 +85,7 @@
         <p:confirmDialog widgetVar="deletePlayerDialog" showEffect="fade" width="300"
                          message="Delete the player?" header="Confirm" severity="warn">
             <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{playerController.deletePlayer}"
-                             process="@this" update=":form:delete-players-button"
+                             process="@this" update=":form_player:delete-players-button"
                              oncomplete="PF('deletePlayerDialog').hide()" />
             <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
                              onclick="PF('deletePlayerDialog').hide()" />

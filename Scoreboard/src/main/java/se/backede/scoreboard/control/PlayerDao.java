@@ -78,7 +78,7 @@ public class PlayerDao {
 
     }
 
-    public Optional<Player> removeTeam(String playerId, String teamId) {
+    public Optional<Player> removeTeam(String playerId) {
 
         em.createNamedQuery(PlayerConstants.QUERY_DELETE_TEAM, Player.class)
                 .setParameter(PlayerConstants.TABLE_COLUMN_ID, playerId)

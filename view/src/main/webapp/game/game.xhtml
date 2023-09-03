@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="form_game">
+        <p:growl id="messages" showDetail="true" />
+
+        <!-- CREATE NEW AND DELETE SELECTED -->
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:commandButton value="New" icon="pi pi-plus" actionListener="#{gameController.openNew}"
+                                 update=":dialogs_game:manage-game-content" oncomplete="PF('manageGameDialog').show()"
+                                 styleClass="ui-button-success" style="margin-right: .5rem">
+                    <p:resetInput target=":dialogs_game:manage-game-content" />
+                </p:commandButton>
+                <p:commandButton id="delete-games-button" value="#{gameController.deleteButtonMessage}"
+                                 icon="pi pi-trash" actionListener="#{gameController.deleteSelectedGames}"
+                                 styleClass="ui-button-danger" disabled="#{!gameController.hasSelectedGames()}" update="@this">
+                    <p:confirm header="Confirmation" message="Delete the selected games?" icon="pi pi-exclamation-triangle" />
+                </p:commandButton>
+            </p:toolbarGroup>
+        </p:toolbar>
+
+        <p:dataTable id="dt-games" widgetVar="dtGames" var="game" value="#{gameController.games}"
+                     reflow="true" styleClass="games-table" selection="#{gameController.selectedGames}"
+                     rowKey="#{game.id}" paginator="true" rows="10" paginatorPosition="bottom">
+            <f:facet name="header">
+                <div class="games-table-header">
+                    <span style="font-weight: bold">GAMES</span>
+                </div>
+            </f:facet>
+
+            <p:ajax event="rowSelect" update=":form_game:delete-games-button" />
+            <p:ajax event="rowUnselect" update=":form_game:delete-games-button" />
+            <p:ajax event="rowSelectCheckbox" update=":form_game:delete-games-button" />
+            <p:ajax event="rowUnselectCheckbox" update=":form_game:delete-games-button" />
+            <p:ajax event="toggleSelect" update=":form_game:delete-games-button" />
+
+            <p:column selectionMode="multiple" exportable="false"></p:column>
+
+            <p:column headerText="Name" sortBy="#{game.name}" >
+                <h:outputText value="#{game.name}" />
+            </p:column>
+            <p:column headerText="Game Type" sortBy="#{game.gameType}" >
+                <h:outputText value="#{game.gameType}" />
+            </p:column>
+            <p:column exportable="false">
+                <p:commandButton icon="pi pi-pencil" update=":dialogs_game:manage-game-content"
+                                 oncomplete="PF('manageGameDialog').show()"
+                                 styleClass="edit-button rounded-button ui-button-success" 
+                                 process="@this">
+                    <f:setPropertyActionListener value="#{game}" target="#{gameController.selectedGame}" />
+                    <p:resetInput target=":dialogs_game:manage-game-content" />
+                </p:commandButton>
+                <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"
+                                 process="@this"
+                                 oncomplete="PF('deleteGameDialog').show()">
+                    <f:setPropertyActionListener value="#{game}" target="#{gameController.selectedGame}" />
+                </p:commandButton>
+            </p:column>
+
+        </p:dataTable>
+    </h:form>
+
+    <h:form id="dialogs_game">
+        <p:dialog header="Game Details" showEffect="fade" modal="true" widgetVar="manageGameDialog"
+                  responsive="true">
+            <p:outputPanel id="manage-game-content" class="ui-fluid">
+                <p:outputPanel rendered="#{not empty gameController.selectedGame}">
+                    <div class="field">
+                        <p:outputLabel for="name">Name</p:outputLabel>
+                        <p:inputText id="name" value="#{gameController.selectedGame.name}" required="true" />
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="Save" icon="pi pi-check" actionListener="#{gameController.saveGame}"
+                                 update="manage-game-content" process="manage-game-content @this" />
+                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageGameDialog').hide()"
+                                 class="ui-button-secondary" type="button" />
+            </f:facet>
+        </p:dialog>
+
+        <p:confirmDialog widgetVar="deleteGameDialog" showEffect="fade" width="300"
+                         message="Delete the game?" header="Confirm" severity="warn">
+            <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{gameController.deleteGame}"
+                             process="@this" update=":form_game:delete-games-button"
+                             oncomplete="PF('deleteGameDialog').hide()" />
+            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                             onclick="PF('deleteGameDialog').hide()" />
+        </p:confirmDialog>
+
+        <p:confirmDialog global="true" showEffect="fade" width="300">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                             icon="pi pi-times" />
+        </p:confirmDialog>
+    </h:form>
+
+</html>
+
