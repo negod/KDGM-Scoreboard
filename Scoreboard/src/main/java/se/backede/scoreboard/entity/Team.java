@@ -1,5 +1,6 @@
 package se.backede.scoreboard.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,7 +32,7 @@ import se.backede.scoreboard.common.constants.TeamConstants;
 @Setter
 public class Team extends GenericEntity {
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER, orphanRemoval = false, cascade = CascadeType.DETACH)
     private Set<Player> players;
 
     @NotNull(message = "Name cannot be NULL")

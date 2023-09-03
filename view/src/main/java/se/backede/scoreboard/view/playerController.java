@@ -3,9 +3,9 @@
 package se.backede.scoreboard.view;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.PrimeFaces;
 import se.backede.scoreboard.view.resources.dto.Player;
-import se.backede.scoreboard.view.resources.PlayerRestClientController;
+import se.backede.scoreboard.view.resources.controller.PlayerRestClientController;
 
 /**
  *
@@ -23,9 +23,9 @@ import se.backede.scoreboard.view.resources.PlayerRestClientController;
  */
 @Getter
 @Setter
-@Named("indexController")
-@ApplicationScoped
-public class IndexController implements Serializable {
+@Named("playerController")
+@ViewScoped
+public class playerController implements Serializable {
 
     private Player selectedPlayer;
     private List<Player> players;

@@ -74,6 +74,18 @@ public class PlayerService {
 
     }
 
+    @PUT
+    @Path("{playerId}/{teamId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addOrRemoveTeam(@PathParam(value = "playerId") String player, @PathParam(value = "teamId") String team) {
+
+        return (Response) dao.removeTeam(player, team).map(x -> {
+            return Response.ok(x).build();
+        }).orElse(Response.notModified().build());
+
+    }
+
     @DELETE
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)

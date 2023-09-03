@@ -3,14 +3,17 @@ package se.backede.scoreboard.control;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolationException;
+import jakarta.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import se.backede.scoreboard.common.constants.PlayerConstants;
 import se.backede.scoreboard.entity.Player;
+import se.backede.scoreboard.entity.Team;
 
 /**
  *
@@ -75,16 +78,26 @@ public class PlayerDao {
 
     }
 
+    public Optional<Player> removeTeam(String playerId, String teamId) {
+
+        em.createNamedQuery(PlayerConstants.QUERY_DELETE_TEAM, Player.class)
+                .setParameter(PlayerConstants.TABLE_COLUMN_ID, playerId)
+                .executeUpdate();
+        em.flush();
+
+        return Optional.ofNullable(em.find(Player.class, playerId));
+
+    }
+
     public Optional<Player> updatePlayer(Player player) {
         try {
-            Player find = em.find(Player.class, player.getId());
 
-            if (player.getName() != null) {
-                find.setName(player.getName());
-            }
+            TypedQuery<Player> createNamedQuery = em.createNamedQuery(PlayerConstants.QUERY_UPDATE_PLAYER, Player.class);
+            createNamedQuery.setParameter(PlayerConstants.TABLE_COLUMN_NAME, player.getName());
+            createNamedQuery.setParameter(PlayerConstants.TABLE_COLUMN_ID, player.getId());
+            int executeUpdate = createNamedQuery.executeUpdate();
 
-            em.merge(find);
-            return Optional.ofNullable(find);
+            return Optional.ofNullable(player);
         } catch (ConstraintViolationException e) {
             e.getConstraintViolations().forEach(err -> Logger.getLogger(PlayerDao.class.getName()).log(Level.SEVERE, "Constraint violation", e.toString()));
             return Optional.empty();

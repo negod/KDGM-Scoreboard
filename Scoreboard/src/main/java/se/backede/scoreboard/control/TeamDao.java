@@ -3,13 +3,18 @@
 package se.backede.scoreboard.control;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import se.backede.scoreboard.common.constants.PlayerConstants;
 import se.backede.scoreboard.common.constants.TeamConstants;
 import se.backede.scoreboard.entity.Player;
 import se.backede.scoreboard.entity.Team;
@@ -24,6 +29,9 @@ public class TeamDao {
 
     @PersistenceContext(unitName = "PU")
     private EntityManager em;
+
+    @Inject
+    PlayerDao playerDao;
 
     public TeamDao() {
     }
@@ -63,12 +71,21 @@ public class TeamDao {
     public Optional<Boolean> deleteTeam(String id) {
 
         try {
-
             Team teamToRemove = em.find(Team.class, id);
 
-            em.remove(teamToRemove);
+            for (Player player : teamToRemove.getPlayers()) {
+                playerDao.removeTeam(player.getId(), teamToRemove.getId());
+            }
 
+            teamToRemove.setPlayers(null);
+            em.remove(teamToRemove);
             return Optional.of(Boolean.TRUE);
+
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            for (ConstraintViolation<?> violation : violations) {
+                Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, "Constraint Violation: {0} - {1}", new Object[]{violation.getPropertyPath(), violation.getMessage()});
+            }
         } catch (Exception e) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, "Error when deleting team", e);
         }
@@ -98,7 +115,6 @@ public class TeamDao {
             Team team = em.find(Team.class, teamId);
             Player player = em.find(Player.class, playerId);
 
-            player.setTeam(team);
             team.getPlayers().add(player);
 
             em.merge(team);

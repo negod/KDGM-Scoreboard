@@ -1,0 +1,102 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="form">
+        <p:growl id="messages" showDetail="true" />
+
+        <!-- CREATE NEW AND DELETE SELECTED -->
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:commandButton value="New" icon="pi pi-plus" actionListener="#{teamController.openNew}"
+                                 update=":dialogs:manage-team-content" oncomplete="PF('manageTeamDialog').show()"
+                                 styleClass="ui-button-success" style="margin-right: .5rem">
+                    <p:resetInput target=":dialogs:manage-team-content" />
+                </p:commandButton>
+                <p:commandButton id="delete-teams-button" value="#{teamController.deleteButtonMessage}"
+                                 icon="pi pi-trash" actionListener="#{teamController.deleteSelectedTeams}"
+                                 styleClass="ui-button-danger" disabled="#{!teamController.hasSelectedTeams()}" update="@this">
+                    <p:confirm header="Confirmation" message="Delete the selected teams?" icon="pi pi-exclamation-triangle" />
+                </p:commandButton>
+            </p:toolbarGroup>
+        </p:toolbar>
+
+        <p:dataTable id="dt-teams" widgetVar="dtTeams" var="team" value="#{teamController.teams}"
+                     reflow="true" styleClass="teams-table" selection="#{teamController.selectedTeams}"
+                     rowKey="#{team.id}" paginator="true" rows="10" paginatorPosition="bottom">
+            <f:facet name="header">
+                <div class="teams-table-header">
+                    <span style="font-weight: bold">PLAYERS</span>
+                </div>
+            </f:facet>
+
+            <p:ajax event="rowSelect" update=":form:delete-teams-button" />
+            <p:ajax event="rowUnselect" update=":form:delete-teams-button" />
+            <p:ajax event="rowSelectCheckbox" update=":form:delete-teams-button" />
+            <p:ajax event="rowUnselectCheckbox" update=":form:delete-teams-button" />
+            <p:ajax event="toggleSelect" update=":form:delete-teams-button" />
+
+            <p:column selectionMode="multiple" exportable="false"></p:column>
+
+            <p:column headerText="Name" sortBy="#{team.name}" >
+                <h:outputText value="#{team.name}" />
+            </p:column>
+            <p:column exportable="false">
+                <p:commandButton icon="pi pi-pencil" update=":dialogs:manage-team-content"
+                                 oncomplete="PF('manageTeamDialog').show()"
+                                 styleClass="edit-button rounded-button ui-button-success" 
+                                 process="@this">
+                    <f:setPropertyActionListener value="#{team}" target="#{teamController.selectedTeam}" />
+                    <p:resetInput target=":dialogs:manage-team-content" />
+                </p:commandButton>
+                <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"
+                                 process="@this"
+                                 oncomplete="PF('deleteTeamDialog').show()">
+                    <f:setPropertyActionListener value="#{team}" target="#{teamController.selectedTeam}" />
+                </p:commandButton>
+            </p:column>
+
+        </p:dataTable>
+    </h:form>
+
+    <h:form id="dialogs">
+        <p:dialog header="Team Details" showEffect="fade" modal="true" widgetVar="manageTeamDialog"
+                  responsive="true">
+            <p:outputPanel id="manage-team-content" class="ui-fluid">
+                <p:outputPanel rendered="#{not empty teamController.selectedTeam}">
+                    <div class="field">
+                        <p:outputLabel for="name">Name</p:outputLabel>
+                        <p:inputText id="name" value="#{teamController.selectedTeam.name}" required="true" />
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="Save" icon="pi pi-check" actionListener="#{teamController.saveTeam}"
+                                 update="manage-team-content" process="manage-team-content @this" />
+                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageTeamDialog').hide()"
+                                 class="ui-button-secondary" type="button" />
+            </f:facet>
+        </p:dialog>
+
+        <p:confirmDialog widgetVar="deleteTeamDialog" showEffect="fade" width="300"
+                         message="Delete the team?" header="Confirm" severity="warn">
+            <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{teamController.deleteTeam}"
+                             process="@this" update=":form:delete-teams-button"
+                             oncomplete="PF('deleteTeamDialog').hide()" />
+            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                             onclick="PF('deleteTeamDialog').hide()" />
+        </p:confirmDialog>
+
+        <p:confirmDialog global="true" showEffect="fade" width="300">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                             icon="pi pi-times" />
+        </p:confirmDialog>
+    </h:form>
+
+</html>
+

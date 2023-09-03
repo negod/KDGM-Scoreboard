@@ -5,12 +5,14 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +29,9 @@ import se.backede.scoreboard.common.constants.PlayerConstants;
 @ToString
 @Table(schema = GlobalConstants.SCHEMA_NAME, name = PlayerConstants.TABLE_NAME)
 @NamedQueries({
-    @NamedQuery(name = PlayerConstants.QUERY_GET_ALL_PLAYERS, query = "SELECT p FROM Player p")
+    @NamedQuery(name = PlayerConstants.QUERY_GET_ALL_PLAYERS, query = "SELECT p FROM Player p"),
+    @NamedQuery(name = PlayerConstants.QUERY_UPDATE_PLAYER, query = "UPDATE Player p set p.name =:name WHERE p.id=:id "),
+    @NamedQuery(name = PlayerConstants.QUERY_DELETE_TEAM, query = "UPDATE Player p set p.team = null WHERE p.id=:id ")
 })
 
 @Getter
@@ -38,7 +42,9 @@ public class Player extends GenericEntity {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Null
+    @JoinColumn(name = "team_id", nullable = true)
     @JsonbTransient
     private Team team;
 
