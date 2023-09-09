@@ -15,6 +15,7 @@ import lombok.Setter;
 import lombok.ToString;
 import se.backede.scoreboard.common.GenericEntity;
 import se.backede.scoreboard.common.constants.GlobalConstants;
+import se.backede.scoreboard.common.constants.PlayerConstants;
 import se.backede.scoreboard.common.constants.TeamConstants;
 
 /**
@@ -25,14 +26,14 @@ import se.backede.scoreboard.common.constants.TeamConstants;
 @ToString(exclude = "players")
 @Table(schema = GlobalConstants.SCHEMA_NAME, name = TeamConstants.TABLE_NAME)
 @NamedQueries({
-    @NamedQuery(name = TeamConstants.QUERY_GET_ALL_TEAMS, query = "SELECT t FROM Team t")
-})
+    @NamedQuery(name = TeamConstants.QUERY_GET_ALL_TEAMS, query = "SELECT t FROM Team t"),
+    @NamedQuery(name = TeamConstants.QUERY_UPDATE_TEAM, query = "UPDATE Team t set t.name =:name WHERE t.id=:id "),})
 
 @Getter
 @Setter
 public class Team extends GenericEntity {
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER, orphanRemoval = false, cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY, orphanRemoval = false, cascade = CascadeType.DETACH)
     private Set<Player> players;
 
     @NotNull(message = "Name cannot be NULL")

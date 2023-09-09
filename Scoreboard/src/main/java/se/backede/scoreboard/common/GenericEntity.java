@@ -21,8 +21,11 @@ import jakarta.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 /**
  *
@@ -31,14 +34,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GenericEntity implements Serializable {
-
-    public GenericEntity() {
-    }
-
-    public GenericEntity(String id) {
-        this.id = id;
-    }
 
     @Id
     @NotNull(message = "External id cannot be null and should be set to UUID")

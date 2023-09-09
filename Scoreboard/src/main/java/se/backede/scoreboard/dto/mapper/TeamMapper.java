@@ -18,4 +18,11 @@ public class TeamMapper {
                 .build();
     }
 
+    public static Team mapToEntity(TeamDto teamDto) {
+        Team team = new Team();
+        team.setId(teamDto.getId());
+        team.setName(teamDto.getName());
+        return team;
+    }
+
 }

@@ -77,8 +77,11 @@ public class PlayerService {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updatePlayer(Player player) {
-        return (Response) dao.updatePlayer(player).map(fetchedPlayer -> {
+    public Response updatePlayer(PlayerDto playerDto) {
+
+        Player playerEntity = PlayerMapper.mapToEntity(playerDto);
+
+        return (Response) dao.updatePlayer(playerEntity).map(fetchedPlayer -> {
             return Response.ok(PlayerMapper.mapToDto(fetchedPlayer)).build();
         }).orElse(Response.notModified().build());
 

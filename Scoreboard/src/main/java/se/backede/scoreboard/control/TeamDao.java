@@ -6,6 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -96,14 +97,13 @@ public class TeamDao {
 
     public Optional<Team> updateTeam(Team team) {
         try {
-            Team find = em.find(Team.class, team.getId());
 
-            if (team.getName() != null) {
-                find.setName(team.getName());
-            }
+            TypedQuery<Team> createNamedQuery = em.createNamedQuery(TeamConstants.QUERY_UPDATE_TEAM, Team.class);
+            createNamedQuery.setParameter(TeamConstants.TABLE_COLUMN_NAME, team.getName());
+            createNamedQuery.setParameter(TeamConstants.TABLE_COLUMN_ID, team.getId());
+            int executeUpdate = createNamedQuery.executeUpdate();
 
-            em.merge(find);
-            return Optional.ofNullable(find);
+            return Optional.ofNullable(team);
         } catch (Exception e) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, "Error when deleting team {0}", new Object[]{team.toString()});
             return Optional.empty();

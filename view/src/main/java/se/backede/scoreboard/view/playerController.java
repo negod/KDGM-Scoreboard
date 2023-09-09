@@ -68,6 +68,15 @@ public class PlayerController implements Serializable {
 
     }
 
+    public Team getTeamById(String teamId) {
+        for (Team team : teams) {
+            if (team.getId().equals(teamId)) {
+                return team;
+            }
+        }
+        return null;
+    }
+
     public boolean hasSelectedPlayers() {
         return this.selectedPlayers != null && !this.selectedPlayers.isEmpty();
     }
@@ -106,21 +115,6 @@ public class PlayerController implements Serializable {
             PrimeFaces.current().ajax().update("form:messages", "form:dt-players");
         }
 
-    }
-
-    public void onRowCancel(RowEditEvent<Player> event) {
-        FacesMessage msg = new FacesMessage("Player Cancelled", String.valueOf(event.getObject().getName()));
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-
-        if (newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
     }
 
     public void savePlayer() {

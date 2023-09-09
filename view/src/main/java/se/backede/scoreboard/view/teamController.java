@@ -99,7 +99,7 @@ public class TeamController implements Serializable{
         }
 
         PrimeFaces.current().executeScript("PF('manageTeamDialog').hide()");
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-teams");
+        PrimeFaces.current().ajax().update("form_team:messages", "form_team:dt-teams");
     }
 
     public void deleteTeam() {
@@ -111,11 +111,11 @@ public class TeamController implements Serializable{
             this.teams.remove(selectedTeam);
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Team Removed"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-teams");
+            PrimeFaces.current().ajax().update("form_team:messages", "form_team:dt-teams");
 
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Could not remove Team", selectedTeam.getName()));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-teams");
+            PrimeFaces.current().ajax().update("form_team:messages", "form_team:dt-teams");
         }
     }
 
@@ -132,12 +132,12 @@ public class TeamController implements Serializable{
                 }
 
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Team Removed"));
-                PrimeFaces.current().ajax().update("form:messages", "form:dt-teams");
+                PrimeFaces.current().ajax().update("form_team:messages", "form_team:dt-teams");
                 PrimeFaces.current().executeScript("PF('dtTeams').clearFilters()");
 
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Could not remove Team", selected.getName()));
-                PrimeFaces.current().ajax().update("form:messages", "form:dt-teams");
+                PrimeFaces.current().ajax().update("form_team:messages", "form_team:dt-teams");
             }
         }
 

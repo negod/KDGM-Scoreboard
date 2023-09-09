@@ -119,7 +119,7 @@ public class ResultDao {
     public Optional<List<Result>> getResultsByGame(String gameId) {
         Logger.getLogger(ResultDao.class.getName()).log(Level.INFO, "Getting Results By Game {0}", new Object[]{gameId});
         TypedQuery<Result> query = em.createNamedQuery(ResultConstants.QUERY_GET_BY_GAME, Result.class);
-        query.setParameter("game", new Game(gameId));
+        query.setParameter("game", Game.builder().id(gameId).build());
         return Optional.ofNullable(query.getResultList());
 
     }

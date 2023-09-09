@@ -14,9 +14,12 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.GenericEntity;
 import se.backede.scoreboard.common.constants.GlobalConstants;
 import se.backede.scoreboard.common.constants.PlayerConstants;
@@ -30,12 +33,15 @@ import se.backede.scoreboard.common.constants.PlayerConstants;
 @Table(schema = GlobalConstants.SCHEMA_NAME, name = PlayerConstants.TABLE_NAME)
 @NamedQueries({
     @NamedQuery(name = PlayerConstants.QUERY_GET_ALL_PLAYERS, query = "SELECT p FROM Player p"),
-    @NamedQuery(name = PlayerConstants.QUERY_UPDATE_PLAYER, query = "UPDATE Player p set p.name =:name WHERE p.id=:id "),
+    @NamedQuery(name = PlayerConstants.QUERY_UPDATE_PLAYER, query = "UPDATE Player p set p.name =:name, p.nickName =:nickName, p.team =:team WHERE p.id=:id "),
     @NamedQuery(name = PlayerConstants.QUERY_DELETE_TEAM, query = "UPDATE Player p set p.team = null WHERE p.id=:id ")
 })
 
 @Getter
 @Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Player extends GenericEntity {
 
     @NotNull(message = "Name cannot be NULL")

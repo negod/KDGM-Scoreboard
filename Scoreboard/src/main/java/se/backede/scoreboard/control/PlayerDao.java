@@ -92,9 +92,18 @@ public class PlayerDao {
     public Optional<Player> updatePlayer(Player player) {
         try {
 
+            Team team = null;
+
+            if (player.getTeam() != null) {
+                team = em.find(Team.class, player.getTeam().getId());
+                Logger.getLogger(PlayerDao.class.getName()).log(Level.INFO, "Found a Team {0}", new Object[]{team.toString()});
+            }
+
             TypedQuery<Player> createNamedQuery = em.createNamedQuery(PlayerConstants.QUERY_UPDATE_PLAYER, Player.class);
             createNamedQuery.setParameter(PlayerConstants.TABLE_COLUMN_NAME, player.getName());
             createNamedQuery.setParameter(PlayerConstants.TABLE_COLUMN_ID, player.getId());
+            createNamedQuery.setParameter(PlayerConstants.TABLE_COLUMN_TEAM, team);
+            createNamedQuery.setParameter(PlayerConstants.TABLE_COLUMN_NICK_NAME, player.getNickName());
             int executeUpdate = createNamedQuery.executeUpdate();
 
             return Optional.ofNullable(player);

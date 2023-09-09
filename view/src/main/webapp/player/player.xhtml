@@ -47,7 +47,7 @@
             <p:column headerText="Nick Name" sortBy="#{player.nickName}" >
                 <h:outputText value="#{player.nickName}" />
             </p:column>
-            <p:column headerText="Team" sortBy="#{player.team}" >
+            <p:column headerText="Team" sortBy="#{player.team.name}" >
                 <h:outputText value="#{player.team.name}" />
             </p:column>
             <p:column exportable="false">
@@ -82,7 +82,7 @@
                         <p:inputText id="nick_name" value="#{playerController.selectedPlayer.nickName}" required="true" />
                     </div>
                     <div>
-                        <p:selectOneMenu id="selectTeamMenu" value="#{playerController.selectedPlayer.team}" var="team">
+                        <p:selectOneMenu id="selectTeamMenu" value="#{playerController.selectedPlayer.team}" var="team" converter="teamConverter">
                             <f:selectItem itemLabel="Select a Team..." />
                             <f:selectItems value="#{playerController.teams}" var="team" itemLabel="#{team.name}" itemValue="#{team}" />
                             <p:column><i class="pi pi-#{team}" /> #{team.name} </p:column>

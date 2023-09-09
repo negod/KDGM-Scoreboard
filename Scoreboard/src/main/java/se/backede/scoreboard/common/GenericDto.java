@@ -2,7 +2,10 @@
  */
 package se.backede.scoreboard.common;
 
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -13,7 +16,9 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-public class GenericDto {
+@NoArgsConstructor
+@AllArgsConstructor
+public class GenericDto implements Serializable{
 
     private String id;
 
