@@ -69,6 +69,8 @@ public class TeamController implements Serializable{
             FacesContext.getCurrentInstance().validationFailed();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("failed to add team"));
         }
+        
+        
 
     }
 

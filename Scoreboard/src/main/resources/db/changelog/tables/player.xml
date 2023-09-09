@@ -20,6 +20,9 @@
             <column name="name" type="varchar">
                 <constraints unique="true" nullable="false"/>
             </column>
+            <column name="nick_name" type="varchar">
+                <constraints unique="true" nullable="false"/>
+            </column>
             <column name="team_id" type="VARCHAR(36)">
                 <constraints nullable="true"/>
             </column>

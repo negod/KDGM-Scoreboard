@@ -14,8 +14,12 @@ import java.util.Optional;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 import se.backede.scoreboard.view.resources.dto.Player;
 import se.backede.scoreboard.view.resources.controller.PlayerRestClientController;
+import se.backede.scoreboard.view.resources.controller.TeamRestClientController;
+import se.backede.scoreboard.view.resources.dto.Team;
 
 /**
  *
@@ -28,17 +32,30 @@ import se.backede.scoreboard.view.resources.controller.PlayerRestClientControlle
 public class PlayerController implements Serializable {
 
     private Player selectedPlayer;
+    private Team selectedTeam;
+
     private List<Player> players;
     private List<Player> selectedPlayers;
+
+    private List<Team> teams;
 
     @Inject
     private PlayerRestClientController playerClient;
 
+    @Inject
+    private TeamRestClientController teamClient;
+
     @PostConstruct
     public void init() {
-        playerClient.getAll().ifPresent(x -> {
-            players = x;
+
+        playerClient.getAll().ifPresent(fetchedPlayers -> {
+            players = fetchedPlayers;
         });
+
+        teamClient.getAll().ifPresent(fetchedTeams -> {
+            teams = fetchedTeams;
+        });
+
     }
 
     public String getDeleteButtonMessage() {
@@ -48,6 +65,7 @@ public class PlayerController implements Serializable {
         }
 
         return "Delete";
+
     }
 
     public boolean hasSelectedPlayers() {
@@ -55,7 +73,10 @@ public class PlayerController implements Serializable {
     }
 
     public void openNew() {
-        this.selectedPlayer = new Player();
+        Team team = new Team();
+        Player player = new Player();
+        player.setTeam(team);
+        this.selectedPlayer = player;
     }
 
     private void createPlayer() {
@@ -85,6 +106,21 @@ public class PlayerController implements Serializable {
             PrimeFaces.current().ajax().update("form:messages", "form:dt-players");
         }
 
+    }
+
+    public void onRowCancel(RowEditEvent<Player> event) {
+        FacesMessage msg = new FacesMessage("Player Cancelled", String.valueOf(event.getObject().getName()));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+
+        if (newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
     }
 
     public void savePlayer() {

@@ -42,6 +42,10 @@ public class Player extends GenericEntity {
     @Column(name = "name")
     private String name;
 
+    @NotNull(message = "Nick Name cannot be NULL")
+    @Column(name = "nick_name")
+    private String nickName;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Null
     @JoinColumn(name = "team_id", nullable = true)

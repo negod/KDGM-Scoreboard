@@ -3,6 +3,7 @@
 package se.backede.scoreboard.view.commons;
 
 import java.io.Serializable;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@EqualsAndHashCode
 public class GenericDto implements Serializable{
 
     private String id;

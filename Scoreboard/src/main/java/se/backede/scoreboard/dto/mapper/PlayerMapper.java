@@ -11,18 +11,19 @@ import se.backede.scoreboard.entity.Player;
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
 public class PlayerMapper {
-
+    
     public static PlayerDto mapToDto(Player player) {
         PlayerDto playerDto = PlayerDto.builder()
                 .id(player.getId())
                 .name(player.getName())
+                .nickName(player.getNickName())
                 .build();
-
+        
         Optional.ofNullable(player.getTeam()).ifPresent(team -> {
             playerDto.setTeam(TeamMapper.mapToDto(team));
         });
-
+        
         return playerDto;
     }
-
+    
 }
