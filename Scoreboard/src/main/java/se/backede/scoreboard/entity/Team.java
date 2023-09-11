@@ -15,7 +15,6 @@ import lombok.Setter;
 import lombok.ToString;
 import se.backede.scoreboard.common.GenericEntity;
 import se.backede.scoreboard.common.constants.GlobalConstants;
-import se.backede.scoreboard.common.constants.PlayerConstants;
 import se.backede.scoreboard.common.constants.TeamConstants;
 
 /**
@@ -33,7 +32,7 @@ import se.backede.scoreboard.common.constants.TeamConstants;
 @Setter
 public class Team extends GenericEntity {
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY, orphanRemoval = false, cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY, orphanRemoval = false, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
     private Set<Player> players;
 
     @NotNull(message = "Name cannot be NULL")

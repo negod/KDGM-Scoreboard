@@ -5,115 +5,131 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    <h:form id="form">
-        <p:growl id="messages" showDetail="true" />
+    <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css" />
 
-        <!-- CREATE NEW AND DELETE SELECTED -->
-        <p:toolbar>
-            <p:toolbarGroup>
-                <p:commandButton value="New" icon="pi pi-plus" actionListener="#{playerController.openNew}"
-                                 update=":dialogs:manage-player-content" oncomplete="PF('managePlayerDialog').show()"
-                                 styleClass="ui-button-success" style="margin-right: .5rem">
-                    <p:resetInput target=":dialogs:manage-player-content" />
-                </p:commandButton>
-                <p:commandButton id="delete-players-button" value="#{playerController.deleteButtonMessage}"
-                                 icon="pi pi-trash" actionListener="#{playerController.deleteSelectedPlayers}"
-                                 styleClass="ui-button-danger" disabled="#{!playerController.hasSelectedPlayers()}" update="@this">
-                    <p:confirm header="Confirmation" message="Delete the selected players?" icon="pi pi-exclamation-triangle" />
-                </p:commandButton>
-            </p:toolbarGroup>
-        </p:toolbar>
+    <h:head>
+        <title>Kode Gubbs Gaming night</title>
+    </h:head>
 
-        <p:dataTable id="dt-players" widgetVar="dtPlayers" var="player" value="#{playerController.players}"
-                     reflow="true" styleClass="players-table" selection="#{playerController.selectedPlayers}"
-                     rowKey="#{player.id}" paginator="true" rows="10" paginatorPosition="bottom">
-            <f:facet name="header">
-                <div class="players-table-header">
-                    <span style="font-weight: bold">PLAYERS</span>
-                </div>
-            </f:facet>
+    <!-- https://primefaces.github.io/primefaces/12_0_0/#/?id=main -->
+    <!-- https://www.primefaces.org/showcase/index.xhtml?jfwid=15355 -->
+    <!-- https://www.primefaces.org/primeflex/fontsize -->
 
-            <p:ajax event="rowSelect" update=":form:delete-players-button" />
-            <p:ajax event="rowUnselect" update=":form:delete-players-button" />
-            <p:ajax event="rowSelectCheckbox" update=":form:delete-players-button" />
-            <p:ajax event="rowUnselectCheckbox" update=":form:delete-players-button" />
-            <p:ajax event="toggleSelect" update=":form:delete-players-button" />
+    <ui:include src="../navigation.xhtml" id="playerview"/>
 
-            <p:column selectionMode="multiple" exportable="false"></p:column>
+    <h:body>
 
-            <p:column headerText="Name" sortBy="#{player.name}" >
-                <h:outputText value="#{player.name}" />
-            </p:column>
-            <p:column headerText="Nick Name" sortBy="#{player.nickName}" >
-                <h:outputText value="#{player.nickName}" />
-            </p:column>
-            <p:column headerText="Team" sortBy="#{player.team.name}" >
-                <h:outputText value="#{player.team.name}" />
-            </p:column>
-            <p:column exportable="false">
-                <p:commandButton icon="pi pi-pencil" update=":dialogs:manage-player-content"
-                                 oncomplete="PF('managePlayerDialog').show()"
-                                 styleClass="edit-button rounded-button ui-button-success" 
-                                 process="@this">
-                    <f:setPropertyActionListener value="#{player}" target="#{playerController.selectedPlayer}" />
-                    <p:resetInput target=":dialogs:manage-player-content" />
-                </p:commandButton>
-                <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"
-                                 process="@this"
-                                 oncomplete="PF('deletePlayerDialog').show()">
-                    <f:setPropertyActionListener value="#{player}" target="#{playerController.selectedPlayer}" />
-                </p:commandButton>
-            </p:column>
+        <h:form id="form">
+            <p:growl id="messages" showDetail="true" />
 
-        </p:dataTable>
-    </h:form>
+            <!-- CREATE NEW AND DELETE SELECTED -->
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <p:commandButton value="New" icon="pi pi-plus" actionListener="#{playerController.openNew}"
+                                     update=":dialogs:manage-player-content" oncomplete="PF('managePlayerDialog').show()"
+                                     styleClass="ui-button-success" style="margin-right: .5rem">
+                        <p:resetInput target=":dialogs:manage-player-content" />
+                    </p:commandButton>
+                    <p:commandButton id="delete-players-button" value="#{playerController.deleteButtonMessage}"
+                                     icon="pi pi-trash" actionListener="#{playerController.deleteSelectedPlayers}"
+                                     styleClass="ui-button-danger" disabled="#{!playerController.hasSelectedPlayers()}" update="@this">
+                        <p:confirm header="Confirmation" message="Delete the selected players?" icon="pi pi-exclamation-triangle" />
+                    </p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
 
-    <h:form id="dialogs">
-        <p:dialog header="Player Details" showEffect="fade" modal="true" widgetVar="managePlayerDialog"
-                  responsive="true">
-            <p:outputPanel id="manage-player-content" class="ui-fluid">
-                <p:outputPanel rendered="#{not empty playerController.selectedPlayer}">
-                    <div class="field">
-                        <p:outputLabel for="name">Name</p:outputLabel>
-                        <p:inputText id="name" value="#{playerController.selectedPlayer.name}" required="true" />
+            <p:dataTable id="dt-players" widgetVar="dtPlayers" var="player" value="#{playerController.players}"
+                         reflow="true" styleClass="players-table" selection="#{playerController.selectedPlayers}"
+                         rowKey="#{player.id}" paginator="true" rows="10" paginatorPosition="bottom">
+                <f:facet name="header">
+                    <div class="players-table-header">
+                        <span style="font-weight: bold">PLAYERS</span>
                     </div>
-                    <div class="field">
-                        <p:outputLabel for="nick_name">Nick Name</p:outputLabel>
-                        <p:inputText id="nick_name" value="#{playerController.selectedPlayer.nickName}" required="true" />
-                    </div>
-                    <div>
-                        <p:selectOneMenu id="selectTeamMenu" value="#{playerController.selectedPlayer.team}" var="team" converter="teamConverter">
-                            <f:selectItem itemLabel="Select a Team..." />
-                            <f:selectItems value="#{playerController.teams}" var="team" itemLabel="#{team.name}" itemValue="#{team}" />
-                            <p:column><i class="pi pi-#{team}" /> #{team.name} </p:column>
-                        </p:selectOneMenu>
-                    </div>
+                </f:facet>
+
+                <p:ajax event="rowSelect" update=":form:delete-players-button" />
+                <p:ajax event="rowUnselect" update=":form:delete-players-button" />
+                <p:ajax event="rowSelectCheckbox" update=":form:delete-players-button" />
+                <p:ajax event="rowUnselectCheckbox" update=":form:delete-players-button" />
+                <p:ajax event="toggleSelect" update=":form:delete-players-button" />
+
+                <p:column selectionMode="multiple" exportable="false"></p:column>
+
+                <p:column headerText="Name" sortBy="#{player.name}" >
+                    <h:outputText value="#{player.name}" />
+                </p:column>
+                <p:column headerText="Nick Name" sortBy="#{player.nickName}" >
+                    <h:outputText value="#{player.nickName}" />
+                </p:column>
+                <p:column headerText="Team" sortBy="#{player.team.name}" >
+                    <h:outputText value="#{player.team.name}" />
+                </p:column>
+                <p:column exportable="false">
+                    <p:commandButton icon="pi pi-pencil" update=":dialogs:manage-player-content"
+                                     oncomplete="PF('managePlayerDialog').show()"
+                                     styleClass="edit-button rounded-button ui-button-success" 
+                                     process="@this">
+                        <f:setPropertyActionListener value="#{player}" target="#{playerController.selectedPlayer}" />
+                        <p:resetInput target=":dialogs:manage-player-content" />
+                    </p:commandButton>
+                    <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"
+                                     process="@this"
+                                     oncomplete="PF('deletePlayerDialog').show()">
+                        <f:setPropertyActionListener value="#{player}" target="#{playerController.selectedPlayer}" />
+                    </p:commandButton>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+        <h:form id="dialogs">
+            <p:dialog header="Player Details" showEffect="fade" modal="true" widgetVar="managePlayerDialog"
+                      responsive="true">
+                <p:outputPanel id="manage-player-content" class="ui-fluid">
+                    <p:outputPanel rendered="#{not empty playerController.selectedPlayer}">
+                        <div class="field">
+                            <p:outputLabel for="name">Name</p:outputLabel>
+                            <p:inputText id="name" value="#{playerController.selectedPlayer.name}" required="true" />
+                        </div>
+                        <div class="field">
+                            <p:outputLabel for="nick_name">Nick Name</p:outputLabel>
+                            <p:inputText id="nick_name" value="#{playerController.selectedPlayer.nickName}" required="true" />
+                        </div>
+                        <!--div>
+                            <p:selectOneMenu id="selectTeamMenu" value="#{playerController.selectedPlayer.team}" var="team" converter="teamConverter">
+                                <f:selectItem itemLabel="Select a Team..." />
+                                <f:selectItems value="#{playerController.teams}" var="team" itemLabel="#{team.name}" itemValue="#{team}" />
+                                <p:column><i class="pi pi-#{team}" /> #{team.name} </p:column>
+                            </p:selectOneMenu>
+                        </div-->
+                    </p:outputPanel>
                 </p:outputPanel>
-            </p:outputPanel>
 
-            <f:facet name="footer">
-                <p:commandButton value="Save" icon="pi pi-check" actionListener="#{playerController.savePlayer}"
-                                 update="manage-player-content" process="manage-player-content @this" />
-                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('managePlayerDialog').hide()"
-                                 class="ui-button-secondary" type="button" />
-            </f:facet>
-        </p:dialog>
+                <f:facet name="footer">
+                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{playerController.savePlayer}"
+                                     update="manage-player-content" process="manage-player-content @this" />
+                    <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('managePlayerDialog').hide()"
+                                     class="ui-button-secondary" type="button" />
+                </f:facet>
+            </p:dialog>
 
-        <p:confirmDialog widgetVar="deletePlayerDialog" showEffect="fade" width="300"
-                         message="Delete the player?" header="Confirm" severity="warn">
-            <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{playerController.deletePlayer}"
-                             process="@this" update=":form:delete-players-button"
-                             oncomplete="PF('deletePlayerDialog').hide()" />
-            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-                             onclick="PF('deletePlayerDialog').hide()" />
-        </p:confirmDialog>
+            <p:confirmDialog widgetVar="deletePlayerDialog" showEffect="fade" width="300"
+                             message="Delete the player?" header="Confirm" severity="warn">
+                <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{playerController.deletePlayer}"
+                                 process="@this" update=":form:delete-players-button"
+                                 oncomplete="PF('deletePlayerDialog').hide()" />
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('deletePlayerDialog').hide()" />
+            </p:confirmDialog>
 
-        <p:confirmDialog global="true" showEffect="fade" width="300">
-            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
-                             icon="pi pi-times" />
-        </p:confirmDialog>
-    </h:form>
+            <p:confirmDialog global="true" showEffect="fade" width="300">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                 icon="pi pi-times" />
+            </p:confirmDialog>
+        </h:form>
+
+    </h:body>
 
 </html>
 

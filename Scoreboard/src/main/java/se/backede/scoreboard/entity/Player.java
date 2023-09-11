@@ -52,7 +52,7 @@ public class Player extends GenericEntity {
     @Column(name = "nick_name")
     private String nickName;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE})
     @Null
     @JoinColumn(name = "team_id", nullable = true)
     @JsonbTransient

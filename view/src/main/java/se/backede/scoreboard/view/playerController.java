@@ -82,9 +82,7 @@ public class PlayerController implements Serializable {
     }
 
     public void openNew() {
-        Team team = new Team();
         Player player = new Player();
-        player.setTeam(team);
         this.selectedPlayer = player;
     }
 

@@ -17,8 +17,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import se.backede.scoreboard.dto.PlayerDto;
 import se.backede.scoreboard.dto.mapper.PlayerMapper;
 import se.backede.scoreboard.entity.Player;
@@ -66,9 +64,11 @@ public class PlayerService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createPlayer(Player player) {
+    public Response createPlayer(PlayerDto player) {
 
-        return (Response) dao.createPlayer(player).map(x -> {
+        Player playerEntity = PlayerMapper.mapToEntity(player);
+
+        return (Response) dao.createPlayer(playerEntity).map(x -> {
             return Response.created(uriInfo.getAbsolutePath()).entity(x).build();
         }).orElse(Response.serverError().build());
 

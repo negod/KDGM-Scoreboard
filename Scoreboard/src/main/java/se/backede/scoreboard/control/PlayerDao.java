@@ -40,9 +40,10 @@ public class PlayerDao {
     }
 
     public Optional<Player> createPlayer(Player player) {
-
         try {
+
             em.persist(player);
+
             return Optional.of(player);
         } catch (Exception e) {
             Logger.getLogger(PlayerDao.class.getName()).log(Level.SEVERE, "Error when persisting player", e);
@@ -96,7 +97,6 @@ public class PlayerDao {
 
             if (player.getTeam() != null) {
                 team = em.find(Team.class, player.getTeam().getId());
-                Logger.getLogger(PlayerDao.class.getName()).log(Level.INFO, "Found a Team {0}", new Object[]{team.toString()});
             }
 
             TypedQuery<Player> createNamedQuery = em.createNamedQuery(PlayerConstants.QUERY_UPDATE_PLAYER, Player.class);
