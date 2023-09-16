@@ -50,7 +50,7 @@ public class GameRestClientController implements GenericRestClient<Game> {
         try {
             return Optional.ofNullable((Game) client.update(dto));
         } catch (WebApplicationException e) {
-            Logger.getLogger(GameRestClientController.class.getName()).log(Level.SEVERE, "Error when updatin in RestClient", e);
+            Logger.getLogger(GameRestClientController.class.getName()).log(Level.SEVERE, "Error when updating in RestClient", e);
             return Optional.empty();
         }
     }

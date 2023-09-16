@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css" />
+
+
+    <p:dataTable id="dt-games" widgetVar="dtGames" var="game" value="#{gameController.games}"
+                 reflow="true" styleClass="games-table" selection="#{gameController.selectedGames}"
+                 rowKey="#{game.id}" paginator="true" rows="10" paginatorPosition="bottom">
+        <f:facet name="header">
+            <div class="games-table-header">
+                <span style="font-weight: bold">GAMES</span>
+            </div>
+        </f:facet>
+
+        <p:ajax event="rowSelect" update=":form_game:delete-games-button" />
+        <p:ajax event="rowUnselect" update=":form_game:delete-games-button" />
+        <p:ajax event="rowSelectCheckbox" update=":form_game:delete-games-button" />
+        <p:ajax event="rowUnselectCheckbox" update=":form_game:delete-games-button" />
+        <p:ajax event="toggleSelect" update=":form_game:delete-games-button" />
+
+        <p:column selectionMode="multiple" exportable="false"></p:column>
+
+        <p:column headerText="Name" sortBy="#{game.name}" >
+            <h:outputText value="#{game.name}" />
+        </p:column>
+        <p:column headerText="Game Type" sortBy="#{game.gameType}" >
+            <h:outputText value="#{game.gameType}" />
+        </p:column>
+        <p:column exportable="false">
+            <p:commandButton icon="pi pi-pencil" update=":dialogs_game:manage-game-content"
+                             oncomplete="PF('manageGameDialog').show()"
+                             styleClass="edit-button rounded-button ui-button-success" 
+                             process="@this">
+                <f:setPropertyActionListener value="#{game}" target="#{gameController.selectedGame}" />
+                <p:resetInput target=":dialogs_game:manage-game-content" />
+            </p:commandButton>
+            <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"
+                             process="@this"
+                             oncomplete="PF('deleteGameDialog').show()">
+                <f:setPropertyActionListener value="#{game}" target="#{gameController.selectedGame}" />
+            </p:commandButton>
+        </p:column>
+
+    </p:dataTable>
+</html>

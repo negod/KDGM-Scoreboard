@@ -1,5 +1,7 @@
 package se.backede.scoreboard.entity;
 
+import jakarta.json.bind.annotation.JsonbNillable;
+import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -12,6 +14,7 @@ import lombok.ToString;
 import se.backede.scoreboard.common.GenericEntity;
 import se.backede.scoreboard.common.constants.GameConstants;
 import se.backede.scoreboard.common.constants.GlobalConstants;
+import jakarta.validation.constraints.NotNull;
 
 /**
  *
@@ -27,8 +30,13 @@ import se.backede.scoreboard.common.constants.GlobalConstants;
 @Setter
 public class Game extends GenericEntity {
 
+    @NotNull(message = "Name cannot be null")
+    @JsonbNillable(false)
     private String name;
+
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "GameType cannot be null")
+    @JsonbNillable(false)
     private GameType gametype;
 
 }

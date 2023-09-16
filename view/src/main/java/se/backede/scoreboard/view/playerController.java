@@ -14,8 +14,6 @@ import java.util.Optional;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.PrimeFaces;
-import org.primefaces.event.CellEditEvent;
-import org.primefaces.event.RowEditEvent;
 import se.backede.scoreboard.view.resources.dto.Player;
 import se.backede.scoreboard.view.resources.controller.PlayerRestClientController;
 import se.backede.scoreboard.view.resources.controller.TeamRestClientController;

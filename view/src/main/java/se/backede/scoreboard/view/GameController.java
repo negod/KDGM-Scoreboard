@@ -31,15 +31,21 @@ public class GameController implements Serializable {
     private Game selectedGame;
     private List<Game> games;
     private List<Game> selectedGames;
+    private GameType selectedGameType;
 
     @Inject
     private GameRestClientController gameClient;
 
     @PostConstruct
     public void init() {
+        System.out.println("TESTING");
         gameClient.getAll().ifPresent(x -> {
             games = x;
         });
+    }
+
+    public GameType[] getGameTypes() {
+        return GameType.values();
     }
 
     public String getDeleteButtonMessage() {
@@ -80,10 +86,10 @@ public class GameController implements Serializable {
             games.remove(selectedGame);
             games.add(updatedGame.get());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Updated Game"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-games");
+            PrimeFaces.current().ajax().update("form_game:messages", "form_game:dt-games");
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to Update Game"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-games");
+            //PrimeFaces.current().ajax().update("form_game:messages", "form_game:dt-games");
         }
 
     }
@@ -98,7 +104,7 @@ public class GameController implements Serializable {
         }
 
         PrimeFaces.current().executeScript("PF('manageGameDialog').hide()");
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-games");
+        PrimeFaces.current().ajax().update("form_game:messages", "form_game:dt-games");
     }
 
     public void deleteGame() {
@@ -110,11 +116,11 @@ public class GameController implements Serializable {
             this.games.remove(selectedGame);
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Game Removed"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-games");
+            PrimeFaces.current().ajax().update("form_game:messages", "form_game:dt-games");
 
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Could not remove Game", selectedGame.getName()));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-games");
+            PrimeFaces.current().ajax().update("form_game:messages", "form_game:dt-games");
         }
     }
 
@@ -131,12 +137,12 @@ public class GameController implements Serializable {
                 }
 
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Game Removed"));
-                PrimeFaces.current().ajax().update("form:messages", "form:dt-games");
+                PrimeFaces.current().ajax().update("form_game:messages", "form_game:dt-games");
                 PrimeFaces.current().executeScript("PF('dtGames').clearFilters()");
 
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Could not remove Game", selected.getName()));
-                PrimeFaces.current().ajax().update("form:messages", "form:dt-games");
+                PrimeFaces.current().ajax().update("form_game:messages", "form_game:dt-games");
             }
         }
 

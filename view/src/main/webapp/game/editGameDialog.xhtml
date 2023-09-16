@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css" />
+
+
+    <p:dialog header="Game Details" showEffect="fade" modal="true" widgetVar="manageGameDialog"
+              responsive="true">
+        <p:outputPanel id="manage-game-content" class="ui-fluid">
+            <p:outputPanel rendered="#{not empty gameController.selectedGame}">
+                <div class="field">
+                    <p:outputLabel for="name">Name</p:outputLabel>
+                    <p:inputText id="name" value="#{gameController.selectedGame.name}" required="true" />
+                </div>
+                <div class="field">
+                    <p:outputLabel for="gameType">Game Type</p:outputLabel>
+                    <p:selectOneMenu value="#{gameController.selectedGame.gameType}" var="gameType" id="gameType">
+                        <f:selectItem itemLabel="Select Game Type" />
+                        <f:selectItems var="gameType" value="#{gameController.gameTypes}" itemValue="#{gameType}" itemLabel="#{gameType}" />
+                        <p:column><i class="pi pi-#{gameType}" /> #{gameType} </p:column>
+                    </p:selectOneMenu>
+                </div>
+            </p:outputPanel>
+        </p:outputPanel>
+
+        <f:facet name="footer">
+            <p:commandButton value="Save" icon="pi pi-check" actionListener="#{gameController.saveGame}"
+                             update="manage-game-content" process="manage-game-content @this" />
+            <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageGameDialog').hide()"
+                             class="ui-button-secondary" type="button" />
+        </f:facet>
+    </p:dialog>
+
+</html>

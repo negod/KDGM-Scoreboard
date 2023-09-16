@@ -16,8 +16,10 @@ import se.backede.scoreboard.view.commons.GenericDto;
 @Setter
 public class Game extends GenericDto {
 
+    private String name;
+    
     @Enumerated(EnumType.STRING)
     private GameType gameType;
-    private String name;
+    
 
 }

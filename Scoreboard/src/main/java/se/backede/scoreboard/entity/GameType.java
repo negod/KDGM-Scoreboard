@@ -6,6 +6,6 @@ package se.backede.scoreboard.entity;
  */
 public enum GameType {
 
-    TIME, SCORE;
+    TIME, SCORE, NONE;
 
 }
