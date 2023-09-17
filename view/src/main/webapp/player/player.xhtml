@@ -95,13 +95,13 @@
                             <p:outputLabel for="nick_name">Nick Name</p:outputLabel>
                             <p:inputText id="nick_name" value="#{playerController.selectedPlayer.nickName}" required="true" />
                         </div>
-                        <!--div>
+                        <div>
                             <p:selectOneMenu id="selectTeamMenu" value="#{playerController.selectedPlayer.team}" var="team" converter="teamConverter">
                                 <f:selectItem itemLabel="Select a Team..." />
                                 <f:selectItems value="#{playerController.teams}" var="team" itemLabel="#{team.name}" itemValue="#{team}" />
                                 <p:column><i class="pi pi-#{team}" /> #{team.name} </p:column>
                             </p:selectOneMenu>
-                        </div-->
+                        </di>
                     </p:outputPanel>
                 </p:outputPanel>
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui">
+
+    <p:toolbar>
+        <p:toolbarGroup>
+            <p:commandButton value="New" icon="pi pi-plus" actionListener="#{gameController.openNew}"
+                             update=":dialogs:manage-item-content" oncomplete="PF('manageGameDialog').show()"
+                             styleClass="ui-button-success" style="margin-right: .5rem">
+                <p:resetInput target=":dialogs:manage-item-content" />
+            </p:commandButton>
+            <p:commandButton id="deleteItemButton" value="#{gameController.deleteButtonMessage}"
+                             icon="pi pi-trash" actionListener="#{gameController.deleteSelectedItems}"
+                             styleClass="ui-button-danger" disabled="#{!gameController.hasSelectedItems()}" update="@this">
+                <p:confirm header="Confirmation" message="Delete the selected Items?" icon="pi pi-exclamation-triangle" />
+            </p:commandButton>
+        </p:toolbarGroup>
+    </p:toolbar>
+
+</html>

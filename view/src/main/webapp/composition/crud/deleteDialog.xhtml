@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui">
+
+    <p:confirmDialog widgetVar="deleteItemDialog" showEffect="fade" width="300"
+                     message="Do you want to delete??" header="Confirm" severity="warn">
+        <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{gameController.deleteItem}"
+                         process="@parent" update="@form"
+                         oncomplete="PF('deleteItemDialog').hide()" />
+        <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                         onclick="PF('deleteItemDialog').hide()" />
+    </p:confirmDialog>
+
+</html>

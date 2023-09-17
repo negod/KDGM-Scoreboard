@@ -5,21 +5,21 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css" />
-
-    <h:head>
-        <title>Kode Gubbs Gaming night</title>
-    </h:head>
-
     <!-- https://primefaces.github.io/primefaces/12_0_0/#/?id=main -->
     <!-- https://www.primefaces.org/showcase/index.xhtml?jfwid=15355 -->
     <!-- https://www.primefaces.org/primeflex/fontsize -->
     <!-- https://www.primefaces.org/diamond/icons.xhtml -->
 
-
-    <h:body>
-        <ui:include src="navigation.xhtml" id="navigation"/>
-    </h:body>
+    <ui:composition template="layout/basicLayout.xhtml">
+        <ui:define name="header">
+        </ui:define>
+        
+        <ui:define name="content">
+        </ui:define>
+        
+        <ui:define name="footer">
+        </ui:define>
+    </ui:composition>
 
 </html>
 

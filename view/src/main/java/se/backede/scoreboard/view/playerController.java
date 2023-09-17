@@ -27,45 +27,28 @@ import se.backede.scoreboard.view.resources.dto.Team;
 @Setter
 @Named("playerController")
 @ViewScoped
-public class PlayerController implements Serializable {
-
-    private Player selectedPlayer;
+public class PlayerController extends CrudController<Player> implements Serializable {
+    
     private Team selectedTeam;
-
-    private List<Player> players;
-    private List<Player> selectedPlayers;
-
     private List<Team> teams;
-
+    
     @Inject
     private PlayerRestClientController playerClient;
-
+    
     @Inject
     private TeamRestClientController teamClient;
-
+    
     @PostConstruct
+    @Override
     public void init() {
-
-        playerClient.getAll().ifPresent(fetchedPlayers -> {
-            players = fetchedPlayers;
-        });
-
+        super.setupController(playerClient);
+        
         teamClient.getAll().ifPresent(fetchedTeams -> {
             teams = fetchedTeams;
         });
-
+        
     }
-
-    public String getDeleteButtonMessage() {
-        if (hasSelectedPlayers()) {
-            int size = this.selectedPlayers.size();
-            return size > 1 ? size + " players selected" : "1 player selected";
-        }
-
-        return "Delete";
-
-    }
-
+    
     public Team getTeamById(String teamId) {
         for (Team team : teams) {
             if (team.getId().equals(teamId)) {
@@ -74,96 +57,10 @@ public class PlayerController implements Serializable {
         }
         return null;
     }
-
-    public boolean hasSelectedPlayers() {
-        return this.selectedPlayers != null && !this.selectedPlayers.isEmpty();
-    }
-
+    
+    @Override
     public void openNew() {
-        Player player = new Player();
-        this.selectedPlayer = player;
+        setSelectedItem(new Player());
     }
-
-    private void createPlayer() {
-
-        Optional<Player> createdPlayer = playerClient.create(selectedPlayer);
-
-        if (createdPlayer.isPresent()) {
-            this.players.add(createdPlayer.get());
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Player Added"));
-        } else {
-            FacesContext.getCurrentInstance().validationFailed();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("failed to add player"));
-        }
-
-    }
-
-    private void updatePlayer() {
-        Optional<Player> updatedPlayer = playerClient.update(selectedPlayer);
-
-        if (updatedPlayer.isPresent()) {
-            players.remove(selectedPlayer);
-            players.add(updatedPlayer.get());
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Updated Player"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-players");
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to Update Player"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-players");
-        }
-
-    }
-
-    public void savePlayer() {
-        Optional<String> playerId = Optional.ofNullable(selectedPlayer.getId());
-
-        if (!playerId.isPresent()) {
-            createPlayer();
-        } else {
-            updatePlayer();
-        }
-
-        PrimeFaces.current().executeScript("PF('managePlayerDialog').hide()");
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-players");
-    }
-
-    public void deletePlayer() {
-
-        Optional<Boolean> deletedPlayer = playerClient.delete(selectedPlayer.getId());
-
-        if (deletedPlayer.isPresent()) {
-
-            this.players.remove(selectedPlayer);
-
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Player Removed"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-players");
-
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Could not remove Player", selectedPlayer.getName()));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-players");
-        }
-    }
-
-    public void deleteSelectedPlayers() {
-
-        for (Player selected : selectedPlayers) {
-            Optional<Boolean> deletedPlayer = playerClient.delete(selected.getId());
-
-            if (deletedPlayer.isPresent()) {
-
-                if (deletedPlayer.get()) {
-                    this.players.remove(selected);
-                    this.selectedPlayers.remove(selected);
-                }
-
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Player Removed"));
-                PrimeFaces.current().ajax().update("form:messages", "form:dt-players");
-                PrimeFaces.current().executeScript("PF('dtPlayers').clearFilters()");
-
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Could not remove Player", selected.getName()));
-                PrimeFaces.current().ajax().update("form:messages", "form:dt-players");
-            }
-        }
-
-    }
+    
 }
