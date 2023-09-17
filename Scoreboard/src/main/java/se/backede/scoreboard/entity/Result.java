@@ -33,12 +33,12 @@ import se.backede.scoreboard.converter.DurationConverter;
 @Setter
 public class Result extends GenericEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "player_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE}, optional = false)
+    @JoinColumn(name = "player_id", nullable = false, referencedColumnName = "id")
     private Player player;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "game_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE}, optional = false)
+    @JoinColumn(name = "game_id", nullable = false, referencedColumnName = "id")
     private Game game;
 
     private Integer score;

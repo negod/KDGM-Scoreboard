@@ -5,10 +5,11 @@ package se.backede.scoreboard.control;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import se.backede.scoreboard.common.constants.GameConstants;
@@ -76,19 +77,19 @@ public class GameDao {
 
     public Optional<Game> updateGame(Game game) {
         try {
-            Game find = em.find(Game.class, game.getId());
 
-            if (game.getName() != null) {
-                find.setName(game.getName());
-            }
-            if (game.getGametype() != null) {
-                find.setGametype(game.getGametype());
-            }
+            TypedQuery<Game> createNamedQuery = em.createNamedQuery(GameConstants.QUERY_UPDATE_GAME, Game.class);
+            createNamedQuery.setParameter(GameConstants.TABLE_COLUMN_ID, game.getId());
+            createNamedQuery.setParameter(GameConstants.TABLE_COLUMN_NAME, game.getName());
+            createNamedQuery.setParameter(GameConstants.TABLE_COLUMN_GAMETYPE, game.getGametype());
+            int executeUpdate = createNamedQuery.executeUpdate();
 
-            em.merge(find);
-            return Optional.ofNullable(find);
+            return Optional.ofNullable(game);
+        } catch (ConstraintViolationException e) {
+            e.getConstraintViolations().forEach(err -> Logger.getLogger(GameDao.class.getName()).log(Level.SEVERE, "Constraint violation", e.toString()));
+            return Optional.empty();
         } catch (Exception e) {
-            Logger.getLogger(GameDao.class.getName()).log(Level.SEVERE, "Error when updating game", e);
+            Logger.getLogger(GameDao.class.getName()).log(Level.SEVERE, "Error when updating gameI", e);
             return Optional.empty();
         }
     }

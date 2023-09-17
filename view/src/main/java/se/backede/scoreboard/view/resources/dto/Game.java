@@ -2,8 +2,6 @@
  */
 package se.backede.scoreboard.view.resources.dto;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
 import se.backede.scoreboard.view.commons.GenericDto;
@@ -16,10 +14,9 @@ import se.backede.scoreboard.view.commons.GenericDto;
 @Setter
 public class Game extends GenericDto {
 
-    private String name;
-    
-    @Enumerated(EnumType.STRING)
-    private GameType gameType;
+    public String name;
+    public GameType gametype;
+
     
 
 }

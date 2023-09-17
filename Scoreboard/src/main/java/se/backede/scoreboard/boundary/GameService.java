@@ -16,6 +16,8 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import se.backede.scoreboard.control.GameDao;
 import se.backede.scoreboard.entity.Game;
 
@@ -23,11 +25,10 @@ import se.backede.scoreboard.entity.Game;
  *
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
-
 @Path("game")
 @ApplicationScoped
 public class GameService {
-    
+
     @Inject
     GameDao dao;
 
@@ -57,6 +58,7 @@ public class GameService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createGame(Game game) {
+        Logger.getLogger(GameService.class.getName()).log(Level.INFO, "Creating Game {0}", game.toString());
 
         return (Response) dao.createGame(game).map(x -> {
             return Response.created(uriInfo.getAbsolutePath()).entity(x).build();
@@ -68,14 +70,13 @@ public class GameService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateGame(Game game) {
+        Logger.getLogger(GameService.class.getName()).log(Level.INFO, "Updating Game {0} ID: {1}", new Object[]{game.toString(), game.getId()});
 
         return (Response) dao.updateGame(game).map(x -> {
             return Response.ok(x).build();
         }).orElse(Response.notModified().build());
 
     }
-
-
 
     @DELETE
     @Path("{id}")
@@ -87,5 +88,5 @@ public class GameService {
             return Response.ok(x).build();
         }).orElse(Response.serverError().build());
     }
-    
+
 }

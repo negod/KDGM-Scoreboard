@@ -89,7 +89,7 @@ public class GameController implements Serializable {
             PrimeFaces.current().ajax().update("form_game:messages", "form_game:dt-games");
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to Update Game"));
-            //PrimeFaces.current().ajax().update("form_game:messages", "form_game:dt-games");
+            PrimeFaces.current().ajax().update("form_game:messages", "form_game:dt-games");
         }
 
     }
