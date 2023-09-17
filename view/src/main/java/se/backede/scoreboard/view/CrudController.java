@@ -94,7 +94,7 @@ public abstract class CrudController<T extends GenericDto> {
             updateItem();
         }
 
-        PrimeFaces.current().executeScript("PF('manageGameDialog').hide()");
+        PrimeFaces.current().executeScript("PF('manageItemialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
     }
 

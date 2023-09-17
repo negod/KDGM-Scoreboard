@@ -26,6 +26,7 @@ public class TeamController extends CrudController<Team> implements Serializable
     private TeamRestClientController teamClient;
 
     @PostConstruct
+    @Override
     public void init() {
         super.setupController(teamClient);
     }
