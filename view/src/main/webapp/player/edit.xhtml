@@ -9,11 +9,14 @@
         <p:inputText id="name" value="#{controller.selectedItem.name}" required="true" />
     </div>
     <div class="field">
-        <p:outputLabel for="gameType">Game Type</p:outputLabel>
-        <p:selectOneMenu value="#{controller.selectedItem.gametype}" var="gameType" id="gameType">
-            <!--f:selectItem itemLabel="Select Game Type" /-->
-            <f:selectItems var="gameType" value="#{controller.gameTypes}" itemValue="#{gameType}" itemLabel="#{gameType}" />
-            <p:column><i class="pi pi-#{gameType}" /> #{gameType} </p:column>
+        <p:outputLabel for="nick_name">Nick Name</p:outputLabel>
+        <p:inputText id="nick_name" value="#{controller.selectedItem.nickName}" required="true" />
+    </div>
+    <div>
+        <p:selectOneMenu id="selectTeamMenu" value="#{controller.selectedItem.team}" var="team" converter="teamConverter">
+            <f:selectItem itemLabel="Select a Team..." />
+            <f:selectItems value="#{controller.teams}" var="team" itemLabel="#{team.name}" itemValue="#{team}" />
+            <p:column><i class="pi pi-#{team}" /> #{team.name} </p:column>
         </p:selectOneMenu>
     </div>
 
