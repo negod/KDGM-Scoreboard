@@ -3,6 +3,9 @@
 package se.backede.scoreboard.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
@@ -29,9 +32,22 @@ import se.backede.scoreboard.common.constants.GlobalConstants;
 @Setter
 public class Competition extends GenericEntity {
 
-    private Date date;
+    private Date comopetitionDate;
     private String name;
+    @ManyToMany
+    @JoinTable(
+            name = "competition_team",
+            joinColumns = @JoinColumn(name = "competition_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id")
+    )
     private Set<Team> teams;
+
+    @ManyToMany
+    @JoinTable(
+            name = "competition_game",
+            joinColumns = @JoinColumn(name = "competition_id"),
+            inverseJoinColumns = @JoinColumn(name = "game_id")
+    )
     private Set<Game> games;
 
 }
