@@ -1,6 +1,6 @@
 /*
  */
-package se.backede.scoreboard.view.resources.dto;
+package se.backede.scoreboard.admin.resources.dto;
 
 import java.io.Serializable;
 import lombok.ToString;

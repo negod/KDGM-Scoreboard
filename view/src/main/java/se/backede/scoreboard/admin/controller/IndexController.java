@@ -1,6 +1,6 @@
 /*
  */
-package se.backede.scoreboard.view;
+package se.backede.scoreboard.admin.controller;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;

@@ -1,11 +1,11 @@
 /*
  */
-package se.backede.scoreboard.view.resources.dto;
+package se.backede.scoreboard.admin.resources.dto;
 
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
-import se.backede.scoreboard.view.commons.GenericDto;
+import se.backede.scoreboard.admin.commons.GenericDto;
 
 /**
  *

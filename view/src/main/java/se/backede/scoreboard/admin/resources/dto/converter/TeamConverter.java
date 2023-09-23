@@ -1,14 +1,14 @@
 /*
  */
-package se.backede.scoreboard.view.resources.dto.converter;
+package se.backede.scoreboard.admin.resources.dto.converter;
 
 import jakarta.el.ValueExpression;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
 import jakarta.faces.convert.FacesConverter;
-import se.backede.scoreboard.view.PlayerController;
-import se.backede.scoreboard.view.resources.dto.Team;
+import se.backede.scoreboard.admin.controller.PlayerController;
+import se.backede.scoreboard.admin.resources.dto.Team;
 
 /**
  *

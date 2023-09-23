@@ -1,7 +1,8 @@
 /*
  */
-package se.backede.scoreboard.view;
+package se.backede.scoreboard.admin.controller;
 
+import se.backede.scoreboard.admin.commons.CrudController;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -9,8 +10,8 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
-import se.backede.scoreboard.view.resources.controller.TeamRestClientController;
-import se.backede.scoreboard.view.resources.dto.Team;
+import se.backede.scoreboard.admin.resources.controller.TeamRestClientController;
+import se.backede.scoreboard.admin.resources.dto.Team;
 
 /**
  *

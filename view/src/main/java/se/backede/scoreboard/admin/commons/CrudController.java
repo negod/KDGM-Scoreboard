@@ -1,6 +1,6 @@
 /*
  */
-package se.backede.scoreboard.view;
+package se.backede.scoreboard.admin.commons;
 
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -9,8 +9,6 @@ import java.util.Optional;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.PrimeFaces;
-import se.backede.scoreboard.view.commons.GenericDto;
-import se.backede.scoreboard.view.commons.GenericRestClient;
 
 /**
  *
@@ -32,8 +30,8 @@ public abstract class CrudController<T extends GenericDto> {
     public void setupController(GenericRestClient restClient) {
         this.restClient = restClient;
 
-        getRestClient().getAll().ifPresent(allGAmes -> {
-            setAllItems(allGAmes);
+        getRestClient().getAll().ifPresent(allItems -> {
+            setAllItems(allItems);
         });
 
     }
@@ -77,12 +75,12 @@ public abstract class CrudController<T extends GenericDto> {
             getAllItems().remove(getSelectedItem());
             getAllItems().add(updatedGame.get());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Updated Item"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to Update Game"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to Update Item"));
         }
 
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
+        PrimeFaces.current().executeScript("PF('manageItemdialog').hide()");
     }
 
     public void saveItem() {
@@ -94,7 +92,7 @@ public abstract class CrudController<T extends GenericDto> {
             updateItem();
         }
 
-        PrimeFaces.current().executeScript("PF('manageItemialog').hide()");
+        PrimeFaces.current().executeScript("PF('manageItemdialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
     }
 
@@ -105,14 +103,12 @@ public abstract class CrudController<T extends GenericDto> {
         if (deletedGame.isPresent()) {
 
             this.getAllItems().remove(getSelectedItem());
-
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item Deleted"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
 
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Could not remove Item", getSelectedItem().getClass().getName()));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
         }
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
     }
 
     public void deleteSelectedItem() {
@@ -132,7 +128,7 @@ public abstract class CrudController<T extends GenericDto> {
                 PrimeFaces.current().executeScript("PF('dtItems').clearFilters()");
 
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Could not remove Game", selected.getClass().getName()));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Could not remove Item", selected.getClass().getName()));
                 PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
             }
         }

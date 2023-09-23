@@ -1,6 +1,6 @@
 /*
  */
-package se.backede.scoreboard.view.commons;
+package se.backede.scoreboard.admin.commons;
 
 import jakarta.ws.rs.PathParam;
 import java.util.List;

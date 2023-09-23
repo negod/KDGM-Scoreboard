@@ -1,6 +1,6 @@
 /*
  */
-package se.backede.scoreboard.view.resources.controller;
+package se.backede.scoreboard.admin.resources.controller;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -10,9 +10,9 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-import se.backede.scoreboard.view.commons.GenericRestClient;
-import se.backede.scoreboard.view.resources.PlayerRestClient;
-import se.backede.scoreboard.view.resources.dto.Player;
+import se.backede.scoreboard.admin.commons.GenericRestClient;
+import se.backede.scoreboard.admin.resources.PlayerRestClient;
+import se.backede.scoreboard.admin.resources.dto.Player;
 
 /**
  *

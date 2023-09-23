@@ -1,6 +1,6 @@
 /*
  */
-package se.backede.scoreboard.view.resources;
+package se.backede.scoreboard.admin.resources;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -13,29 +13,29 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
-import se.backede.scoreboard.view.resources.dto.Player;
+import se.backede.scoreboard.admin.resources.dto.Team;
 
 /**
  *
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
-@Path("/rest-service/player")
+@Path("/rest-service/team")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @RegisterRestClient(baseUri = "http://192.168.2.140:8083")
-public interface PlayerRestClient {
+public interface TeamRestClient {
 
     @GET
-    List<Player> getAll();
+    List<Team> getAll();
 
     @GET
-    Player getById(String id);
+    Team getById(String id);
 
     @PUT
-    Player update(Player dto);
+    Team update(Team dto);
 
     @POST
-    Player create(Player dto);
+    Team create(Team dto);
 
     @DELETE
     @Path("{id}")
