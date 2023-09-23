@@ -33,7 +33,7 @@ public abstract class CrudController<T extends GenericDto> {
         getRestClient().getAll().ifPresent(allItems -> {
             setAllItems(allItems);
         });
-
+        
     }
 
     public String getDeleteButtonMessage() {

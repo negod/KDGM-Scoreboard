@@ -9,16 +9,16 @@
 
         <ui:define name="table">
             <ui:include src="../composition/crud/table.xhtml" id="table">
-                <ui:param name="controller" value="#{playerController}"/>
-                <ui:param name="columns" value="../../player/columns.xhtml"/>
-                <ui:param name="tableHeading" value="PLAYERS"/>
+                <ui:param name="controller" value="#{competitionController}"/>
+                <ui:param name="columns" value="../../game/columns.xhtml"/>
+                <ui:param name="tableHeading" value="COMPETITIONS"/>
             </ui:include>
         </ui:define>
 
         <ui:define name="editDialog">
             <ui:include src="../composition/crud/editDialog.xhtml" id="editDialog">
-                <ui:param name="controller" value="#{playerController}"/>
-                <ui:param name="edit" value="../../player/edit.xhtml"/>
+                <ui:param name="controller" value="#{competitionController}"/>
+                <ui:param name="edit" value="../../game/edit.xhtml"/>
             </ui:include>
         </ui:define>
 

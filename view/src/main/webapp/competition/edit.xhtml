@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <div class="field">
+        <p:outputLabel for="name">Name</p:outputLabel>
+        <p:inputText id="name" value="#{controller.selectedItem.name}" required="true" />
+    </div>
+    <div class="field">
+        <p:outputLabel for="gameType">Game Type</p:outputLabel>
+        <p:selectOneMenu value="#{controller.selectedItem.gametype}" var="gameType" id="gameType">
+            <!--f:selectItem itemLabel="Select Game Type" /-->
+            <f:selectItems var="gameType" value="#{controller.gameTypes}" itemValue="#{gameType}" itemLabel="#{gameType}" />
+            <p:column><i class="pi pi-#{gameType}" /> #{gameType} </p:column>
+        </p:selectOneMenu>
+    </div>
+
+</html>
