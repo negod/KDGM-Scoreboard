@@ -2,6 +2,7 @@
  */
 package se.backede.scoreboard.admin.resources.dto;
 
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import se.backede.scoreboard.admin.commons.GenericDto;
@@ -15,5 +16,7 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 public class Competition extends GenericDto {
 
     private String name;
+    private Date competitionDate;
+
 
 }

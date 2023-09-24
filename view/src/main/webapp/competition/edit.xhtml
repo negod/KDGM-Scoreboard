@@ -9,12 +9,9 @@
         <p:inputText id="name" value="#{controller.selectedItem.name}" required="true" />
     </div>
     <div class="field">
-        <p:outputLabel for="gameType">Game Type</p:outputLabel>
-        <p:selectOneMenu value="#{controller.selectedItem.gametype}" var="gameType" id="gameType">
-            <!--f:selectItem itemLabel="Select Game Type" /-->
-            <f:selectItems var="gameType" value="#{controller.gameTypes}" itemValue="#{gameType}" itemLabel="#{gameType}" />
-            <p:column><i class="pi pi-#{gameType}" /> #{gameType} </p:column>
-        </p:selectOneMenu>
+        <p:outputLabel for="date">Date</p:outputLabel>
+        <p:datePicker id="date" value="#{controller.selectedItem.competitionDate}" />
     </div>
+
 
 </html>

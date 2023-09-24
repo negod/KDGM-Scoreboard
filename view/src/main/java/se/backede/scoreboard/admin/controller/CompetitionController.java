@@ -6,6 +6,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 import se.backede.scoreboard.admin.commons.CrudController;
@@ -20,10 +21,10 @@ import se.backede.scoreboard.admin.resources.dto.Competition;
 @Setter
 @Named("competitionController")
 @ViewScoped
-public class CompetitionController extends CrudController<Competition> {
+public class CompetitionController extends CrudController<Competition> implements Serializable {
 
     @Inject
-    private CompetitionrestClientController competitionClient;
+    CompetitionrestClientController competitionClient;
 
     @PostConstruct
     @Override

@@ -10,7 +10,7 @@
         <ui:define name="table">
             <ui:include src="../composition/crud/table.xhtml" id="table">
                 <ui:param name="controller" value="#{competitionController}"/>
-                <ui:param name="columns" value="../../game/columns.xhtml"/>
+                <ui:param name="columns" value="../../competition/columns.xhtml"/>
                 <ui:param name="tableHeading" value="COMPETITIONS"/>
             </ui:include>
         </ui:define>
@@ -18,7 +18,7 @@
         <ui:define name="editDialog">
             <ui:include src="../composition/crud/editDialog.xhtml" id="editDialog">
                 <ui:param name="controller" value="#{competitionController}"/>
-                <ui:param name="edit" value="../../game/edit.xhtml"/>
+                <ui:param name="edit" value="../../competition/edit.xhtml"/>
             </ui:include>
         </ui:define>
 
