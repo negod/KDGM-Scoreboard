@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.service.GenericDto;
 
@@ -18,6 +19,7 @@ import se.backede.scoreboard.common.service.GenericDto;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class TeamDto extends GenericDto {
 
     private String name;

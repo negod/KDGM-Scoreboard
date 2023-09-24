@@ -2,10 +2,12 @@
  */
 package se.backede.scoreboard.competition;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import se.backede.scoreboard.team.TeamEntity;
 import se.backede.scoreboard.game.GameEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -44,8 +46,8 @@ public class CompetitionEntity extends GenericEntity {
     @Column(name = "competition_date")
     private Date competitionDate;
     private String name;
-    
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE})
     @JoinTable(
             name = "competition_team",
             joinColumns = @JoinColumn(name = "competition_id"),
@@ -53,7 +55,7 @@ public class CompetitionEntity extends GenericEntity {
     )
     private Set<TeamEntity> teams;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE})
     @JoinTable(
             name = "competition_game",
             joinColumns = @JoinColumn(name = "competition_id"),

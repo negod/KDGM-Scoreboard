@@ -33,7 +33,7 @@ public abstract class CrudController<T extends GenericDto> {
         getRestClient().getAll().ifPresent(allItems -> {
             setAllItems(allItems);
         });
-        
+
     }
 
     public String getDeleteButtonMessage() {
@@ -75,12 +75,12 @@ public abstract class CrudController<T extends GenericDto> {
             getAllItems().remove(getSelectedItem());
             getAllItems().add(updatedGame.get());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Updated Item"));
+            PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to Update Item"));
         }
 
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
-        PrimeFaces.current().executeScript("PF('manageItemdialog').hide()");
+        PrimeFaces.current().executeScript("PF('manageItemDialog').hide()");
     }
 
     public void saveItem() {

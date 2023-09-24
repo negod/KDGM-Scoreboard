@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.service.GenericDto;
 import se.backede.scoreboard.converter.DurationConverter;
@@ -21,6 +22,7 @@ import se.backede.scoreboard.converter.DurationConverter;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class ResultDto extends GenericDto {
 
     private String player;

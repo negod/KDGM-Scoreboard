@@ -42,10 +42,10 @@ public class GenericEntity implements Serializable {
     @Id
     @NotNull(message = "External id cannot be null and should be set to UUID")
     @Column(unique = true, updatable = false, insertable = true, name = "id")
-    @Pattern(regexp = "[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}")
+    @Pattern(regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
     private String id;
 
-    @NotNull(message = "Updated date cannot be null and all CRUD operations must have a date")
+    //@NotNull(message = "Updated date cannot be null and all CRUD operations must have a date")
     @Column(name = "updated")
     @Temporal(TIMESTAMP)
     private Date updatedDate;
