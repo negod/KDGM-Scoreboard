@@ -4,7 +4,9 @@
     <ui:composition template="../layout/crud/crud.xhtml">
 
         <ui:define name="toolbar">
-            <ui:include src="../composition/crud/toolBar.xhtml" id="toolBar"/>
+            <ui:include src="../composition/crud/toolBar.xhtml" id="toolBar">
+                <ui:param name="controller" value="#{gameController}"/>
+            </ui:include>
         </ui:define>
 
         <ui:define name="table">
@@ -12,6 +14,12 @@
                 <ui:param name="controller" value="#{gameController}"/>
                 <ui:param name="columns" value="../../game/columns.xhtml"/>
                 <ui:param name="tableHeading" value="GAMES"/>
+            </ui:include>
+        </ui:define>
+
+        <ui:define name="picklist">
+            <ui:include src="../composition/subitem/picklist.xhtml" id="picklist">
+                <ui:param name="controller" value="#{gameController}"/>
             </ui:include>
         </ui:define>
 
@@ -27,7 +35,9 @@
         </ui:define>
 
         <ui:define name="confirmDialog">
-            <ui:include src="../composition/crud/confirmDialog.xhtml" id="confirmDialog"/>
+            <ui:include src="../composition/crud/confirmDialog.xhtml" id="confirmDialog">
+                <ui:param name="controller" value="#{gameController}"/>
+            </ui:include>
         </ui:define>
 
     </ui:composition>

@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <div class="card">
+        <br/>
+        <p:pickList id="pojoPickList" value="#{controller.items}" var="item"
+                    itemValue="#{item}" itemLabel="#{item.name}" showSourceControls="true"
+                    showTargetControls="true" showCheckbox="true"
+                    showSourceFilter="true" showTargetFilter="true"
+                    sourceFilterPlaceholder="Filter available countries"
+                    targetFilterPlaceholder="Filter starting countries"
+                    filterMatchMode="contains" responsive="true">
+
+            <f:facet name="sourceCaption">AVAILABLE</f:facet>
+            <f:facet name="targetCaption">SELECTED</f:facet>
+
+            <p:ajax event="transfer" listener="#{controller.onTransfer}" update="form:messages"/>
+            <p:ajax event="select" listener="#{controller.onSelect}" update="form:messages"/>
+            <p:ajax event="unselect" listener="#{controller.onUnselect}" update="form:messages"/>
+            <p:ajax event="reorder" listener="#{controller.onReorder}" update="form:messages"/>
+
+            <p:column style="width:94%">
+                <div class="flex align-items-center">
+                    <h:outputText value="#{item.name}"/>
+                </div>
+            </p:column>
+        </p:pickList>
+    </div>
+
+</html>
+

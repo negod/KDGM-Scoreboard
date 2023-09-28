@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import se.backede.scoreboard.exception.ExceptionHandlingInterceptor;
@@ -77,6 +78,7 @@ public abstract class AbstractCrudDao<E extends GenericEntity> implements Generi
     public Optional<E> create(E entity) {
         try {
 
+            entity.setId(UUID.randomUUID().toString());
             Optional<E> validatedEntity = validate(entity);
             if (validatedEntity.isPresent()) {
                 em.persist(validatedEntity.get());

@@ -5,6 +5,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
@@ -20,6 +21,7 @@ import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.dao.GenericEntity;
 import se.backede.scoreboard.common.constants.GlobalConstants;
 import se.backede.scoreboard.common.constants.TeamConstants;
+import se.backede.scoreboard.competition.CompetitionEntity;
 
 /**
  *
@@ -39,11 +41,14 @@ import se.backede.scoreboard.common.constants.TeamConstants;
 @AllArgsConstructor
 public class TeamEntity extends GenericEntity {
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY, orphanRemoval = false, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY, orphanRemoval = false, cascade = {CascadeType.DETACH, CascadeType.MERGE})
     private Set<PlayerEntity> players;
 
     @NotNull(message = "Name cannot be NULL")
     @Column(name = "name")
     private String name;
+
+    @ManyToMany(mappedBy = "teams")
+    private Set<CompetitionEntity> competitions;
 
 }

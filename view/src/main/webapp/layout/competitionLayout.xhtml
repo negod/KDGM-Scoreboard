@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css" />
+
+    <h:head>
+        <title>Kode Gubbs Gaming night admin</title>
+    </h:head>
+
+    <body>
+
+        <div id="header">
+            <ui:include src="../../navigation.xhtml" id="navigation"/>
+            <ui:insert name="header"/>       
+        </div>
+
+        <h:form id="form">
+            <p:growl id="messages" showDetail="true" />
+            <div id="toolbar">
+                <ui:insert name="toolbar"/>
+            </div>
+            <div id="competition">
+                <ui:insert name="competition"/>
+            </div>
+            <div id="games">
+                <ui:insert name="games"/>
+            </div>
+            <div id="teams">
+                <ui:insert name="teams"/>
+            </div>
+        </h:form>
+
+        <div id="footer">
+            <ui:insert name="footer"/>
+        </div>
+
+    </body>
+
+</html>
+

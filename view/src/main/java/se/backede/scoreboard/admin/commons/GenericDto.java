@@ -16,7 +16,7 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class GenericDto implements Serializable{
+public class GenericDto implements Serializable {
 
     private String id;
 

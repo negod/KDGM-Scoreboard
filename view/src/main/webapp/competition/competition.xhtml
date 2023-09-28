@@ -4,7 +4,9 @@
     <ui:composition template="../layout/crud/crud.xhtml">
 
         <ui:define name="toolbar">
-            <ui:include src="../composition/crud/toolBar.xhtml" id="toolBar"/>
+            <ui:include src="../composition/crud/toolBar.xhtml" id="toolBar">
+                <ui:param name="controller" value="#{competitionController}"/>
+            </ui:include>
         </ui:define>
 
         <ui:define name="table">
@@ -12,6 +14,12 @@
                 <ui:param name="controller" value="#{competitionController}"/>
                 <ui:param name="columns" value="../../competition/columns.xhtml"/>
                 <ui:param name="tableHeading" value="COMPETITIONS"/>
+            </ui:include>
+        </ui:define>
+
+        <ui:define name="pickList1">
+            <ui:include src="../composition/subItem/picklist.xhtml" id="picklist">
+                <ui:param name="controller" value="#{gamePickListController}"/>
             </ui:include>
         </ui:define>
 
@@ -23,7 +31,9 @@
         </ui:define>
 
         <ui:define name="deleteDialog">
-            <ui:include src="../composition/crud/deleteDialog.xhtml" id="deleteDialog"/>
+            <ui:include src="../composition/crud/deleteDialog.xhtml" id="deleteDialog">
+                <ui:param name="controller" value="#{competitionController}"/>
+            </ui:include>
         </ui:define>
 
         <ui:define name="confirmDialog">

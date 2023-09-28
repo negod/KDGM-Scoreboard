@@ -19,7 +19,7 @@ import se.backede.scoreboard.admin.resources.dto.Competition;
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
 @ApplicationScoped
-public class CompetitionrestClientController implements GenericRestClient<Competition> {
+public class CompetitionRestClientController implements GenericRestClient<Competition> {
 
     @Inject
     @RestClient
@@ -30,7 +30,7 @@ public class CompetitionrestClientController implements GenericRestClient<Compet
         try {
             return Optional.ofNullable(client.getAll());
         } catch (Exception e) {
-            Logger.getLogger(CompetitionrestClientController.class.getName()).log(Level.SEVERE, "Error when getting all in RestClient", e);
+            Logger.getLogger(CompetitionRestClientController.class.getName()).log(Level.SEVERE, "Error when getting all in RestClient", e);
             return Optional.empty();
         }
     }
@@ -40,7 +40,7 @@ public class CompetitionrestClientController implements GenericRestClient<Compet
         try {
             return Optional.ofNullable((Competition) client.getById(id));
         } catch (WebApplicationException e) {
-            Logger.getLogger(CompetitionrestClientController.class.getName()).log(Level.SEVERE, "Error when getting by id in RestClient", e);
+            Logger.getLogger(CompetitionRestClientController.class.getName()).log(Level.SEVERE, "Error when getting by id in RestClient", e);
             return Optional.empty();
         }
     }
@@ -50,7 +50,7 @@ public class CompetitionrestClientController implements GenericRestClient<Compet
         try {
             return Optional.ofNullable((Competition) client.update(dto));
         } catch (WebApplicationException e) {
-            Logger.getLogger(CompetitionrestClientController.class.getName()).log(Level.SEVERE, "Error when updating in RestClient", e);
+            Logger.getLogger(CompetitionRestClientController.class.getName()).log(Level.SEVERE, "Error when updating in RestClient", e);
             return Optional.empty();
         }
     }
@@ -60,7 +60,7 @@ public class CompetitionrestClientController implements GenericRestClient<Compet
         try {
             return Optional.ofNullable((Competition) client.create(dto));
         } catch (WebApplicationException e) {
-            Logger.getLogger(CompetitionrestClientController.class.getName()).log(Level.SEVERE, "Error when creating in RestClient", e);
+            Logger.getLogger(CompetitionRestClientController.class.getName()).log(Level.SEVERE, "Error when creating in RestClient", e);
             return Optional.empty();
         }
     }
@@ -70,7 +70,7 @@ public class CompetitionrestClientController implements GenericRestClient<Compet
         try {
             return Optional.ofNullable(client.delete(id));
         } catch (WebApplicationException e) {
-            Logger.getLogger(CompetitionrestClientController.class.getName()).log(Level.SEVERE, "Error when deleting all in RestClient", e);
+            Logger.getLogger(CompetitionRestClientController.class.getName()).log(Level.SEVERE, "Error when deleting all in RestClient", e);
             return Optional.empty();
         }
     }

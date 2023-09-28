@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
-    <persistence-unit name="PU" transaction-type="JTA">
-        <jta-data-source>java:app/Postgres</jta-data-source>
-        <class>se.backede.scoreboard.entity.test.Game</class>
-        <class>se.backede.scoreboard.entity.test.Result</class>
-        <class>se.backede.scoreboard.entity.test.Team</class>
-        <class>se.backede.scoreboard.entity.test.Player</class>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
-        <properties>
-            <!-- ENABLE FOR LOGGING -->
-            <!-- property name="eclipselink.logging.level" value="FINE"/-->
-            <!-- property name="eclipselink.logging.parameters" value="true"/-->
-        </properties>
-    </persistence-unit>
+  <persistence-unit name="PU" transaction-type="JTA">
+    <jta-data-source>java:app/Postgres</jta-data-source>
+    <class>se.backede.scoreboard.entity.test.Game</class>
+    <class>se.backede.scoreboard.entity.test.Result</class>
+    <class>se.backede.scoreboard.entity.test.Team</class>
+    <class>se.backede.scoreboard.entity.test.Player</class>
+    <class>generated.CompetitionGame</class>
+    <class>generated.CompetitionTeam</class>
+    <class>generated.Competition</class>
+    <class>generated.Result</class>
+    <class>generated.Game</class>
+    <class>generated.Player</class>
+    <class>generated.Team</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <!-- ENABLE FOR LOGGING -->
+      <!-- property name="eclipselink.logging.level" value="FINE"/-->
+      <!-- property name="eclipselink.logging.parameters" value="true"/-->
+    </properties>
+  </persistence-unit>
 </persistence>

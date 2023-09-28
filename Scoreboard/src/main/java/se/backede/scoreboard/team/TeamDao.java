@@ -41,14 +41,21 @@ public class TeamDao extends AbstractCrudDao<TeamEntity> {
     @Override
     public Optional<Boolean> delete(String id) {
 
+        Logger.getLogger(TeamDao.class.getName()).log(Level.INFO, "Deleting team");
+
         try {
+
             TeamEntity teamToRemove = getEntityManager().find(TeamEntity.class, id);
 
+//            for (PlayerEntity player : teamToRemove.getPlayers()) {
+//                playerDao.removeTeam(player.getId());
+//            }
             for (PlayerEntity player : teamToRemove.getPlayers()) {
-                playerDao.removeTeam(player.getId());
+                player.setTeam(null);
             }
 
-            teamToRemove.setPlayers(null);
+            getEntityManager().flush();
+
             getEntityManager().remove(teamToRemove);
             return Optional.of(Boolean.TRUE);
 
@@ -65,7 +72,7 @@ public class TeamDao extends AbstractCrudDao<TeamEntity> {
 
     }
 
-    @Override
+    /*@Override
     public Optional<TeamEntity> update(TeamEntity team) {
         try {
 
@@ -79,8 +86,7 @@ public class TeamDao extends AbstractCrudDao<TeamEntity> {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, "Error when deleting team {0}", new Object[]{team.toString()});
             return Optional.empty();
         }
-    }
-
+    }*/
     public Optional<TeamEntity> addPlayer(String teamId, String playerId) {
         try {
             TeamEntity team = getEntityManager().find(TeamEntity.class, teamId);

@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
@@ -17,9 +18,11 @@ import se.backede.scoreboard.common.constants.GameConstants;
 import se.backede.scoreboard.common.constants.GlobalConstants;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import se.backede.scoreboard.competition.CompetitionEntity;
 import se.backede.scoreboard.result.ResultEntity;
 
 /**
@@ -48,5 +51,8 @@ public class GameEntity extends GenericEntity {
 
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "game")
     private List<ResultEntity> results;
+
+    @ManyToMany(mappedBy = "games")
+    private Set<CompetitionEntity> competitions;
 
 }

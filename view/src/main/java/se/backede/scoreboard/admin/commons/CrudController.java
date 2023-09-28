@@ -75,12 +75,10 @@ public abstract class CrudController<T extends GenericDto> {
             getAllItems().remove(getSelectedItem());
             getAllItems().add(updatedGame.get());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Updated Item"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to Update Item"));
         }
 
-        PrimeFaces.current().executeScript("PF('manageItemDialog').hide()");
     }
 
     public void saveItem() {
@@ -92,8 +90,8 @@ public abstract class CrudController<T extends GenericDto> {
             updateItem();
         }
 
-        PrimeFaces.current().executeScript("PF('manageItemdialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
+        PrimeFaces.current().executeScript("PF('manageItemDialog').hide()");
     }
 
     public void deleteItem() {
@@ -108,6 +106,7 @@ public abstract class CrudController<T extends GenericDto> {
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Could not remove Item", getSelectedItem().getClass().getName()));
         }
+
         PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
     }
 

@@ -40,7 +40,7 @@ public class PlayerDao extends AbstractCrudDao<PlayerEntity> {
 
     }
 
-    @Override
+    /*@Override
     public Optional<PlayerEntity> update(PlayerEntity player) {
         try {
 
@@ -66,6 +66,6 @@ public class PlayerDao extends AbstractCrudDao<PlayerEntity> {
             return Optional.empty();
         }
 
-    }
+    }*/
 
 }

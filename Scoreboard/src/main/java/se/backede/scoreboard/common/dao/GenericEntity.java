@@ -45,7 +45,6 @@ public class GenericEntity implements Serializable {
     @Pattern(regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
     private String id;
 
-    //@NotNull(message = "Updated date cannot be null and all CRUD operations must have a date")
     @Column(name = "updated")
     @Temporal(TIMESTAMP)
     private Date updatedDate;

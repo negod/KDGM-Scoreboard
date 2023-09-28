@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../layout/basicLayout.xhtml">
+
+    <ui:define name="content">
+        <h:form id="form">
+            <!-- Dropdown for Competitions -->
+            <p:selectOneMenu id="competitionDropdown" 
+                             value="#{competitionController.selectedItem}" 
+                             converter="competitionConverterCompetition" 
+                             var="comp" 
+                             filter="true" 
+                             filterMatchMode="contains">
+                <f:selectItem itemLabel="Select Competition" itemValue="#{null}" noSelectionOption="true"/>
+                <f:selectItems value="#{competitionController.allItems}" var="comp" itemLabel="#{comp.name}" itemValue="#{comp}" />
+                <p:column><i class="pi pi-#{comp}" /> #{comp.name} </p:column>
+                <p:ajax listener="#{competitionController.onCompetitionChange}" 
+                        update="gamePickList teamPickList" />
+            </p:selectOneMenu>
+
+            <!-- PickList for Games -->
+            <p:pickList id="gamePickList" 
+                        value="#{competitionController.gamesDualList}" 
+                        var="game" 
+                        itemValue="#{game}" 
+                        itemLabel="#{game.name}">
+                <f:facet name="sourceCaption">Available Games</f:facet>
+                <f:facet name="targetCaption">Selected Games</f:facet>
+                <p:ajax event="transfer" listener="#{competitionController.onGameTransfer}" />
+            </p:pickList>
+
+            <!-- PickList for Teams -->
+            <p:pickList id="teamPickList" 
+                        value="#{competitionController.teamsDualList}" 
+                        var="team" 
+                        itemValue="#{team}" 
+                        itemLabel="#{team.name}">
+                <f:facet name="sourceCaption">Available Teams</f:facet>
+                <f:facet name="targetCaption">Selected Teams</f:facet>
+                <p:ajax event="transfer" listener="#{competitionController.onTeamTransfer}" />
+            </p:pickList>
+
+            <!-- Button to Save Changes -->
+            <p:commandButton value="Save Changes" action="#{competitionController.saveChanges}" />
+        </h:form>
+    </ui:define>
+
+</ui:composition>

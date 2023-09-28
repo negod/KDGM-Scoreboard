@@ -47,20 +47,16 @@ public class CompetitionEntity extends GenericEntity {
     private Date competitionDate;
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE})
-    @JoinTable(
-            name = "competition_team",
+    @ManyToMany
+    @JoinTable(name = "kggn.competition_game",
             joinColumns = @JoinColumn(name = "competition_id"),
-            inverseJoinColumns = @JoinColumn(name = "team_id")
-    )
-    private Set<TeamEntity> teams;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE})
-    @JoinTable(
-            name = "competition_game",
-            joinColumns = @JoinColumn(name = "competition_id"),
-            inverseJoinColumns = @JoinColumn(name = "game_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "game_id"))
     private Set<GameEntity> games;
+
+    @ManyToMany
+    @JoinTable(name = "kggn.competition_team",
+            joinColumns = @JoinColumn(name = "competition_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id"))
+    private Set<TeamEntity> teams;
 
 }
