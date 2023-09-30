@@ -127,7 +127,7 @@ public class CompetitionController extends CrudController<Competition> implement
         } else if (event.isRemove()) {
             for (Object item : event.getItems()) {
                 String id = (String) item;
-                Game gameById = getGameById(id);
+                Team gameById = getTeamById(id);
                 super.getSelectedItem().getTeams().remove(gameById);
             }
         }
