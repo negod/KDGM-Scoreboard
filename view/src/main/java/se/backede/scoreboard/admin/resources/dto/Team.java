@@ -17,4 +17,5 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 public class Team extends GenericDto {
 
     private String name;
+
 }

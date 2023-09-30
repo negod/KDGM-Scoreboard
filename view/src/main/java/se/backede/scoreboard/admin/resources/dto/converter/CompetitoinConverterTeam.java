@@ -8,7 +8,6 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
 import jakarta.faces.convert.FacesConverter;
 import se.backede.scoreboard.admin.controller.CompetitionController;
-import se.backede.scoreboard.admin.controller.PlayerController;
 import se.backede.scoreboard.admin.resources.dto.Team;
 
 /**

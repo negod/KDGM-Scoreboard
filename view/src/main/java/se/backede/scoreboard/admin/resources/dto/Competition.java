@@ -16,8 +16,8 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 @Setter
 public class Competition extends GenericDto {
 
-    private String name;
     private Date competitionDate;
+    private String name;
     private List<Game> games;
     private List<Team> teams;
 

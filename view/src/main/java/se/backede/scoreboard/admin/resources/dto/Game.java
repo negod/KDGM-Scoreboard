@@ -2,9 +2,11 @@
  */
 package se.backede.scoreboard.admin.resources.dto;
 
-import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.admin.commons.GenericDto;
 
 /**
@@ -13,7 +15,9 @@ import se.backede.scoreboard.admin.commons.GenericDto;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Game extends GenericDto {
 
     private String name;

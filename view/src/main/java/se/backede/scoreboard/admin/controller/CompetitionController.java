@@ -10,6 +10,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -91,23 +92,48 @@ public class CompetitionController extends CrudController<Competition> implement
 
         gamesDualList = new DualListModel<>(availableGames, selectedGames);
         teamsDualList = new DualListModel<>(availableTeams, selectedTeams);
-        
+
         PrimeFaces.current().ajax().update("form:gamePickList", "form:teamPickList");
 
     }
 
     public void onGameTransfer(TransferEvent event) {
+
+        if (event.isAdd()) {
+            for (Object item : event.getItems()) {
+                String id = (String) item;
+                Game gameById = getGameById(id);
+                super.getSelectedItem().getGames().add(gameById);
+            }
+        } else if (event.isRemove()) {
+            for (Object item : event.getItems()) {
+                String id = (String) item;
+                Game gameById = getGameById(id);
+                super.getSelectedItem().getGames().remove(gameById);
+            }
+        }
+
+        super.saveItem();
         // Logik för att hantera överföring av spel
     }
 
     public void onTeamTransfer(TransferEvent event) {
-        // Logik för att hantera överföring av lag
-    }
+        if (event.isAdd()) {
+            for (Object item : event.getItems()) {
+                String id = (String) item;
+                Team gameById = getTeamById(id);
+                super.getSelectedItem().getTeams().add(gameById);
+            }
+        } else if (event.isRemove()) {
+            for (Object item : event.getItems()) {
+                String id = (String) item;
+                Game gameById = getGameById(id);
+                super.getSelectedItem().getTeams().remove(gameById);
+            }
+        }
 
-    public void saveChanges() {
-        // Logik för att spara ändringar
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saved", "Changes have been saved.");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        super.saveItem();
+        // Logik för att h
     }
 
     public Team getTeamById(String teamId) {
@@ -119,9 +145,9 @@ public class CompetitionController extends CrudController<Competition> implement
         return null;
     }
 
-    public Game getGameById(String gameId) {
+    public Game getGameById(String teamId) {
         for (Game game : games) {
-            if (game.getId().equals(gameId)) {
+            if (game.getId().equals(teamId)) {
                 return game;
             }
         }

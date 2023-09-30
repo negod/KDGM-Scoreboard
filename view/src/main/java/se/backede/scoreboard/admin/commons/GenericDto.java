@@ -3,10 +3,13 @@
 package se.backede.scoreboard.admin.commons;
 
 import java.io.Serializable;
+import javax.json.bind.annotation.JsonbProperty;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 /**
  *
@@ -14,10 +17,13 @@ import lombok.ToString;
  */
 @Getter
 @Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
-@ToString
 public class GenericDto implements Serializable {
 
+    @JsonbProperty
     private String id;
 
 }

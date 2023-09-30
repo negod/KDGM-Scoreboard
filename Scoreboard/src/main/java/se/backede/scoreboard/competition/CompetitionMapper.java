@@ -29,16 +29,21 @@ public class CompetitionMapper extends AbstractMapper<CompetitionDto, Competitio
                 .competitionDate(dto.getCompetitionDate())
                 .build();
 
-        List<GameEntity> gamesList = dto.getGames().stream()
-                .map(gameMapper::mapToEntity)
-                .collect(Collectors.toList());
+        if (dto.getGames() != null) {
+            List<GameEntity> gamesList = dto.getGames().stream()
+                    .map(gameMapper::mapToEntity)
+                    .collect(Collectors.toList());
 
-        List<TeamEntity> teamsList = dto.getTeams().stream()
-                .map(teamMapper::mapToEntity)
-                .collect(Collectors.toList());
+            build.setGames(gamesList.stream().collect(Collectors.toSet()));
+        }
 
-        build.setGames(gamesList.stream().collect(Collectors.toSet()));
-        build.setTeams(teamsList.stream().collect(Collectors.toSet()));
+        if (dto.getTeams() != null) {
+            List<TeamEntity> teamsList = dto.getTeams().stream()
+                    .map(teamMapper::mapToEntity)
+                    .collect(Collectors.toList());
+
+            build.setTeams(teamsList.stream().collect(Collectors.toSet()));
+        }
 
         return build;
     }
@@ -51,16 +56,21 @@ public class CompetitionMapper extends AbstractMapper<CompetitionDto, Competitio
                 .competitionDate(entity.getCompetitionDate())
                 .build();
 
-        List<GameDto> gamesList = entity.getGames().stream()
-                .map(gameMapper::mapToDto)
-                .collect(Collectors.toList());
+        if (entity.getGames() != null) {
+            List<GameDto> gamesList = entity.getGames().stream()
+                    .map(gameMapper::mapToDto)
+                    .collect(Collectors.toList());
 
-        List<TeamDto> teamsList = entity.getTeams().stream()
-                .map(teamMapper::mapToDto)
-                .collect(Collectors.toList());
+            build.setGames(gamesList);
+        }
 
-        build.setGames(gamesList);
-        build.setTeams(teamsList);
+        if (entity.getTeams() != null) {
+            List<TeamDto> teamsList = entity.getTeams().stream()
+                    .map(teamMapper::mapToDto)
+                    .collect(Collectors.toList());
+
+            build.setTeams(teamsList);
+        }
 
         return build;
     }
