@@ -2,8 +2,9 @@
  */
 package se.backede.scoreboard.team;
 
+import java.util.Optional;
 import se.backede.scoreboard.common.AbstractMapper;
-import se.backede.scoreboard.team.TeamEntity;
+import se.backede.scoreboard.player.PlayerMapper;
 
 /**
  *
@@ -11,20 +12,36 @@ import se.backede.scoreboard.team.TeamEntity;
  */
 public class TeamMapper extends AbstractMapper<TeamDto, TeamEntity> {
 
+    private final PlayerMapper PLAYER_MAPPER = new PlayerMapper();
+
     @Override
     public TeamDto mapToDto(TeamEntity team) {
-        return TeamDto.builder()
+        TeamDto teamDto = TeamDto.builder()
                 .id(team.getId())
                 .name(team.getName())
                 .build();
+
+        Optional.ofNullable(team.getPlayers()).ifPresent(teams -> {
+            teamDto.setPlayers(PLAYER_MAPPER.mapToDtoList(teams));
+        });
+
+        return teamDto;
     }
 
     @Override
     public TeamEntity mapToEntity(TeamDto teamDto) {
-        TeamEntity team = new TeamEntity();
-        team.setId(teamDto.getId());
-        team.setName(teamDto.getName());
-        return team;
+
+        TeamEntity teamEntity = TeamEntity.builder()
+                .id(teamDto.getId())
+                .name(teamDto.getName())
+                .build();
+
+        Optional.ofNullable(teamDto.getPlayers()).ifPresent(teams -> {
+            teamEntity.setPlayers(PLAYER_MAPPER.mapToEntityList(teams));
+        });
+
+        return teamEntity;
+
     }
 
 }

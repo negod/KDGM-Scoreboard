@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <div class="field">
         <p:outputLabel for="name">Name</p:outputLabel>
         <p:inputText id="name" value="#{controller.selectedItem.name}" required="true" />
+    </div>
+    <div>
+        <p:outputLabel for="pickList">Choose Teams</p:outputLabel>
+        <p:pickList id="pickList" 
+                    value="#{controller.dualList}" 
+                    var="team" 
+                    itemValue="#{team}" 
+                    itemLabel="#{team.name}"
+                    responsive="true"
+                    converter="#{teamConverter}">
+            <f:facet name="sourceCaption">Available Teams</f:facet>
+            <f:facet name="targetCaption">Selected Teams</f:facet>
+            
+            <p:ajax event="transfer" listener="#{controller.onTransfer}" />
+            
+            
+        </p:pickList>
     </div>
 
 </html>

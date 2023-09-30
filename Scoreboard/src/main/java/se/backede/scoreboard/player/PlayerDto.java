@@ -9,7 +9,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.service.GenericDto;
-import se.backede.scoreboard.team.TeamDto;
 
 /**
  *
@@ -25,6 +24,5 @@ public class PlayerDto extends GenericDto {
 
     private String name;
     private String nickName;
-    private TeamDto team;
 
 }

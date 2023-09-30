@@ -2,6 +2,8 @@
  */
 package se.backede.scoreboard.admin.resources.dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,5 +19,6 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 public class Team extends GenericDto {
 
     private String name;
+    private List<Player> players = new ArrayList<>();
 
 }

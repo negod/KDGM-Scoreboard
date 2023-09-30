@@ -8,27 +8,33 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
-    <changeSet id="init_competition_team_table" author="Joakim Backede">
-    
-        <createTable tableName="competition_team">
-            <column name="competition_id" type="CHAR(36)">
+
+    <changeSet id="create_player_team" author="Joakim Backede">
+        <createTable tableName="player_team">
+            <column name="player_id" type="VARCHAR(36)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="team_id" type="CHAR(36)">
+            <column name="team_id" type="VARCHAR(36)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
         </createTable>
-    
-        <addForeignKeyConstraint baseTableName="competition_team"
-                                 baseColumnNames="competition_id"
-                                 referencedTableName="competition"
+
+        <addForeignKeyConstraint baseTableName="player_team" 
+                                 baseColumnNames="player_id"
+                                 referencedTableName="player" 
                                  referencedColumnNames="id"
-                                 constraintName="FK_competition_team_competition"/>
-        <addForeignKeyConstraint baseTableName="competition_team"
+                                 constraintName="fk_player_team_player" />
+
+        <addForeignKeyConstraint baseTableName="player_team" 
                                  baseColumnNames="team_id"
-                                 referencedTableName="team"
+                                 referencedTableName="team" 
                                  referencedColumnNames="id"
-                                 constraintName="FK_competition_team_team"/>
-        
+                                 constraintName="fk_player_team_team" />
+
+        <rollback>
+            <dropTable tableName="player_team" cascadeConstraints="true" />
+        </rollback>
+
     </changeSet>
+
 </databaseChangeLog>

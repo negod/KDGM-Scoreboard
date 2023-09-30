@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <changeSet id="playerdata" author="Joakim Backede">
+        <!-- Insert players for Team One -->
+        <insert tableName="player_team">
+            <column name="player_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3" />
+            <column name="team_id" value="5A0FC1F5-028C-4BC1-BD86-AE1D47EB2D4B" />
+        </insert>
+        <!-- Insert players for Team Two -->
+        <insert tableName="player_team">
+            <column name="player_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4BB" />
+            <column name="team_id" value="7B5BB9E4-94D0-4DFC-A0E4-83244E17C659" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

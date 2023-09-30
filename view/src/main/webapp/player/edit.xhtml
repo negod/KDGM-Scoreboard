@@ -12,12 +12,4 @@
         <p:outputLabel for="nick_name">Nick Name</p:outputLabel>
         <p:inputText id="nick_name" value="#{controller.selectedItem.nickName}" required="true" />
     </div>
-    <div>
-        <p:selectOneMenu id="selectTeamMenu" value="#{controller.selectedItem.team}" var="team" converter="teamConverter">
-            <f:selectItem itemLabel="Select a Team..." />
-            <f:selectItems value="#{controller.teams}" var="team" itemLabel="#{team.name}" itemValue="#{team}" />
-            <p:column><i class="pi pi-#{team}" /> #{team.name} </p:column>
-        </p:selectOneMenu>
-    </div>
-
 </html>

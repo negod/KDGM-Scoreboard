@@ -40,6 +40,7 @@
                         var="team" 
                         itemValue="#{team.id}" 
                         itemLabel="#{team.name}"
+                        converter="#{competitionConverterTeam}"
                         responsive="true">
                 <f:facet name="sourceCaption">Available Teams</f:facet>
                 <f:facet name="targetCaption">Selected Teams</f:facet>

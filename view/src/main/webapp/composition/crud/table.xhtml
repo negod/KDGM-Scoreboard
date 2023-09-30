@@ -29,6 +29,7 @@
         <p:column exportable="false">
             <p:commandButton icon="pi pi-pencil" update=":dialogs:manage-item-content"
                              oncomplete="PF('manageItemDialog').show()"
+                             action="#{controller.onChange()}"
                              styleClass="edit-button rounded-button ui-button-success" 
                              process="@this">
                 <f:setPropertyActionListener value="#{item}" target="#{controller.selectedItem}" />
@@ -42,5 +43,5 @@
         </p:column>
 
     </p:dataTable>
-    
+
 </html>

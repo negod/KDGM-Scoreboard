@@ -7,14 +7,21 @@
 
 
     <div class="card">
-        <br/>
-        <p:pickList id="pojoPickList" value="#{controller.items}" var="item"
-                    itemValue="#{item}" itemLabel="#{item.name}" showSourceControls="true"
-                    showTargetControls="true" showCheckbox="true"
-                    showSourceFilter="true" showTargetFilter="true"
-                    sourceFilterPlaceholder="Filter available countries"
-                    targetFilterPlaceholder="Filter starting countries"
-                    filterMatchMode="contains" responsive="true">
+
+        <p:pickList id="picklist" 
+                    value="#{controller.picklistItems}" 
+                    var="pickListItem"
+                    itemValue="#{pickListItem.id}" 
+                    itemLabel="#{pickListItem.name}" 
+                    showSourceControls="true"
+                    showTargetControls="true" 
+                    showCheckbox="true"
+                    showSourceFilter="true" 
+                    showTargetFilter="true"
+                    sourceFilterPlaceholder="Filter"
+                    targetFilterPlaceholder="Filter"
+                    filterMatchMode="contains" 
+                    responsive="true">
 
             <f:facet name="sourceCaption">AVAILABLE</f:facet>
             <f:facet name="targetCaption">SELECTED</f:facet>
@@ -26,7 +33,7 @@
 
             <p:column style="width:94%">
                 <div class="flex align-items-center">
-                    <h:outputText value="#{item.name}"/>
+                    <h:outputText value="#{pickListItem.name}"/>
                 </div>
             </p:column>
         </p:pickList>

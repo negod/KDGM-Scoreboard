@@ -11,6 +11,7 @@
     <include file="tables/competition.xml" relativeToChangelogFile="true"/>
     <include file="tables/competition_game.xml" relativeToChangelogFile="true"/>
     <include file="tables/competition_team.xml" relativeToChangelogFile="true"/>
+    <include file="tables/player_team.xml" relativeToChangelogFile="true"/>
     
     
     <include file="sampledata/teamdata.xml" relativeToChangelogFile="true"/>
@@ -20,6 +21,7 @@
     <include file="sampledata/competitiondata.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/competition_game_data.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/competition_team_data.xml" relativeToChangelogFile="true"/>
+    <include file="sampledata/player_team_data.xml" relativeToChangelogFile="true"/>
     
 </databaseChangeLog>
 
