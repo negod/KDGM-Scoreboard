@@ -10,6 +10,7 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.event.TransferEvent;
 import se.backede.scoreboard.admin.resources.controller.GameRestClientController;
 import se.backede.scoreboard.admin.resources.dto.Game;
 import se.backede.scoreboard.admin.resources.dto.GameType;
@@ -42,6 +43,16 @@ public class GameController extends CrudController<Game> implements Serializable
     @Override
     public void openNew() {
         setSelectedItem(new Game());
+    }
+
+    @Override
+    public void onDualListChange() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void onDualListTransfer(TransferEvent event) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

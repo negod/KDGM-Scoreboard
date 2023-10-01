@@ -4,11 +4,14 @@ package se.backede.scoreboard.admin.commons;
 
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.TransferEvent;
+import org.primefaces.model.DualListModel;
 
 /**
  *
@@ -22,6 +25,7 @@ public abstract class CrudController<T extends GenericDto> {
     private T selectedItem;
     private List<T> allItems;
     private List<T> selectedItems;
+    private DualListModel<T> dualList;
 
     private GenericRestClient<T> restClient;
 
@@ -32,6 +36,7 @@ public abstract class CrudController<T extends GenericDto> {
 
         getRestClient().getAll().ifPresent(allItems -> {
             setAllItems(allItems);
+            dualList = new DualListModel<>(allItems, new ArrayList<>());
         });
 
     }
@@ -48,11 +53,6 @@ public abstract class CrudController<T extends GenericDto> {
     public boolean hasSelectedItems() {
         return getSelectedItems() != null && !getSelectedItems().isEmpty();
     }
-
-    /**
-     * Craete new instance of the selected Item
-     */
-    public abstract void openNew();
 
     private void createItem() {
 
@@ -133,5 +133,28 @@ public abstract class CrudController<T extends GenericDto> {
         }
 
     }
+
+    public T getItemById(String id) {
+        return allItems.stream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * Implement logic for what should happen on dualListTransfer
+     * @param event 
+     */
+    public abstract void onDualListTransfer(TransferEvent event);
+
+    /**
+     * Implement logic for what should happen on DualListChange
+     */
+    public abstract void onDualListChange();
+
+    /**
+     * Create new instance of the selected Item
+     */
+    public abstract void openNew();
 
 }

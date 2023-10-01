@@ -17,8 +17,6 @@ import org.primefaces.event.TransferEvent;
 import org.primefaces.model.DualListModel;
 import se.backede.scoreboard.admin.commons.CrudController;
 import se.backede.scoreboard.admin.resources.controller.CompetitionRestClientController;
-import se.backede.scoreboard.admin.resources.controller.GameRestClientController;
-import se.backede.scoreboard.admin.resources.controller.TeamRestClientController;
 import se.backede.scoreboard.admin.resources.dto.Competition;
 import se.backede.scoreboard.admin.resources.dto.Game;
 import se.backede.scoreboard.admin.resources.dto.Team;
@@ -37,31 +35,15 @@ public class CompetitionController extends CrudController<Competition> implement
     CompetitionRestClientController competitionClient;
 
     @Inject
-    GameRestClientController gameClient;
+    GameController game;
 
     @Inject
-    TeamRestClientController teamClient;
-
-    private List<Team> teams;
-    private List<Game> games;
-
-    private DualListModel<Game> gamesDualList;
-    private DualListModel<Team> teamsDualList;
+    TeamController team;
 
     @PostConstruct
     @Override
     public void init() {
         super.setupController(competitionClient);
-
-        gameClient.getAll().ifPresent(allItems -> {
-            games = allItems;
-            gamesDualList = new DualListModel<>(games, new ArrayList<>());
-        });
-
-        teamClient.getAll().ifPresent(allItems -> {
-            teams = allItems;
-            teamsDualList = new DualListModel<>(teams, new ArrayList<>());
-        });
     }
 
     @Override
@@ -69,7 +51,8 @@ public class CompetitionController extends CrudController<Competition> implement
         setSelectedItem(new Competition());
     }
 
-    public void onCompetitionChange() {
+    public void onDualListChange() {
+
         if (getSelectedItem() == null) {
             return;
         }
@@ -77,85 +60,50 @@ public class CompetitionController extends CrudController<Competition> implement
         List<Game> selectedGames = getSelectedItem().getGames();
         List<Team> selectedTeams = getSelectedItem().getTeams();
 
-        List<Game> availableGames = games.stream()
+        List<Game> availableGames = game.getAllItems().stream()
                 .filter(game -> !selectedGames.contains(game))
                 .collect(Collectors.toList());
 
-        List<Team> availableTeams = teams.stream()
+        List<Team> availableTeams = team.getAllItems().stream()
                 .filter(team -> !selectedTeams.contains(team))
                 .collect(Collectors.toList());
 
-        gamesDualList = new DualListModel<>(availableGames, selectedGames);
-        teamsDualList = new DualListModel<>(availableTeams, selectedTeams);
-
+        game.setDualList(new DualListModel<>(availableGames, selectedGames));
+        team.setDualList(new DualListModel<>(availableTeams, selectedTeams));
+        
         PrimeFaces.current().ajax().update("form:gamePickList", "form:teamPickList");
 
     }
 
-    public void onGameTransfer(TransferEvent event) {
+    public void onDualListTransfer(TransferEvent event) {
+    }
 
+    public void onGameTransfer(TransferEvent event) {
         if (event.isAdd()) {
             for (Object item : event.getItems()) {
-                String id = (String) item;
-                Game gameById = getGameById(id);
-                super.getSelectedItem().getGames().add(gameById);
+                super.getSelectedItem().getGames().add((Game) item);
             }
         } else if (event.isRemove()) {
             for (Object item : event.getItems()) {
-                String id = (String) item;
-                Game gameById = getGameById(id);
-                super.getSelectedItem().getGames().remove(gameById);
+                super.getSelectedItem().getGames().remove((Game) item);
             }
         }
 
         super.saveItem();
-        // Logik för att hantera överföring av spel
     }
 
     public void onTeamTransfer(TransferEvent event) {
         if (event.isAdd()) {
             for (Object item : event.getItems()) {
-                String id = (String) item;
-                Team gameById = getTeamById(id);
-                super.getSelectedItem().getTeams().add(gameById);
+                super.getSelectedItem().getTeams().add((Team) item);
             }
         } else if (event.isRemove()) {
             for (Object item : event.getItems()) {
-                String id = (String) item;
-                Team gameById = getTeamById(id);
-                super.getSelectedItem().getTeams().remove(gameById);
+                super.getSelectedItem().getTeams().remove((Team) item);
             }
         }
 
         super.saveItem();
-        // Logik för att h
-    }
-
-    public Team getTeamById(String teamId) {
-        for (Team team : teams) {
-            if (team.getId().equals(teamId)) {
-                return team;
-            }
-        }
-        return null;
-    }
-
-    public Game getGameById(String teamId) {
-        for (Game game : games) {
-            if (game.getId().equals(teamId)) {
-                return game;
-            }
-        }
-        return null;
-    }
-
-    public Competition getCompetitionById(String competitionId) {
-        for (Competition competition : getAllItems()) {
-            if (competition.getId().equals(competitionId)) {
-                return competition;
-            }
-        }
-        return null;
     }
 
 }

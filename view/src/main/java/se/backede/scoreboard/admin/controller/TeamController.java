@@ -16,7 +16,6 @@ import lombok.Setter;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.TransferEvent;
 import org.primefaces.model.DualListModel;
-import se.backede.scoreboard.admin.resources.controller.PlayerRestClientController;
 import se.backede.scoreboard.admin.resources.controller.TeamRestClientController;
 import se.backede.scoreboard.admin.resources.dto.Player;
 import se.backede.scoreboard.admin.resources.dto.Team;
@@ -31,27 +30,20 @@ import se.backede.scoreboard.admin.resources.dto.Team;
 @ViewScoped
 public class TeamController extends CrudController<Team> implements Serializable {
 
-    private DualListModel<Player> dualList;
-    private List<Player> players = new ArrayList<>();
-
     @Inject
     private TeamRestClientController teamClient;
 
     @Inject
-    private PlayerRestClientController playerClient;
+    PlayerController player;
 
     @PostConstruct
     @Override
     public void init() {
         super.setupController(teamClient);
-
-        playerClient.getAll().ifPresent(fetchedPlayers -> {
-            players = fetchedPlayers;
-            dualList = new DualListModel<>(players, new ArrayList<>());
-        });
     }
 
-    public void onChange() {
+    @Override
+    public void onDualListChange() {
 
         if (getSelectedItem() == null) {
             return;
@@ -59,11 +51,11 @@ public class TeamController extends CrudController<Team> implements Serializable
 
         List<Player> selectedTeams = getSelectedItem().getPlayers();
 
-        List<Player> availableTeams = players.stream()
+        List<Player> availableTeams = player.getAllItems().stream()
                 .filter(team -> !selectedTeams.contains(team))
                 .collect(Collectors.toList());
 
-        dualList = new DualListModel<>(availableTeams, selectedTeams);
+        player.setDualList(new DualListModel<>(availableTeams, selectedTeams));
 
         PrimeFaces.current().ajax().update("form:pickList");
 
@@ -72,41 +64,20 @@ public class TeamController extends CrudController<Team> implements Serializable
     @Override
     public void openNew() {
         setSelectedItem(new Team());
-
-        playerClient.getAll().ifPresent(fetchedTeams -> {
-            players = fetchedTeams;
-            dualList = new DualListModel<>(players, new ArrayList<>());
-        });
+        player.setDualList(new DualListModel<>(player.getAllItems(), new ArrayList<>()));
     }
 
-    public void onTransfer(TransferEvent event) {
+    @Override
+    public void onDualListTransfer(TransferEvent event) {
         if (event.isAdd()) {
             for (Object item : event.getItems()) {
-                String id = (String) item;
-                Player gameById = getPlayerById(id);
-                super.getSelectedItem().getPlayers().add(gameById);
+                super.getSelectedItem().getPlayers().add((Player) item);
             }
         } else if (event.isRemove()) {
             for (Object item : event.getItems()) {
-                String id = (String) item;
-                Player gameById = getPlayerById(id);
-                super.getSelectedItem().getPlayers().remove(gameById);
+                super.getSelectedItem().getPlayers().remove((Player) item);
             }
         }
-    }
-
-    public Player getPlayerById(String teamId) {
-        return players.stream()
-                .filter(player -> player.getId().equals(teamId))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public Team getTeamById(String teamId) {
-        return getAllItems().stream()
-                .filter(team -> team.getId().equals(teamId))
-                .findFirst()
-                .orElse(null);
     }
 
 }

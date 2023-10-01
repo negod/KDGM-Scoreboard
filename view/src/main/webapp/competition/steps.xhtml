@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../layout/basicLayout.xhtml">
+
+    <ui:define name="content">
+        <h:form id="form">
+            <p:steps activeIndex="#{createCompetitionController.activeIndex}">
+                <p:menuitem value="Competition" url="#"/>
+                <p:menuitem value="Games" url="#"/>
+                <p:menuitem value="Players" url="#"/>
+                <p:menuitem value="Teams" url="#"/>
+                <p:menuitem value="Confirmation" url="#"/>
+            </p:steps>
+
+            <ui:fragment rendered="#{createCompetitionController.activeIndex == 0}">
+                <p:selectOneMenu id="competitionDropdown" 
+                                 value="#{createCompetitionController.competition.selectedItem}" 
+                                 var="comp" 
+                                 filter="true" 
+                                 filterMatchMode="contains"
+                                 converter="competitionConverter" >
+                    <f:selectItem itemLabel="Select Competition" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItems value="#{createCompetitionController.competition.allItems}" var="comp" itemLabel="#{comp.name}" itemValue="#{comp}" />
+                    <p:column><i class="pi pi-#{comp}" /> #{comp.name} </p:column>
+                    <p:ajax listener="#{createCompetitionController.competition.onDualListChange}" update="gamePickList" />
+                </p:selectOneMenu>
+            </ui:fragment>
+
+
+            <!-- PickList for Games -->
+            <ui:fragment rendered="#{createCompetitionController.activeIndex == 1}">
+                <p:pickList id="gamePickList" 
+                            value="#{createCompetitionController.competition.game.dualList}" 
+                            var="game" 
+                            itemValue="#{game}" 
+                            itemLabel="#{game.name}"
+                            converter="gameConverter"
+                            showSourceControls="true"
+                            showTargetControls="true" 
+                            showCheckbox="true"
+                            showSourceFilter="true" 
+                            showTargetFilter="true"
+                            sourceFilterPlaceholder="Filter available countries"
+                            targetFilterPlaceholder="Filter starting countries"
+                            filterMatchMode="contains"
+                            responsive="true">
+                    <f:facet name="sourceCaption">Available Games</f:facet>
+                    <f:facet name="targetCaption">Selected Games</f:facet>
+                    <p:ajax event="transfer" listener="#{createCompetitionController.competition.onGameTransfer}" />
+                </p:pickList>
+            </ui:fragment>
+
+            <ui:fragment rendered="#{createCompetitionController.activeIndex == 2}">
+                <p:pickList id="playerPickList" 
+                            value="#{createCompetitionController.team.player.dualList}" 
+                            var="player" 
+                            itemValue="#{player}" 
+                            itemLabel="#{player.name}"
+                            converter="playerConverter"
+                            showSourceControls="true"
+                            showTargetControls="true" 
+                            showCheckbox="true"
+                            showSourceFilter="true" 
+                            showTargetFilter="true"
+                            sourceFilterPlaceholder="Filter available countries"
+                            targetFilterPlaceholder="Filter starting countries"
+                            filterMatchMode="contains"
+                            responsive="true">
+                    <f:facet name="sourceCaption">Available Players</f:facet>
+                    <f:facet name="targetCaption">Selected Players</f:facet>
+                    <p:ajax event="transfer" listener="#{createCompetitionController.team.onDualListChange}" />
+                </p:pickList>
+            </ui:fragment>
+
+            <ui:fragment rendered="#{createCompetitionController.activeIndex == 3}">
+                <p:outputPanel deferred="true" deferredMode="visible">
+                    <h5>Amount of Players selected: #{selectedPlayers}</h5>
+                </p:outputPanel>
+            </ui:fragment>
+
+            <!-- Knapparna placerade direkt efter varandra -->
+            <div  class="card" style="text-align: right;">
+                <p:commandButton value="Föregående" action="#{createCompetitionController.prevStep}" update=":form" disabled="#{createCompetitionController.activeIndex == 0}" />
+                <p:commandButton value="Nästa" action="#{createCompetitionController.nextStep}" update=":form" disabled="#{createCompetitionController.activeIndex == 4}" />
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

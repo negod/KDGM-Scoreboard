@@ -10,6 +10,7 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.event.TransferEvent;
 import se.backede.scoreboard.admin.resources.dto.Player;
 import se.backede.scoreboard.admin.resources.controller.PlayerRestClientController;
 
@@ -37,7 +38,14 @@ public class PlayerController extends CrudController<Player> implements Serializ
         setSelectedItem(new Player());
     }
 
-    public void onChange() {
+    @Override
+    public void onDualListChange() {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+    @Override
+    public void onDualListTransfer(TransferEvent event) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

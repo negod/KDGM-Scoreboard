@@ -9,20 +9,19 @@
         <p:inputText id="name" value="#{controller.selectedItem.name}" required="true" />
     </div>
     <div>
-        <p:outputLabel for="pickList">Choose Teams</p:outputLabel>
+        <p:outputLabel for="pickList">Choose Players</p:outputLabel>
         <p:pickList id="pickList" 
-                    value="#{controller.dualList}" 
+                    value="#{controller.player.dualList}" 
                     var="team" 
                     itemValue="#{team}" 
                     itemLabel="#{team.name}"
                     responsive="true"
-                    converter="#{teamConverter}">
-            <f:facet name="sourceCaption">Available Teams</f:facet>
-            <f:facet name="targetCaption">Selected Teams</f:facet>
-            
-            <p:ajax event="transfer" listener="#{controller.onTransfer}" />
-            
-            
+                    converter="playerConverter">
+            <f:facet name="sourceCaption">Available Players</f:facet>
+            <f:facet name="targetCaption">Selected Players</f:facet>
+
+            <p:ajax event="transfer" listener="#{controller.onDualListTransfer}" />
+
         </p:pickList>
     </div>
 
