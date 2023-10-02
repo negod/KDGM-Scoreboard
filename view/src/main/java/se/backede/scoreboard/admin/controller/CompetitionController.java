@@ -51,6 +51,7 @@ public class CompetitionController extends CrudController<Competition> implement
         setSelectedItem(new Competition());
     }
 
+    @Override
     public void onDualListChange() {
 
         if (getSelectedItem() == null) {
@@ -75,6 +76,7 @@ public class CompetitionController extends CrudController<Competition> implement
 
     }
 
+    @Override
     public void onDualListTransfer(TransferEvent event) {
     }
 
