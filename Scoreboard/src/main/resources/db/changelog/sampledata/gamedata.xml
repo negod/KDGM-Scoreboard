@@ -17,6 +17,23 @@
             <column name="gametype" value="SCORE" />
             <column name="updated" value="2023-08-27 00:00:00" />
         </insert>
-
+        <insert tableName="game">
+            <column name="id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3"/>
+            <column name="updated" valueDate="2023-08-27"/>
+            <column name="name" value="Project Cars"/>
+            <column name="gametype" value="TIME"/>
+        </insert>
+        <insert tableName="game">
+            <column name="id" value="ff5d3c46-3075-451e-b2bc-26e9c7705217"/>
+            <column name="updated" valueDate="2023-10-01"/>
+            <column name="name" value="Bowling"/>
+            <column name="gametype" value="SCORE"/>
+        </insert>
+        <insert tableName="game">
+            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4BB"/>
+            <column name="updated" valueDate="2023-08-27"/>
+            <column name="name" value="Starcraft Remastered"/>
+            <column name="gametype" value="SCORE"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

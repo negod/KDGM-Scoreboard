@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../layout/basicLayout.xhtml">
+    <ui:define name="content">
+        <h:form id="form">
+            <p:fieldset legend="#{viewCompetitionController.selectedCompetition.name}">
+                <p:steps activeIndex="#{viewCompetitionController.gamesIndex.activeIndex}" model="#{viewCompetitionController.stepsModel}"/>
+            </p:fieldset>
+
+
+            <ui:fragment rendered="#{viewCompetitionController.gamesIndex.activeIndex == 1}">
+                STEP 1
+            </ui:fragment>
+
+            <ui:fragment rendered="#{viewCompetitionController.gamesIndex.activeIndex == 2}">
+                STEP 2
+            </ui:fragment>
+
+            <ui:fragment rendered="#{viewCompetitionController.gamesIndex.activeIndex == 3}">
+                STEP 3
+            </ui:fragment>
+
+            <!-- Knapparna placerade direkt efter varandra -->
+            <div  class="card" style="text-align: right;">
+                <p:commandButton value="Previous" action="#{viewCompetitionController.gamesIndex.prevStep}" update=":form" disabled="#{viewCompetitionController.gamesIndex.activeIndex == 0}"/>
+                <p:commandButton value="Next" action="#{viewCompetitionController.gamesIndex.nextStep}" update=":form" disabled="#{viewCompetitionController.gamesIndex.disabled()}" />
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

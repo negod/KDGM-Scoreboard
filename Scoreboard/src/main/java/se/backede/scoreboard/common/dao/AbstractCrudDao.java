@@ -126,6 +126,7 @@ public abstract class AbstractCrudDao<E extends GenericEntity> implements Generi
             Optional<E> validatedEntity = validate(entity);
             if (validatedEntity.isPresent()) {
                 em.merge(entity);
+                em.flush();
                 return Optional.of(entity);
             } else {
                 return Optional.empty();

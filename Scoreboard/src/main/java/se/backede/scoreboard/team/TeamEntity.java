@@ -4,6 +4,8 @@ import jakarta.persistence.CascadeType;
 import se.backede.scoreboard.player.PlayerEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
@@ -39,14 +41,19 @@ import se.backede.scoreboard.competition.CompetitionEntity;
 @AllArgsConstructor
 public class TeamEntity extends GenericEntity {
 
-    @ManyToMany(mappedBy = "teams")
+    @ManyToMany()
+    @JoinTable(
+            name = "kggn.player_team",
+            joinColumns = @JoinColumn(name = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "player_id")
+    )
     private List<PlayerEntity> players;
 
     @NotNull(message = "Name cannot be NULL")
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "teams", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "teams")
     private Set<CompetitionEntity> competitions;
 
 }

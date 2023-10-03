@@ -1,6 +1,6 @@
 /*
  */
-package se.backede.scoreboard.admin.controller;
+package se.backede.scoreboard.admin.controller.helper;
 
 import lombok.Getter;
 import lombok.Setter;

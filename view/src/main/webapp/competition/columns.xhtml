@@ -10,5 +10,14 @@
     <p:column headerText="Date" sortBy="#{item.competitionDate}" >
         <h:outputText value="#{item.competitionDate}"/>
     </p:column>
+    <p:column>
+        <p:menuButton value="Handle Competition" icon="pi pi-bars">
+            <p:menuitem value="Start Competition" outcome="competitionView/games" icon="pi pi-user">
+                <f:param name="competitionId" value="#{item.id}"/>
+            </p:menuitem>
+            <p:menuitem value="View Competition"  icon="pi pi-user"/>
+            <p:menuitem value="Stop Competition"  icon="pi pi-user"/>
+        </p:menuButton>
+    </p:column>
 
 </html>

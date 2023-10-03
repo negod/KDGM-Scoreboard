@@ -40,12 +40,10 @@ public class PlayerController extends CrudController<Player> implements Serializ
 
     @Override
     public void onDualListChange() {
-        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public void onDualListTransfer(TransferEvent event) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

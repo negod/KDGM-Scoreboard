@@ -16,7 +16,7 @@
         </p:outputPanel>
 
         <f:facet name="footer">
-            <p:commandButton value="Save" icon="pi pi-check" actionListener="#{controller.saveItem}"
+            <p:commandButton value="Save" icon="pi pi-check" actionListener="#{controller.saveSelectedItem}"
                              update="manage-item-content" process="manage-item-content @this" />
             <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageItemDialog').hide()"
                              class="ui-button-secondary" type="button" />

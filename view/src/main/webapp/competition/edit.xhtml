@@ -13,5 +13,35 @@
         <p:datePicker id="date" value="#{controller.selectedItem.competitionDate}" />
     </div>
 
+    <p:outputLabel for="teamPickList">Choose Teams</p:outputLabel>
+    <p:pickList id="teamPickList" 
+                value="#{controller.team.dualList}" 
+                var="team" 
+                itemValue="#{team}" 
+                itemLabel="#{team.name}"
+                responsive="true"
+                converter="teamConverter">
+        <f:facet name="sourceCaption">Available Teams</f:facet>
+        <f:facet name="targetCaption">Selected Teams</f:facet>
+
+        <p:ajax event="transfer" listener="#{controller.onDualListTransfer}" />
+
+    </p:pickList>
+
+    <p:outputLabel for="gamePickList">Choose Games</p:outputLabel>
+    <p:pickList id="gamePickList" 
+                value="#{controller.game.dualList}" 
+                var="game" 
+                itemValue="#{game}" 
+                itemLabel="#{game.name}"
+                responsive="true"
+                converter="gameConverter">
+        <f:facet name="sourceCaption">Available Games</f:facet>
+        <f:facet name="targetCaption">Selected Games</f:facet>
+
+        <p:ajax event="transfer" listener="#{controller.onDualListTransfer}" />
+
+    </p:pickList>
+
 
 </html>

@@ -47,13 +47,13 @@ public class CompetitionEntity extends GenericEntity {
     private Date competitionDate;
     private String name;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(name = "kggn.competition_game",
             joinColumns = @JoinColumn(name = "competition_id"),
             inverseJoinColumns = @JoinColumn(name = "game_id"))
     private Set<GameEntity> games;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(name = "kggn.competition_team",
             joinColumns = @JoinColumn(name = "competition_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id"))

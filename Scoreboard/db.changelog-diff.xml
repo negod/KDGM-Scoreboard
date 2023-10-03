@@ -1,0 +1,93 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="joaki (generated)" id="1696355093180-1">
+        <insert tableName="competition">
+            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
+            <column name="updated" valueDate="2023-10-03"/>
+            <column name="name" value="Kode Gubbz Gaming night 2023"/>
+            <column name="competition_date" valueDate="2023-10-21"/>
+        </insert>
+    </changeSet>
+    <changeSet author="joaki (generated)" id="1696355093180-2">
+        <insert tableName="competition_game">
+            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
+            <column name="game_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4BB"/>
+        </insert>
+        <insert tableName="competition_game">
+            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
+            <column name="game_id" value="ff5d3c46-3075-451e-b2bc-26e9c7705217"/>
+        </insert>
+        <insert tableName="competition_game">
+            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
+            <column name="game_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3"/>
+        </insert>
+    </changeSet>
+    <changeSet author="joaki (generated)" id="1696355093180-3">
+        <insert tableName="game">
+            <column name="id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3"/>
+            <column name="updated" valueDate="2023-08-27"/>
+            <column name="name" value="Project Cars"/>
+            <column name="gametype" value="TIME"/>
+        </insert>
+        <insert tableName="game">
+            <column name="id" value="ff5d3c46-3075-451e-b2bc-26e9c7705217"/>
+            <column name="updated" valueDate="2023-10-01"/>
+            <column name="name" value="Bowling"/>
+            <column name="gametype" value="SCORE"/>
+        </insert>
+        <insert tableName="game">
+            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4BB"/>
+            <column name="updated" valueDate="2023-08-27"/>
+            <column name="name" value="Starcraft Remastered"/>
+            <column name="gametype" value="SCORE"/>
+        </insert>
+    </changeSet>
+    <changeSet author="joaki (generated)" id="1696355093180-4">
+        <insert tableName="competition_team">
+            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
+            <column name="team_id" value="5ae2bad5-9c50-435e-8de2-a3f6ad0d696f"/>
+        </insert>
+        <insert tableName="competition_team">
+            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
+            <column name="team_id" value="dc14810d-905d-4899-afa5-12e93fbcfc13"/>
+        </insert>
+    </changeSet>
+    <changeSet author="joaki (generated)" id="1696355093180-5">
+        <insert tableName="team">
+            <column name="id" value="5ae2bad5-9c50-435e-8de2-a3f6ad0d696f"/>
+            <column name="name" value="Team 1"/>
+            <column name="updated" valueDate="2023-10-03T14:55:21.703"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" value="dc14810d-905d-4899-afa5-12e93fbcfc13"/>
+            <column name="name" value="Team 2"/>
+            <column name="updated" valueDate="2023-10-03T14:55:21.725"/>
+        </insert>
+    </changeSet>
+    <changeSet author="joaki (generated)" id="1696355093180-6">
+        <insert tableName="player">
+            <column name="id" value="5dad7fb3-d23c-454d-8b21-a33a418cbbb0"/>
+            <column name="updated" valueDate="2023-10-01"/>
+            <column name="name" value="Karl"/>
+            <column name="nick_name" value="Tha man"/>
+        </insert>
+        <insert tableName="player">
+            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4BB"/>
+            <column name="updated" valueDate="2023-10-01"/>
+            <column name="name" value="Aron"/>
+            <column name="nick_name" value="The VR dude"/>
+        </insert>
+        <insert tableName="player">
+            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C5AA"/>
+            <column name="updated" valueDate="2023-10-01"/>
+            <column name="name" value="Alexander"/>
+            <column name="nick_name" value="House man"/>
+        </insert>
+        <insert tableName="player">
+            <column name="id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3"/>
+            <column name="updated" valueDate="2023-10-01"/>
+            <column name="name" value="Joakim"/>
+            <column name="nick_name" value="The beast"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

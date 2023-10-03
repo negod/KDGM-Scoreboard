@@ -6,18 +6,25 @@
     <changeSet id="competition_game_data" author="Joakim Backede">
         <!-- Insert games for Team One -->
         <insert tableName="competition_game">
-            <!--column name="id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E7389" />
-            <column name="updated" value="2023-08-27 00:00:00" /-->
             <column name="competition_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E7381" />
             <column name="game_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3" />
         </insert>
         <insert tableName="competition_game">
-            <!--column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482" />
-            <column name="updated" value="2023-08-27 00:00:00" /-->
             <column name="competition_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E7381" />
             <column name="game_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4BB" />
         </insert>
-
+        <insert tableName="competition_game">
+            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
+            <column name="game_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4BB"/>
+        </insert>
+        <insert tableName="competition_game">
+            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
+            <column name="game_id" value="ff5d3c46-3075-451e-b2bc-26e9c7705217"/>
+        </insert>
+        <insert tableName="competition_game">
+            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
+            <column name="game_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>
 

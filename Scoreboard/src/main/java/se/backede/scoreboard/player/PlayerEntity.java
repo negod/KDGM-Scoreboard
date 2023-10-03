@@ -50,12 +50,7 @@ public class PlayerEntity extends GenericEntity {
     @Column(name = "nick_name")
     private String nickName;
 
-    @ManyToMany()
-    @JoinTable(
-            name = "kggn.player_team",
-            joinColumns = @JoinColumn(name = "player_id"),
-            inverseJoinColumns = @JoinColumn(name = "team_id")
-    )
+    @ManyToMany(mappedBy = "players")
     private List<TeamEntity> teams = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "player")

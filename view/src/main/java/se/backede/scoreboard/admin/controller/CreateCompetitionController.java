@@ -2,6 +2,7 @@
  */
 package se.backede.scoreboard.admin.controller;
 
+import se.backede.scoreboard.admin.controller.helper.ToggleHelper;
 import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -10,11 +11,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import se.backede.scoreboard.admin.resources.dto.Competition;
 import se.backede.scoreboard.admin.resources.dto.Player;
 import se.backede.scoreboard.admin.resources.dto.Team;
 
@@ -113,10 +111,17 @@ public class CreateCompetitionController implements Serializable {
 
         List<Team> persistedTeams = new ArrayList<>();
         for (Team createdTeam : createdTeams) {
+
+            List<Player> players = createdTeam.getPlayers();
+            createdTeam.setPlayers(null);
             team.saveItem(createdTeam).ifPresent(item -> {
-                persistedTeams.add(item);
+                item.setPlayers(players);
+                team.getTeamClient().update(item).ifPresent(updated -> {
+                    persistedTeams.add(item);
+                });
             });
         }
+        createdTeams = persistedTeams;
 
         competition.getSelectedItem().setTeams(persistedTeams);
         competition.getSelectedItem().setGames(game.getDualList().getTarget());
