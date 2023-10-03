@@ -10,9 +10,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import se.backede.scoreboard.admin.resources.dto.Competition;
 import se.backede.scoreboard.admin.resources.dto.Player;
 import se.backede.scoreboard.admin.resources.dto.Team;
 
@@ -105,6 +107,22 @@ public class CreateCompetitionController implements Serializable {
 
     public int getMaxPlayers() {
         return player.getDualList().getTarget().size();
+    }
+
+    public void saveCompetition() {
+
+        List<Team> persistedTeams = new ArrayList<>();
+        for (Team createdTeam : createdTeams) {
+            team.saveItem(createdTeam).ifPresent(item -> {
+                persistedTeams.add(item);
+            });
+        }
+
+        competition.getSelectedItem().setTeams(persistedTeams);
+        competition.getSelectedItem().setGames(game.getDualList().getTarget());
+
+        competition.saveSelectedItem();
+
     }
 
 }

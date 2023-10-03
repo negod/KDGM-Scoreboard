@@ -91,7 +91,7 @@ public class CompetitionController extends CrudController<Competition> implement
             }
         }
 
-        super.saveItem();
+        super.saveSelectedItem();
     }
 
     public void onTeamTransfer(TransferEvent event) {
@@ -105,7 +105,7 @@ public class CompetitionController extends CrudController<Competition> implement
             }
         }
 
-        super.saveItem();
+        super.saveSelectedItem();
     }
 
 }

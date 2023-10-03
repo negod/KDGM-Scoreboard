@@ -12,6 +12,7 @@ import lombok.Setter;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.TransferEvent;
 import org.primefaces.model.DualListModel;
+import se.backede.scoreboard.admin.resources.dto.Team;
 
 /**
  *
@@ -81,7 +82,7 @@ public abstract class CrudController<T extends GenericDto> {
 
     }
 
-    public void saveItem() {
+    public void saveSelectedItem() {
         Optional<String> itemId = Optional.ofNullable(getSelectedItem().getId());
 
         if (!itemId.isPresent()) {
@@ -92,6 +93,10 @@ public abstract class CrudController<T extends GenericDto> {
 
         PrimeFaces.current().ajax().update("form:messages", "form:dt-items");
         PrimeFaces.current().executeScript("PF('manageItemDialog').hide()");
+    }
+
+    public Optional<T> saveItem(T team) {
+        return restClient.create(team);
     }
 
     public void deleteItem() {
@@ -143,7 +148,8 @@ public abstract class CrudController<T extends GenericDto> {
 
     /**
      * Implement logic for what should happen on dualListTransfer
-     * @param event 
+     *
+     * @param event
      */
     public abstract void onDualListTransfer(TransferEvent event);
 
