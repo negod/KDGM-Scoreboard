@@ -73,6 +73,7 @@ public class CreateCompetitionController implements Serializable {
         for (int i = 0; i < numberOfTeams; i++) {
             // skapa ett nytt team
             Team team = new Team();
+            team.setName("Team " + String.valueOf(i + 1));
 
             // plocka ut spelare för detta team baserat på index i den blandade listan
             List<Player> playersForThisTeam = shuffledPlayers.subList(i * playersInEachTeam, (i + 1) * playersInEachTeam);
@@ -88,25 +89,6 @@ public class CreateCompetitionController implements Serializable {
             Team team = createdTeams.get(j % numberOfTeams); // cykla genom teams
             team.getPlayers().add(shuffledPlayers.get(i)); // Lägg till spelaren till teamet
         }
-    }
-
-    public List<TeamPlayer> getFlattenTeamList() {
-        List<TeamPlayer> flattenList = new ArrayList<>();
-        for (Team team : createdTeams) {
-            for (Player player : team.getPlayers()) {
-                flattenList.add(new TeamPlayer(team, player));
-            }
-        }
-        return flattenList;
-    }
-
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    public static class TeamPlayer {
-
-        private Team team;
-        private Player player;
     }
 
     public void onCompetitionChange() {
