@@ -18,7 +18,7 @@
             <column name="competition_date" value="2023-09-01 00:00:00" />
         </insert>
         <insert tableName="competition">
-            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
+            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483"/>
             <column name="updated" valueDate="2023-10-03"/>
             <column name="name" value="Kode Gubbz Gaming night 2023"/>
             <column name="competition_date" valueDate="2023-10-21"/>

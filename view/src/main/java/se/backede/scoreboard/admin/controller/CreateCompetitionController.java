@@ -72,8 +72,7 @@ public class CreateCompetitionController implements Serializable {
 
         for (int i = 0; i < numberOfTeams; i++) {
             // skapa ett nytt team
-            Team team = new Team();
-            team.setName("Team " + String.valueOf(i + 1));
+            Team team = new Team("Team " + String.valueOf(i + 1));
 
             // plocka ut spelare för detta team baserat på index i den blandade listan
             List<Player> playersForThisTeam = shuffledPlayers.subList(i * playersInEachTeam, (i + 1) * playersInEachTeam);

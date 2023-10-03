@@ -18,11 +18,11 @@
             <column name="team_id" value="7B5BB9E4-94D0-4DFC-A0E4-83244E17C659" />
         </insert>
         <insert tableName="competition_team">
-            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
+            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483"/>
             <column name="team_id" value="5ae2bad5-9c50-435e-8de2-a3f6ad0d696f"/>
         </insert>
         <insert tableName="competition_team">
-            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
+            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483"/>
             <column name="team_id" value="dc14810d-905d-4899-afa5-12e93fbcfc13"/>
         </insert>
     </changeSet>

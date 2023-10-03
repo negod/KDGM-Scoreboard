@@ -11,7 +11,10 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.service.GenericDto;
+import se.backede.scoreboard.competition.CompetitionDto;
 import se.backede.scoreboard.converter.DurationConverter;
+import se.backede.scoreboard.game.GameDto;
+import se.backede.scoreboard.player.PlayerDto;
 
 /**
  *
@@ -25,7 +28,9 @@ import se.backede.scoreboard.converter.DurationConverter;
 @ToString
 public class ResultDto extends GenericDto {
 
-    private String player;
+    private PlayerDto player;
+    private GameDto game;
+    private CompetitionDto competition;
     private Integer score;
     @Convert(converter = DurationConverter.class)
     private Duration time;

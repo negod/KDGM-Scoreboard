@@ -12,12 +12,16 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import java.time.Duration;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.dao.GenericEntity;
 import se.backede.scoreboard.common.constants.GlobalConstants;
 import se.backede.scoreboard.common.constants.ResultConstants;
+import se.backede.scoreboard.competition.CompetitionEntity;
 import se.backede.scoreboard.converter.DurationConverter;
 
 /**
@@ -33,6 +37,9 @@ import se.backede.scoreboard.converter.DurationConverter;
 })
 @Getter
 @Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResultEntity extends GenericEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE}, optional = false)
@@ -42,6 +49,10 @@ public class ResultEntity extends GenericEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE}, optional = false)
     @JoinColumn(name = "game_id", nullable = false, referencedColumnName = "id")
     private GameEntity game;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE}, optional = false)
+    @JoinColumn(name = "competition_id", nullable = false, referencedColumnName = "id")
+    private CompetitionEntity competition;
 
     private Integer score;
 
