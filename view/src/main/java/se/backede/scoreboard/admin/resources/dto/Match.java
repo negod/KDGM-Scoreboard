@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import se.backede.scoreboard.admin.commons.GenericDto;
 
 /**
  *
@@ -18,10 +17,11 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Result extends GenericDto {
+public class Match {
 
-    private Match match;
-    private Player player;
-    private Long scoreValue;
+    Team team1;
+    Team team2;
+    Game game;
+    Competition competition;
 
 }

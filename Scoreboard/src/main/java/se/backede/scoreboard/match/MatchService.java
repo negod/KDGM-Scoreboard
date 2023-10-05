@@ -1,6 +1,6 @@
 /*
  */
-package se.backede.scoreboard.result;
+package se.backede.scoreboard.match;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -14,23 +14,22 @@ import java.util.List;
 import se.backede.scoreboard.common.GenericMapper;
 import se.backede.scoreboard.common.dao.GenericCrudDao;
 import se.backede.scoreboard.common.service.AbstractCrudService;
-import se.backede.scoreboard.match.MatchDto;
 
 /**
  *
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
-@Path("result")
+@Path("match")
 @ApplicationScoped
-public class ResultService extends AbstractCrudService<ResultDto, ResultEntity> {
+public class MatchService extends AbstractCrudService<MatchDto, MatchEntity> {
 
     @Inject
-    ResultDao dao;
+    MatchDao dao;
 
-    GenericMapper<ResultDto, ResultEntity> mapper = new ResultMapper();
+    GenericMapper<MatchDto, MatchEntity> mapper = new MatchMapper();
 
     @Override
-    public GenericMapper<ResultDto, ResultEntity> getMapper() {
+    public GenericMapper<MatchDto, MatchEntity> getMapper() {
         return mapper;
     }
 
@@ -49,9 +48,9 @@ public class ResultService extends AbstractCrudService<ResultDto, ResultEntity> 
     @Produces(MediaType.APPLICATION_JSON)
     public Response getResultbyGame(@PathParam(value = "competitionId") String competitionId) {
 
-        return (Response) dao.getResultsByCompetition(competitionId).map(results -> {
+        return (Response) dao.getMatchByCompetition(competitionId).map(results -> {
 
-            List<ResultDto> resultByCompetitionDtoList = mapper.mapToDtoList(results);
+            List<MatchDto> resultByCompetitionDtoList = mapper.mapToDtoList(results);
             return Response.ok(resultByCompetitionDtoList).build();
 
         }).orElse(Response.serverError().build());

@@ -27,7 +27,7 @@ public class JaxRsActivator extends Application {
         resources.add(se.backede.scoreboard.player.PlayerService.class);
         resources.add(se.backede.scoreboard.team.TeamService.class);
         resources.add(se.backede.scoreboard.game.GameService.class);
-        resources.add(se.backede.scoreboard.result.ResultService.class);
+        resources.add(se.backede.scoreboard.match.MatchService.class);
         resources.add(se.backede.scoreboard.competition.CompetitionService.class);
     }
 

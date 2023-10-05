@@ -4,10 +4,10 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
     <changeSet id="competition_game_data" author="Joakim Backede">
-        <!-- Insert games for Team One -->
+        <!-- Kode Gubbz Gaming nighet har 3 games Starcraft Remastered, Bowling, Project Cars-->
         <insert tableName="competition_game">
             <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483"/>
-            <column name="game_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4CC"/>
+            <column name="game_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73A5"/>
         </insert>
         <insert tableName="competition_game">
             <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483"/>
@@ -15,7 +15,7 @@
         </insert>
         <insert tableName="competition_game">
             <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483"/>
-            <column name="game_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73A5"/>
+            <column name="game_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4CC"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

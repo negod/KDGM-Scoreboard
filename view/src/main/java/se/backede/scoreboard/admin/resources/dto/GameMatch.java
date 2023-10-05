@@ -2,12 +2,12 @@
  */
 package se.backede.scoreboard.admin.resources.dto;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
-import se.backede.scoreboard.admin.commons.GenericDto;
 
 /**
  *
@@ -15,13 +15,12 @@ import se.backede.scoreboard.admin.commons.GenericDto;
  */
 @Getter
 @Setter
-@SuperBuilder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Result extends GenericDto {
+public class GameMatch {
 
-    private Match match;
-    private Player player;
-    private Long scoreValue;
+    Game game;
+    List<Match> matches;
 
 }

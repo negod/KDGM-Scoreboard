@@ -23,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.dao.GenericEntity;
 import se.backede.scoreboard.common.constants.GlobalConstants;
 import se.backede.scoreboard.common.constants.PlayerConstants;
-import se.backede.scoreboard.result.ResultEntity;
+import se.backede.scoreboard.match.MatchEntity;
 import se.backede.scoreboard.team.TeamEntity;
 
 /**
@@ -54,6 +54,6 @@ public class PlayerEntity extends GenericEntity {
     private List<TeamEntity> teams = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "player")
-    private List<ResultEntity> results;
+    private List<MatchEntity> results;
 
 }

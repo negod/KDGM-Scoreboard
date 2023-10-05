@@ -4,19 +4,13 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
     <changeSet id="competition_data" author="Joakim Backede">
-        <!-- Insert games for Team One -->
-        <insert tableName="competition">
-            <column name="id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E7381" />
-            <column name="name" value="Competition 1" />
-            <column name="updated" value="2023-08-27 00:00:00" />
-            <column name="competition_date" value="2023-09-01 00:00:00" />
-        </insert>
         <insert tableName="competition">
             <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482" />
             <column name="name" value="Competition 2" />
             <column name="updated" value="2023-08-27 00:00:00" />
             <column name="competition_date" value="2023-09-01 00:00:00" />
         </insert>
+        <!-- Started competition with Matches -->
         <insert tableName="competition">
             <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483"/>
             <column name="updated" valueDate="2023-10-03"/>

@@ -5,23 +5,53 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../layout/basicLayout.xhtml">
     <ui:define name="content">
+
+        <style>
+            .no-border-column td {
+                border-top: none !important;
+                border-bottom: none !important;
+            }
+        </style>
+
         <h:form id="form">
             <p:fieldset legend="#{viewCompetitionController.selectedCompetition.name}">
                 <p:steps activeIndex="#{viewCompetitionController.gamesIndex.activeIndex}" model="#{viewCompetitionController.stepsModel}"/>
             </p:fieldset>
 
 
-            <ui:fragment rendered="#{viewCompetitionController.gamesIndex.activeIndex == 1}">
-                STEP 1
-            </ui:fragment>
+            <ui:repeat value="#{viewCompetitionController.matches}" var="entry">
+                <ui:fragment rendered="#{viewCompetitionController.gamesIndex.activeIndex == entry.key}">
+                    <p:dataTable lazy="false" rowIndexVar="rowNum" var="match" value="#{entry.value.matches}"
+                                 style="margin-top: 20px;
+                                 margin-right: 30px;
+                                 margin-bottom: 40px;
+                                 margin-left: 50px;">
 
-            <ui:fragment rendered="#{viewCompetitionController.gamesIndex.activeIndex == 2}">
-                STEP 2
-            </ui:fragment>
+                        <p:column style="text-align: center;">
+                            <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{match.team1.name}"/>
+                        </p:column>
+                        <p:column style="text-align: center;">
+                            <ui:repeat value="#{match.team1.players}" var="player">
+                                <h:outputText value="#{player.name}" style="text-align: center;"/>
+                                <br/> <!-- För att separera spelarnas namn -->
+                            </ui:repeat>
+                        </p:column>
 
-            <ui:fragment rendered="#{viewCompetitionController.gamesIndex.activeIndex == 3}">
-                STEP 3
-            </ui:fragment>
+                        <p:column style="text-align: center;" styleClass="no-border-column">
+                            <h:outputText value="- VS -"/>
+                        </p:column>
+                        <p:column style="text-align: center;">
+                            <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{match.team2.name}"/>
+                        </p:column>
+                        <p:column style="text-align: center;">
+                            <ui:repeat value="#{match.team2.players}" var="player">
+                                <h:outputText value="#{player.name}" style="text-align: center;"/>
+                                <br/> <!-- För att separera spelarnas namn -->
+                            </ui:repeat>
+                        </p:column>
+                    </p:dataTable>
+                </ui:fragment>
+            </ui:repeat>
 
             <!-- Knapparna placerade direkt efter varandra -->
             <div  class="card" style="text-align: right;">

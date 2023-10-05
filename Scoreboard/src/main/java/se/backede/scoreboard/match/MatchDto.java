@@ -1,6 +1,6 @@
 /*
  */
-package se.backede.scoreboard.result;
+package se.backede.scoreboard.match;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,9 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.service.GenericDto;
-import se.backede.scoreboard.match.MatchDto;
-import se.backede.scoreboard.player.PlayerDto;
+import se.backede.scoreboard.competition.CompetitionDto;
+import se.backede.scoreboard.game.GameDto;
+import se.backede.scoreboard.team.TeamDto;
 
 /**
  *
@@ -22,11 +23,12 @@ import se.backede.scoreboard.player.PlayerDto;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ResultDto extends GenericDto {
+public class MatchDto extends GenericDto {
 
-    private MatchDto match;
-    private PlayerDto player;
-    private Long scoreValue;
- 
+    private TeamDto team1;
+    private TeamDto team2;
+    private GameDto game;
+    private CompetitionDto competition;
+    private Integer order;
 
 }

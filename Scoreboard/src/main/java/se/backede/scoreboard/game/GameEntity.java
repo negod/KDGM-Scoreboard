@@ -23,7 +23,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.competition.CompetitionEntity;
-import se.backede.scoreboard.result.ResultEntity;
+import se.backede.scoreboard.match.MatchEntity;
 
 /**
  *
@@ -50,7 +50,7 @@ public class GameEntity extends GenericEntity {
     private GameType gametype;
 
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "game")
-    private List<ResultEntity> results;
+    private List<MatchEntity> results;
 
     @ManyToMany(mappedBy = "games")
     private Set<CompetitionEntity> competitions;

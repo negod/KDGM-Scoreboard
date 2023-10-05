@@ -4,14 +4,23 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
     <changeSet id="playerdata" author="Joakim Backede">
-        <!-- Insert players for Team One -->
+        <!-- Karl and Aron is member of Team One -->
         <insert tableName="player_team">
-            <column name="player_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3" />
+            <column name="player_id" value="5dad7fb3-d23c-454d-8b21-a33a418cbbb0" />
             <column name="team_id" value="5A0FC1F5-028C-4BC1-BD86-AE1D47EB2D4B" />
         </insert>
-        <!-- Insert players for Team Two -->
         <insert tableName="player_team">
-            <column name="player_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4BB" />
+            <column name="player_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4AA" />
+            <column name="team_id" value="5A0FC1F5-028C-4BC1-BD86-AE1D47EB2D4B" />
+        </insert>
+        
+        <!-- Alexander and Joakim is member of Team Two -->
+        <insert tableName="player_team">
+            <column name="player_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C5GG" />
+            <column name="team_id" value="7B5BB9E4-94D0-4DFC-A0E4-83244E17C659" />
+        </insert>
+        <insert tableName="player_team">
+            <column name="player_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73F7" />
             <column name="team_id" value="7B5BB9E4-94D0-4DFC-A0E4-83244E17C659" />
         </insert>
     </changeSet>

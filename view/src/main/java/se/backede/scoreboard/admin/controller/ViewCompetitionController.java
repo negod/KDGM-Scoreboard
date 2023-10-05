@@ -9,16 +9,19 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.model.menu.BaseMenuModel;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.MenuModel;
+import se.backede.scoreboard.admin.resources.dto.GameMatch;
 import se.backede.scoreboard.admin.controller.helper.IndexHelper;
 import se.backede.scoreboard.admin.controller.helper.MatchMaker;
 import se.backede.scoreboard.admin.resources.dto.Competition;
 import se.backede.scoreboard.admin.resources.dto.Game;
+import se.backede.scoreboard.admin.resources.dto.Match;
 
 /**
  *
@@ -38,7 +41,6 @@ public class ViewCompetitionController implements Serializable {
 
     MenuModel stepsModel;
     IndexHelper gamesIndex;
-    MatchMaker matchMaker = new MatchMaker();
 
     @Inject
     CompetitionController competition;
@@ -55,26 +57,46 @@ public class ViewCompetitionController implements Serializable {
     @Inject
     ResultController result;
 
-    Map<Integer, Game> gameIndex = new HashMap<>();
+    Map<Integer, GameMatch> matches = new HashMap<>();
 
     @PostConstruct
     public void init() {
         selectedCompetition = competition.getItemById(competitionId);
+        gamesIndex = new IndexHelper(selectedCompetition.getGames().size() -1, 0);
+        matches = createMatches(selectedCompetition.getGames());
         prepareSteps();
-        gamesIndex = new IndexHelper(selectedCompetition.getGames().size(), 0);
+    }
+
+    public List<Match> getSelectedGameMatches() {
+
+        GameMatch match = matches.get(gamesIndex.getActiveIndex());
+        return match.getMatches();
+
+    }
+
+    public Map<Integer, GameMatch> createMatches(List<Game> games) {
+
+        Map<Integer, GameMatch> matches = new HashMap<>();
+
+        int index = 0;
+        for (Game game : games) {
+            List<Match> generateMatches = MatchMaker.generateMatches(selectedCompetition.getTeams());
+            GameMatch build = GameMatch.builder().game(game).matches(generateMatches).build();
+            matches.put(index, build);
+            index++;
+        }
+        return matches;
+
     }
 
     public void prepareSteps() {
         stepsModel = new BaseMenuModel();
-        int index = 0;
-        for (Game competitionGame : selectedCompetition.getGames()) {
-            gameIndex.put(index, competitionGame);
+        for (Integer index : matches.keySet()) {
             DefaultMenuItem item = DefaultMenuItem.builder()
                     .url("#")
-                    .value(competitionGame.getName())
+                    .value(matches.get(index).getGame().getName())
                     .build();
             stepsModel.getElements().add(item);
-            index++;
         }
     }
 
