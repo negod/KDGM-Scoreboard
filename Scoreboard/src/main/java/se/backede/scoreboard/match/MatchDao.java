@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import se.backede.scoreboard.common.constants.ResultConstants;
+import se.backede.scoreboard.common.constants.MatchConstants;
 import se.backede.scoreboard.common.dao.AbstractCrudDao;
 import se.backede.scoreboard.competition.CompetitionEntity;
 
@@ -33,7 +33,7 @@ public class MatchDao extends AbstractCrudDao<MatchEntity> {
 
     public Optional<List<MatchEntity>> getMatchByCompetition(String competitionId) {
         Logger.getLogger(MatchDao.class.getName()).log(Level.INFO, "Getting Matches By Competition {0}", new Object[]{competitionId});
-        TypedQuery<MatchEntity> query = getEntityManager().createNamedQuery(ResultConstants.QUERY_GET_BY_COMPETITION, MatchEntity.class);
+        TypedQuery<MatchEntity> query = getEntityManager().createNamedQuery(MatchConstants.QUERY_GET_BY_COMPETITION, MatchEntity.class);
         query.setParameter("competition", CompetitionEntity.builder().id(competitionId).build());
         return Optional.ofNullable(query.getResultList());
     }

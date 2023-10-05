@@ -17,6 +17,7 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.dao.GenericEntity;
 import se.backede.scoreboard.common.constants.GlobalConstants;
+import se.backede.scoreboard.common.constants.MatchConstants;
 import se.backede.scoreboard.common.constants.ResultConstants;
 import se.backede.scoreboard.competition.CompetitionEntity;
 import se.backede.scoreboard.team.TeamEntity;
@@ -25,12 +26,11 @@ import se.backede.scoreboard.team.TeamEntity;
  *
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
-@Entity(name = "Result")
+@Entity(name = "Match")
 @ToString
 @Table(schema = GlobalConstants.SCHEMA_NAME, name = ResultConstants.TABLE_NAME)
 @NamedQueries({
-    @NamedQuery(name = ResultConstants.QUERY_GET_ALL_RESULTS, query = "SELECT r FROM Result r"),
-    @NamedQuery(name = ResultConstants.QUERY_GET_BY_COMPETITION, query = "SELECT r FROM Result r where r.competition = :competition")
+    @NamedQuery(name = MatchConstants.QUERY_GET_BY_COMPETITION, query = "SELECT m FROM Match m where m.competition = :competition")
 })
 @Getter
 @Setter
@@ -39,19 +39,19 @@ import se.backede.scoreboard.team.TeamEntity;
 @AllArgsConstructor
 public class MatchEntity extends GenericEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE}, optional = false)
-    @JoinColumn(name = "team_id", nullable = false, referencedColumnName = "id")
+    @ManyToOne()
+    @JoinColumn(name = "team1_id", nullable = false, referencedColumnName = "id")
     private TeamEntity team1;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE}, optional = false)
-    @JoinColumn(name = "team_id", nullable = false, referencedColumnName = "id")
+    @ManyToOne()
+    @JoinColumn(name = "team2_id", nullable = false, referencedColumnName = "id")
     private TeamEntity team2;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE}, optional = false)
+    @ManyToOne()
     @JoinColumn(name = "game_id", nullable = false, referencedColumnName = "id")
     private GameEntity game;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE}, optional = false)
+    @ManyToOne()
     @JoinColumn(name = "competition_id", nullable = false, referencedColumnName = "id")
     private CompetitionEntity competition;
 
