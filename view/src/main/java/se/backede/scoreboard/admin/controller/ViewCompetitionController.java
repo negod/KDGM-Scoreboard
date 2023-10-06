@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.model.menu.BaseMenuModel;
@@ -57,14 +58,43 @@ public class ViewCompetitionController implements Serializable {
     @Inject
     ResultController result;
 
+    @Inject
+    MatchController match;
+
     Map<Integer, GameMatch> matches = new HashMap<>();
 
     @PostConstruct
     public void init() {
         selectedCompetition = competition.getItemById(competitionId);
-        gamesIndex = new IndexHelper(selectedCompetition.getGames().size() -1, 0);
-        matches = createMatches(selectedCompetition.getGames());
+        gamesIndex = new IndexHelper(selectedCompetition.getGames().size() - 1, 0);
+
+        if (selectedCompetition.getStarted()) {
+            matches = getMatches(selectedCompetition);
+        } else {
+            matches = createMatches(selectedCompetition.getGames());
+        }
+
         prepareSteps();
+    }
+
+    public Map<Integer, GameMatch> getMatches(Competition competition) {
+        Map<Integer, GameMatch> matches = new HashMap<>();
+        match.getMatchClient().getByCompetitionId(selectedCompetition.getId()).ifPresent(m -> {
+            Map<Game, List<Match>> matchesMap
+                    = m.stream().collect(Collectors.groupingBy(Match::getGame));
+
+            List<GameMatch> gameMatches = matchesMap.entrySet().stream()
+                    .map(entry -> GameMatch.builder()
+                            .game(entry.getKey())
+                            .matches(entry.getValue())
+                            .build())
+                    .collect(Collectors.toList());
+            //Fixa nedan
+            for (int i = 0; i < gameMatches.size(); i++) {
+                matches.put(i, gameMatches.get(i));
+            }
+        });
+        return matches;
     }
 
     public List<Match> getSelectedGameMatches() {

@@ -59,4 +59,6 @@ public class CompetitionEntity extends GenericEntity {
             inverseJoinColumns = @JoinColumn(name = "team_id"))
     private Set<TeamEntity> teams;
 
+    private Boolean started;
+
 }

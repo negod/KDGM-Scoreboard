@@ -20,7 +20,7 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 @AllArgsConstructor
 public class Result extends GenericDto {
 
-    private Match match;
+    private String matchId;
     private Player player;
     private Long scoreValue;
 

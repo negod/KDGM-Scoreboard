@@ -12,6 +12,7 @@
     </p:column>
     <p:column>
         <p:menuButton value="Handle Competition" icon="pi pi-bars">
+            <!-- p:menuitem value="Start Competition" outcome="competitionView/games" icon="pi pi-user" disabled="#{item.started}"-->
             <p:menuitem value="Start Competition" outcome="competitionView/games" icon="pi pi-user">
                 <f:param name="competitionId" value="#{item.id}"/>
             </p:menuitem>
