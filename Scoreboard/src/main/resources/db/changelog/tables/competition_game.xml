@@ -17,6 +17,9 @@
             <column name="game_id" type="CHAR(36)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="game_order" type="Int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
         </createTable>
     
         <addForeignKeyConstraint baseTableName="competition_game"

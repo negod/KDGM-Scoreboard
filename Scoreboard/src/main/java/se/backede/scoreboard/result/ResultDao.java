@@ -31,10 +31,10 @@ public class ResultDao extends AbstractCrudDao<ResultEntity> {
         return ResultEntity.class;
     }
 
-    public Optional<List<ResultEntity>> getResultsByCompetition(String gameId) {
+    public Optional<List<ResultEntity>> getResultsByMatch(String gameId) {
         Logger.getLogger(ResultDao.class.getName()).log(Level.INFO, "Getting Results By Competition {0}", new Object[]{gameId});
         TypedQuery<ResultEntity> query = getEntityManager().createNamedQuery(ResultConstants.QUERY_GET_BY_COMPETITION, ResultEntity.class);
-        query.setParameter("competition", CompetitionEntity.builder().id(gameId).build());
+        query.setParameter("matchId", CompetitionEntity.builder().id(gameId).build());
         return Optional.ofNullable(query.getResultList());
     }
 

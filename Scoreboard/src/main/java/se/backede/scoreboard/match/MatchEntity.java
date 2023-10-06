@@ -1,9 +1,7 @@
 package se.backede.scoreboard.match;
 
 import se.backede.scoreboard.game.GameEntity;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
@@ -18,7 +16,6 @@ import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.dao.GenericEntity;
 import se.backede.scoreboard.common.constants.GlobalConstants;
 import se.backede.scoreboard.common.constants.MatchConstants;
-import se.backede.scoreboard.common.constants.ResultConstants;
 import se.backede.scoreboard.competition.CompetitionEntity;
 import se.backede.scoreboard.team.TeamEntity;
 
@@ -28,7 +25,7 @@ import se.backede.scoreboard.team.TeamEntity;
  */
 @Entity(name = "Match")
 @ToString
-@Table(schema = GlobalConstants.SCHEMA_NAME, name = ResultConstants.TABLE_NAME)
+@Table(schema = GlobalConstants.SCHEMA_NAME, name = MatchConstants.TABLE_NAME)
 @NamedQueries({
     @NamedQuery(name = MatchConstants.QUERY_GET_BY_COMPETITION, query = "SELECT m FROM Match m where m.competition = :competition")
 })
@@ -54,7 +51,5 @@ public class MatchEntity extends GenericEntity {
     @ManyToOne()
     @JoinColumn(name = "competition_id", nullable = false, referencedColumnName = "id")
     private CompetitionEntity competition;
-
-    private Integer order;
 
 }

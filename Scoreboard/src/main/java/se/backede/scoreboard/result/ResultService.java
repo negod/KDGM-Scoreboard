@@ -14,7 +14,6 @@ import java.util.List;
 import se.backede.scoreboard.common.GenericMapper;
 import se.backede.scoreboard.common.dao.GenericCrudDao;
 import se.backede.scoreboard.common.service.AbstractCrudService;
-import se.backede.scoreboard.match.MatchDto;
 
 /**
  *
@@ -45,14 +44,14 @@ public class ResultService extends AbstractCrudService<ResultDto, ResultEntity> 
     }
 
     @GET
-    @Path("competition/{competitionId}")
+    @Path("match/{matchId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getResultbyGame(@PathParam(value = "competitionId") String competitionId) {
+    public Response getResultbyGame(@PathParam(value = "matchId") String matchId) {
 
-        return (Response) dao.getResultsByCompetition(competitionId).map(results -> {
+        return (Response) dao.getResultsByMatch(matchId).map(results -> {
 
-            List<ResultDto> resultByCompetitionDtoList = mapper.mapToDtoList(results);
-            return Response.ok(resultByCompetitionDtoList).build();
+            List<ResultDto> resultByMatchDtoList = mapper.mapToDtoList(results);
+            return Response.ok(resultByMatchDtoList).build();
 
         }).orElse(Response.serverError().build());
 

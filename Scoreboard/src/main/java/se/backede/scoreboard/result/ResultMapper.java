@@ -4,7 +4,6 @@ package se.backede.scoreboard.result;
 
 import se.backede.scoreboard.match.*;
 import se.backede.scoreboard.common.AbstractMapper;
-import se.backede.scoreboard.competition.CompetitionMapper;
 import se.backede.scoreboard.player.PlayerMapper;
 
 /**
@@ -22,7 +21,7 @@ public class ResultMapper extends AbstractMapper<ResultDto, ResultEntity> {
                 .id(dto.getId())
                 .player(PLAYER_MAPPER.mapToEntity(dto.getPlayer()))
                 .scoreValue(dto.getScoreValue())
-                .match(MATCH_MAPPER.mapToEntity(dto.getMatch()))
+                .matchId(dto.getMatchId())
                 .build();
     }
 
@@ -31,7 +30,7 @@ public class ResultMapper extends AbstractMapper<ResultDto, ResultEntity> {
         return ResultDto.builder()
                 .id(entity.getId())
                 .player(PLAYER_MAPPER.mapToDto(entity.getPlayer()))
-                .match(MATCH_MAPPER.mapToDto(entity.getMatch()))
+                .matchId(entity.getMatchId())
                 .scoreValue(entity.getScoreValue())
                 .build();
     }

@@ -21,7 +21,6 @@ public class MatchMapper extends AbstractMapper<MatchDto, MatchEntity> {
     public MatchEntity mapToEntity(MatchDto dto) {
         return MatchEntity.builder()
                 .id(dto.getId())
-                .order(dto.getOrder())
                 .team1(TEAM_MAPPER.mapToEntity(dto.getTeam1()))
                 .team2(TEAM_MAPPER.mapToEntity(dto.getTeam2()))
                 .game(GAME_MAPPER.mapToEntity(dto.getGame()))
@@ -33,7 +32,6 @@ public class MatchMapper extends AbstractMapper<MatchDto, MatchEntity> {
     public MatchDto mapToDto(MatchEntity entity) {
         return MatchDto.builder()
                 .id(entity.getId())
-                .order(entity.getOrder())
                 .team1(TEAM_MAPPER.mapToDto(entity.getTeam1()))
                 .team2(TEAM_MAPPER.mapToDto(entity.getTeam2()))
                 .game(GAME_MAPPER.mapToDto(entity.getGame()))
