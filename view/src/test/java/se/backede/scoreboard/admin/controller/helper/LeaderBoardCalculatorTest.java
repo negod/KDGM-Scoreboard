@@ -90,8 +90,8 @@ public class LeaderBoardCalculatorTest {
         assertTrue(matchresults.get(expectedOrder2) != null);
 
         //Each team should have 2 results, one for each player we have 2 teams so it should be 4
-        assertEquals(4, matchresults.get(expectedOrder1).getTeamResults().size());
-        assertEquals(4, matchresults.get(expectedOrder2).getTeamResults().size());
+        assertEquals(2, matchresults.get(expectedOrder1).getTeamResults().size());
+        assertEquals(2, matchresults.get(expectedOrder2).getTeamResults().size());
     }
 
     /**
@@ -154,8 +154,8 @@ public class LeaderBoardCalculatorTest {
         assertTrue(matchresults.stream().anyMatch(matchResult -> match2.getId().equals(matchResult.getMatch().getId())));
 
         //Each team should have 2 results, one for each player we have 2 teams so it should be 4
-        assertEquals(4, matchresults.get(0).getTeamResults().size());
-        assertEquals(4, matchresults.get(1).getTeamResults().size());
+        assertEquals(2, matchresults.get(0).getTeamResults().size());
+        assertEquals(2, matchresults.get(1).getTeamResults().size());
 
     }
 
@@ -207,7 +207,7 @@ public class LeaderBoardCalculatorTest {
 
         //We should have 1 result for each player in the team. 
         List<TeamResult> teamResults = result.getTeamResults();
-        assertEquals(expetedResults.size(), teamResults.size());
+        assertEquals(2, teamResults.size());
 
     }
 

@@ -47,7 +47,7 @@ public class TeamLeaderBoardController implements Serializable {
         selectedCompetition = view.getSelectedCompetition();
 
         updateData();
-
+        
         results = LeaderBoardCalculator.mapMatchResults(matches, allResults);
 
     }

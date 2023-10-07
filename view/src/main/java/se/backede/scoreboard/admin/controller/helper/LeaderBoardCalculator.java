@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import se.backede.scoreboard.admin.resources.controller.CompetitionRestClientController;
 import se.backede.scoreboard.admin.resources.dto.Match;
 import se.backede.scoreboard.admin.resources.dto.MatchResult;
 import se.backede.scoreboard.admin.resources.dto.Player;
@@ -21,6 +24,8 @@ public class LeaderBoardCalculator {
 
     public static Map<Integer, MatchResult> mapMatchResults(List<Match> matches, List<Result> results) {
 
+        Logger.getLogger(LeaderBoardCalculator.class.getName()).log(Level.INFO, "Size of Matches {0}", new Object[]{matches.size()});
+
         Map<Integer, MatchResult> mappedResults = new HashMap<>();
 
         if (results != null && matches != null) {
@@ -33,6 +38,8 @@ public class LeaderBoardCalculator {
                 order++;
             }
         }
+
+        Logger.getLogger(LeaderBoardCalculator.class.getName()).log(Level.INFO, "Size of Mapped Results {0}", new Object[]{mappedResults.size()});
 
         return mappedResults;
 
@@ -59,21 +66,27 @@ public class LeaderBoardCalculator {
 
         List<TeamResult> teamResults = new ArrayList<>();
 
+        //Team 1
+        List<PlayerResult> extractedplayerResultsForTeam1 = new ArrayList<>();
         for (Player player : match.getTeam1().getPlayers()) {
-            List<PlayerResult> playerResultForPlayer = getPlayerResultForPlayer(player, playerResults);
-            TeamResult team = TeamResult.builder().results(playerResultForPlayer).team(match.getTeam1()).build();
-            Long calculateTeamScore = calculateTeamScore(team);
-            team.setCalculatedTeamScore(calculateTeamScore);
-            teamResults.add(team);
+            extractedplayerResultsForTeam1.addAll(getPlayerResultForPlayer(player, playerResults));
         }
 
+        TeamResult team1Results = TeamResult.builder().results(extractedplayerResultsForTeam1).team(match.getTeam1()).build();
+        Long calculateTeamScore = calculateTeamScore(team1Results);
+        team1Results.setCalculatedTeamScore(calculateTeamScore);
+        teamResults.add(team1Results);
+
+        //Team 2
+        List<PlayerResult> extractedplayerResultsForTeam2 = new ArrayList<>();
         for (Player player : match.getTeam2().getPlayers()) {
-            List<PlayerResult> playerResultForPlayer = getPlayerResultForPlayer(player, playerResults);
-            TeamResult team = TeamResult.builder().results(playerResultForPlayer).team(match.getTeam2()).build();
-            Long calculateTeamScore = calculateTeamScore(team);
-            team.setCalculatedTeamScore(calculateTeamScore);
-            teamResults.add(team);
+            extractedplayerResultsForTeam2.addAll(getPlayerResultForPlayer(player, playerResults));
         }
+
+        TeamResult team2results = TeamResult.builder().results(extractedplayerResultsForTeam2).team(match.getTeam2()).build();
+        Long calculateTeam2Score = calculateTeamScore(team2results);
+        team2results.setCalculatedTeamScore(calculateTeam2Score);
+        teamResults.add(team2results);
 
         Map<Integer, MatchResult> matchResultMap = new HashMap<>();
 
