@@ -75,4 +75,13 @@ public class ResultRestClientController implements GenericRestClient<Result> {
         }
     }
 
+    public Optional<List<Result>> getByMatch(String competitionId) {
+        try {
+            return Optional.ofNullable(client.getByMatch(competitionId));
+        } catch (WebApplicationException e) {
+            Logger.getLogger(MatchRestClientController.class.getName()).log(Level.SEVERE, "Error when deleting all in RestClient", e);
+            return Optional.empty();
+        }
+    }
+
 }

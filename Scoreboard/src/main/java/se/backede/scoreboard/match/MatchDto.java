@@ -29,5 +29,5 @@ public class MatchDto extends GenericDto {
     private TeamDto team2;
     private GameDto game;
     private CompetitionDto competition;
-
+    private Integer order;
 }

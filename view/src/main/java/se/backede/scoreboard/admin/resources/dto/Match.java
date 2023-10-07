@@ -24,5 +24,6 @@ public class Match extends GenericDto {
     Team team2;
     Game game;
     Competition competition;
+    Integer order;
 
 }

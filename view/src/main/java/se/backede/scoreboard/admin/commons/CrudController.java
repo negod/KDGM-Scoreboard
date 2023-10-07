@@ -12,7 +12,6 @@ import lombok.Setter;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.TransferEvent;
 import org.primefaces.model.DualListModel;
-import se.backede.scoreboard.admin.resources.dto.Team;
 
 /**
  *

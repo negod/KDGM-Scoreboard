@@ -41,4 +41,8 @@ public interface ResultRestClient {
     @Path("{id}")
     Boolean delete(@PathParam(value = "id") String id);
 
+    @GET
+    @Path("/match/{matchId}")
+    List<Result> getByMatch(@PathParam(value = "matchId") String id);
+
 }

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.admin.commons.GenericDto;
 
 /**
@@ -21,6 +22,7 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 @EqualsAndHashCode(callSuper = true)
 @RequiredArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 public class Team extends GenericDto {
 
     @NonNull

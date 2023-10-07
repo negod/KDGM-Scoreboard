@@ -5,7 +5,9 @@ package se.backede.scoreboard.admin.resources.dto;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.admin.commons.GenericDto;
 
 /**
@@ -15,6 +17,8 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
+@RequiredArgsConstructor
+@SuperBuilder
 public class Player extends GenericDto {
 
     private String name;

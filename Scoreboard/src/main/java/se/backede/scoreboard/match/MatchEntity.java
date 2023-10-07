@@ -1,5 +1,6 @@
 package se.backede.scoreboard.match;
 
+import jakarta.persistence.Column;
 import se.backede.scoreboard.game.GameEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -51,5 +52,8 @@ public class MatchEntity extends GenericEntity {
     @ManyToOne()
     @JoinColumn(name = "competition_id", nullable = false, referencedColumnName = "id")
     private CompetitionEntity competition;
+
+    @Column(name = "match_order")
+    private Integer order;
 
 }

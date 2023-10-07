@@ -24,6 +24,9 @@
             <column name="competition_id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
+            <column name="match_order" type="INT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <!-- Add foreign key constraints -->

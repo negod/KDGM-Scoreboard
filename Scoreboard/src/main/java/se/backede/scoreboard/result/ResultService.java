@@ -46,7 +46,7 @@ public class ResultService extends AbstractCrudService<ResultDto, ResultEntity> 
     @GET
     @Path("match/{matchId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getResultbyGame(@PathParam(value = "matchId") String matchId) {
+    public Response getResultbyMatch(@PathParam(value = "matchId") String matchId) {
 
         return (Response) dao.getResultsByMatch(matchId).map(results -> {
 
