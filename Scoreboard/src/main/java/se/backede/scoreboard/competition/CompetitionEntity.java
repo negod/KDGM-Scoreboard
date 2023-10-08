@@ -2,12 +2,10 @@
  */
 package se.backede.scoreboard.competition;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import se.backede.scoreboard.team.TeamEntity;
 import se.backede.scoreboard.game.GameEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;

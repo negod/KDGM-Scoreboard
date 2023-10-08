@@ -35,6 +35,14 @@
                         <br/> <!-- För att separera spelarnas namn -->
                     </ui:repeat>
                 </p:column>
+                <p:column>
+                    <p:commandButton icon="pi pi-plus" 
+                                     styleClass="edit-button rounded-button ui-button-success" 
+                                     value="Add result"
+                                     process="@this">
+                        
+                    </p:commandButton>
+                </p:column>
             </p:dataTable>
         </ui:fragment>
     </ui:repeat>

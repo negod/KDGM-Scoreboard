@@ -16,8 +16,10 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.event.TransferEvent;
 import org.primefaces.model.DualListModel;
 import se.backede.scoreboard.admin.commons.CrudController;
+import se.backede.scoreboard.admin.resources.controller.CompetitionGameRestClientController;
 import se.backede.scoreboard.admin.resources.controller.CompetitionRestClientController;
 import se.backede.scoreboard.admin.resources.dto.Competition;
+import se.backede.scoreboard.admin.resources.dto.CompetitionGame;
 import se.backede.scoreboard.admin.resources.dto.Game;
 import se.backede.scoreboard.admin.resources.dto.Team;
 
@@ -33,6 +35,9 @@ public class CompetitionController extends CrudController<Competition> implement
 
     @Inject
     CompetitionRestClientController competitionClient;
+
+    @Inject
+    CompetitionGameRestClientController competitionGameClient;
 
     @Inject
     GameController game;
@@ -71,27 +76,55 @@ public class CompetitionController extends CrudController<Competition> implement
 
         game.setDualList(new DualListModel<>(availableGames, selectedGames));
         team.setDualList(new DualListModel<>(availableTeams, selectedTeams));
-        
+
         PrimeFaces.current().ajax().update("form:gamePickList", "form:teamPickList");
 
     }
 
     @Override
     public void onDualListTransfer(TransferEvent event) {
+        if (event.getItems() != null) {
+
+            if (event.getItems().get(0).getClass().equals(Game.class)) {
+                onGameTransfer(event);
+            } else if (event.getItems().get(0).getClass().equals(Team.class)) {
+                onTeamTransfer(event);
+            }
+        }
     }
 
     public void onGameTransfer(TransferEvent event) {
         if (event.isAdd()) {
             for (Object item : event.getItems()) {
-                super.getSelectedItem().getGames().add((Game) item);
+                Game game = (Game) item;
+                CompetitionGame cg = CompetitionGame.builder()
+                        .competition(super.getSelectedItem().getId())
+                        .game(game.getId())
+                        .build();
+
+                if (super.getSelectedItem().getGames() != null) {
+                    cg.setGameOrder(super.getSelectedItem().getGames().size());
+                } else {
+                    cg.setGameOrder(1);
+                }
+
+                game.setOrder(cg.getGameOrder());
+                competitionGameClient.create(cg).ifPresent(c -> {
+                    super.getSelectedItem().getGames().add(game);
+                });
             }
         } else if (event.isRemove()) {
             for (Object item : event.getItems()) {
-                super.getSelectedItem().getGames().remove((Game) item);
+                Game game = (Game) item;
+                competitionGameClient.delete(game.getId()).ifPresent(c -> {
+                    super.getSelectedItem().getGames().remove(game);
+                    List<Game> data = super.getSelectedItem().getGames();
+                    for (int i = 0; i < data.size(); i++) {
+                        data.get(i).setOrder(i);
+                    }
+                });
             }
         }
-
-        super.saveSelectedItem();
     }
 
     public void onTeamTransfer(TransferEvent event) {

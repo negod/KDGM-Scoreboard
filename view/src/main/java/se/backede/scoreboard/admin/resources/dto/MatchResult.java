@@ -3,10 +3,12 @@
 package se.backede.scoreboard.admin.resources.dto;
 
 import java.util.List;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import se.backede.scoreboard.admin.commons.GenericDto;
 
 /**
  *
@@ -14,9 +16,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@EqualsAndHashCode()
-@Builder
-public class MatchResult {
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
+@RequiredArgsConstructor
+public class MatchResult extends GenericDto {
 
     Match match;
     List<TeamResult> teamResults;

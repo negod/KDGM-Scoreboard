@@ -6,16 +6,22 @@
     <changeSet id="competition_game_data" author="Joakim Backede">
         <!-- Kode Gubbz Gaming nighet har 3 games Starcraft Remastered, Bowling, Project Cars-->
         <insert tableName="competition_game">
+            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C501"/>
+            <column name="updated" value="2023-08-27 00:00:00"/>
             <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483"/>
             <column name="game_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73A5"/>
             <column name="game_order" value="1"/>
         </insert>
         <insert tableName="competition_game">
+            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C502"/>
+            <column name="updated" value="2023-08-27 00:00:00"/>
             <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483"/>
             <column name="game_id" value="ff5d3c46-3075-451e-b2bc-26e9c7705217"/>
             <column name="game_order" value="2"/>
         </insert>
         <insert tableName="competition_game">
+            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C503"/>
+            <column name="updated" value="2023-08-27 00:00:00"/>
             <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483"/>
             <column name="game_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4CC"/>
             <column name="game_order" value="3"/>

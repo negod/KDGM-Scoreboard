@@ -44,10 +44,9 @@ public class TeamLeaderBoardController implements Serializable {
 
     @PostConstruct
     public void init() {
-        selectedCompetition = view.getSelectedCompetition();
 
+        selectedCompetition = view.getSelectedCompetition();
         updateData();
-        
         results = LeaderBoardCalculator.mapMatchResults(matches, allResults);
 
     }

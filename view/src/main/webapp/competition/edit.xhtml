@@ -12,6 +12,9 @@
         <p:outputLabel for="date">Date</p:outputLabel>
         <p:datePicker id="date" value="#{controller.selectedItem.competitionDate}" />
     </div>
+    <div class="field">
+        <p:selectBooleanCheckbox id="started" value="#{controller.selectedItem.started}" itemLabel="Started"/>
+    </div>
 
     <p:outputLabel for="teamPickList">Choose Teams</p:outputLabel>
     <p:pickList id="teamPickList" 

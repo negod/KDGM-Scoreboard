@@ -13,6 +13,15 @@
     <class>generated.Game</class>
     <class>generated.Player</class>
     <class>generated.Team</class>
+    <class>se.backede.scoreboard.competitionteam.Competition</class>
+    <class>se.backede.scoreboard.competitionteam.Team</class>
+    <class>se.backede.scoreboard.common.generated.CompetitionGame</class>
+    <class>se.backede.scoreboard.common.generated.Competition</class>
+    <class>se.backede.scoreboard.common.generated.Game</class>
+    <class>se.backede.scoreboard.common.generated.Player</class>
+    <class>se.backede.scoreboard.common.generated.Result</class>
+    <class>se.backede.scoreboard.common.generated.Match</class>
+    <class>se.backede.scoreboard.common.generated.Team</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!-- ENABLE FOR LOGGING -->

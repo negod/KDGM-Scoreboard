@@ -2,7 +2,6 @@
  */
 package se.backede.scoreboard.admin.resources.dto;
 
-import jakarta.json.bind.annotation.JsonbTransient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,11 +18,10 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Game extends GenericDto {
+public class CompetitionGame extends GenericDto {
 
-    private String name;
-    public GameType gametype;
-    @JsonbTransient
-    public Integer order;
+    String competition;
+    String game;
+    Integer gameOrder;
 
 }
