@@ -9,15 +9,18 @@
     <p:dataTable lazy="false" rowIndexVar="rowNum" var="matchResult" value="#{controller.results[indexController.gamesIndex.activeIndex]}"
                  style="margin-top: 20px; margin-right: 30px; margin-bottom: 40px; margin-left: 50px;">
 
-        <f:facet name="header">
-            Match #{matchResult.match.order}
-        </f:facet>
 
-        <p:column headerText="Team">
-            <h:outputText value="#{teamResult.team.name}" />
-        </p:column>
-        
+
         <p:subTable value="#{matchResult.teamResults}" var="teamResult">
+
+            <f:facet name="header">
+                Match #{matchResult.match.order}
+            </f:facet>
+
+            <p:column headerText="Team">
+                <h:outputText value="#{teamResult.team.name}" />
+            </p:column>
+
             <p:column headerText="Spelare">
                 <ui:repeat value="#{teamResult.results}" var="playerResult">
                     <h:outputText value="#{playerResult.player.name}" />
