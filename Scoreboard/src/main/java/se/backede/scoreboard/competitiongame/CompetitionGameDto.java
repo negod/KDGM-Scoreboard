@@ -3,6 +3,7 @@
 package se.backede.scoreboard.competitiongame;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,12 +23,11 @@ import se.backede.scoreboard.game.GameDto;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class CompetitionGameDto extends GenericDto {
 
-//    private CompetitionDto competition;
-//    private GameDto game;
-    private String game;
-    private String competition;
+    private CompetitionDto competition;
+    private GameDto game;
     private Integer gameOrder;
 
 }

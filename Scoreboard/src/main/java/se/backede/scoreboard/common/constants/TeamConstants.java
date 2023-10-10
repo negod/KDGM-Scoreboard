@@ -8,7 +8,7 @@ package se.backede.scoreboard.common.constants;
  */
 public class TeamConstants {
 
-    public static final String TABLE_NAME = "team";
+    public static final String TABLE_NAME = "Team";
 
     public static final String QUERY_GET_ALL_TEAMS = "GetAllTeams";
     public static final String QUERY_UPDATE_TEAM = "updateTeam";

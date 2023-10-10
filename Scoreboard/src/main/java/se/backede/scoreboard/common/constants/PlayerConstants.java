@@ -10,7 +10,7 @@ import se.backede.scoreboard.common.CommonConstants;
  */
 public class PlayerConstants extends CommonConstants {
 
-    public static final String TABLE_NAME = "player";
+    public static final String TABLE_NAME = "Player";
     
     public static final String TABLE_COLUMN_NAME = "name";
     public static final String TABLE_COLUMN_NICK_NAME = "nickName";

@@ -21,7 +21,7 @@ public class TeamMapper extends AbstractMapper<TeamDto, TeamEntity> {
                 .name(team.getName())
                 .build();
 
-        Optional.ofNullable(team.getPlayers()).ifPresent(teams -> {
+        Optional.ofNullable(team.getPlayerList()).ifPresent(teams -> {
             teamDto.setPlayers(PLAYER_MAPPER.mapToDtoList(teams));
         });
 
@@ -37,7 +37,7 @@ public class TeamMapper extends AbstractMapper<TeamDto, TeamEntity> {
                 .build();
 
         Optional.ofNullable(teamDto.getPlayers()).ifPresent(teams -> {
-            teamEntity.setPlayers(PLAYER_MAPPER.mapToEntityList(teams));
+            teamEntity.setPlayerList(PLAYER_MAPPER.mapToEntityList(teams));
         });
 
         return teamEntity;

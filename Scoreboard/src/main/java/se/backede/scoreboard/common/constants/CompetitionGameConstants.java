@@ -8,7 +8,7 @@ package se.backede.scoreboard.common.constants;
  */
 public class CompetitionGameConstants {
 
-    public static final String TABLE_NAME = "competition_game";
+    public static final String TABLE_NAME = "CompetitionGame";
 
     public static final String COLUMN_NAME_GAME = "game";
     public static final String COLUMN_NAME_COMPETITION = "competition";

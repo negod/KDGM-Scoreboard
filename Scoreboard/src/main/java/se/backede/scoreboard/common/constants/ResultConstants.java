@@ -8,7 +8,7 @@ package se.backede.scoreboard.common.constants;
  */
 public class ResultConstants {
 
-    public static final String TABLE_NAME = "result";
+    public static final String TABLE_NAME = "Result";
     public static final String QUERY_GET_ALL_RESULTS = "GetAllResults";
     public static final String QUERY_GET_BY_COMPETITION = "GetResultsByMatch";
 
