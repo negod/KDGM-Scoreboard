@@ -2,7 +2,6 @@
  */
 package se.backede.scoreboard.competitiongame;
 
-import jakarta.persistence.Column;
 import java.io.Serializable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -11,9 +10,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import static jakarta.persistence.TemporalType.TIMESTAMP;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

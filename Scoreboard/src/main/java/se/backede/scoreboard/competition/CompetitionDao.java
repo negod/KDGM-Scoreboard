@@ -33,15 +33,16 @@ public class CompetitionDao extends AbstractCrudDao<CompetitionEntity> {
     @Override
     public Optional<CompetitionEntity> update(CompetitionEntity entity) {
         try {
+
+            if (entity.getCompetitionGameList() != null) {
+                for (CompetitionGameEntity competitionGameEntity : entity.getCompetitionGameList()) {
+                    competitionGameEntity.getCompetitionGamePK().setId(UUID.randomUUID().toString());
+                    competitionGameEntity.getCompetitionGamePK().setUpdatedDate(new Date());
+                }
+            }
+
             Optional<CompetitionEntity> validatedEntity = validate(entity);
             if (validatedEntity.isPresent()) {
-
-                if (entity.getCompetitionGameList() != null) {
-                    for (CompetitionGameEntity competitionGameEntity : entity.getCompetitionGameList()) {
-                        competitionGameEntity.getCompetitionGamePK().setId(UUID.randomUUID().toString());
-                        competitionGameEntity.getCompetitionGamePK().setUpdatedDate(new Date());
-                    }
-                }
 
                 getEntityManager().merge(entity);
                 getEntityManager().flush();

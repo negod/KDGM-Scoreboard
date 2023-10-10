@@ -50,15 +50,13 @@ public class CompetitionMapper extends AbstractMapper<CompetitionDto, Competitio
             case ALL_LISTS:
                 if (dto.getGames() != null) {
                     for (GameDto gameDto : dto.getGames()) {
+                        System.out.println(gameDto.toString());
                         CompetitionGameEntity cge = CompetitionGameEntity.builder()
-                                .competition(build)
-                                .game(GameEntity.builder()
-                                        .id(gameDto.getId())
-                                        .name(gameDto.getName())
-                                        .gametype(gameDto.getGametype())
+                                .competitionGamePK(CompetitionGamePKEntity.builder()
+                                        .competitionId(dto.getId())
+                                        .gameId(gameDto.getId())
+                                        .gameOrder(gameDto.getGameOrder())
                                         .build()).build();
-                        cgePK.setGameId(gameDto.getId());
-                        cge.setCompetitionGamePK(cgePK);
                         build.getCompetitionGameList().add(cge);
                     }
 

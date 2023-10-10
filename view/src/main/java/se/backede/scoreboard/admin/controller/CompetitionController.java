@@ -108,22 +108,20 @@ public class CompetitionController extends CrudController<Competition> implement
                     cg.setGameOrder(1);
                 }
 
-                game.setOrder(cg.getGameOrder());
-                competitionGameClient.create(cg).ifPresent(c -> {
-                    super.getSelectedItem().getGames().add(game);
-                });
+                game.setGameOrder(cg.getGameOrder());
+                super.getSelectedItem().getGames().add(game);
             }
         } else if (event.isRemove()) {
             for (Object item : event.getItems()) {
                 Game game = (Game) item;
-                competitionGameClient.delete(game.getId()).ifPresent(c -> {
-                    super.getSelectedItem().getGames().remove(game);
-                    List<Game> data = super.getSelectedItem().getGames();
-                    for (int i = 0; i < data.size(); i++) {
-                        data.get(i).setOrder(i);
-                    }
-                });
+                super.getSelectedItem().getGames().remove(game);
             }
+            
+            for (int i = 0; i < super.getSelectedItem().getGames().size(); i++) {
+                super.getSelectedItem().getGames().get(i).setGameOrder(i);
+            }
+            
+            
         }
     }
 

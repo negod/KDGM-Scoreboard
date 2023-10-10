@@ -117,9 +117,8 @@ public class CreateCompetitionController implements Serializable {
     }
 
     public void saveCompetition() {
-        
-        // Fix GameOrder
 
+        // Fix GameOrder
         List<Team> persistedTeams = new ArrayList<>();
         for (Team createdTeam : createdTeams) {
 
@@ -136,15 +135,8 @@ public class CreateCompetitionController implements Serializable {
 
         competition.getSelectedItem().setTeams(persistedTeams);
 
-        for (Game game1 : game.getDualList().getTarget()) {
-            CompetitionGame cg = CompetitionGame.builder()
-                    .competition(competition.getSelectedItem().getId())
-                    .game(game1.getId())
-                    .gameOrder(game1.getOrder())
-                    .build();
-            competition.getCompetitionGameClient().create(cg).ifPresent(c -> {
-                competition.getSelectedItem().getGames().add(game1);
-            });
+        for (Game game1 : competition.getSelectedItem().getGames()) {
+            System.out.println(game1.toString());
         }
 
         competition.saveSelectedItem();
