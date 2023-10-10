@@ -26,6 +26,7 @@ public class GameMapper extends AbstractMapper<GameDto, GameEntity> {
                 .id(entity.getId())
                 .name(entity.getName())
                 .gametype(entity.getGametype())
+                .gameOrder(null)
                 .build();
     }
 

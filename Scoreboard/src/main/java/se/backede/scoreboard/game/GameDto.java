@@ -14,16 +14,16 @@ import se.backede.scoreboard.common.service.GenericDto;
  *
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
-
 @Getter
 @Setter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class GameDto extends GenericDto{
-    
+public class GameDto extends GenericDto {
+
     private String name;
     private GameType gametype;
-    
+    private Integer gameOrder;
+
 }

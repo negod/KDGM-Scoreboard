@@ -33,7 +33,6 @@ import se.backede.scoreboard.game.GameEntity;
 @NamedQueries({
     @NamedQuery(name = "CompetitionGame.findAll", query = "SELECT c FROM CompetitionGame c"),
     @NamedQuery(name = "CompetitionGame.findById", query = "SELECT c FROM CompetitionGame c WHERE c.competitionGamePK.id = :id"),
-    @NamedQuery(name = "CompetitionGame.findByUpdated", query = "SELECT c FROM CompetitionGame c WHERE c.updatedDate = :updated"),
     @NamedQuery(name = "CompetitionGame.findByCompetitionId", query = "SELECT c FROM CompetitionGame c WHERE c.competitionGamePK.competitionId = :competitionId"),
     @NamedQuery(name = "CompetitionGame.findByGameId", query = "SELECT c FROM CompetitionGame c WHERE c.competitionGamePK.gameId = :gameId"),
     @NamedQuery(name = "CompetitionGame.findByGameOrder", query = "SELECT c FROM CompetitionGame c WHERE c.competitionGamePK.gameOrder = :gameOrder")})
@@ -43,10 +42,6 @@ import se.backede.scoreboard.game.GameEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CompetitionGameEntity implements Serializable {
-
-    @Column(name = "updated")
-    @Temporal(TIMESTAMP)
-    private Date updatedDate;
 
     @EmbeddedId
     protected CompetitionGamePKEntity competitionGamePK;

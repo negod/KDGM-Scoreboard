@@ -3,7 +3,6 @@
 package se.backede.scoreboard.admin.controller;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.ejb.DependsOn;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -28,7 +27,7 @@ import se.backede.scoreboard.admin.resources.dto.Result;
 @Setter
 @Named("teamLeaderBoardController")
 @ViewScoped
-@DependsOn(value = {"viewCompetitionController"})
+//@DependsOn(value = {"viewCompetitionController"})
 public class TeamLeaderBoardController implements Serializable {
 
     private Competition selectedCompetition;

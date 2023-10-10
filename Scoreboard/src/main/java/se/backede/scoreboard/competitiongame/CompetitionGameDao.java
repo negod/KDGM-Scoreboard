@@ -14,13 +14,15 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import se.backede.scoreboard.common.dao.AbstractCrudDao;
+import se.backede.scoreboard.competition.CompetitionEntity;
+import se.backede.scoreboard.game.GameEntity;
 
 /**
  *
@@ -78,7 +80,8 @@ public class CompetitionGameDao {
 
     public Optional<CompetitionGameEntity> create(CompetitionGameEntity entity) {
         try {
-
+            entity.getCompetitionGamePK().setId(UUID.randomUUID().toString());
+            entity.getCompetitionGamePK().setUpdatedDate(new Date());
             Optional<CompetitionGameEntity> validatedEntity = validate(entity);
             if (validatedEntity.isPresent()) {
                 em.persist(validatedEntity.get());
@@ -135,6 +138,33 @@ public class CompetitionGameDao {
 
         return Optional.empty();
 
+    }
+
+    public CompetitionGameEntity mapToEntity(CompetitionGameDto dto) {
+
+        GameEntity game = em.find(GameEntity.class, dto.getGame());
+        CompetitionEntity competition = em.find(CompetitionEntity.class, dto.getCompetition());
+
+        return CompetitionGameEntity.builder()
+                .competition(competition)
+                .game(game)
+                .competitionGamePK(CompetitionGamePKEntity.builder()
+                        .competitionId(dto.getCompetition())
+                        .gameId(dto.getGame())
+                        .gameOrder(dto.getGameOrder())
+                        .build()
+                )
+                .build();
+
+    }
+
+    public CompetitionGameDto mapToDto(CompetitionGameEntity entity) {
+        return CompetitionGameDto.builder()
+                .competition(entity.getCompetition().getId())
+                .game(entity.getGame().getId())
+                .id(entity.getCompetitionGamePK().getCompetitionId())
+                .gameOrder(entity.competitionGamePK.getGameOrder())
+                .build();
     }
 
 }

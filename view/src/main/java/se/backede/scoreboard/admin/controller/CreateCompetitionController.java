@@ -16,7 +16,6 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.ReorderEvent;
-import se.backede.scoreboard.admin.resources.controller.CompetitionGameRestClientController;
 import se.backede.scoreboard.admin.resources.dto.CompetitionGame;
 import se.backede.scoreboard.admin.resources.dto.Game;
 import se.backede.scoreboard.admin.resources.dto.Player;
@@ -118,6 +117,8 @@ public class CreateCompetitionController implements Serializable {
     }
 
     public void saveCompetition() {
+        
+        // Fix GameOrder
 
         List<Team> persistedTeams = new ArrayList<>();
         for (Team createdTeam : createdTeams) {
