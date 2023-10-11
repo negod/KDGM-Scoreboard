@@ -9,7 +9,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.service.GenericDto;
-import se.backede.scoreboard.match.MatchDto;
 import se.backede.scoreboard.player.PlayerDto;
 
 /**
@@ -24,7 +23,7 @@ import se.backede.scoreboard.player.PlayerDto;
 @ToString
 public class ResultDto extends GenericDto {
 
-    private MatchDto match;
+    private String matchId;
     private PlayerDto player;
     private Long scoreValue;
 

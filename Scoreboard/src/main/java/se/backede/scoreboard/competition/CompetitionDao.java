@@ -3,14 +3,17 @@
 package se.backede.scoreboard.competition;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import se.backede.scoreboard.common.constants.CompetitionGameConstants;
 import se.backede.scoreboard.common.dao.AbstractCrudDao;
 import se.backede.scoreboard.competitiongame.CompetitionGameEntity;
+import se.backede.scoreboard.match.MatchEntity;
 
 /**
  *
@@ -35,11 +38,23 @@ public class CompetitionDao extends AbstractCrudDao<CompetitionEntity> {
         try {
 
             if (entity.getCompetitionGameList() != null) {
+
                 for (CompetitionGameEntity competitionGameEntity : entity.getCompetitionGameList()) {
-                    
-                    competitionGameEntity.getCompetitionGamePK().setId(UUID.randomUUID().toString());
-                    competitionGameEntity.getCompetitionGamePK().setUpdatedDate(new Date());
+
+                    try {
+                        TypedQuery<CompetitionGameEntity> query = getEntityManager().createNamedQuery(CompetitionGameConstants.QUERY_MATCH_BY_COMPETITION_AND_GAME, CompetitionGameEntity.class);
+                        query.setParameter("competitionId", competitionGameEntity.getCompetition().getId());
+                        query.setParameter("gameId", competitionGameEntity.getGame().getId());
+
+                        CompetitionGameEntity competitionGame = query.getSingleResult();
+                        competitionGameEntity.getCompetitionGamePK().setId(competitionGame.getCompetitionGamePK().getId());
+                        competitionGameEntity.getCompetitionGamePK().setUpdatedDate(competitionGame.getCompetitionGamePK().getUpdatedDate());
+                    } catch (Exception e) {
+                        competitionGameEntity.getCompetitionGamePK().setId(UUID.randomUUID().toString());
+                        competitionGameEntity.getCompetitionGamePK().setUpdatedDate(new Date());
+                    }
                 }
+
             }
 
             Optional<CompetitionEntity> validatedEntity = validate(entity);
@@ -53,7 +68,7 @@ public class CompetitionDao extends AbstractCrudDao<CompetitionEntity> {
             }
 
         } catch (Exception e) {
-            Logger.getLogger(getLoggerClass().getName()).log(Level.SEVERE, "Error when updating {0} with values: {1}", new Object[]{getEntityClass().getSimpleName(), entity.toString()});
+            Logger.getLogger(getLoggerClass().getName()).log(Level.SEVERE, "Error when updating {0} with values: {1} ERROR {2}", new Object[]{getEntityClass().getSimpleName(), entity.toString(), e});
         }
 
         return Optional.empty();

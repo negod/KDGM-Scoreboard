@@ -7,7 +7,6 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
@@ -19,7 +18,6 @@ import se.backede.scoreboard.admin.commons.CrudController;
 import se.backede.scoreboard.admin.resources.controller.CompetitionGameRestClientController;
 import se.backede.scoreboard.admin.resources.controller.CompetitionRestClientController;
 import se.backede.scoreboard.admin.resources.dto.Competition;
-import se.backede.scoreboard.admin.resources.dto.CompetitionGame;
 import se.backede.scoreboard.admin.resources.dto.Game;
 import se.backede.scoreboard.admin.resources.dto.Team;
 

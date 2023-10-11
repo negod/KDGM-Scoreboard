@@ -70,9 +70,26 @@ public class ViewCompetitionController implements Serializable {
         if (selectedCompetition.getStarted()) {
             match.getMatchClient().getByCompetitionId(selectedCompetition.getId()).ifPresent(matches -> {
                 this.matches = MatchHelper.getIndexedMatches(matches);
+
             });
         } else {
             matches = MatchHelper.createMatches(selectedCompetition.getGames(), selectedCompetition.getTeams());
+
+            for (Map.Entry<Integer, GameMatch> entry : matches.entrySet()) {
+
+                //TODO Match Order
+                Integer order = 1;
+                for (Match matche : entry.getValue().getMatches()) {
+                    matche.setCompetition(selectedCompetition);
+                    matche.setOrder(order);
+                    match.getMatchClient().create(matche);
+                    order++;
+                }
+
+            }
+
+            selectedCompetition.setStarted(Boolean.TRUE);
+            competition.getCompetitionClient().update(selectedCompetition);
         }
 
         prepareSteps();

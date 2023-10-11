@@ -28,10 +28,9 @@ import se.backede.scoreboard.match.MatchEntity;
 @Entity(name = ResultConstants.TABLE_NAME)
 @Table(name = "result", schema = GlobalConstants.SCHEMA_NAME)
 @NamedQueries({
-    @NamedQuery(name = "Result.findAll", query = "SELECT r FROM Result r"),
-    @NamedQuery(name = "Result.findById", query = "SELECT r FROM Result r WHERE r.id = :id"),
-    @NamedQuery(name = "Result.findByUpdated", query = "SELECT r FROM Result r WHERE r.updatedDate = :updated"),
-    @NamedQuery(name = "Result.findByScoreValue", query = "SELECT r FROM Result r WHERE r.scoreValue = :scoreValue")})
+    @NamedQuery(name = ResultConstants.QUERY_GET_ALL_RESULTS, query = "SELECT r FROM Result r"),
+    @NamedQuery(name = ResultConstants.QUERY_GET_BY_MATCH, query = "SELECT r FROM Result r where r.matchId.id = :matchId")
+})
 @Getter
 @Setter
 @SuperBuilder

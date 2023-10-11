@@ -31,7 +31,7 @@ import se.backede.scoreboard.game.GameEntity;
     @NamedQuery(name = "CompetitionGame.findById", query = "SELECT c FROM CompetitionGame c WHERE c.competitionGamePK.id = :id"),
     @NamedQuery(name = "CompetitionGame.findByCompetitionId", query = "SELECT c FROM CompetitionGame c WHERE c.competitionGamePK.competitionId = :competitionId"),
     @NamedQuery(name = "CompetitionGame.findByGameId", query = "SELECT c FROM CompetitionGame c WHERE c.competitionGamePK.gameId = :gameId"),
-    @NamedQuery(name = "CompetitionGame.findByGameOrder", query = "SELECT c FROM CompetitionGame c WHERE c.competitionGamePK.gameOrder = :gameOrder")})
+    @NamedQuery(name = CompetitionGameConstants.QUERY_MATCH_BY_COMPETITION_AND_GAME, query = "SELECT c FROM CompetitionGame c WHERE c.competitionGamePK.gameId = :gameId AND c.competitionGamePK.competitionId =:competitionId")})
 @Getter
 @Setter
 @SuperBuilder

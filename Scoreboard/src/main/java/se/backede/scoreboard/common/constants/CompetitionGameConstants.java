@@ -15,5 +15,9 @@ public class CompetitionGameConstants {
 
     public static final String QUERY_GET_ALL_BY_COMPETITION = "GetAllCompetitionGameByCompetition";
     public static final String QUERY_GET_ALL_BY_GAME = "GetAllCompetitionGameByGame";
+     public static final String QUERY_MATCH_BY_COMPETITION_AND_GAME = "competitoin.getCompetitionByCompetitionAndGame";
+    
+    
+
 
 }

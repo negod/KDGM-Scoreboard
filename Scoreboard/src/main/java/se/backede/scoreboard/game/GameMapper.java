@@ -13,21 +13,27 @@ public class GameMapper extends AbstractMapper<GameDto, GameEntity> {
 
     @Override
     public GameEntity mapToEntity(GameDto dto) {
-        return GameEntity.builder()
-                .id(dto.getId())
-                .name(dto.getName())
-                .gametype(dto.getGametype())
-                .build();
+        if (dto != null) {
+            return GameEntity.builder()
+                    .id(dto.getId())
+                    .name(dto.getName())
+                    .gametype(dto.getGametype())
+                    .build();
+        }
+        return null;
     }
 
     @Override
     public GameDto mapToDto(GameEntity entity) {
-        return GameDto.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .gametype(entity.getGametype())
-                .gameOrder(null)
-                .build();
+        if (entity != null) {
+            return GameDto.builder()
+                    .id(entity.getId())
+                    .name(entity.getName())
+                    .gametype(entity.getGametype())
+                    .gameOrder(null)
+                    .build();
+        }
+        return null;
     }
 
 }

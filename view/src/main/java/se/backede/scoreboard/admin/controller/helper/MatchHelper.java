@@ -32,8 +32,8 @@ public class MatchHelper {
                 .collect(Collectors.toList());
 
         //Fixa nedan
-        for (int i = 0; i < gameMatches.size(); i++) {
-            indexedMatches.put(i, gameMatches.get(i));
+        for (GameMatch gameMatche : gameMatches) {
+            indexedMatches.put(gameMatche.getGame().getGameOrder() + 1, gameMatche);
         }
 
         return indexedMatches;
@@ -43,12 +43,15 @@ public class MatchHelper {
 
         Map<Integer, GameMatch> matches = new HashMap<>();
 
-        int index = 0;
         for (Game game : games) {
             List<Match> generateMatches = generateMatches(teams);
+            
+            for (Match generateMatche : generateMatches) {
+                generateMatche.setGame(game);
+            }
+
             GameMatch build = GameMatch.builder().game(game).matches(generateMatches).build();
-            matches.put(index, build);
-            index++;
+            matches.put(game.gameOrder, build);
         }
         return matches;
 

@@ -9,8 +9,8 @@ import se.backede.scoreboard.common.AbstractMapper;
 import se.backede.scoreboard.competitiongame.CompetitionGameEntity;
 import se.backede.scoreboard.competitiongame.CompetitionGamePKEntity;
 import se.backede.scoreboard.game.GameDto;
-import se.backede.scoreboard.game.GameEntity;
 import se.backede.scoreboard.game.GameMapper;
+import se.backede.scoreboard.match.MatchEntity;
 import se.backede.scoreboard.team.TeamDto;
 import se.backede.scoreboard.team.TeamEntity;
 import se.backede.scoreboard.team.TeamMapper;
@@ -98,6 +98,7 @@ public class CompetitionMapper extends AbstractMapper<CompetitionDto, Competitio
                 .build();
 
         switch (competitionLists) {
+
             case ALL_LISTS:
                 if (entity.getCompetitionGameList() != null) {
                     for (CompetitionGameEntity competitionGameEntity : entity.getCompetitionGameList()) {
@@ -119,6 +120,15 @@ public class CompetitionMapper extends AbstractMapper<CompetitionDto, Competitio
 
                     build.setTeams(teamsList);
                 }
+
+                if (entity.getMatchList() != null) {
+
+                    for (MatchEntity matchEntity : entity.getMatchList()) {
+
+                    }
+
+                }
+
                 break;
             case NO_LISTS:
                 break;
