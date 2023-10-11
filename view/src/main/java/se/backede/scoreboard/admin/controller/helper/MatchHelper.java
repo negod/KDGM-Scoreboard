@@ -72,7 +72,7 @@ public class MatchHelper {
                 Team team2 = rotationList.get(rotationList.size() - 1 - j);
 
                 // Don't add matches with the placeholder "BYE".
-                if (!team1.equals("BYE") && !team2.getName().equals("BYE")) {
+                if (!team1.equals("BYE") && !team2.getId().equals("BYE")) {
                     matches.add(Match.builder().team1(team1).team2(team2).build());
                 }
             }

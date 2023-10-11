@@ -36,6 +36,7 @@ public class CompetitionDao extends AbstractCrudDao<CompetitionEntity> {
 
             if (entity.getCompetitionGameList() != null) {
                 for (CompetitionGameEntity competitionGameEntity : entity.getCompetitionGameList()) {
+                    
                     competitionGameEntity.getCompetitionGamePK().setId(UUID.randomUUID().toString());
                     competitionGameEntity.getCompetitionGamePK().setUpdatedDate(new Date());
                 }

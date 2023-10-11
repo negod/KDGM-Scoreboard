@@ -97,18 +97,13 @@ public class CompetitionController extends CrudController<Competition> implement
         if (event.isAdd()) {
             for (Object item : event.getItems()) {
                 Game game = (Game) item;
-                CompetitionGame cg = CompetitionGame.builder()
-                        .competition(super.getSelectedItem().getId())
-                        .game(game.getId())
-                        .build();
 
                 if (super.getSelectedItem().getGames() != null) {
-                    cg.setGameOrder(super.getSelectedItem().getGames().size());
+                    game.setGameOrder(super.getSelectedItem().getGames().size());
                 } else {
-                    cg.setGameOrder(1);
+                    game.setGameOrder(1);
                 }
 
-                game.setGameOrder(cg.getGameOrder());
                 super.getSelectedItem().getGames().add(game);
             }
         } else if (event.isRemove()) {
@@ -116,12 +111,10 @@ public class CompetitionController extends CrudController<Competition> implement
                 Game game = (Game) item;
                 super.getSelectedItem().getGames().remove(game);
             }
-            
+
             for (int i = 0; i < super.getSelectedItem().getGames().size(); i++) {
                 super.getSelectedItem().getGames().get(i).setGameOrder(i);
             }
-            
-            
         }
     }
 

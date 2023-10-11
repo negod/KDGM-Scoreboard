@@ -34,10 +34,8 @@ import se.backede.scoreboard.common.dao.GenericEntity;
 @Entity(name = MatchConstants.TABLE_NAME)
 @Table(name = "match", schema = GlobalConstants.SCHEMA_NAME)
 @NamedQueries({
-    @NamedQuery(name = "Match.findAll", query = "SELECT m FROM Match m"),
-    @NamedQuery(name = "Match.findById", query = "SELECT m FROM Match m WHERE m.id = :id"),
-    @NamedQuery(name = "Match.findByUpdated", query = "SELECT m FROM Match m WHERE m.updatedDate = :updated"),
-    @NamedQuery(name = "Match.findByMatchOrder", query = "SELECT m FROM Match m WHERE m.matchOrder = :matchOrder")})
+    @NamedQuery(name = MatchConstants.QUERY_GET_BY_COMPETITION, query = "SELECT m FROM Match m where m.competitionId = :competition")
+})
 @Getter
 @Setter
 @SuperBuilder

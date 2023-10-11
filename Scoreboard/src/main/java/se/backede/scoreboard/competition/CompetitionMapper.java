@@ -56,7 +56,11 @@ public class CompetitionMapper extends AbstractMapper<CompetitionDto, Competitio
                                         .competitionId(dto.getId())
                                         .gameId(gameDto.getId())
                                         .gameOrder(gameDto.getGameOrder())
-                                        .build()).build();
+                                        .build())
+                                .game(gameMapper.mapToEntity(gameDto))
+                                .competition(build)
+                                .build();
+
                         build.getCompetitionGameList().add(cge);
                     }
 
