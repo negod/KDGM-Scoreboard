@@ -92,6 +92,7 @@ public class CreateCompetitionController implements Serializable {
             Team team = createdTeams.get(j % numberOfTeams); // cykla genom teams
             team.getPlayers().add(shuffledPlayers.get(i)); // Lägg till spelaren till teamet
         }
+
     }
 
     public void onCompetitionChange() {
@@ -120,23 +121,13 @@ public class CreateCompetitionController implements Serializable {
         // Fix GameOrder
         List<Team> persistedTeams = new ArrayList<>();
         for (Team createdTeam : createdTeams) {
-
-            List<Player> players = createdTeam.getPlayers();
-            createdTeam.setPlayers(null);
             team.saveItem(createdTeam).ifPresent(item -> {
-                item.setPlayers(players);
-                team.getTeamClient().update(item).ifPresent(updated -> {
-                    persistedTeams.add(item);
-                });
+                persistedTeams.add(item);
             });
         }
         createdTeams = persistedTeams;
 
         competition.getSelectedItem().setTeams(persistedTeams);
-
-        for (Game game1 : competition.getSelectedItem().getGames()) {
-            System.out.println(game1.toString());
-        }
 
         competition.saveSelectedItem();
     }

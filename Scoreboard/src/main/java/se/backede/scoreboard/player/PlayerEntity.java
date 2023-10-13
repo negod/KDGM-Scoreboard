@@ -53,10 +53,10 @@ public class PlayerEntity extends GenericEntity implements Serializable {
     @Column(name = "nick_name")
     private String nickName;
 
-    @JoinTable(name = "kggn.player_team", joinColumns = {
-        @JoinColumn(name = "player_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "team_id", referencedColumnName = "id")})
-    @ManyToMany
+//    @JoinTable(name = "kggn.player_team", joinColumns = {
+//        @JoinColumn(name = "player_id", referencedColumnName = "id")}, inverseJoinColumns = {
+//        @JoinColumn(name = "team_id", referencedColumnName = "id")})
+    @ManyToMany(mappedBy = "playerList")
     private List<TeamEntity> teamList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "playerId")

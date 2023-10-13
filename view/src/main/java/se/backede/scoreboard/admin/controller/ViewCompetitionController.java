@@ -20,6 +20,7 @@ import se.backede.scoreboard.admin.resources.dto.GameMatch;
 import se.backede.scoreboard.admin.controller.helper.IndexHelper;
 import se.backede.scoreboard.admin.controller.helper.MatchHelper;
 import se.backede.scoreboard.admin.resources.dto.Competition;
+import se.backede.scoreboard.admin.resources.dto.Game;
 import se.backede.scoreboard.admin.resources.dto.Match;
 
 /**
@@ -60,22 +61,28 @@ public class ViewCompetitionController implements Serializable {
     @Inject
     MatchController match;
 
-    Map<Integer, GameMatch> matches = new HashMap<>();
+    Map<String, GameMatch> matches = new HashMap<>();
 
     @PostConstruct
     public void init() {
         selectedCompetition = competition.getItemById(competitionId);
-        gamesIndex = new IndexHelper(selectedCompetition.getGames().size() - 1, 0);
+
+        Map<Integer, String> indexGameId = new HashMap<>();
+        for (Game game1 : selectedCompetition.getGames()) {
+            indexGameId.put(game1.getGameOrder() - 1, game1.getId());
+        }
+
+        gamesIndex = new IndexHelper(selectedCompetition.getGames().size() - 1, 0, indexGameId);
 
         if (selectedCompetition.getStarted()) {
             match.getMatchClient().getByCompetitionId(selectedCompetition.getId()).ifPresent(matches -> {
-                this.matches = MatchHelper.getIndexedMatches(matches);
+                this.matches = MatchHelper.getMatchesGroupedOnGameId(matches);
 
             });
         } else {
             matches = MatchHelper.createMatches(selectedCompetition.getGames(), selectedCompetition.getTeams());
 
-            for (Map.Entry<Integer, GameMatch> entry : matches.entrySet()) {
+            for (Map.Entry<String, GameMatch> entry : matches.entrySet()) {
 
                 //TODO Match Order
                 Integer order = 1;
@@ -104,7 +111,7 @@ public class ViewCompetitionController implements Serializable {
 
     public void prepareSteps() {
         stepsModel = new BaseMenuModel();
-        for (Integer index : matches.keySet()) {
+        for (String index : matches.keySet()) {
             DefaultMenuItem item = DefaultMenuItem.builder()
                     .url("#")
                     .value(matches.get(index).getGame().getName())

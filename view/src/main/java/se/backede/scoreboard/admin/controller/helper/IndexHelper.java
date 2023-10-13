@@ -2,6 +2,8 @@
  */
 package se.backede.scoreboard.admin.controller.helper;
 
+import java.util.HashMap;
+import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,9 +19,16 @@ public class IndexHelper {
     private int maxIndex = 0;
     private int minIndex = 0;
 
-    public IndexHelper(int maxIndex, int minIndex) {
+    Map<Integer, String> indexGameId = new HashMap<>();
+
+    public IndexHelper(int maxIndex, int minIndex, Map<Integer, String> indexGameId) {
+        this.indexGameId = indexGameId;
         this.maxIndex = maxIndex;
         this.minIndex = minIndex;
+    }
+
+    public String activeIndexGameId() {
+        return indexGameId.get(getActiveIndex());
     }
 
     public void nextStep() {

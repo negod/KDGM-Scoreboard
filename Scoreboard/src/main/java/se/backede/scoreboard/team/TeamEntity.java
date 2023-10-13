@@ -9,6 +9,8 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
@@ -49,8 +51,12 @@ public class TeamEntity extends GenericEntity implements Serializable {
 
     @ManyToMany(mappedBy = "teamList")
     private List<CompetitionEntity> competitionList;
-
-    @ManyToMany(mappedBy = "teamList")
+    
+     
+     @JoinTable(name = "kggn.player_team", joinColumns = {
+        @JoinColumn(name = "team_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "player_id", referencedColumnName = "id")})
+    @ManyToMany()
     private List<PlayerEntity> playerList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team1Id")

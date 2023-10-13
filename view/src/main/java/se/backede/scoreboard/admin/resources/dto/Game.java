@@ -20,7 +20,7 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class Game extends GenericDto {
 

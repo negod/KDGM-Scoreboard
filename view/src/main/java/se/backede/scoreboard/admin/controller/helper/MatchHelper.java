@@ -19,8 +19,8 @@ import se.backede.scoreboard.admin.resources.dto.Team;
  */
 public class MatchHelper {
 
-    public static Map<Integer, GameMatch> getIndexedMatches(List<Match> matches) {
-        Map<Integer, GameMatch> indexedMatches = new HashMap<>();
+    public static Map<String, GameMatch> getMatchesGroupedOnGameId(List<Match> matches) {
+        Map<String, GameMatch> indexedMatches = new HashMap<>();
 
         Map<Game, List<Match>> matchesMap = matches.stream().collect(Collectors.groupingBy(Match::getGame));
 
@@ -33,25 +33,25 @@ public class MatchHelper {
 
         //Fixa nedan
         for (GameMatch gameMatche : gameMatches) {
-            indexedMatches.put(gameMatche.getGame().getGameOrder() - 1, gameMatche);
+            indexedMatches.put(gameMatche.getGame().getId(), gameMatche);
         }
 
         return indexedMatches;
     }
 
-    public static Map<Integer, GameMatch> createMatches(List<Game> games, List<Team> teams) {
+    public static Map<String, GameMatch> createMatches(List<Game> games, List<Team> teams) {
 
-        Map<Integer, GameMatch> matches = new HashMap<>();
+        Map<String, GameMatch> matches = new HashMap<>();
 
         for (Game game : games) {
             List<Match> generateMatches = generateMatches(teams);
-            
+
             for (Match generateMatche : generateMatches) {
                 generateMatche.setGame(game);
             }
 
             GameMatch build = GameMatch.builder().game(game).matches(generateMatches).build();
-            matches.put(game.gameOrder, build);
+            matches.put(game.getId(), build);
         }
         return matches;
 
