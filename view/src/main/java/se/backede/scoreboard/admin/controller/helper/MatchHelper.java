@@ -33,7 +33,7 @@ public class MatchHelper {
 
         //Fixa nedan
         for (GameMatch gameMatche : gameMatches) {
-            indexedMatches.put(gameMatche.getGame().getGameOrder() + 1, gameMatche);
+            indexedMatches.put(gameMatche.getGame().getGameOrder() - 1, gameMatche);
         }
 
         return indexedMatches;

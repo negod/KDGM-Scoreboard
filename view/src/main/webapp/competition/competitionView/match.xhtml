@@ -7,6 +7,7 @@
 
     <ui:repeat value="#{controller.matches}" var="entry">
         <ui:fragment rendered="#{indexController.gamesIndex.activeIndex == entry.key}">
+
             <p:dataTable lazy="false" rowIndexVar="rowNum" var="match" value="#{entry.value.matches}"
                          style="margin-top: 20px;
                          margin-right: 30px;
@@ -40,7 +41,7 @@
                                      styleClass="edit-button rounded-button ui-button-success" 
                                      value="Add result"
                                      process="@this">
-                        
+
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
