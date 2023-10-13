@@ -46,7 +46,7 @@ public class ModelMock {
      * @param players amount of players i eacn team
      * @return
      */
-    public static Match getMatch(int players) {
+    public static Match getMatch(int players, Integer order) {
         
         List<Player> playerListTeam1 = PlayerMock.getPlayerList(players);
         List<Player> playerListTeam2 = PlayerMock.getPlayerList(players);
@@ -69,6 +69,7 @@ public class ModelMock {
                 .team1(team1)
                 .team2(team2)
                 .game(game)
+                .order(order)
                 .build();
         
     }

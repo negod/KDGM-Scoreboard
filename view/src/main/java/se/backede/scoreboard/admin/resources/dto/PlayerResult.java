@@ -17,6 +17,7 @@ import lombok.Setter;
 @Builder
 public class PlayerResult {
 
+    String resultId;
     Player player;
     Long scoreValue;
 

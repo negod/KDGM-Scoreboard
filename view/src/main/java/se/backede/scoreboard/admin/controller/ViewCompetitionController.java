@@ -21,6 +21,7 @@ import se.backede.scoreboard.admin.controller.helper.MatchHelper;
 import se.backede.scoreboard.admin.resources.dto.Competition;
 import se.backede.scoreboard.admin.resources.dto.Game;
 import se.backede.scoreboard.admin.resources.dto.Match;
+import se.backede.scoreboard.admin.resources.dto.Player;
 import se.backede.scoreboard.admin.resources.dto.Result;
 
 /**
@@ -61,7 +62,11 @@ public class ViewCompetitionController implements Serializable {
     @Inject
     MatchController match;
 
-    Match selectedMatch;
+    //Match selectedMatch;
+    Player selectedPlayer;
+        
+    
+    
     Map<String, List<Match>> matches = new HashMap<>();
     Map<String, List<Result>> resultList = new HashMap<>();
 

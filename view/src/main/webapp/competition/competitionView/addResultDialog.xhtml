@@ -2,22 +2,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-    <p:dialog header="Results" showEffect="fade" modal="true" widgetVar="manageItemDialog" responsive="true">
+    <p:dialog header="Results" showEffect="fade" modal="true" widgetVar="manageItemDialog" responsive="true" width="50%">
 
-        #{controller.selectedMatch.team1.name}
+        <p:outputPanel id="manage-item-content" class="ui-fluid" >
+            <p:outputPanel rendered="#{not empty teamLeaderBoardController.selectedMatch}">
 
-        <p:outputPanel id="manage-item-content" class="ui-fluid">
-            <p:outputPanel rendered="#{not empty controller.selectedMatch}">
+                <p:dataTable var="player" value="#{teamLeaderBoardController.selectedMatch.team1.players}" style="width: 100%;">
+                    <p:column headerText="#{teamLeaderBoardController.selectedMatch.team1.name}">
+                        <h:outputText value="#{player.name}" />
+                    </p:column>
+                    <p:column headerText="Score">
+                        <p:inputText value="#{player.score}" />
+                    </p:column>
+                </p:dataTable>
 
-                #{controller.selectedMatch}
+                <p:divider type="Horizontal"/>
+
+                <p:dataTable var="player" value="#{teamLeaderBoardController.selectedMatch.team2.players}">
+                    <p:column headerText="#{teamLeaderBoardController.selectedMatch.team2.name}">
+                        <h:outputText value="#{player.name}" />
+                    </p:column>
+                    <p:column headerText="Score">
+                        <p:inputText value="#{player.score}" />
+                    </p:column>
+                </p:dataTable>
 
             </p:outputPanel>
         </p:outputPanel>
 
         <f:facet name="footer">
-            <p:commandButton value="Save" icon="pi pi-check" actionListener="#{controller.saveSelectedItem}"
+            <p:commandButton value="Save" icon="pi pi-check" actionListener="#{teamLeaderBoardController.saveSelectedItem}"
                              update="manage-item-content" process="manage-item-content @this" />
             <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageItemDialog').hide()"
                              class="ui-button-secondary" type="button" />

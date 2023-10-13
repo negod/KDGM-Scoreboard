@@ -3,6 +3,7 @@
 package se.backede.scoreboard.admin.resources.dto;
 
 import java.util.Date;
+import javax.json.bind.annotation.JsonbTransient;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,5 +25,7 @@ public class Player extends GenericDto {
     private String name;
     private String nickName;
     private Date updated;
+    @JsonbTransient
+    Long score;
 
 }

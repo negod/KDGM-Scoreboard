@@ -17,7 +17,7 @@
                          margin-right: 30px;
                          margin-bottom: 40px;
                          margin-left: 50px;"
-                         selection="${controller.selectedMatch}"
+                         selection="${teamLeaderBoardController.selectedMatch}"
                          rowKey="${match.id}">
 
                 <p:column style="text-align: center;">
@@ -49,7 +49,7 @@
                                      value="Add result"
                                      process="@this"
                                      oncomplete="PF('manageItemDialog').show()">
-                        <f:setPropertyActionListener value="#{match}" target="#{controller.selectedMatch}" />
+                        <f:setPropertyActionListener value="#{match}" target="#{teamLeaderBoardController.selectedMatch}" />
                         <p:resetInput target=":form:manage-item-content" />
                     </p:commandButton>
                 </p:column>

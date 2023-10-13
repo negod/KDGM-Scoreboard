@@ -36,10 +36,8 @@ public class LeaderBoardCalculatorTest {
         int expectedOrder1 = 0;
         int expectedOrder2 = 1;
 
-        Match match1 = ModelMock.getMatch(2);
-        match1.setOrder(expectedOrder1 + 1);
-        Match match2 = ModelMock.getMatch(2);
-        match2.setOrder(expectedOrder2 + 1);
+        Match match1 = ModelMock.getMatch(2, expectedOrder1);
+        Match match2 = ModelMock.getMatch(2, expectedOrder2);
 
         List<Match> matches = new ArrayList<>();
         matches.add(match1);
@@ -102,8 +100,8 @@ public class LeaderBoardCalculatorTest {
     public void testPairMatchResultswithResults() {
         System.out.println("pairMatchResultswithResults");
 
-        Match match1 = ModelMock.getMatch(2);
-        Match match2 = ModelMock.getMatch(2);
+        Match match1 = ModelMock.getMatch(2, 0);
+        Match match2 = ModelMock.getMatch(2, 1);
 
         List<Match> matches = new ArrayList<>();
         matches.add(match1);
@@ -166,8 +164,8 @@ public class LeaderBoardCalculatorTest {
     public void testPairResultWithMatches() {
         System.out.println("pairResultWithMatches");
 
-        Match match1 = ModelMock.getMatch(2);
-        Match match2 = ModelMock.getMatch(2);
+        Match match1 = ModelMock.getMatch(2, 0);
+        Match match2 = ModelMock.getMatch(2, 1);
 
         List<Player> team1PlayersMatch1 = match1.getTeam1().getPlayers();
         List<Player> team2PlayersMatch1 = match1.getTeam2().getPlayers();
