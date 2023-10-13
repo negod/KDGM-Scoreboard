@@ -80,8 +80,15 @@ public class CompetitionGameDao {
 
     public Optional<CompetitionGameEntity> create(CompetitionGameEntity entity) {
         try {
+
+            try {
+                getEntityManager().find(GameEntity.class, entity.getGame().getId());
+            } catch (Exception e) {
+            }
+
             entity.getCompetitionGamePK().setId(UUID.randomUUID().toString());
             entity.getCompetitionGamePK().setUpdatedDate(new Date());
+
             Optional<CompetitionGameEntity> validatedEntity = validate(entity);
             if (validatedEntity.isPresent()) {
                 em.persist(validatedEntity.get());

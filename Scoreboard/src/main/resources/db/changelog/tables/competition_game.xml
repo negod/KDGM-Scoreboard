@@ -38,6 +38,9 @@
                                  referencedTableName="game"
                                  referencedColumnNames="id"
                                  constraintName="FK_competition_game_game"/>
+        <addUniqueConstraint tableName="competition_game"
+                             columnNames="game_id,competition_id"
+                             constraintName="UC_competition_game"/>
         
     </changeSet>
 </databaseChangeLog>

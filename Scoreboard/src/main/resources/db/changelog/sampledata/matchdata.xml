@@ -12,7 +12,7 @@
             <column name="team2_id" value="7B5BB9E4-94D0-4DFC-A0E4-83244E17C659" />
             <column name="game_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73A5" />
             <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483" />
-            <column name="match_order" value="1" />
+            <column name="match_order" value="0" />
         </insert>
         <!-- Team One and Team Two have one match in Bowling -->
         <insert tableName="match">
@@ -22,7 +22,7 @@
             <column name="team2_id" value="7B5BB9E4-94D0-4DFC-A0E4-83244E17C659" />
             <column name="game_id" value="ff5d3c46-3075-451e-b2bc-26e9c7705217" />
             <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483" />
-            <column name="match_order" value="2" />
+            <column name="match_order" value="1" />
         </insert>
         <!-- Team One and Team Two have one match in Starcraft Remastered -->
         <insert tableName="match">
@@ -32,7 +32,7 @@
             <column name="team2_id" value="7B5BB9E4-94D0-4DFC-A0E4-83244E17C659" />
             <column name="game_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4CC" />
             <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483" />
-            <column name="match_order" value="3" />
+            <column name="match_order" value="2" />
         </insert>
     </changeSet>
 </databaseChangeLog>

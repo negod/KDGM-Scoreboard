@@ -99,7 +99,7 @@ public class CompetitionController extends CrudController<Competition> implement
                 if (super.getSelectedItem().getGames() != null) {
                     game.setGameOrder(super.getSelectedItem().getGames().size());
                 } else {
-                    game.setGameOrder(1);
+                    game.setGameOrder(0);
                 }
 
                 super.getSelectedItem().getGames().add(game);

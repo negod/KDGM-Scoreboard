@@ -6,6 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:repeat value="#{controller.matches}" var="entry">
+        
         <ui:fragment rendered="#{indexController.gamesIndex.activeIndexGameId() == entry.key}">
             
             #{indexController.gamesIndex.activeIndex}

@@ -70,7 +70,7 @@ public class ViewCompetitionController implements Serializable {
 
         Map<Integer, String> indexGameId = new HashMap<>();
         for (Game game1 : selectedCompetition.getGames()) {
-            indexGameId.put(game1.getGameOrder() - 1, game1.getId());
+            indexGameId.put(game1.getGameOrder(), game1.getId());
         }
 
         gamesIndex = new IndexHelper(selectedCompetition.getGames().size() - 1, 0, indexGameId);
@@ -78,7 +78,6 @@ public class ViewCompetitionController implements Serializable {
         if (selectedCompetition.getStarted()) {
             match.getMatchClient().getByCompetitionId(selectedCompetition.getId()).ifPresent(matches -> {
                 this.matches = MatchHelper.getMatchesGroupedOnGameId(matches);
-
             });
         } else {
             matches = MatchHelper.createMatches(selectedCompetition.getGames(), selectedCompetition.getTeams());
@@ -86,7 +85,7 @@ public class ViewCompetitionController implements Serializable {
             for (Map.Entry<String, List<Match>> entry : matches.entrySet()) {
 
                 //TODO Match Order
-                Integer order = 1;
+                Integer order = 0;
                 for (Match matche : entry.getValue()) {
                     matche.setCompetition(selectedCompetition);
                     matche.setOrder(order);

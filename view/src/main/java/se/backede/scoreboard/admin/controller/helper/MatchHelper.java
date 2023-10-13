@@ -28,17 +28,17 @@ public class MatchHelper {
         Map<String, List<Match>> matches = new HashMap<>();
 
         for (Game game : games) {
-            List<Match> generateMatches = generateMatches(teams);
+            List<Match> generateMatches = generateMatches(teams, game);
             for (Match generateMatche : generateMatches) {
                 generateMatche.setGame(game);
             }
-            matches.put(game.getId(), generateMatches(teams));
+            matches.put(game.getId(), generateMatches);
         }
         return matches;
 
     }
 
-    public static List<Match> generateMatches(List<Team> teams) {
+    public static List<Match> generateMatches(List<Team> teams, Game game) {
         List<Match> matches = new ArrayList<>();
         List<Team> rotationList = new LinkedList<>(teams);
 
@@ -55,7 +55,7 @@ public class MatchHelper {
 
                 // Don't add matches with the placeholder "BYE".
                 if (!team1.getName().equals("BYE") && !team2.getName().equals("BYE")) {
-                    matches.add(Match.builder().team1(team1).team2(team2).build());
+                    matches.add(Match.builder().team1(team1).team2(team2).game(game).build());
                 }
             }
 
