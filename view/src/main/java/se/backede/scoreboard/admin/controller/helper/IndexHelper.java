@@ -31,6 +31,10 @@ public class IndexHelper {
         return indexGameId.get(getActiveIndex());
     }
 
+    public String getGameByIndex(Integer Index) {
+        return indexGameId.get(Index);
+    }
+
     public void nextStep() {
         if (activeIndex < maxIndex) {
             activeIndex++;

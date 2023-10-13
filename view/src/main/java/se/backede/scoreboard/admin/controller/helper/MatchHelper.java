@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import se.backede.scoreboard.admin.resources.dto.Game;
-import se.backede.scoreboard.admin.resources.dto.GameMatch;
 import se.backede.scoreboard.admin.resources.dto.Match;
 import se.backede.scoreboard.admin.resources.dto.Team;
 
@@ -19,39 +18,21 @@ import se.backede.scoreboard.admin.resources.dto.Team;
  */
 public class MatchHelper {
 
-    public static Map<String, GameMatch> getMatchesGroupedOnGameId(List<Match> matches) {
-        Map<String, GameMatch> indexedMatches = new HashMap<>();
-
-        Map<Game, List<Match>> matchesMap = matches.stream().collect(Collectors.groupingBy(Match::getGame));
-
-        List<GameMatch> gameMatches = matchesMap.entrySet().stream()
-                .map(entry -> GameMatch.builder()
-                .game(entry.getKey())
-                .matches(entry.getValue())
-                .build())
-                .collect(Collectors.toList());
-
-        //Fixa nedan
-        for (GameMatch gameMatche : gameMatches) {
-            indexedMatches.put(gameMatche.getGame().getId(), gameMatche);
-        }
-
-        return indexedMatches;
+    public static Map<String, List<Match>> getMatchesGroupedOnGameId(List<Match> matches) {
+        return matches.stream()
+                .collect(Collectors.groupingBy(match -> match.getGame().getId()));
     }
 
-    public static Map<String, GameMatch> createMatches(List<Game> games, List<Team> teams) {
+    public static Map<String, List<Match>> createMatches(List<Game> games, List<Team> teams) {
 
-        Map<String, GameMatch> matches = new HashMap<>();
+        Map<String, List<Match>> matches = new HashMap<>();
 
         for (Game game : games) {
             List<Match> generateMatches = generateMatches(teams);
-
             for (Match generateMatche : generateMatches) {
                 generateMatche.setGame(game);
             }
-
-            GameMatch build = GameMatch.builder().game(game).matches(generateMatches).build();
-            matches.put(game.getId(), build);
+            matches.put(game.getId(), generateMatches(teams));
         }
         return matches;
 

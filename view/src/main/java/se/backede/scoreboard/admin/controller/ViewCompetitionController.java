@@ -16,12 +16,12 @@ import lombok.Setter;
 import org.primefaces.model.menu.BaseMenuModel;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.MenuModel;
-import se.backede.scoreboard.admin.resources.dto.GameMatch;
 import se.backede.scoreboard.admin.controller.helper.IndexHelper;
 import se.backede.scoreboard.admin.controller.helper.MatchHelper;
 import se.backede.scoreboard.admin.resources.dto.Competition;
 import se.backede.scoreboard.admin.resources.dto.Game;
 import se.backede.scoreboard.admin.resources.dto.Match;
+import se.backede.scoreboard.admin.resources.dto.Result;
 
 /**
  *
@@ -61,7 +61,8 @@ public class ViewCompetitionController implements Serializable {
     @Inject
     MatchController match;
 
-    Map<String, GameMatch> matches = new HashMap<>();
+    Map<String, List<Match>> matches = new HashMap<>();
+    Map<String, List<Result>> resultList = new HashMap<>();
 
     @PostConstruct
     public void init() {
@@ -82,11 +83,11 @@ public class ViewCompetitionController implements Serializable {
         } else {
             matches = MatchHelper.createMatches(selectedCompetition.getGames(), selectedCompetition.getTeams());
 
-            for (Map.Entry<String, GameMatch> entry : matches.entrySet()) {
+            for (Map.Entry<String, List<Match>> entry : matches.entrySet()) {
 
                 //TODO Match Order
                 Integer order = 1;
-                for (Match matche : entry.getValue().getMatches()) {
+                for (Match matche : entry.getValue()) {
                     matche.setCompetition(selectedCompetition);
                     matche.setOrder(order);
                     match.getMatchClient().create(matche);
@@ -103,18 +104,16 @@ public class ViewCompetitionController implements Serializable {
     }
 
     public List<Match> getSelectedGameMatches() {
-
-        GameMatch match = matches.get(gamesIndex.getActiveIndex());
-        return match.getMatches();
-
+        return matches.get(gamesIndex.getActiveIndex());
     }
 
     public void prepareSteps() {
         stepsModel = new BaseMenuModel();
-        for (String index : matches.keySet()) {
+        for (int i = 0; i < gamesIndex.getMaxIndex() + 1; i++) {
+            Game gameById = this.game.getItemById(gamesIndex.getGameByIndex(i));
             DefaultMenuItem item = DefaultMenuItem.builder()
                     .url("#")
-                    .value(matches.get(index).getGame().getName())
+                    .value(gameById.getName())
                     .build();
             stepsModel.getElements().add(item);
         }
