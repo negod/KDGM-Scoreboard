@@ -39,6 +39,8 @@ public class TeamLeaderBoardController implements Serializable {
 
     List<Match> matches;
 
+    Match selectedMatch;
+
     Map<Integer, MatchResult> results = new HashMap<>();
 
     @PostConstruct

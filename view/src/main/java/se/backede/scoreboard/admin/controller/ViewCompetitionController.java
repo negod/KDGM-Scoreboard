@@ -61,6 +61,7 @@ public class ViewCompetitionController implements Serializable {
     @Inject
     MatchController match;
 
+    Match selectedMatch;
     Map<String, List<Match>> matches = new HashMap<>();
     Map<String, List<Result>> resultList = new HashMap<>();
 

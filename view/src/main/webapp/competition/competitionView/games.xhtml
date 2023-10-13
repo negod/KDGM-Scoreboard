@@ -37,6 +37,10 @@
                 <ui:param name="indexController" value="#{viewCompetitionController}"/>
             </ui:include>
 
+            <ui:include src="addResultDialog.xhtml" id="editDialog">
+                <ui:param name="controller" value="#{viewCompetitionController}"/>
+            </ui:include>
+
 
         </h:form>
     </ui:define>

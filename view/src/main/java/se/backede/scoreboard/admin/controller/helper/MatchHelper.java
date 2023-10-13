@@ -55,7 +55,7 @@ public class MatchHelper {
 
                 // Don't add matches with the placeholder "BYE".
                 if (!team1.getName().equals("BYE") && !team2.getName().equals("BYE")) {
-                    matches.add(Match.builder().team1(team1).team2(team2).game(game).build());
+                    matches.add(Match.builder().team1(team1).team2(team2).game(game).order(j).build());
                 }
             }
 

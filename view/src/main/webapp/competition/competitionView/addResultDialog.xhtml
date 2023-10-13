@@ -4,10 +4,14 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <p:dialog header="Details" showEffect="fade" modal="true" widgetVar="manageItemDialog" responsive="true">
-        <p:outputPanel id="manage-item-content" class="ui-fluid">
-            <p:outputPanel rendered="#{not empty controller.selectedItem}">
+    <p:dialog header="Results" showEffect="fade" modal="true" widgetVar="manageItemDialog" responsive="true">
 
+        #{controller.selectedMatch.team1.name}
+
+        <p:outputPanel id="manage-item-content" class="ui-fluid">
+            <p:outputPanel rendered="#{not empty controller.selectedMatch}">
+
+                #{controller.selectedMatch}
 
             </p:outputPanel>
         </p:outputPanel>

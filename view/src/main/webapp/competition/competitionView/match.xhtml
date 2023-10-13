@@ -6,18 +6,19 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:repeat value="#{controller.matches}" var="entry">
-        
+
         <ui:fragment rendered="#{indexController.gamesIndex.activeIndexGameId() == entry.key}">
-            
-            #{indexController.gamesIndex.activeIndex}
-            
-            
-            
-            <p:dataTable lazy="false" rowIndexVar="rowNum" var="match" value="#{entry.value}"
+
+            <p:dataTable id="matchTable" lazy="false" 
+                         rowIndexVar="rowNum" 
+                         var="match" 
+                         value="#{entry.value}"
                          style="margin-top: 20px;
                          margin-right: 30px;
                          margin-bottom: 40px;
-                         margin-left: 50px;">
+                         margin-left: 50px;"
+                         selection="${controller.selectedMatch}"
+                         rowKey="${match.id}">
 
                 <p:column style="text-align: center;">
                     <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{match.team1.name}"/>
@@ -43,10 +44,13 @@
                 </p:column>
                 <p:column>
                     <p:commandButton icon="pi pi-plus" 
+                                     update=":form:manage-item-content"
                                      styleClass="edit-button rounded-button ui-button-success" 
                                      value="Add result"
-                                     process="@this">
-                        
+                                     process="@this"
+                                     oncomplete="PF('manageItemDialog').show()">
+                        <f:setPropertyActionListener value="#{match}" target="#{controller.selectedMatch}" />
+                        <p:resetInput target=":form:manage-item-content" />
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
