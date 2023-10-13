@@ -30,7 +30,7 @@
                     </ui:repeat>
                 </p:column>
 
-                <p:column style="text-align: center;" styleClass="no-border-column" headerText="Match #{match.order}">
+                <p:column style="text-align: center;" styleClass="no-border-column" headerText="Matches">
                     <h:outputText value="- VS -"/>
                 </p:column>
                 <p:column style="text-align: center;">
@@ -46,7 +46,7 @@
                     <p:commandButton icon="pi pi-plus" 
                                      update=":form:manage-item-content"
                                      styleClass="edit-button rounded-button ui-button-success" 
-                                     value="Add result"
+                                     value="Add result for match #{match.order +1}"
                                      process="@this"
                                      oncomplete="PF('manageItemDialog').show()">
                         <f:setPropertyActionListener value="#{match}" target="#{teamLeaderBoardController.selectedMatch}" />

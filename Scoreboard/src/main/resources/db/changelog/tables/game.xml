@@ -23,6 +23,9 @@
             <column name="gametype" type="varchar(10)">
                 <constraints unique="false" nullable="false"/>
             </column>
+              <column name="teamScore" type="varchar(10)">
+                <constraints unique="false" nullable="false"/>
+            </column>
 
         </createTable>
         

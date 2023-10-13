@@ -34,16 +34,13 @@
 
                     <c:choose>
                         <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'TIME'}">
-                            <!-- Visa något specifikt för TIME -->
-                           <h:outputText value="${playerResult.scoreValue}" converter="timeConverter"/>
+                            <h:outputText value="${playerResult.scoreValue}" converter="timeConverter"/>
                         </c:when>
                         <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'SCORE'}">
-                            <!-- Visa något specifikt för SCORE -->
                             <h:outputText value="${playerResult.scoreValue}"/>
                         </c:when>
                         <c:otherwise>
-                            <!-- Visa något specifikt för NONE eller andra värden -->
-                            <h:outputText value="Detta är en NONE-typ eller okänt värde" />
+                            <h:outputText value="${playerResult.scoreValue}" />
                         </c:otherwise>
                     </c:choose>
                     <br/>
