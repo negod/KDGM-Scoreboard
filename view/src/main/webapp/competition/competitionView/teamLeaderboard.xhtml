@@ -4,7 +4,8 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <p:dataTable lazy="false" rowIndexVar="rowNum" var="matchResult" value="#{controller.results[indexController.gamesIndex.activeIndexGameId()]}"
                  style="margin-top: 20px; margin-right: 30px; margin-bottom: 40px; margin-left: 50px;">
@@ -14,7 +15,7 @@
         <p:subTable value="#{matchResult.teamResults}" var="teamResult">
 
             <f:facet name="header">
-                Match #{matchResult.match.order} Results 
+                Match #{matchResult.match.order +1} Results 
             </f:facet>
 
             <p:column headerText="Team">
@@ -28,8 +29,23 @@
                 </ui:repeat>
             </p:column>
             <p:column headerText="Poäng">
+
                 <ui:repeat value="#{teamResult.results}" var="playerResult">
-                    <h:outputText value="#{playerResult.scoreValue}" />
+
+                    <c:choose>
+                        <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'TIME'}">
+                            <!-- Visa något specifikt för TIME -->
+                           <h:outputText value="${playerResult.scoreValue}" converter="timeConverter"/>
+                        </c:when>
+                        <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'SCORE'}">
+                            <!-- Visa något specifikt för SCORE -->
+                            <h:outputText value="${playerResult.scoreValue}"/>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- Visa något specifikt för NONE eller andra värden -->
+                            <h:outputText value="Detta är en NONE-typ eller okänt värde" />
+                        </c:otherwise>
+                    </c:choose>
                     <br/>
                 </ui:repeat>
             </p:column>

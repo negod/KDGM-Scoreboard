@@ -17,12 +17,13 @@ import lombok.Setter;
 import org.primefaces.PrimeFaces;
 import se.backede.scoreboard.admin.controller.helper.LeaderBoardCalculator;
 import se.backede.scoreboard.admin.resources.dto.Competition;
+import se.backede.scoreboard.admin.resources.dto.Game;
+import se.backede.scoreboard.admin.resources.dto.GameType;
 import se.backede.scoreboard.admin.resources.dto.Match;
 import se.backede.scoreboard.admin.resources.dto.MatchResult;
 import se.backede.scoreboard.admin.resources.dto.Player;
 import se.backede.scoreboard.admin.resources.dto.PlayerResult;
 import se.backede.scoreboard.admin.resources.dto.Result;
-import se.backede.scoreboard.admin.resources.dto.TeamResult;
 
 /**
  *
@@ -61,6 +62,11 @@ public class TeamLeaderBoardController implements Serializable {
 
     }
 
+    public GameType getGameType(String gameId) {
+        Game game = view.getGame().getItemById(gameId);
+        return game.gametype;
+    }
+
     public void updateData() {
 
         view.getMatch().getMatchClient().getByCompetitionId(selectedCompetition.getId()).ifPresent(m -> {
@@ -81,31 +87,13 @@ public class TeamLeaderBoardController implements Serializable {
     }
 
     public Optional<PlayerResult> playerAlreadyHasResult(String matchId, String playerId) {
-
-        for (Map.Entry<String, List<MatchResult>> entry : results.entrySet()) {
-
-            for (MatchResult value : entry.getValue()) {
-                if (value.getId() == null) {
-                    return Optional.empty();
-                }
-                if (value.getId().equals(matchId)) {
-                    for (TeamResult teamResult : value.getTeamResults()) {
-                        for (PlayerResult result : teamResult.getResults()) {
-                            if (result.getPlayer().getId().equals(playerId)) {
-                                if (result.getResultId() == null) {
-                                    return Optional.empty();
-                                }
-                                return Optional.of(result);
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-
-        return Optional.empty();
-
+        return results.entrySet().stream()
+                .flatMap(entry -> entry.getValue().stream())
+                .filter(matchResult -> matchId.equals(matchResult.getId()))
+                .flatMap(matchResult -> matchResult.getTeamResults().stream())
+                .flatMap(teamResult -> teamResult.getResults().stream())
+                .filter(playerResult -> playerId.equals(playerResult.getPlayer().getId()))
+                .findFirst();
     }
 
     public void upsertResults(List<Player> players, Match match) {

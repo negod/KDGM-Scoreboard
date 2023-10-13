@@ -32,7 +32,6 @@ import se.backede.scoreboard.admin.resources.dto.Result;
 @Setter
 @Named("viewCompetitionController")
 @ViewScoped
-//@DependsOn(value = {"competitionController, playerController, gameController, resultController, matchController"})
 public class ViewCompetitionController implements Serializable {
 
     @Inject
@@ -62,11 +61,8 @@ public class ViewCompetitionController implements Serializable {
     @Inject
     MatchController match;
 
-    //Match selectedMatch;
     Player selectedPlayer;
-        
-    
-    
+
     Map<String, List<Match>> matches = new HashMap<>();
     Map<String, List<Result>> resultList = new HashMap<>();
 
