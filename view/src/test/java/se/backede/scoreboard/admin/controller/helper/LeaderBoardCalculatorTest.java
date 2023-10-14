@@ -160,7 +160,8 @@ public class LeaderBoardCalculatorTest {
     }
 
     /**
-     * Test of pairResultsWithMatchAndCreateMatchResult method, of class LeaderBoardCalculator.
+     * Test of pairResultsWithMatchAndCreateMatchResult method, of class
+     * LeaderBoardCalculator.
      */
     @Test
     public void testPairResultWithMatches() {
@@ -261,11 +262,14 @@ public class LeaderBoardCalculatorTest {
             expResultTeam2 += playerResult.getScoreValue();
         }
 
-        Long resultTeam1 = LeaderBoardCalculator.calculateTeamScore(team1.getResults());
-        Long resultTeam2 = LeaderBoardCalculator.calculateTeamScore(team2.getResults());
+        Optional<Long> resultTeam1 = LeaderBoardCalculator.calculateTeamScore(team1.getResults());
+        Optional<Long> resultTeam2 = LeaderBoardCalculator.calculateTeamScore(team2.getResults());
 
-        assertEquals(expResultTeam1, resultTeam1);
-        assertEquals(expResultTeam2, resultTeam2);
+        assertTrue(resultTeam1.isPresent());
+        assertTrue(resultTeam2.isPresent());
+
+        assertEquals(expResultTeam1, resultTeam1.get());
+        assertEquals(expResultTeam2, resultTeam2.get());
     }
 
 }

@@ -7,7 +7,7 @@
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <p:dataTable lazy="false" rowIndexVar="rowNum" var="matchResult" value="#{controller.results[indexController.gamesIndex.activeIndexGameId()]}"
+    <p:dataTable id="matchResultTable" lazy="false" rowIndexVar="rowNum" var="matchResult" value="#{controller.results[indexController.gamesIndex.activeIndexGameId()]}"
                  style="margin-top: 20px; margin-right: 30px; margin-bottom: 40px; margin-left: 50px;">
 
 

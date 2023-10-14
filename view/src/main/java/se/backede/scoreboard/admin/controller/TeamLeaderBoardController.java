@@ -91,7 +91,7 @@ public class TeamLeaderBoardController implements Serializable {
     public void upsertResults(List<Player> players, Match match) {
 
         players.forEach(player -> {
-                
+
             Optional<Result> playerResult = getPlayerResult(match.getId(), player.getId());
 
             Result result = Result.builder()
@@ -107,6 +107,8 @@ public class TeamLeaderBoardController implements Serializable {
                 viewCompetitionController.getResultController().getResultClient().create(result);
             }
         });
+
+        updateData();
 
     }
 
