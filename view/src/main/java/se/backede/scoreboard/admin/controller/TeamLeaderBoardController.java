@@ -45,7 +45,6 @@ public class TeamLeaderBoardController implements Serializable {
     List<Result> allResults = new ArrayList<>();
 
     List<Match> matches;
-
     Match selectedMatch;
 
     Map<String, List<MatchResult>> results = new HashMap<>();
