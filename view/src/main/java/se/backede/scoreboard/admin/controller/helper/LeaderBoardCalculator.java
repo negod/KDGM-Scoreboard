@@ -2,7 +2,9 @@
  */
 package se.backede.scoreboard.admin.controller.helper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,6 +16,7 @@ import se.backede.scoreboard.admin.resources.dto.MatchResult;
 import se.backede.scoreboard.admin.resources.dto.Player;
 import se.backede.scoreboard.admin.resources.dto.Result;
 import se.backede.scoreboard.admin.resources.dto.Team;
+import se.backede.scoreboard.admin.resources.dto.TeamLeaderBoard;
 import se.backede.scoreboard.admin.resources.dto.TeamResult;
 
 /**
@@ -23,6 +26,45 @@ import se.backede.scoreboard.admin.resources.dto.TeamResult;
 public class LeaderBoardCalculator {
 
     private static final Logger LOGGER = Logger.getLogger(LeaderBoardCalculator.class.getName());
+
+    public static Optional<Map<String, List<TeamLeaderBoard>>> groupByTeamResultsByGame(Map<String, List<MatchResult>> results, List<String> gameIds) {
+
+        Map<String, List<TeamLeaderBoard>> teamScores = new HashMap<>();
+        for (String gameId : gameIds) { //För varje game
+            Map<String, Long> aggregatedTeamScores = new HashMap<>();
+            LOGGER.log(Level.INFO, "Looping Game {0}", new Object[]{gameId});
+
+            for (MatchResult matchResult : results.get(gameId)) { // Gå igenom alla Matchresults, där alla teamens poäng redan är kalkylerad
+
+                LOGGER.log(Level.INFO, "MatchResult for Game {0} and Match {1}", new Object[]{matchResult.getGameId(), matchResult.getMatchId()});
+
+                for (TeamResult teamResult : matchResult.getTeamResults()) {// Lägg teamets namn som nyckel och lägg till teamets poäng
+
+                    LOGGER.log(Level.INFO, "TeamResult for Team {0} in Match {1} with calculated score {2}", new Object[]{teamResult.getTeam().getName(), matchResult.getMatchId(), teamResult.getCalculatedTeamScore()});
+
+                    aggregatedTeamScores.compute(teamResult.getTeam().getName(), (key, currentScore) -> {
+                        if (currentScore == null) {
+                            LOGGER.log(Level.INFO, "Current SCore for Team {0} is {1}", new Object[]{teamResult.getTeam().getName(), teamResult.getCalculatedTeamScore()});
+                            return teamResult.getCalculatedTeamScore();
+                        } else {
+                            LOGGER.log(Level.INFO, "Current Score for Team {0} is {1}", new Object[]{teamResult.getTeam().getName(), currentScore + teamResult.getCalculatedTeamScore()});
+                            return currentScore + teamResult.getCalculatedTeamScore();
+                        }
+                    });
+                }
+            }
+
+            List<TeamLeaderBoard> teamLeaderBoards = aggregatedTeamScores.entrySet().stream()
+                    .map(entry -> TeamLeaderBoard.builder()
+                    .teamName(entry.getKey())
+                    .teamScore(entry.getValue())
+                    .build())
+                    .collect(Collectors.toList());
+
+            teamScores.put(gameId, teamLeaderBoards);
+        }
+        return Optional.ofNullable(teamScores);
+    }
 
     public static Optional<Map<String, List<MatchResult>>> mapMatchesAndResultsAndGroupByGame(List<Match> matches, List<Result> results) {
         LOGGER.log(Level.INFO, "Size of Matches {0}", matches.size());

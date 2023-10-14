@@ -8,6 +8,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +23,8 @@ import se.backede.scoreboard.admin.resources.dto.GameType;
 import se.backede.scoreboard.admin.resources.dto.Match;
 import se.backede.scoreboard.admin.resources.dto.MatchResult;
 import se.backede.scoreboard.admin.resources.dto.Player;
-import se.backede.scoreboard.admin.resources.dto.PlayerResult;
 import se.backede.scoreboard.admin.resources.dto.Result;
-import se.backede.scoreboard.admin.resources.dto.TeamResult;
+import se.backede.scoreboard.admin.resources.dto.TeamLeaderBoard;
 
 /**
  *
@@ -48,6 +48,7 @@ public class TeamLeaderBoardController implements Serializable {
     Match selectedMatch;
 
     Map<String, List<MatchResult>> results = new HashMap<>();
+    Map<String, List<TeamLeaderBoard>> teamResults = new HashMap<>();
 
     @PostConstruct
     public void init() {
@@ -73,6 +74,14 @@ public class TeamLeaderBoardController implements Serializable {
         });
 
         results = LeaderBoardCalculator.mapMatchesAndResultsAndGroupByGame(matches, allResults).orElse(new HashMap<>());
+
+        List<String> gameIds = new ArrayList<>(viewCompetitionController.getGamesIndex().getIndexGameId().values());
+
+        LeaderBoardCalculator.groupByTeamResultsByGame(results, gameIds).ifPresent(teamResults::putAll);
+
+        teamResults.forEach((key, list) -> {
+            list.sort(Comparator.comparingLong(TeamLeaderBoard::getTeamScore).reversed());
+        });
 
     }
 

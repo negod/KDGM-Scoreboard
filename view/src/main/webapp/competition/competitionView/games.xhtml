@@ -32,7 +32,12 @@
             </div>
 
 
-            <ui:include src="teamLeaderboard.xhtml" id="teamLeaderBoard">
+            <ui:include src="resultBoard.xhtml" id="resultBoard">
+                <ui:param name="controller" value="#{teamLeaderBoardController}"/>
+                <ui:param name="indexController" value="#{viewCompetitionController}"/>
+            </ui:include>
+
+            <ui:include src="teamLeaderBoard.xhtml" id="teamLeaderBoard">
                 <ui:param name="controller" value="#{teamLeaderBoardController}"/>
                 <ui:param name="indexController" value="#{viewCompetitionController}"/>
             </ui:include>

@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <p:dataTable id="teamResultTable" lazy="false" rowIndexVar="rowNum" var="teamResult" value="#{controller.teamResults[indexController.gamesIndex.activeIndexGameId()]}"
+                 style="margin-top: 20px; margin-right: 30px; margin-bottom: 40px; margin-left: 50px;">
+
+        <p:column headerText="Team">
+            <h:outputText value="#{teamResult.teamName}" />
+        </p:column>
+        <p:column headerText="Poäng">
+            <h:outputText value="#{teamResult.teamScore}" />
+        </p:column>
+    </p:dataTable>
+
+</html>
