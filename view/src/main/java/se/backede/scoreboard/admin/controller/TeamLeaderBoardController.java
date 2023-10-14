@@ -23,6 +23,7 @@ import se.backede.scoreboard.admin.resources.dto.GameType;
 import se.backede.scoreboard.admin.resources.dto.Match;
 import se.backede.scoreboard.admin.resources.dto.MatchResult;
 import se.backede.scoreboard.admin.resources.dto.Player;
+import se.backede.scoreboard.admin.resources.dto.PlayerLeaderBoard;
 import se.backede.scoreboard.admin.resources.dto.Result;
 import se.backede.scoreboard.admin.resources.dto.TeamLeaderBoard;
 
@@ -49,6 +50,7 @@ public class TeamLeaderBoardController implements Serializable {
 
     Map<String, List<MatchResult>> results = new HashMap<>();
     Map<String, List<TeamLeaderBoard>> teamResults = new HashMap<>();
+    Map<String, List<PlayerLeaderBoard>> playerResults = new HashMap<>();
 
     @PostConstruct
     public void init() {
@@ -77,10 +79,15 @@ public class TeamLeaderBoardController implements Serializable {
 
         List<String> gameIds = new ArrayList<>(viewCompetitionController.getGamesIndex().getIndexGameId().values());
 
-        LeaderBoardCalculator.groupByTeamResultsByGame(results, gameIds).ifPresent(teamResults::putAll);
+        LeaderBoardCalculator.calculateTeamResultsAndGroupByGame(results, gameIds).ifPresent(teamResults::putAll);
+        LeaderBoardCalculator.calculateTotalPlayerREsultsAndGroupByGame(results, gameIds).ifPresent(playerResults::putAll);
 
         teamResults.forEach((key, list) -> {
             list.sort(Comparator.comparingLong(TeamLeaderBoard::getTeamScore).reversed());
+        });
+        
+        playerResults.forEach((key, list) -> {
+            list.sort(Comparator.comparingLong(PlayerLeaderBoard::getScore).reversed());
         });
 
     }

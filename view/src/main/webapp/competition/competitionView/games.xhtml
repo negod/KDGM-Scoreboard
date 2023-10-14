@@ -27,8 +27,8 @@
 
             <!-- Knapparna placerade direkt efter varandra -->
             <div  class="card" style="text-align: right;">
-                <p:commandButton value="Previous" action="#{viewCompetitionController.gamesIndex.prevStep}" update=":form" disabled="#{viewCompetitionController.gamesIndex.activeIndex == 0}"/>
-                <p:commandButton value="Next" action="#{viewCompetitionController.gamesIndex.nextStep}" update=":form" disabled="#{viewCompetitionController.gamesIndex.disabled()}" />
+                <p:commandButton value="Previous Game" action="#{viewCompetitionController.gamesIndex.prevStep}" update=":form" disabled="#{viewCompetitionController.gamesIndex.activeIndex == 0}"/>
+                <p:commandButton value="Next Game" action="#{viewCompetitionController.gamesIndex.nextStep}" update=":form" disabled="#{viewCompetitionController.gamesIndex.disabled()}" />
             </div>
 
 
@@ -38,6 +38,11 @@
             </ui:include>
 
             <ui:include src="teamLeaderBoard.xhtml" id="teamLeaderBoard">
+                <ui:param name="controller" value="#{teamLeaderBoardController}"/>
+                <ui:param name="indexController" value="#{viewCompetitionController}"/>
+            </ui:include>
+            
+            <ui:include src="personLeaderBoard.xhtml" id="personLeaderBoard">
                 <ui:param name="controller" value="#{teamLeaderBoardController}"/>
                 <ui:param name="indexController" value="#{viewCompetitionController}"/>
             </ui:include>
