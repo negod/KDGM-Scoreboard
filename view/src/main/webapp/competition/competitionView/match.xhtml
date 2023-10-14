@@ -46,7 +46,7 @@
                     <p:commandButton icon="pi pi-plus" 
                                      update=":form:manage-item-content"
                                      styleClass="edit-button rounded-button ui-button-success" 
-                                     value="Add result for match #{match.order +1}"
+                                     value="Match #{match.order +1}"
                                      process="@this"
                                      oncomplete="PF('manageItemDialog').show()">
                         <f:setPropertyActionListener value="#{match}" target="#{teamLeaderBoardController.selectedMatch}" />

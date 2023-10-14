@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <p:dataTable id="teamResultTable" lazy="false" rowIndexVar="rowNum" var="teamResult" value="#{controller.teamResults[indexController.gamesIndex.activeIndexGameId()]}"
+                 style="margin-top: 20px; margin-right: 30px; margin-bottom: 40px; margin-left: 50px;">
+        <f:facet name="header">
+            Team leaderboard for this game
+        </f:facet>
+        <p:column headerText="Position">
+            <h:outputText value="#{rowNum+1}" />
+        </p:column>
+        <p:column headerText="Team">
+            <h:outputText value="#{teamResult.teamName}" />
+        </p:column>
+
+        <c:choose>
+
+            <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'TIME'}">
+                <p:column headerText="Time">
+                    <h:outputText value="${teamResult.teamScore}" converter="timeConverter"/>
+                </p:column>
+            </c:when>
+
+            <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'SCORE'}">
+                <p:column headerText="Score">
+                    <h:outputText value="${teamResult.teamScore}" style="text-align: right;"/>
+                </p:column>
+            </c:when>
+
+            <c:otherwise>
+                <p:column headerText="Score">
+                    <h:outputText value="${teamResult.teamScore}" />
+                </p:column>
+            </c:otherwise>
+        </c:choose>
+
+    </p:dataTable>
+
+</html>

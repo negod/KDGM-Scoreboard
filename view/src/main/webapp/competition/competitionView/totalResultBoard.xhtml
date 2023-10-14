@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../layout/basicLayout.xhtml">
+    <ui:define name="content">
+
+        <style>
+            .no-border-column td {
+                border-top: none !important;
+                border-bottom: none !important;
+            }
+        </style>
+
+        <h:form id="form">
+
+            <ui:include src="competitionTeamResultBoard.xhtml" id="teamTotalPage">
+                <ui:param name="controller" value="#{totalLeaderBoardController}"/>
+            </ui:include>
+
+            <ui:include src="competitionPersonResultBoard.xhtml" id="personTotalBoard">
+                <ui:param name="controller" value="#{totalLeaderBoardController}"/>
+            </ui:include>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

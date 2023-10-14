@@ -15,11 +15,15 @@
     </p:column>
     <p:column>
         <p:menuButton value="Handle Competition" icon="pi pi-bars">
-            <!-- p:menuitem value="Start Competition" outcome="competitionView/games" icon="pi pi-user" disabled="#{item.started}"-->
-            <p:menuitem value="Start Competition" outcome="competitionView/games" icon="pi pi-user">
+            <p:menuitem value="Start Competition" outcome="competitionView/games" icon="pi pi-user" disabled="#{item.started}">
                 <f:param name="competitionId" value="#{item.id}"/>
             </p:menuitem>
-            <p:menuitem value="View Competition"  icon="pi pi-user"/>
+            <p:menuitem value="View Competition by Game"  outcome="competitionView/games" icon="pi pi-user" disabled="#{!item.started}">
+                <f:param name="competitionId" value="#{item.id}"/>
+            </p:menuitem>
+            <p:menuitem value="View Competition in total"  outcome="competitionView/totalResultBoard" icon="pi pi-user" disabled="#{!item.started}">
+                <f:param name="competitionId" value="#{item.id}"/>
+            </p:menuitem>
             <p:menuitem value="Stop Competition"  icon="pi pi-user"/>
         </p:menuButton>
     </p:column>
