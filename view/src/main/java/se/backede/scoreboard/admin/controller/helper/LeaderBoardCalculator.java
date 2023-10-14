@@ -2,7 +2,9 @@
  */
 package se.backede.scoreboard.admin.controller.helper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +12,13 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import se.backede.scoreboard.admin.resources.dto.GameType;
+import static se.backede.scoreboard.admin.resources.dto.GameType.SCORE;
+import static se.backede.scoreboard.admin.resources.dto.GameType.TIME;
 import se.backede.scoreboard.admin.resources.dto.Match;
 import se.backede.scoreboard.admin.resources.dto.MatchResult;
 import se.backede.scoreboard.admin.resources.dto.Player;
 import se.backede.scoreboard.admin.resources.dto.PlayerLeaderBoard;
-import se.backede.scoreboard.admin.resources.dto.PlayerResult;
 import se.backede.scoreboard.admin.resources.dto.Result;
 import se.backede.scoreboard.admin.resources.dto.Team;
 import se.backede.scoreboard.admin.resources.dto.TeamLeaderBoard;
@@ -28,10 +32,70 @@ public class LeaderBoardCalculator {
 
     private static final Logger LOGGER = Logger.getLogger(LeaderBoardCalculator.class.getName());
 
-    public static Optional<Map<String, List<TeamLeaderBoard>>> calculateTeamResultsAndGroupByGame(Map<String, List<MatchResult>> results, List<String> gameIds) {
+    public static List<TeamLeaderBoard> calculateTotalTeamLeaderBoard(Map<String, List<TeamLeaderBoard>> teamScoresOrderedByGameIds, Map<String, GameType> gameIds) {
+
+        Map<String, Long> totalScores = new HashMap<>();
+
+        for (String gameId : gameIds.keySet()) {
+            GameType gameType = gameIds.get(gameId);
+            List<TeamLeaderBoard> leaderBoards = teamScoresOrderedByGameIds.get(gameId);
+
+            if (gameType == GameType.TIME) {
+                leaderBoards.sort(Comparator.comparingLong(TeamLeaderBoard::getTeamScore)); // Lowest time is best
+            } else if (gameType == GameType.SCORE) {
+                leaderBoards.sort(Comparator.comparingLong(TeamLeaderBoard::getTeamScore).reversed()); // Highest score is best
+            }
+
+            for (int i = 0; i < leaderBoards.size(); i++) {
+                TeamLeaderBoard board = leaderBoards.get(i);
+                long pointsToAdd = (i < 10) ? 100 - i * 10 : 0;  // Teams after 10th place get 0 points
+                totalScores.merge(board.getTeamName(), pointsToAdd, Long::sum);
+            }
+        }
+
+        return totalScores.entrySet().stream()
+                .map(entry -> TeamLeaderBoard.builder()
+                .teamName(entry.getKey())
+                .teamScore(entry.getValue())
+                .build())
+                .sorted(Comparator.comparingLong(TeamLeaderBoard::getTeamScore).reversed()) // Sort descending to have the highest score first
+                .collect(Collectors.toList());
+    }
+
+    public static List<PlayerLeaderBoard> calculateTotalPlayerLeaderBoard(Map<String, List<PlayerLeaderBoard>> playerScoresOrderedByGameIds, Map<String, GameType> gameIds) {
+
+        Map<String, Long> totalScores = new HashMap<>();
+
+        for (String gameId : gameIds.keySet()) {
+            GameType gameType = gameIds.get(gameId);
+            List<PlayerLeaderBoard> leaderBoards = playerScoresOrderedByGameIds.get(gameId);
+
+            if (gameType == GameType.TIME) {
+                leaderBoards.sort(Comparator.comparingLong(PlayerLeaderBoard::getScore)); // Lowest time is best
+            } else if (gameType == GameType.SCORE) {
+                leaderBoards.sort(Comparator.comparingLong(PlayerLeaderBoard::getScore).reversed()); // Highest score is best
+            }
+
+            for (int i = 0; i < leaderBoards.size(); i++) {
+                PlayerLeaderBoard board = leaderBoards.get(i);
+                long pointsToAdd = (i < 10) ? 100 - i * 10 : 0;  // Teams after 10th place get 0 points
+                totalScores.merge(board.getTeamName(), pointsToAdd, Long::sum);
+            }
+        }
+
+        return totalScores.entrySet().stream()
+                .map(entry -> PlayerLeaderBoard.builder()
+                .teamName(entry.getKey())
+                .score(entry.getValue())
+                .build())
+                .sorted(Comparator.comparingLong(PlayerLeaderBoard::getScore).reversed()) // Sort descending to have the highest score first
+                .collect(Collectors.toList());
+    }
+
+    public static Optional<Map<String, List<TeamLeaderBoard>>> calculateTeamResultsAndGroupByGame(Map<String, List<MatchResult>> results, Map<String, GameType> gameIds) {
 
         Map<String, List<TeamLeaderBoard>> teamScores = new HashMap<>();
-        for (String gameId : gameIds) { //För varje game
+        for (String gameId : gameIds.keySet()) { //För varje game
             Map<String, Long> aggregatedTeamScores = new HashMap<>();
 
             for (MatchResult matchResult : results.get(gameId)) { // Gå igenom alla Matchresults, där alla teamens poäng redan är kalkylerad
@@ -53,15 +117,26 @@ public class LeaderBoardCalculator {
                     .build())
                     .collect(Collectors.toList());
 
+            switch (gameIds.get(gameId)) {
+                case SCORE:
+                    teamLeaderBoards.sort(Comparator.comparingLong(TeamLeaderBoard::getTeamScore).reversed());
+                    break;
+                case TIME:
+                    teamLeaderBoards.sort(Comparator.comparingLong(TeamLeaderBoard::getTeamScore));
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+
             teamScores.put(gameId, teamLeaderBoards);
         }
         return Optional.ofNullable(teamScores);
     }
 
-    public static Optional<Map<String, List<PlayerLeaderBoard>>> calculateTotalPlayerREsultsAndGroupByGame(Map<String, List<MatchResult>> results, List<String> gameIds) {
+    public static Optional<Map<String, List<PlayerLeaderBoard>>> calculateTotalPlayerResultsAndGroupByGame(Map<String, List<MatchResult>> results, Map<String, GameType> gameIds) {
 
         Map<String, List<PlayerLeaderBoard>> playerScores = new HashMap<>();
-        for (String gameId : gameIds) { //För varje game
+        for (String gameId : gameIds.keySet()) { //För varje game
             Map<String, Long> aggregatedPlayerScores = new HashMap<>();
 
             for (MatchResult matchResult : results.get(gameId)) { // Gå igenom alla Matchresults, där alla teamens poäng redan är kalkylerad
@@ -95,6 +170,19 @@ public class LeaderBoardCalculator {
                     .score(entry.getValue())
                     .build())
                     .collect(Collectors.toList());
+
+            playerScoresList.sort(Comparator.comparingLong(PlayerLeaderBoard::getScore));
+
+            switch (gameIds.get(gameId)) {
+                case SCORE:
+                    playerScoresList.sort(Comparator.comparingLong(PlayerLeaderBoard::getScore).reversed());
+                    break;
+                case TIME:
+                    playerScoresList.sort(Comparator.comparingLong(PlayerLeaderBoard::getScore));
+                    break;
+                default:
+                    throw new AssertionError();
+            }
 
             playerScores.put(gameId, playerScoresList);
         }

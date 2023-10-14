@@ -51,9 +51,17 @@ public class TeamLeaderBoardController implements Serializable {
     Map<String, List<MatchResult>> results = new HashMap<>();
     Map<String, List<TeamLeaderBoard>> teamResults = new HashMap<>();
     Map<String, List<PlayerLeaderBoard>> playerResults = new HashMap<>();
+    Map<String, GameType> gameMap = new HashMap<>();
 
     @PostConstruct
     public void init() {
+        selectedCompetition = viewCompetitionController.getSelectedCompetition();
+
+        List<String> gameIds = new ArrayList<>(viewCompetitionController.getGamesIndex().getIndexGameId().values());
+        for (String gameId : gameIds) {
+            gameMap.put(gameId, viewCompetitionController.getGameController().getItemById(gameId).getGametype());
+        }
+
         updateData();
     }
 
@@ -63,8 +71,6 @@ public class TeamLeaderBoardController implements Serializable {
     }
 
     public void updateData() {
-
-        selectedCompetition = viewCompetitionController.getSelectedCompetition();
 
         viewCompetitionController.getMatch().getMatchClient().getByCompetitionId(selectedCompetition.getId()).ifPresent(m -> {
             matches = m;
@@ -77,18 +83,8 @@ public class TeamLeaderBoardController implements Serializable {
 
         results = LeaderBoardCalculator.mapMatchesAndResultsAndGroupByGame(matches, allResults).orElse(new HashMap<>());
 
-        List<String> gameIds = new ArrayList<>(viewCompetitionController.getGamesIndex().getIndexGameId().values());
-
-        LeaderBoardCalculator.calculateTeamResultsAndGroupByGame(results, gameIds).ifPresent(teamResults::putAll);
-        LeaderBoardCalculator.calculateTotalPlayerREsultsAndGroupByGame(results, gameIds).ifPresent(playerResults::putAll);
-
-        teamResults.forEach((key, list) -> {
-            list.sort(Comparator.comparingLong(TeamLeaderBoard::getTeamScore).reversed());
-        });
-        
-        playerResults.forEach((key, list) -> {
-            list.sort(Comparator.comparingLong(PlayerLeaderBoard::getScore).reversed());
-        });
+        LeaderBoardCalculator.calculateTeamResultsAndGroupByGame(results, gameMap).ifPresent(teamResults::putAll);
+        LeaderBoardCalculator.calculateTotalPlayerResultsAndGroupByGame(results, gameMap).ifPresent(playerResults::putAll);
 
     }
 
