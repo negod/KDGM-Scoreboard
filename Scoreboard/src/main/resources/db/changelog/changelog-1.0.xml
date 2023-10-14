@@ -7,21 +7,23 @@
     <include file="tables/team.xml" relativeToChangelogFile="true"/>
     <include file="tables/player.xml" relativeToChangelogFile="true"/>
     <include file="tables/game.xml" relativeToChangelogFile="true"/>
-    <include file="tables/result.xml" relativeToChangelogFile="true"/>
     <include file="tables/competition.xml" relativeToChangelogFile="true"/>
     <include file="tables/competition_game.xml" relativeToChangelogFile="true"/>
     <include file="tables/competition_team.xml" relativeToChangelogFile="true"/>
     <include file="tables/player_team.xml" relativeToChangelogFile="true"/>
+    <include file="tables/match.xml" relativeToChangelogFile="true"/>
+    <include file="tables/result.xml" relativeToChangelogFile="true"/>
     
     
     <include file="sampledata/teamdata.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/playerdata.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/gamedata.xml" relativeToChangelogFile="true"/>
-    <include file="sampledata/resultdata.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/competitiondata.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/competition_game_data.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/competition_team_data.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/player_team_data.xml" relativeToChangelogFile="true"/>
+    <include file="sampledata/matchdata.xml" relativeToChangelogFile="true"/>
+    <include file="sampledata/resultdata.xml" relativeToChangelogFile="true"/>
     
 </databaseChangeLog>
 

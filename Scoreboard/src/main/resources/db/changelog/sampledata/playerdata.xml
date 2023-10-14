@@ -32,19 +32,19 @@
             <column name="nick_name" value="Tha man"/>
         </insert>
         <insert tableName="player">
-            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4BB"/>
+            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4AA"/>
             <column name="updated" valueDate="2023-10-01"/>
             <column name="name" value="Aron"/>
             <column name="nick_name" value="The VR dude"/>
         </insert>
         <insert tableName="player">
-            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C5AA"/>
+            <column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C5GG"/>
             <column name="updated" valueDate="2023-10-01"/>
             <column name="name" value="Alexander"/>
             <column name="nick_name" value="House man"/>
         </insert>
         <insert tableName="player">
-            <column name="id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3"/>
+            <column name="id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73F7"/>
             <column name="updated" valueDate="2023-10-01"/>
             <column name="name" value="Joakim"/>
             <column name="nick_name" value="The beast"/>

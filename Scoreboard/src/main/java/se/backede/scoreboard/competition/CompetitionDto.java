@@ -30,5 +30,6 @@ public class CompetitionDto extends GenericDto {
     private String name;
     private List<GameDto> games;
     private List<TeamDto> teams;
+    private Boolean started;
 
 }

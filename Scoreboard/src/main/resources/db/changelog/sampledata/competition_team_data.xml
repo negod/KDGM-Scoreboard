@@ -3,27 +3,15 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
-    <changeSet id="competition_game_data" author="Joakim Backede">
-        <!-- Insert games for Team One -->
+    <changeSet id="competition_team_data" author="Joakim Backede">
+        <!-- Kode Gubbs Gaming Night has 2 teams -->
         <insert tableName="competition_team">
-            <!--column name="id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E7389" /-->
-            <!--column name="updated" value="2023-08-27 00:00:00" /-->
-            <column name="competition_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E7381" />
+            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483" />
             <column name="team_id" value="5A0FC1F5-028C-4BC1-BD86-AE1D47EB2D4B" />
         </insert>
         <insert tableName="competition_team">
-            <!--column name="id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482" /-->
-            <!--column name="updated" value="2023-08-27 00:00:00" /-->
-            <column name="competition_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E7381" />
+            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C483" />
             <column name="team_id" value="7B5BB9E4-94D0-4DFC-A0E4-83244E17C659" />
-        </insert>
-        <insert tableName="competition_team">
-            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
-            <column name="team_id" value="5ae2bad5-9c50-435e-8de2-a3f6ad0d696f"/>
-        </insert>
-        <insert tableName="competition_team">
-            <column name="competition_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C482"/>
-            <column name="team_id" value="dc14810d-905d-4899-afa5-12e93fbcfc13"/>
         </insert>
     </changeSet>
     

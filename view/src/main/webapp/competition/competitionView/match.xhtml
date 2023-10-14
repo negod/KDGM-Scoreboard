@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:repeat value="#{controller.matchList}" var="entry">
+
+        <ui:fragment rendered="#{indexController.gamesIndex.activeIndexGameId() == entry.key}">
+
+            <p:dataTable id="matchTable" lazy="false" 
+                         rowIndexVar="rowNum" 
+                         var="match" 
+                         value="#{entry.value}"
+                         style="margin-top: 20px;
+                         margin-right: 30px;
+                         margin-bottom: 40px;
+                         margin-left: 50px;"
+                         selection="${teamLeaderBoardController.selectedMatch}"
+                         rowKey="${match.id}">
+
+                <p:column style="text-align: center;">
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{match.team1.name}"/>
+                </p:column>
+                <p:column style="text-align: center;">
+                    <ui:repeat value="#{match.team1.players}" var="player">
+                        <h:outputText value="#{player.name}" style="text-align: center;"/>
+                        <br/> <!-- För att separera spelarnas namn -->
+                    </ui:repeat>
+                </p:column>
+
+                <p:column style="text-align: center;" styleClass="no-border-column" headerText="Matches">
+                    <h:outputText value="- VS -"/>
+                </p:column>
+                <p:column style="text-align: center;">
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{match.team2.name}"/>
+                </p:column>
+                <p:column style="text-align: center;">
+                    <ui:repeat value="#{match.team2.players}" var="player">
+                        <h:outputText value="#{player.name}" style="text-align: center;"/>
+                        <br/> <!-- För att separera spelarnas namn -->
+                    </ui:repeat>
+                </p:column>
+                <p:column>
+                    <p:commandButton icon="pi pi-plus" 
+                                     update=":form:manage-item-content"
+                                     styleClass="edit-button rounded-button ui-button-success" 
+                                     value="Add result for match #{match.order +1}"
+                                     process="@this"
+                                     oncomplete="PF('manageItemDialog').show()">
+                        <f:setPropertyActionListener value="#{match}" target="#{teamLeaderBoardController.selectedMatch}" />
+                        <p:resetInput target=":form:manage-item-content" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </ui:fragment>
+    </ui:repeat>
+
+</html>

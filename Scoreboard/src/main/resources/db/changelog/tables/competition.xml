@@ -23,6 +23,9 @@
             <column name="competition_date" type="date">
                 <constraints nullable="false"/>
             </column>
+            <column name="started" type="boolean">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         
         <rollback>

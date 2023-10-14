@@ -7,6 +7,9 @@
 
     <ui:define name="content">
         <h:form id="form">
+
+            <p:growl id="messages" showDetail="true" />
+
             <p:steps activeIndex="#{createCompetitionController.activeIndex}">
                 <p:menuitem value="Competition" url="#"/>
                 <p:menuitem value="Games" url="#"/>
@@ -24,7 +27,7 @@
                                  converter="competitionConverter" >
                     <f:selectItem itemLabel="Select Competition" itemValue="#{null}" noSelectionOption="true"/>
                     <f:selectItems value="#{createCompetitionController.competition.allItems}" var="comp" itemLabel="#{comp.name}" itemValue="#{comp}" />
-                    <p:column><i class="pi pi-#{comp}" /> #{comp.name} </p:column>
+                    <p:column visible="comp.started"><i class="pi pi-#{comp}" /> #{comp.name} </p:column>
                     <p:ajax listener="#{createCompetitionController.competition.onDualListChange}" update="gamePickList" />
                 </p:selectOneMenu>
             </ui:fragment>
@@ -137,9 +140,15 @@
                     </p:fieldset >
 
                     <p:fieldset legend="Games">
-                        <p:dataTable var="game" value="#{createCompetitionController.game.dualList.target}">
+                        <p:dataTable var="game" 
+                                     value="#{createCompetitionController.game.dualList.target}" 
+                                     draggableRows="true">
+                            <p:ajax event="rowReorder" listener="#{createCompetitionController.onRowReorder}" update=":form:messages"/>
                             <p:column>
                                 <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{game.name}"/>
+                            </p:column>
+                            <p:column headerText="Game Order">
+                                <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{game.gameOrder +1}"/>
                             </p:column>
                         </p:dataTable>
                     </p:fieldset>

@@ -11,10 +11,19 @@
     <changeSet id="init_competition_game_table" author="Joakim Backede">
     
         <createTable tableName="competition_game">
+            <column name="id" type="varchar(36)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="competition_game_pk"/>
+            </column>
+            <column name="updated" type="date">
+                <constraints nullable="false"/>
+            </column>
             <column name="competition_id" type="CHAR(36)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="game_id" type="CHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="game_order" type="Int">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
         </createTable>
@@ -29,6 +38,9 @@
                                  referencedTableName="game"
                                  referencedColumnNames="id"
                                  constraintName="FK_competition_game_game"/>
+        <addUniqueConstraint tableName="competition_game"
+                             columnNames="game_id,competition_id"
+                             constraintName="UC_competition_game"/>
         
     </changeSet>
 </databaseChangeLog>

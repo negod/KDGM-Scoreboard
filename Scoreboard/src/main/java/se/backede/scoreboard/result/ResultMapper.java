@@ -2,9 +2,9 @@
  */
 package se.backede.scoreboard.result;
 
+import se.backede.scoreboard.match.*;
 import se.backede.scoreboard.common.AbstractMapper;
-import se.backede.scoreboard.result.ResultDto;
-import se.backede.scoreboard.result.ResultEntity;
+import se.backede.scoreboard.player.PlayerMapper;
 
 /**
  *
@@ -12,17 +12,25 @@ import se.backede.scoreboard.result.ResultEntity;
  */
 public class ResultMapper extends AbstractMapper<ResultDto, ResultEntity> {
 
+    PlayerMapper PLAYER_MAPPER = new PlayerMapper();
+    MatchMapper MATCH_MAPPER = new MatchMapper();
+
     @Override
     public ResultEntity mapToEntity(ResultDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return ResultEntity.builder()
+                .id(dto.getId())
+                .playerId(PLAYER_MAPPER.mapToEntity(dto.getPlayer()))
+                .scoreValue(dto.getScoreValue())
+                .build();
     }
 
     @Override
     public ResultDto mapToDto(ResultEntity entity) {
         return ResultDto.builder()
-                .score(entity.getScore())
-                .time(entity.getTime())
-                .player(entity.getPlayer().getId())
+                .id(entity.getId())
+                .player(PLAYER_MAPPER.mapToDto(entity.getPlayerId()))
+                .matchId(entity.getMatchId().getId())
+                .scoreValue(entity.getScoreValue())
                 .build();
     }
 

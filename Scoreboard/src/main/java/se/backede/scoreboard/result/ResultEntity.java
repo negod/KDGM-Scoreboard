@@ -1,51 +1,52 @@
+/*
+ */
 package se.backede.scoreboard.result;
 
 import se.backede.scoreboard.player.PlayerEntity;
-import se.backede.scoreboard.game.GameEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Convert;
+import java.io.Serializable;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import java.time.Duration;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-import se.backede.scoreboard.common.dao.GenericEntity;
+import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.common.constants.GlobalConstants;
 import se.backede.scoreboard.common.constants.ResultConstants;
-import se.backede.scoreboard.converter.DurationConverter;
+import se.backede.scoreboard.common.dao.GenericEntity;
+import se.backede.scoreboard.match.MatchEntity;
 
 /**
  *
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
-@Entity(name = "Result")
-@ToString
-@Table(schema = GlobalConstants.SCHEMA_NAME, name = ResultConstants.TABLE_NAME)
+@Entity(name = ResultConstants.TABLE_NAME)
+@Table(name = "result", schema = GlobalConstants.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = ResultConstants.QUERY_GET_ALL_RESULTS, query = "SELECT r FROM Result r"),
-    @NamedQuery(name = ResultConstants.QUERY_GET_BY_GAME, query = "SELECT r FROM Result r where r.game = :game")
+    @NamedQuery(name = ResultConstants.QUERY_GET_BY_MATCH, query = "SELECT r FROM Result r where r.matchId.id = :matchId")
 })
 @Getter
 @Setter
-public class ResultEntity extends GenericEntity {
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+public class ResultEntity extends GenericEntity implements Serializable {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE}, optional = false)
-    @JoinColumn(name = "player_id", nullable = false, referencedColumnName = "id")
-    private PlayerEntity player;
+    @Column(name = "score_value")
+    private Long scoreValue;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE}, optional = false)
-    @JoinColumn(name = "game_id", nullable = false, referencedColumnName = "id")
-    private GameEntity game;
+    @JoinColumn(name = "match_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private MatchEntity matchId;
 
-    private Integer score;
-
-    @Convert(converter = DurationConverter.class)
-    private Duration time;
+    @JoinColumn(name = "player_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private PlayerEntity playerId;
 
 }

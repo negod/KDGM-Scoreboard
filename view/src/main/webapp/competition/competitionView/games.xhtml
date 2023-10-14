@@ -5,29 +5,43 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../layout/basicLayout.xhtml">
     <ui:define name="content">
+
+        <style>
+            .no-border-column td {
+                border-top: none !important;
+                border-bottom: none !important;
+            }
+        </style>
+
         <h:form id="form">
+
             <p:fieldset legend="#{viewCompetitionController.selectedCompetition.name}">
                 <p:steps activeIndex="#{viewCompetitionController.gamesIndex.activeIndex}" model="#{viewCompetitionController.stepsModel}"/>
             </p:fieldset>
 
+            <ui:include src="match.xhtml" id="match">
+                <ui:param name="controller" value="#{viewCompetitionController}"/>
+                <ui:param name="indexController" value="#{viewCompetitionController}"/>
+            </ui:include>
 
-            <ui:fragment rendered="#{viewCompetitionController.gamesIndex.activeIndex == 1}">
-                STEP 1
-            </ui:fragment>
-
-            <ui:fragment rendered="#{viewCompetitionController.gamesIndex.activeIndex == 2}">
-                STEP 2
-            </ui:fragment>
-
-            <ui:fragment rendered="#{viewCompetitionController.gamesIndex.activeIndex == 3}">
-                STEP 3
-            </ui:fragment>
 
             <!-- Knapparna placerade direkt efter varandra -->
             <div  class="card" style="text-align: right;">
                 <p:commandButton value="Previous" action="#{viewCompetitionController.gamesIndex.prevStep}" update=":form" disabled="#{viewCompetitionController.gamesIndex.activeIndex == 0}"/>
                 <p:commandButton value="Next" action="#{viewCompetitionController.gamesIndex.nextStep}" update=":form" disabled="#{viewCompetitionController.gamesIndex.disabled()}" />
             </div>
+
+
+            <ui:include src="teamLeaderboard.xhtml" id="teamLeaderBoard">
+                <ui:param name="controller" value="#{teamLeaderBoardController}"/>
+                <ui:param name="indexController" value="#{viewCompetitionController}"/>
+            </ui:include>
+
+            <ui:include src="addResultDialog.xhtml" id="editDialog">
+                <ui:param name="controller" value="#{viewCompetitionController}"/>
+            </ui:include>
+
+
         </h:form>
     </ui:define>
 </ui:composition>

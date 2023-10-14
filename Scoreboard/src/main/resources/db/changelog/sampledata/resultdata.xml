@@ -3,21 +3,96 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
-    <changeSet id="teamdata" author="Joakim Backede">
+    <changeSet id="matchdata" author="Joakim Backede">
+        <!-- Match 1 has 4 results in Project Cars this type is TIME -->
         <insert tableName="result">
             <column name="updated" value="2023-08-27 00:00:00" />
-            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d479" />
-            <column name="player_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3" />
-            <column name="game_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3" />
-            <column name="score" value="100" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d480" />
+            <column name="match_id" value="f47ac10b-58cc-4372-a567-0e02b2c3d480" />
+            <column name="player_id" value="5dad7fb3-d23c-454d-8b21-a33a418cbbb0" />
+            <column name="score_value" value="207560" /> <!-- 3 minuter 23 sekunder och 456 hundradelar -->
         </insert>
         <insert tableName="result">
             <column name="updated" value="2023-08-27 00:00:00" />
-            <column name="id" value="7a577f5a-9c68-4f15-bb07-1d430b5b2d91" />
-            <column name="player_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3" />
-            <column name="game_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73E3" />
-            <column name="time" value="PT2M30.025S" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d481" />
+            <column name="match_id" value="f47ac10b-58cc-4372-a567-0e02b2c3d480" />
+            <column name="player_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4AA" />
+            <column name="score_value" value="192340" /> <!-- 3 minuter 10 sekunder och 234 hundradelar -->
+        </insert>
+        <insert tableName="result">
+            <column name="updated" value="2023-08-27 00:00:00" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d482" />
+            <column name="match_id" value="f47ac10b-58cc-4372-a567-0e02b2c3d480" />
+            <column name="player_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C5GG" />
+            <column name="score_value" value="178230" /> <!-- 2 minuter 58 sekunder och 23 hundradelar -->
+        </insert> 
+        <insert tableName="result">
+            <column name="updated" value="2023-08-27 00:00:00" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d483" />
+            <column name="match_id" value="f47ac10b-58cc-4372-a567-0e02b2c3d480" />
+            <column name="player_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73F7" />
+            <column name="score_value" value="178240" /> <!-- 2 minuter 58 sekunder och 24 hundradelar -->
         </insert>
         
+        
+        <!-- Match 1 has 4 results in Bowling this type is SCORE -->
+        <insert tableName="result">
+            <column name="updated" value="2023-08-27 00:00:00" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d484" />
+            <column name="match_id" value="f47ac10b-58cc-4372-a567-0e02b2c3d481" />
+            <column name="player_id" value="5dad7fb3-d23c-454d-8b21-a33a418cbbb0" />
+            <column name="score_value" value="250" />
+        </insert>
+        <insert tableName="result">
+            <column name="updated" value="2023-08-27 00:00:00" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d485" />
+            <column name="match_id" value="f47ac10b-58cc-4372-a567-0e02b2c3d481" />
+            <column name="player_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4AA" />
+            <column name="score_value" value="140" /> 
+        </insert>
+        <insert tableName="result">
+            <column name="updated" value="2023-08-27 00:00:00" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d486" />
+            <column name="match_id" value="f47ac10b-58cc-4372-a567-0e02b2c3d481" />
+            <column name="player_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C5GG" />
+            <column name="score_value" value="70" /> 
+        </insert> 
+        <insert tableName="result">
+            <column name="updated" value="2023-08-27 00:00:00" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d487" />
+            <column name="match_id" value="f47ac10b-58cc-4372-a567-0e02b2c3d481" />
+            <column name="player_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73F7" />
+            <column name="score_value" value="100" /> 
+        </insert>
+        
+        <!-- Team One and Team Two have one match in Starcraft Remastered -->
+         <insert tableName="result">
+            <column name="updated" value="2023-08-27 00:00:00" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d488" />
+            <column name="match_id" value="f47ac10b-58cc-4372-a567-0e02b2c3d482" />
+            <column name="player_id" value="5dad7fb3-d23c-454d-8b21-a33a418cbbb0" />
+            <column name="score_value" value="13000" />
+        </insert>
+        <insert tableName="result">
+            <column name="updated" value="2023-08-27 00:00:00" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d489" />
+            <column name="match_id" value="f47ac10b-58cc-4372-a567-0e02b2c3d482" />
+            <column name="player_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C4AA" />
+            <column name="score_value" value="10000" /> 
+        </insert>
+        <insert tableName="result">
+            <column name="updated" value="2023-08-27 00:00:00" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d490" />
+            <column name="match_id" value="f47ac10b-58cc-4372-a567-0e02b2c3d482" />
+            <column name="player_id" value="F3F2E5C4-85AA-48C1-97FC-2B96C0A8C5GG" />
+            <column name="score_value" value="2000" /> 
+        </insert> 
+        <insert tableName="result">
+            <column name="updated" value="2023-08-27 00:00:00" />
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d491" />
+            <column name="match_id" value="f47ac10b-58cc-4372-a567-0e02b2c3d482" />
+            <column name="player_id" value="E3C9D37D-6D0C-4BC0-AB85-6EAFEF1E73F7" />
+            <column name="score_value" value="23000" /> 
+        </insert>
     </changeSet>
 </databaseChangeLog>

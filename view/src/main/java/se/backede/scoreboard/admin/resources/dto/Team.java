@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import se.backede.scoreboard.admin.commons.GenericDto;
 
 /**
@@ -16,8 +20,12 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
+@RequiredArgsConstructor
+@NoArgsConstructor
+@SuperBuilder
 public class Team extends GenericDto {
 
+    @NonNull
     private String name;
     private List<Player> players = new ArrayList<>();
 

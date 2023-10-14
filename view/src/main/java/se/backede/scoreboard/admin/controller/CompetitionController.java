@@ -7,7 +7,6 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
@@ -16,6 +15,7 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.event.TransferEvent;
 import org.primefaces.model.DualListModel;
 import se.backede.scoreboard.admin.commons.CrudController;
+import se.backede.scoreboard.admin.resources.controller.CompetitionGameRestClientController;
 import se.backede.scoreboard.admin.resources.controller.CompetitionRestClientController;
 import se.backede.scoreboard.admin.resources.dto.Competition;
 import se.backede.scoreboard.admin.resources.dto.Game;
@@ -33,6 +33,9 @@ public class CompetitionController extends CrudController<Competition> implement
 
     @Inject
     CompetitionRestClientController competitionClient;
+
+    @Inject
+    CompetitionGameRestClientController competitionGameClient;
 
     @Inject
     GameController game;
@@ -71,27 +74,46 @@ public class CompetitionController extends CrudController<Competition> implement
 
         game.setDualList(new DualListModel<>(availableGames, selectedGames));
         team.setDualList(new DualListModel<>(availableTeams, selectedTeams));
-        
+
         PrimeFaces.current().ajax().update("form:gamePickList", "form:teamPickList");
 
     }
 
     @Override
     public void onDualListTransfer(TransferEvent event) {
+        if (event.getItems() != null) {
+
+            if (event.getItems().get(0).getClass().equals(Game.class)) {
+                onGameTransfer(event);
+            } else if (event.getItems().get(0).getClass().equals(Team.class)) {
+                onTeamTransfer(event);
+            }
+        }
     }
 
     public void onGameTransfer(TransferEvent event) {
         if (event.isAdd()) {
             for (Object item : event.getItems()) {
-                super.getSelectedItem().getGames().add((Game) item);
+                Game game = (Game) item;
+
+                if (super.getSelectedItem().getGames() != null) {
+                    game.setGameOrder(super.getSelectedItem().getGames().size());
+                } else {
+                    game.setGameOrder(0);
+                }
+
+                super.getSelectedItem().getGames().add(game);
             }
         } else if (event.isRemove()) {
             for (Object item : event.getItems()) {
-                super.getSelectedItem().getGames().remove((Game) item);
+                Game game = (Game) item;
+                super.getSelectedItem().getGames().remove(game);
+            }
+
+            for (int i = 0; i < super.getSelectedItem().getGames().size(); i++) {
+                super.getSelectedItem().getGames().get(i).setGameOrder(i);
             }
         }
-
-        super.saveSelectedItem();
     }
 
     public void onTeamTransfer(TransferEvent event) {

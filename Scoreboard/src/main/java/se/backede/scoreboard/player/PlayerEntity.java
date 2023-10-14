@@ -1,9 +1,14 @@
+/*
+ */
 package se.backede.scoreboard.player;
 
+import se.backede.scoreboard.team.TeamEntity;
+import java.io.Serializable;
+import java.util.List;
+import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -11,49 +16,50 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import se.backede.scoreboard.common.dao.GenericEntity;
 import se.backede.scoreboard.common.constants.GlobalConstants;
 import se.backede.scoreboard.common.constants.PlayerConstants;
+import se.backede.scoreboard.common.dao.GenericEntity;
 import se.backede.scoreboard.result.ResultEntity;
-import se.backede.scoreboard.team.TeamEntity;
 
 /**
  *
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
-@Entity(name = "Player")
-@ToString
-@Table(schema = GlobalConstants.SCHEMA_NAME, name = PlayerConstants.TABLE_NAME)
+@Entity(name = PlayerConstants.TABLE_NAME)
+@Table(name = "player", schema = GlobalConstants.SCHEMA_NAME)
 @NamedQueries({
-    @NamedQuery(name = PlayerConstants.QUERY_GET_ALL_PLAYERS, query = "SELECT p FROM Player p"),})
+    @NamedQuery(name = "Player.findAll", query = "SELECT p FROM Player p"),
+    @NamedQuery(name = "Player.findById", query = "SELECT p FROM Player p WHERE p.id = :id"),
+    @NamedQuery(name = "Player.findByUpdated", query = "SELECT p FROM Player p WHERE p.updatedDate = :updated"),
+    @NamedQuery(name = "Player.findByName", query = "SELECT p FROM Player p WHERE p.name = :name"),
+    @NamedQuery(name = "Player.findByNickName", query = "SELECT p FROM Player p WHERE p.nickName = :nickName")})
 @Getter
 @Setter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlayerEntity extends GenericEntity {
+public class PlayerEntity extends GenericEntity implements Serializable {
 
-    @NotNull(message = "Name cannot be NULL")
+    @Basic(optional = false)
     @Column(name = "name")
     private String name;
 
-    @NotNull(message = "Nick Name cannot be NULL")
+    @Basic(optional = false)
     @Column(name = "nick_name")
     private String nickName;
 
-    @ManyToMany(mappedBy = "players")
-    private List<TeamEntity> teams = new ArrayList<>();
+//    @JoinTable(name = "kggn.player_team", joinColumns = {
+//        @JoinColumn(name = "player_id", referencedColumnName = "id")}, inverseJoinColumns = {
+//        @JoinColumn(name = "team_id", referencedColumnName = "id")})
+    @ManyToMany(mappedBy = "playerList")
+    private List<TeamEntity> teamList;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "player")
-    private List<ResultEntity> results;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "playerId")
+    private List<ResultEntity> resultList;
 
 }

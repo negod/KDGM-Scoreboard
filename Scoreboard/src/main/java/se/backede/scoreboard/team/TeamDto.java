@@ -26,6 +26,6 @@ import se.backede.scoreboard.player.PlayerDto;
 public class TeamDto extends GenericDto {
 
     private String name;
-    private List<PlayerDto> players = new ArrayList<>();
+    private List<PlayerDto> players;
 
 }

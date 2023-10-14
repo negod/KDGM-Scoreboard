@@ -5,7 +5,6 @@ package se.backede.scoreboard.result;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -14,12 +13,14 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.Response.Status;
 import java.util.List;
-import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import se.backede.scoreboard.common.GenericMapper;
 import se.backede.scoreboard.common.dao.GenericCrudDao;
+import se.backede.scoreboard.common.dao.GenericEntity;
 import se.backede.scoreboard.common.service.AbstractCrudService;
+import se.backede.scoreboard.common.service.GenericDto;
 
 /**
  *
@@ -50,17 +51,43 @@ public class ResultService extends AbstractCrudService<ResultDto, ResultEntity> 
     }
 
     @GET
-    @Path("game/{gameId}")
+    @Path("match/{matchId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getResultbyGame(@PathParam(value = "gameId") String gameId) {
+    public Response getResultbyMatch(@PathParam(value = "matchId") String matchId) {
 
-        return (Response) dao.getResultsByGame(gameId).map(results -> {
+        return (Response) dao.getResultsByMatch(matchId).map(results -> {
 
-            List<ResultDto> resultByGameDtoList = mapper.mapToDtoList(results);
-            return Response.ok(resultByGameDtoList).build();
+            List<ResultDto> resultByMatchDtoList = mapper.mapToDtoList(results);
+            return Response.ok(resultByMatchDtoList).build();
 
         }).orElse(Response.serverError().build());
 
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Override
+    public Response create(ResultDto item) {
+        Logger.getLogger(getLoggerClass().getName()).log(Level.INFO, "Creating {0} values {1}", new Object[]{getLoggerClass().getSimpleName(), item.toString()});
+        GenericEntity entity = dao.mapToEntity(item);
+        return (Response) getDao().create(entity).map(x -> {
+            GenericDto dto = getMapper().mapToDto((ResultEntity) x);
+            return Response.created(getUriInfo().getAbsolutePath()).entity(dto).build();
+        }).orElse(Response.serverError().build());
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Override
+    public Response update(ResultDto item) {
+        Logger.getLogger(getLoggerClass().getName()).log(Level.INFO, "Updating {0} values {1}", new Object[]{getLoggerClass().getSimpleName(), item.toString()});
+        GenericEntity entity = dao.mapToEntity(item);
+        return (Response) getDao().update(entity).map(x -> {
+            GenericDto dto = getMapper().mapToDto((ResultEntity) x);
+            return Response.ok(dto).build();
+        }).orElse(Response.notModified().build());
     }
 
 }

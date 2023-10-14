@@ -11,8 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import se.backede.scoreboard.common.constants.ResultConstants;
 import se.backede.scoreboard.common.dao.AbstractCrudDao;
-import se.backede.scoreboard.game.GameEntity;
-import se.backede.scoreboard.player.PlayerEntity;
+import se.backede.scoreboard.match.MatchEntity;
+import se.backede.scoreboard.player.PlayerMapper;
 
 /**
  *
@@ -21,6 +21,8 @@ import se.backede.scoreboard.player.PlayerEntity;
 @ApplicationScoped
 @Transactional
 public class ResultDao extends AbstractCrudDao<ResultEntity> {
+
+    PlayerMapper PLAYER_MAPPER = new PlayerMapper();
 
     @Override
     public Class getLoggerClass() {
@@ -32,62 +34,23 @@ public class ResultDao extends AbstractCrudDao<ResultEntity> {
         return ResultEntity.class;
     }
 
-    @Override
-    public Optional<ResultEntity> create(ResultEntity result) {
-
-        try {
-
-            GameEntity game = getEntityManager().find(GameEntity.class, result.getGame().getId());
-            PlayerEntity player = getEntityManager().find(PlayerEntity.class, result.getPlayer().getId());
-
-            result.setPlayer(player);
-            result.setGame(game);
-
-            getEntityManager().persist(result);
-            return Optional.of(result);
-        } catch (Exception e) {
-            Logger.getLogger(ResultDao.class.getName()).log(Level.SEVERE, "Error when persisting Entity Result {0} Exception {1}", new Object[]{result.toString(), e});
-            return Optional.empty();
-        }
-    }
-
-    @Override
-    public Optional<ResultEntity> update(ResultEntity result) {
-        try {
-            ResultEntity find = getEntityManager().find(ResultEntity.class, result.getId());
-
-            if (result.getGame() != null) {
-                GameEntity game = getEntityManager().find(GameEntity.class, result.getGame().getId());
-                find.setGame(game);
-            }
-
-            if (result.getPlayer() != null) {
-                PlayerEntity player = getEntityManager().find(PlayerEntity.class, result.getPlayer().getId());
-                find.setPlayer(player);
-            }
-
-            if (result.getScore() != null) {
-                find.setScore(result.getScore());
-            }
-
-            if (result.getTime() != null) {
-                find.setTime(result.getTime());
-            }
-
-            getEntityManager().merge(find);
-            return Optional.ofNullable(find);
-        } catch (Exception e) {
-            Logger.getLogger(ResultDao.class.getName()).log(Level.SEVERE, "Error when updating result", e);
-            return Optional.empty();
-        }
-    }
-
-    public Optional<List<ResultEntity>> getResultsByGame(String gameId) {
-        Logger.getLogger(ResultDao.class.getName()).log(Level.INFO, "Getting Results By Game {0}", new Object[]{gameId});
-        TypedQuery<ResultEntity> query = getEntityManager().createNamedQuery(ResultConstants.QUERY_GET_BY_GAME, ResultEntity.class);
-        query.setParameter("game", GameEntity.builder().id(gameId).build());
+    public Optional<List<ResultEntity>> getResultsByMatch(String matchId) {
+        Logger.getLogger(ResultDao.class.getName()).log(Level.INFO, "Getting Results By Match {0}", new Object[]{matchId});
+        TypedQuery<ResultEntity> query = getEntityManager().createNamedQuery(ResultConstants.QUERY_GET_BY_MATCH, ResultEntity.class);
+        query.setParameter("matchId", matchId);
         return Optional.ofNullable(query.getResultList());
+    }
 
+    public ResultEntity mapToEntity(ResultDto dto) {
+
+        MatchEntity match = getEntityManager().find(MatchEntity.class, dto.getMatchId());
+
+        return ResultEntity.builder()
+                .id(dto.getId())
+                .playerId(PLAYER_MAPPER.mapToEntity(dto.getPlayer()))
+                .scoreValue(dto.getScoreValue())
+                .matchId(match)
+                .build();
     }
 
 }

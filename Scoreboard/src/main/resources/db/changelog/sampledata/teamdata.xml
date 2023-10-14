@@ -16,12 +16,12 @@
         </insert>
         <insert tableName="team">
             <column name="id" value="5ae2bad5-9c50-435e-8de2-a3f6ad0d696f"/>
-            <column name="name" value="Team 1"/>
+            <column name="name" value="Team Three"/>
             <column name="updated" valueDate="2023-10-03T14:55:21.703"/>
         </insert>
         <insert tableName="team">
             <column name="id" value="dc14810d-905d-4899-afa5-12e93fbcfc13"/>
-            <column name="name" value="Team 2"/>
+            <column name="name" value="Team Four"/>
             <column name="updated" valueDate="2023-10-03T14:55:21.725"/>
         </insert>
     </changeSet>
