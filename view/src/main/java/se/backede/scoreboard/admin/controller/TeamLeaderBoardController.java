@@ -38,7 +38,7 @@ public class TeamLeaderBoardController implements Serializable {
     private Competition selectedCompetition;
 
     @Inject
-    ViewCompetitionController view;
+    ViewCompetitionController viewCompetitionController;
 
     List<Result> allResults = new ArrayList<>();
 
@@ -51,7 +51,7 @@ public class TeamLeaderBoardController implements Serializable {
     @PostConstruct
     public void init() {
 
-        selectedCompetition = view.getSelectedCompetition();
+        selectedCompetition = viewCompetitionController.getSelectedCompetition();
         updateData();
 
         Optional<Map<String, List<MatchResult>>> matchresults = LeaderBoardCalculator.mapMatchResults(matches, allResults);
@@ -63,16 +63,16 @@ public class TeamLeaderBoardController implements Serializable {
     }
 
     public GameType getGameType(String gameId) {
-        Game game = view.getGame().getItemById(gameId);
+        Game game = viewCompetitionController.getGameController().getItemById(gameId);
         return game.gametype;
     }
 
     public void updateData() {
 
-        view.getMatch().getMatchClient().getByCompetitionId(selectedCompetition.getId()).ifPresent(m -> {
+        viewCompetitionController.getMatch().getMatchClient().getByCompetitionId(selectedCompetition.getId()).ifPresent(m -> {
             matches = m;
             for (Match match : m) {
-                view.getResult().getResultClient().getByMatch(match.getId()).ifPresent(r -> {
+                viewCompetitionController.getResultController().getResultClient().getByMatch(match.getId()).ifPresent(r -> {
                     allResults.addAll(r);
                 });
             }
@@ -111,7 +111,7 @@ public class TeamLeaderBoardController implements Serializable {
                         .scoreValue(team1Player.getScore())
                         .build();
 
-                view.getResult().getResultClient().update(result);
+                viewCompetitionController.getResultController().getResultClient().update(result);
 
             } else {
                 Result result = Result.builder()
@@ -120,7 +120,7 @@ public class TeamLeaderBoardController implements Serializable {
                         .scoreValue(team1Player.getScore())
                         .build();
 
-                view.getResult().getResultClient().create(result);
+                viewCompetitionController.getResultController().getResultClient().create(result);
             }
 
         }

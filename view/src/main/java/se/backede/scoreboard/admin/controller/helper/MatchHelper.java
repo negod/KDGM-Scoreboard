@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import se.backede.scoreboard.admin.resources.dto.Game;
 import se.backede.scoreboard.admin.resources.dto.Match;
+import se.backede.scoreboard.admin.resources.dto.Player;
+import se.backede.scoreboard.admin.resources.dto.Result;
 import se.backede.scoreboard.admin.resources.dto.Team;
 
 /**
@@ -21,6 +23,30 @@ public class MatchHelper {
     public static Map<String, List<Match>> getMatchesGroupedOnGameId(List<Match> matches) {
         return matches.stream()
                 .collect(Collectors.groupingBy(match -> match.getGame().getId()));
+    }
+
+    public static Map<String, List<Match>> enrichMatchesWithPlayerRestults(Map<String, List<Match>> matchesGroupedOnGameId, Map<String, List<Result>> resultsGroupedOnMatchId) {
+
+        ResultHelper resultHelper = ResultHelper.builder().results(resultsGroupedOnMatchId).build();
+
+        for (Map.Entry<String, List<Match>> entry : matchesGroupedOnGameId.entrySet()) {
+            for (Match match : entry.getValue()) {
+
+                for (Player player : match.getTeam1().getPlayers()) {
+                    resultHelper.getScoreValueByPlayerAndMatch(player.getId(), match.getId()).ifPresent(score -> {
+                        player.setScore(score);
+                    });
+                }
+
+                for (Player player : match.getTeam2().getPlayers()) {
+                    resultHelper.getScoreValueByPlayerAndMatch(player.getId(), match.getId()).ifPresent(score -> {
+                        player.setScore(score);
+                    });
+                }
+
+            }
+        }
+        return matchesGroupedOnGameId;
     }
 
     public static Map<String, List<Match>> createMatches(List<Game> games, List<Team> teams) {

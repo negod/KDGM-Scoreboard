@@ -28,6 +28,7 @@
                     <br/>
                 </ui:repeat>
             </p:column>
+
             <p:column headerText="Poäng">
 
                 <ui:repeat value="#{teamResult.results}" var="playerResult">
@@ -43,6 +44,7 @@
                             <h:outputText value="${playerResult.scoreValue}" />
                         </c:otherwise>
                     </c:choose>
+
                     <br/>
                 </ui:repeat>
             </p:column>

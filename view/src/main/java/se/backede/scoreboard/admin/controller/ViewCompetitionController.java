@@ -44,7 +44,7 @@ public class ViewCompetitionController implements Serializable {
     IndexHelper gamesIndex;
 
     @Inject
-    CompetitionController competition;
+    CompetitionController competitionController;
 
     @Inject
     TeamController team;
@@ -53,38 +53,60 @@ public class ViewCompetitionController implements Serializable {
     PlayerController player;
 
     @Inject
-    GameController game;
+    GameController gameController;
 
     @Inject
-    ResultController result;
+    ResultController resultController;
 
     @Inject
     MatchController match;
 
     Player selectedPlayer;
 
-    Map<String, List<Match>> matches = new HashMap<>();
+    Map<String, List<Match>> matchList = new HashMap<>();
     Map<String, List<Result>> resultList = new HashMap<>();
+
+    public IndexHelper createGameIndexesAndBindGameId(List<Game> games) {
+
+        Map<Integer, String> indexedGameIds = new HashMap<>();
+        for (Game game : games) {
+            indexedGameIds.put(game.getGameOrder(), game.getId());
+        }
+
+        return new IndexHelper(selectedCompetition.getGames().size() - 1, 0, indexedGameIds);
+
+    }
+
+    public Map<String, List<Result>> getResultsForMatchesOrderedByMatchId(Map<String, List<Match>> matches) {
+
+        Map<String, List<Result>> results = new HashMap<>();
+        for (Map.Entry<String, List<Match>> entry : matches.entrySet()) {
+            List<Match> matchList = entry.getValue();
+
+            for (Match match : matchList) {
+                resultController.getResultClient().getByMatch(match.getId()).ifPresent(x -> {
+                    results.put(match.getId(), x);
+                });
+            }
+        }
+        return results;
+    }
 
     @PostConstruct
     public void init() {
-        selectedCompetition = competition.getItemById(competitionId);
 
-        Map<Integer, String> indexGameId = new HashMap<>();
-        for (Game game1 : selectedCompetition.getGames()) {
-            indexGameId.put(game1.getGameOrder(), game1.getId());
-        }
+        selectedCompetition = competitionController.getItemById(competitionId);
 
-        gamesIndex = new IndexHelper(selectedCompetition.getGames().size() - 1, 0, indexGameId);
+        gamesIndex = createGameIndexesAndBindGameId(selectedCompetition.getGames());
 
         if (selectedCompetition.getStarted()) {
             match.getMatchClient().getByCompetitionId(selectedCompetition.getId()).ifPresent(matches -> {
-                this.matches = MatchHelper.getMatchesGroupedOnGameId(matches);
+                this.matchList = MatchHelper.getMatchesGroupedOnGameId(matches);
             });
         } else {
-            matches = MatchHelper.createMatches(selectedCompetition.getGames(), selectedCompetition.getTeams());
+            matchList = MatchHelper.createMatches(selectedCompetition.getGames(), selectedCompetition.getTeams());
 
-            for (Map.Entry<String, List<Match>> entry : matches.entrySet()) {
+            for (Map.Entry<String, List<Match>> entry : matchList.entrySet()) {
 
                 //TODO Match Order
                 Integer order = 0;
@@ -98,20 +120,26 @@ public class ViewCompetitionController implements Serializable {
             }
 
             selectedCompetition.setStarted(Boolean.TRUE);
-            competition.getCompetitionClient().update(selectedCompetition);
+            competitionController.getCompetitionClient().update(selectedCompetition);
         }
 
+        resultList = getResultsForMatchesOrderedByMatchId(matchList);
+        MatchHelper.enrichMatchesWithPlayerRestults(matchList, resultList);
         prepareSteps();
     }
 
+    public void enrichDataWithScores() {
+
+    }
+
     public List<Match> getSelectedGameMatches() {
-        return matches.get(gamesIndex.getActiveIndex());
+        return matchList.get(gamesIndex.getActiveIndex());
     }
 
     public void prepareSteps() {
         stepsModel = new BaseMenuModel();
         for (int i = 0; i < gamesIndex.getMaxIndex() + 1; i++) {
-            Game gameById = this.game.getItemById(gamesIndex.getGameByIndex(i));
+            Game gameById = this.gameController.getItemById(gamesIndex.getGameByIndex(i));
             DefaultMenuItem item = DefaultMenuItem.builder()
                     .url("#")
                     .value(gameById.getName())

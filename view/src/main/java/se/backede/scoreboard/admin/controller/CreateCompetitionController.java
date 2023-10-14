@@ -4,7 +4,6 @@ package se.backede.scoreboard.admin.controller;
 
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
-import se.backede.scoreboard.admin.controller.helper.ToggleHelper;
 import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -16,7 +15,6 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.ReorderEvent;
-import se.backede.scoreboard.admin.resources.dto.Game;
 import se.backede.scoreboard.admin.resources.dto.Player;
 import se.backede.scoreboard.admin.resources.dto.Team;
 
@@ -34,15 +32,10 @@ public class CreateCompetitionController implements Serializable {
     CompetitionController competition;
 
     @Inject
-    GameController game;
-
-    @Inject
     PlayerController player;
 
     @Inject
     TeamController team;
-
-    ToggleHelper teamToggle = new ToggleHelper();
 
     List<Team> createdTeams = new ArrayList<>();
 
@@ -126,9 +119,7 @@ public class CreateCompetitionController implements Serializable {
             });
         }
         createdTeams = persistedTeams;
-
         competition.getSelectedItem().setTeams(persistedTeams);
-
         competition.saveSelectedItem();
     }
 
