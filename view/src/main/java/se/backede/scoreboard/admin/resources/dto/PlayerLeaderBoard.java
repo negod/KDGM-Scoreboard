@@ -15,7 +15,6 @@ import lombok.Setter;
 @Builder
 public class PlayerLeaderBoard {
 
-    String teamName;
     String playerName;
     Long score;
 

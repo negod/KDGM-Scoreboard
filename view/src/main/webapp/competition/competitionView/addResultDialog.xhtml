@@ -14,13 +14,29 @@
                     <p:column headerText="#{teamLeaderBoardController.selectedMatch.team1.name}">
                         <h:outputText value="#{player.name}" />
                     </p:column>
-                    
-                    
-                    <p:column headerText="Score">
-                        <p:inputText value="#{player.score}" />
-                    </p:column>
-                    
-                    
+
+
+                    <c:choose>
+                        <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'TIME'}">
+                            <p:column headerText="Time">
+                                <p:inputMask value="#{player.score}" mask="99 min 99 sec 999 millisec" slotChar="-" converter="timeConverter"/>                       
+                            </p:column>
+                        </c:when>
+
+                        <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'SCORE'}">
+                            <p:column headerText="Score">
+                                <p:inputText value="#{player.score}" style="text-align: right;"/>
+                            </p:column>
+                        </c:when>
+
+                        <c:otherwise>
+                            <p:column headerText="Score">
+                                <p:inputText value="#{player.score}"/>
+                            </p:column>
+                        </c:otherwise>
+                    </c:choose>
+
+
                 </p:dataTable>
 
                 <p:divider type="Horizontal"/>
@@ -29,14 +45,27 @@
                     <p:column headerText="#{teamLeaderBoardController.selectedMatch.team2.name}">
                         <h:outputText value="#{player.name}" />
                     </p:column>
-                    
-                    
-                    
-                    <p:column headerText="Score">
-                        <p:inputText value="#{player.score}"/>
-                    </p:column>
-                    
-                    
+
+                    <c:choose>
+                        <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'TIME'}">
+                            <p:column headerText="Time">
+                                <p:inputMask value="#{player.score}" mask="99 min 99 sec 999 millisec" slotChar="-" converter="timeConverter"/>                       
+                            </p:column>
+                        </c:when>
+
+                        <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'SCORE'}">
+                            <p:column headerText="Score">
+                                <p:inputText value="#{player.score}" style="text-align: right;"/>
+                            </p:column>
+                        </c:when>
+
+                        <c:otherwise>
+                            <p:column headerText="Score">
+                                <p:inputText value="#{player.score}"/>
+                            </p:column>
+                        </c:otherwise>
+                    </c:choose>
+
                 </p:dataTable>
 
             </p:outputPanel>
