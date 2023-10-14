@@ -20,8 +20,5 @@ public class PlayerResult {
     private String resultId;
     private Player player;
     private Long scoreValue;
-    private Integer minutes;
-    private Integer seconds;
-    private Integer millis;
 
 }

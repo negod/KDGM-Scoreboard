@@ -28,7 +28,8 @@ public class LeaderBoardCalculatorTest {
     }
 
     /**
-     * Test of mapMatchResults method, of class LeaderBoardCalculator.
+     * Test of mapMatchesAndResultsAndGroupByGame method, of class
+     * LeaderBoardCalculator.
      */
     //@Test
     public void testMapMatchResults() {
@@ -80,14 +81,13 @@ public class LeaderBoardCalculatorTest {
             results.add(result);
         }
 
-        Optional<Map<String, List<MatchResult>>> matchresults = LeaderBoardCalculator.mapMatchResults(matches, results);
+        Optional<Map<String, List<MatchResult>>> matchresults = LeaderBoardCalculator.mapMatchesAndResultsAndGroupByGame(matches, results);
 
         //We have 2 matches ( match1 and match2 )and should only have 2 Match results
         assertEquals(2, matchresults.get().size());
 
         assertTrue(matchresults.get().get(expectedOrder1) != null);
         assertTrue(matchresults.get().get(expectedOrder2) != null);
-        
 
         //Each team should have 2 results, one for each player we have 2 teams so it should be 4
 //        assertEquals(2, matchresults.get().get(expectedOrder1).getTeamResults().size());
@@ -145,13 +145,13 @@ public class LeaderBoardCalculatorTest {
             results.add(result);
         }
 
-        List<MatchResult> matchresults = LeaderBoardCalculator.pairMatchResultswithResults(matches, results);
+        List<MatchResult> matchresults = LeaderBoardCalculator.pairMatchResultsWithResults(matches, results);
 
         //We have 2 matches ( match1 and match2 )and should only have 2 Match results
         assertEquals(2, matchresults.size());
 
-        assertTrue(matchresults.stream().anyMatch(matchResult -> match1.getId().equals(matchResult.getMatch().getId())));
-        assertTrue(matchresults.stream().anyMatch(matchResult -> match2.getId().equals(matchResult.getMatch().getId())));
+        assertTrue(matchresults.stream().anyMatch(matchResult -> match1.getId().equals(matchResult.getMatchId())));
+        assertTrue(matchresults.stream().anyMatch(matchResult -> match2.getId().equals(matchResult.getMatchId())));
 
         //Each team should have 2 results, one for each player we have 2 teams so it should be 4
         assertEquals(2, matchresults.get(0).getTeamResults().size());
@@ -160,7 +160,7 @@ public class LeaderBoardCalculatorTest {
     }
 
     /**
-     * Test of pairResultWithMatches method, of class LeaderBoardCalculator.
+     * Test of pairResultsWithMatchAndCreateMatchResult method, of class LeaderBoardCalculator.
      */
     @Test
     public void testPairResultWithMatches() {
@@ -200,10 +200,10 @@ public class LeaderBoardCalculatorTest {
             results.add(ResultMock.getResult(match2.getId(), player));
         }
 
-        MatchResult result = LeaderBoardCalculator.pairResultWithMatches(match1, results);
+        MatchResult result = LeaderBoardCalculator.pairResultsWithMatchAndCreateMatchResult(match1, results);
 
         //This should only
-        assertEquals(result.getMatch().getId(), match1.getId());
+        assertEquals(result.getMatchId(), match1.getId());
 
         //We should have 1 result for each player in the team. 
         List<TeamResult> teamResults = result.getTeamResults();
@@ -221,18 +221,18 @@ public class LeaderBoardCalculatorTest {
         TeamResult team2 = ModelMock.getTeamResult(2);
 
         int expectedListSizeAll = 4;
-        List<PlayerResult> allResults = new ArrayList<>();
+        List<Result> allResults = new ArrayList<>();
         allResults.addAll(team1.getResults());
         allResults.addAll(team2.getResults());
 
         assertEquals(expectedListSizeAll, allResults.size());
 
-        PlayerResult selectedResult = team1.getResults().get(0);
+        Result selectedResult = team1.getResults().get(0);
         Player selectedPlayer = selectedResult.getPlayer();
 
         int expectedPlayerResultListSize = 1;
 
-        List<PlayerResult> results = LeaderBoardCalculator.getPlayerResultForPlayer(selectedPlayer, allResults);
+        List<Result> results = LeaderBoardCalculator.getPlayerResultForPlayer(selectedPlayer, allResults);
 
         assertEquals(expectedPlayerResultListSize, results.size());
         assertEquals(selectedPlayer.getId(), results.get(0).getPlayer().getId());
@@ -251,18 +251,18 @@ public class LeaderBoardCalculatorTest {
 
         //calaulate the expected results for team 1
         Long expResultTeam1 = 0L;
-        for (PlayerResult playerResult : team1.getResults()) {
+        for (Result playerResult : team1.getResults()) {
             expResultTeam1 += playerResult.getScoreValue();
         }
 
         //calaulate the expected results for team 2
         Long expResultTeam2 = 0L;
-        for (PlayerResult playerResult : team2.getResults()) {
+        for (Result playerResult : team2.getResults()) {
             expResultTeam2 += playerResult.getScoreValue();
         }
 
-        Long resultTeam1 = LeaderBoardCalculator.calculateTeamScore(team1);
-        Long resultTeam2 = LeaderBoardCalculator.calculateTeamScore(team2);
+        Long resultTeam1 = LeaderBoardCalculator.calculateTeamScore(team1.getResults());
+        Long resultTeam2 = LeaderBoardCalculator.calculateTeamScore(team2.getResults());
 
         assertEquals(expResultTeam1, resultTeam1);
         assertEquals(expResultTeam2, resultTeam2);

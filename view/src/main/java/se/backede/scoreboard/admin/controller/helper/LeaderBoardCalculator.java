@@ -2,7 +2,7 @@
  */
 package se.backede.scoreboard.admin.controller.helper;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 import se.backede.scoreboard.admin.resources.dto.Match;
 import se.backede.scoreboard.admin.resources.dto.MatchResult;
 import se.backede.scoreboard.admin.resources.dto.Player;
-import se.backede.scoreboard.admin.resources.dto.PlayerResult;
 import se.backede.scoreboard.admin.resources.dto.Result;
+import se.backede.scoreboard.admin.resources.dto.Team;
 import se.backede.scoreboard.admin.resources.dto.TeamResult;
 
 /**
@@ -21,98 +21,71 @@ import se.backede.scoreboard.admin.resources.dto.TeamResult;
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
 public class LeaderBoardCalculator {
-
-    public static Optional<Map<String, List<MatchResult>>> mapMatchResults(List<Match> matches, List<Result> results) {
-
-        Logger.getLogger(LeaderBoardCalculator.class.getName()).log(Level.INFO, "Size of Matches {0}", new Object[]{matches.size()});
-
-        if (results != null && matches != null) {
-
-            List<MatchResult> pairMatchResultswithResults = pairMatchResultswithResults(matches, results);
-
-            Map<String, List<MatchResult>> groupedMap = pairMatchResultswithResults.stream()
-                    .collect(Collectors.groupingBy(
-                            matchResult -> matchResult.getMatch().getGame().getId()
-                    ));
-
-            return Optional.of(groupedMap);
-
+    
+    private static final Logger LOGGER = Logger.getLogger(LeaderBoardCalculator.class.getName());
+    
+    public static Optional<Map<String, List<MatchResult>>> mapMatchesAndResultsAndGroupByGame(List<Match> matches, List<Result> results) {
+        LOGGER.log(Level.INFO, "Size of Matches {0}", matches.size());
+        
+        if (results == null || matches == null) {
+            return Optional.empty();
         }
-
-        return Optional.empty();
+        
+        List<MatchResult> pairMatchResultsWithResults = pairMatchResultsWithResults(matches, results);
+        
+        Map<String, List<MatchResult>> groupedMap = pairMatchResultsWithResults.stream()
+                .collect(Collectors.groupingBy(matchResult -> matchResult.getGameId()));
+        
+        return Optional.of(groupedMap);
     }
-
-    public static List<MatchResult> pairMatchResultswithResults(List<Match> matches, List<Result> results) {
-
-        List<MatchResult> matchResults = new ArrayList<>();
-        for (Match match : matches) {
-            matchResults.add(pairResultWithMatches(match, results));
-        }
-        return matchResults;
+    
+    public static List<MatchResult> pairMatchResultsWithResults(List<Match> matches, List<Result> results) {
+        return matches.stream()
+                .map(match -> pairResultsWithMatchAndCreateMatchResult(match, results))
+                .collect(Collectors.toList());
     }
-
-    public static MatchResult pairResultWithMatches(Match match, List<Result> results) {
-
-        List<PlayerResult> playerResults = new ArrayList<>();
-        for (Result result : results) {
-            if (result.getMatchId().equals(match.getId())) {
-                PlayerResult build = PlayerResult.builder()
-                        .player(result.getPlayer())
-                        .scoreValue(result.getScoreValue())
-                        .resultId(result.getId())
-                        .build();
-                playerResults.add(build);
-            }
-        }
-
-        List<TeamResult> teamResults = new ArrayList<>();
-
-        //Team 1
-        List<PlayerResult> extractedplayerResultsForTeam1 = new ArrayList<>();
-        for (Player player : match.getTeam1().getPlayers()) {
-            extractedplayerResultsForTeam1.addAll(getPlayerResultForPlayer(player, playerResults));
-        }
-
-        TeamResult team1Results = TeamResult.builder().results(extractedplayerResultsForTeam1).team(match.getTeam1()).build();
-        Long calculateTeamScore = calculateTeamScore(team1Results);
-        team1Results.setCalculatedTeamScore(calculateTeamScore);
-        teamResults.add(team1Results);
-
-        //Team 2
-        List<PlayerResult> extractedplayerResultsForTeam2 = new ArrayList<>();
-        for (Player player : match.getTeam2().getPlayers()) {
-            extractedplayerResultsForTeam2.addAll(getPlayerResultForPlayer(player, playerResults));
-        }
-
-        TeamResult team2results = TeamResult.builder().results(extractedplayerResultsForTeam2).team(match.getTeam2()).build();
-        Long calculateTeam2Score = calculateTeamScore(team2results);
-        team2results.setCalculatedTeamScore(calculateTeam2Score);
-        teamResults.add(team2results);
-
-        return MatchResult.builder().match(match).teamResults(teamResults).build();
-
+    
+    public static MatchResult pairResultsWithMatchAndCreateMatchResult(Match match, List<Result> results) {
+        
+        List<Result> playerResults = results.stream()
+                .filter(result -> result.getMatchId().equals(match.getId()))
+                .collect(Collectors.toList());
+        
+        TeamResult team1Results = buildTeamResult(match.getTeam1(), playerResults);
+        TeamResult team2Results = buildTeamResult(match.getTeam2(), playerResults);
+        
+        return MatchResult.builder()
+                .matchId(match.getId())
+                .gameId(match.getGame().getId())
+                .order(match.getOrder())
+                .teamResults(Arrays.asList(team1Results, team2Results))
+                .build();
     }
-
-    public static List<PlayerResult> getPlayerResultForPlayer(Player player, List<PlayerResult> results) {
-        List<PlayerResult> playerResults = new ArrayList<>();
-        for (PlayerResult result : results) {
-            if (result.getPlayer().getId().equals(player.getId())) {
-                playerResults.add(result);
-            }
-        }
-        return playerResults;
+    
+    public static TeamResult buildTeamResult(Team team, List<Result> playerResults) {
+        List<Result> teamPlayerResults = team.getPlayers().stream()
+                .flatMap(player -> getPlayerResultForPlayer(player, playerResults).stream())
+                .collect(Collectors.toList());
+        
+        Long calculatedScore = calculateTeamScore(teamPlayerResults);
+        
+        return TeamResult.builder()
+                .results(teamPlayerResults)
+                .team(team)
+                .calculatedTeamScore(calculatedScore)
+                .build();
     }
-
-    public static Long calculateTeamScore(TeamResult teamResult) {
-        Long totalScore = 0L;
-        for (PlayerResult result : teamResult.getResults()) {
-            totalScore += result.getScoreValue();
-        }
-        return totalScore;
+    
+    public static List<Result> getPlayerResultForPlayer(Player player, List<Result> results) {
+        return results.stream()
+                .filter(result -> result.getPlayer().getId().equals(player.getId()))
+                .collect(Collectors.toList());
     }
-
-    public void saveSelectedItem() {
-
+    
+    public static Long calculateTeamScore(List<Result> teamPlayerResults) {
+        return teamPlayerResults.stream()
+                .mapToLong(Result::getScoreValue)
+                .sum();
     }
-
+    
 }

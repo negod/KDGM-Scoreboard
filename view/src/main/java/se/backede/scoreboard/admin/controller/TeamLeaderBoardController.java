@@ -24,6 +24,7 @@ import se.backede.scoreboard.admin.resources.dto.MatchResult;
 import se.backede.scoreboard.admin.resources.dto.Player;
 import se.backede.scoreboard.admin.resources.dto.PlayerResult;
 import se.backede.scoreboard.admin.resources.dto.Result;
+import se.backede.scoreboard.admin.resources.dto.TeamResult;
 
 /**
  *
@@ -50,16 +51,7 @@ public class TeamLeaderBoardController implements Serializable {
 
     @PostConstruct
     public void init() {
-
-        selectedCompetition = viewCompetitionController.getSelectedCompetition();
         updateData();
-
-        Optional<Map<String, List<MatchResult>>> matchresults = LeaderBoardCalculator.mapMatchResults(matches, allResults);
-
-        if (matchresults.isPresent()) {
-            results = matchresults.get();
-        }
-
     }
 
     public GameType getGameType(String gameId) {
@@ -69,61 +61,52 @@ public class TeamLeaderBoardController implements Serializable {
 
     public void updateData() {
 
+        selectedCompetition = viewCompetitionController.getSelectedCompetition();
+
         viewCompetitionController.getMatch().getMatchClient().getByCompetitionId(selectedCompetition.getId()).ifPresent(m -> {
             matches = m;
-            for (Match match : m) {
-                viewCompetitionController.getResultController().getResultClient().getByMatch(match.getId()).ifPresent(r -> {
-                    allResults.addAll(r);
-                });
-            }
+            allResults.clear();
+            m.forEach(match -> viewCompetitionController
+                    .getResultController()
+                    .getResultClient()
+                    .getByMatch(match.getId()).ifPresent(allResults::addAll));
         });
 
-        Optional<Map<String, List<MatchResult>>> matchresults = LeaderBoardCalculator.mapMatchResults(matches, allResults);
-
-        if (matchresults.isPresent()) {
-            results = matchresults.get();
-        }
+        results = LeaderBoardCalculator.mapMatchesAndResultsAndGroupByGame(matches, allResults).orElse(new HashMap<>());
 
     }
 
-    public Optional<PlayerResult> playerAlreadyHasResult(String matchId, String playerId) {
-        return results.entrySet().stream()
-                .flatMap(entry -> entry.getValue().stream())
-                .filter(matchResult -> matchId.equals(matchResult.getId()))
+    public Optional<Result> getPlayerResult(String matchId, String playerId) {
+
+        List<MatchResult> resultsForSelectedGame = results.get(viewCompetitionController.getGamesIndex().activeIndexGameId());
+
+        return resultsForSelectedGame.stream()
+                .filter(matchResult -> matchResult.getMatchId().equals(matchId))
                 .flatMap(matchResult -> matchResult.getTeamResults().stream())
                 .flatMap(teamResult -> teamResult.getResults().stream())
-                .filter(playerResult -> playerId.equals(playerResult.getPlayer().getId()))
+                .filter(result -> result.getPlayer().getId().equals(playerId))
                 .findFirst();
     }
 
     public void upsertResults(List<Player> players, Match match) {
 
-        for (Player team1Player : players) {
+        players.forEach(player -> {
+                
+            Optional<Result> playerResult = getPlayerResult(match.getId(), player.getId());
 
-            Optional<PlayerResult> playerResult = playerAlreadyHasResult(match.getId(), team1Player.getId());
+            Result result = Result.builder()
+                    .id(playerResult.map(Result::getId).orElse(null))
+                    .matchId(match.getId())
+                    .player(player)
+                    .scoreValue(player.getScore())
+                    .build();
 
             if (playerResult.isPresent()) {
-
-                Result result = Result.builder()
-                        .matchId(match.getId())
-                        .id(playerResult.get().getResultId())
-                        .player(team1Player)
-                        .scoreValue(team1Player.getScore())
-                        .build();
-
                 viewCompetitionController.getResultController().getResultClient().update(result);
-
             } else {
-                Result result = Result.builder()
-                        .matchId(match.getId())
-                        .player(team1Player)
-                        .scoreValue(team1Player.getScore())
-                        .build();
-
                 viewCompetitionController.getResultController().getResultClient().create(result);
             }
-
-        }
+        });
 
     }
 

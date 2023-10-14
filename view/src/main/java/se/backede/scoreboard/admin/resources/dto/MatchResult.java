@@ -21,7 +21,9 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 @RequiredArgsConstructor
 public class MatchResult extends GenericDto {
 
-    Match match;
+    String gameId;
+    String matchId;
+    Integer order;
     List<TeamResult> teamResults;
 
 }

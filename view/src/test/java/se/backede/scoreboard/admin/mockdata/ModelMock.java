@@ -11,6 +11,7 @@ import se.backede.scoreboard.admin.resources.dto.GameType;
 import se.backede.scoreboard.admin.resources.dto.Match;
 import se.backede.scoreboard.admin.resources.dto.Player;
 import se.backede.scoreboard.admin.resources.dto.PlayerResult;
+import se.backede.scoreboard.admin.resources.dto.Result;
 import se.backede.scoreboard.admin.resources.dto.Team;
 import se.backede.scoreboard.admin.resources.dto.TeamResult;
 
@@ -29,9 +30,9 @@ public class ModelMock {
         Team team1 = TeamMock.getTeam(playerListTeam1);
 
         //Player results for the team
-        List<PlayerResult> playerResultsTeam1 = new ArrayList<>();
+        List<Result> playerResultsTeam1 = new ArrayList<>();
         for (Player player : playerListTeam1) {
-            PlayerResult playerResult = PlayerResultMock.getPlayerResult(player);
+            Result playerResult = ResultMock.getResult(UUID.randomUUID().toString(), player);
             playerResultsTeam1.add(playerResult);
         }
         

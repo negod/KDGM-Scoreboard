@@ -27,5 +27,7 @@ public class Player extends GenericDto {
     private Date updated;
     @JsonbTransient
     Long score;
+    @JsonbTransient
+    String resultId;
 
 }

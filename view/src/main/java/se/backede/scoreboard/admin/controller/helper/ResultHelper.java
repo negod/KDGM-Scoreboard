@@ -18,13 +18,12 @@ public class ResultHelper {
 
     Map<String, List<Result>> results;
 
-    public Optional<Long> getScoreValueByPlayerAndMatch(String playerId, String matchId) {
+    public Optional<Result> getResultByPlayerAndMatch(String playerId, String matchId) {
         return Optional.ofNullable(results.get(matchId))
                 .orElse(Collections.emptyList()) // Returnerar en tom lista om matchId inte finns i mappen
                 .stream() // Skapar en stream av listan
                 .filter(result -> result.getPlayer().getId().equals(playerId)) // Filtrerar listan baserat på playerId
-                .findFirst() // Tar första träffen (om det finns någon)
-                .map(Result::getScoreValue);  // Mapperar till scoreValue
+                .findFirst(); // Tar första träffen (om det finns någon)
     }
 
 }

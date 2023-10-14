@@ -20,6 +20,6 @@ public class TeamResult {
 
     Long calculatedTeamScore;
     Team team;
-    List<PlayerResult> results;
+    List<Result> results;
 
 }
