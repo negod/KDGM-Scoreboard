@@ -57,4 +57,9 @@
         </ui:fragment>
     </ui:repeat>
 
+    <ui:include src="addResultDialog.xhtml" id="editDialog">
+        <ui:param name="controller" value="#{viewCompetitionController}"/>
+        <ui:param name="indexController" value="#{viewCompetitionController}"/>
+    </ui:include>
+
 </html>

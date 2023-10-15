@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <div class="field">
         <p:outputLabel for="name">Name</p:outputLabel>
@@ -15,6 +16,20 @@
             <f:selectItems var="gameType" value="#{controller.gameTypes}" itemValue="#{gameType}" itemLabel="#{gameType}" />
             <p:column><i class="pi pi-#{gameType}" /> #{gameType} </p:column>
         </p:selectOneMenu>
+    </div>
+    <div class="field">
+        <p:outputLabel for="calculationType">Game Type</p:outputLabel>
+        <p:selectOneMenu value="#{controller.selectedItem.calculationtype}" var="calculationType" id="calculationType">
+            <!--f:selectItem itemLabel="Select Game Type" /-->
+            <f:selectItems var="calculationType" value="#{controller.calculationTypes}" itemValue="#{calculationType}" itemLabel="#{calculationType}" />
+            <p:column><i class="pi pi-#{calculationType}" /> #{calculationType} </p:column>
+        </p:selectOneMenu>
+    </div>
+    <div class="field">
+        <p:outputLabel for="name">Name</p:outputLabel>
+        <p:inputTextarea rows="5" cols="30" counter="display" maxlength="1000"
+                         counterTemplate="{0} characters remaining." autoResize="true" value="#{controller.selectedItem.rules}"/>
+        <h:outputText id="display" class="block" />
     </div>
 
 </html>

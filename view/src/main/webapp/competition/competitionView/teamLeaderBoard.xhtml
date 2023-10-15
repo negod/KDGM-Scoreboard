@@ -9,9 +9,6 @@
 
     <p:dataTable id="teamResultTable" lazy="false" rowIndexVar="rowNum" var="teamResult" value="#{controller.teamResults[indexController.gamesIndex.activeIndexGameId()]}"
                  style="margin-top: 20px; margin-right: 30px; margin-bottom: 40px; margin-left: 50px;">
-        <f:facet name="header">
-            Team leaderboard for this game
-        </f:facet>
         <p:column headerText="Position">
             <h:outputText value="#{rowNum+1}" />
         </p:column>

@@ -30,24 +30,24 @@ public class GameDao extends AbstractCrudDao<GameEntity> {
         return GameEntity.class;
     }
 
-    @Override
-    public Optional<GameEntity> update(GameEntity game) {
-        try {
-
-            TypedQuery<GameEntity> createNamedQuery = getEntityManager().createNamedQuery(GameConstants.QUERY_UPDATE_GAME, GameEntity.class);
-            createNamedQuery.setParameter(GameConstants.TABLE_COLUMN_ID, game.getId());
-            createNamedQuery.setParameter(GameConstants.TABLE_COLUMN_NAME, game.getName());
-            createNamedQuery.setParameter(GameConstants.TABLE_COLUMN_GAMETYPE, game.getGametype());
-            int executeUpdate = createNamedQuery.executeUpdate();
-
-            return Optional.ofNullable(game);
-        } catch (ConstraintViolationException e) {
-            e.getConstraintViolations().forEach(err -> Logger.getLogger(GameDao.class.getName()).log(Level.SEVERE, "Constraint violation", e.toString()));
-            return Optional.empty();
-        } catch (Exception e) {
-            Logger.getLogger(GameDao.class.getName()).log(Level.SEVERE, "Error when updating gameI", e);
-            return Optional.empty();
-        }
-    }
+//    @Override
+//    public Optional<GameEntity> update(GameEntity game) {
+//        try {
+//
+//            TypedQuery<GameEntity> createNamedQuery = getEntityManager().createNamedQuery(GameConstants.QUERY_UPDATE_GAME, GameEntity.class);
+//            createNamedQuery.setParameter(GameConstants.TABLE_COLUMN_ID, game.getId());
+//            createNamedQuery.setParameter(GameConstants.TABLE_COLUMN_NAME, game.getName());
+//            createNamedQuery.setParameter(GameConstants.TABLE_COLUMN_GAMETYPE, game.getGametype());
+//            int executeUpdate = createNamedQuery.executeUpdate();
+//
+//            return Optional.ofNullable(game);
+//        } catch (ConstraintViolationException e) {
+//            e.getConstraintViolations().forEach(err -> Logger.getLogger(GameDao.class.getName()).log(Level.SEVERE, "Constraint violation", e.toString()));
+//            return Optional.empty();
+//        } catch (Exception e) {
+//            Logger.getLogger(GameDao.class.getName()).log(Level.SEVERE, "Error when updating gameI", e);
+//            return Optional.empty();
+//        }
+//    }
 
 }

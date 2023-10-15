@@ -25,5 +25,7 @@ public class GameDto extends GenericDto {
     private String name;
     private GameType gametype;
     private Integer gameOrder;
+    private String rules;
+    private ScoreCalculation calculationtype;
 
 }

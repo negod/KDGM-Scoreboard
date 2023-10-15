@@ -1,11 +1,11 @@
 /*
  */
-package se.backede.scoreboard.game;
+package se.backede.scoreboard.admin.resources.dto;
 
 /**
  *
  * @author Joakim Backede <joakim.backede@outlook.com>
  */
-public enum TeamScore {
+public enum ScoreCalculation {
     SUM, AVERAGE
 }

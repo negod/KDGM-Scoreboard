@@ -13,7 +13,53 @@
             }
         </style>
 
+
+
         <h:form id="form">
+
+            <p:accordionPanel multiple="false" id="panel" style="margin-top: 20px; margin-right: 30px; margin-bottom: 40px; margin-left: 50px;" activeIndex="null">
+                <p:tab  title="How the score is calculated" >
+                    <p class="m-0">
+                        <h4>Basic structure</h4><br/>
+                        One <b>competition</b> (Kode gubbz gaming night) consist of one or several <b>games</b> (Bowling, StarCraft etc....)<br/>
+                        Each game has several <b>matches</b> where all teams face each other exactly one time.<br/>
+                        <br/>
+
+                        <h4>Score calculation for each match</h4><br/>
+                        If a games score is calculated based on time (for example fastest lap in a car game), the team with the total least time wins the match (Calculated on all players in the team)<br/>
+                        If a games score is calculated based on score (for example total score in bownling), the team with the total most score wins the match (Calculated on all players in the team)<br/>
+                        <br/>
+                        The team with the least total time in a <b>match</b> gets 100 points <br/>
+                        The team with the next least total time in a <b>match</b> gets 90 points and so on...<br/>
+                        <br/>
+                        The team with the most total score in a <b>match</b> gets 100 points<br/>
+                        The team with the next most total score in a <b>match</b> gets 90 points and so on...<br/>
+                        <br/>
+
+                        <h4>Total Team score calculation (This leaderboard)</h4><br/>
+                        The total score is calculated on the total score for each team in every <b>game</b><br/>
+                        <br/>
+                        If a games score is calculated based on time, the team with the least total time in a <b>game</b> gets 100 points <br/>
+                        The team with the next least total time in a <b>game</b> gets 90 points and so on...<br/>
+                        <br/>
+                        If a games score is calculated based on score, the team with the most total score in a <b>game</b> gets 100 points<br/>
+                        the team with the next most total score in a <b>game</b> gets 90 points and so on...<br/>
+                        <br/>
+
+                        <h4>Total Player score calculation (This leaderboard)</h4><br/>
+                        The total score is calculated on the total score for each player in every <b>game</b><br/>
+                        <br/>
+                        If a player score is calculated based on time, the player with the least total time in a <b>game</b> gets 100 points <br/>
+                        The player with the next least total time in a <b>game</b> gets 90 points and so on...<br/>
+                        <br/>
+                        If a games score is calculated based on score, the player with the most total score in a <b>game</b> gets 100 points<br/>
+                        the player with the next most total score in a <b>game</b> gets 90 points and so on...<br/>
+                        <br/>
+
+                    </p>
+                </p:tab>
+            </p:accordionPanel>
+
 
             <ui:include src="competitionTeamResultBoard.xhtml" id="teamTotalPage">
                 <ui:param name="controller" value="#{totalLeaderBoardController}"/>

@@ -50,6 +50,15 @@ public class GameEntity extends GenericEntity implements Serializable {
     private String name;
 
     @Basic(optional = false)
+    @Column(name = "rules")
+    private String rules;
+
+    @Basic(optional = false)
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "GameType cannot be null")
+    private ScoreCalculation calculationtype;
+
+    @Basic(optional = false)
     @Enumerated(EnumType.STRING)
     @NotNull(message = "GameType cannot be null")
     private GameType gametype;

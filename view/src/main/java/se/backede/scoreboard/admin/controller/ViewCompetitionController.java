@@ -103,6 +103,8 @@ public class ViewCompetitionController implements Serializable {
             match.getMatchClient().getByCompetitionId(selectedCompetition.getId()).ifPresent(matches -> {
                 this.matchList = MatchHelper.getMatchesGroupedOnGameId(matches);
             });
+            resultList = getResultsForMatchesOrderedByMatchId(matchList);
+            MatchHelper.enrichMatchesWithPlayerRestults(matchList, resultList);
         } else {
             matchList = MatchHelper.createMatches(selectedCompetition.getGames(), selectedCompetition.getTeams());
 
@@ -123,8 +125,6 @@ public class ViewCompetitionController implements Serializable {
             competitionController.getCompetitionClient().update(selectedCompetition);
         }
 
-        resultList = getResultsForMatchesOrderedByMatchId(matchList);
-        MatchHelper.enrichMatchesWithPlayerRestults(matchList, resultList);
         prepareSteps();
     }
 

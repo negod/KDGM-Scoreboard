@@ -63,6 +63,8 @@ public class TeamLeaderBoardController implements Serializable {
 
         updateData();
     }
+    
+    
 
     public GameType getGameType(String gameId) {
         Game game = viewCompetitionController.getGameController().getItemById(gameId);

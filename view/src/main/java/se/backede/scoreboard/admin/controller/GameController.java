@@ -14,6 +14,7 @@ import org.primefaces.event.TransferEvent;
 import se.backede.scoreboard.admin.resources.controller.GameRestClientController;
 import se.backede.scoreboard.admin.resources.dto.Game;
 import se.backede.scoreboard.admin.resources.dto.GameType;
+import se.backede.scoreboard.admin.resources.dto.ScoreCalculation;
 
 /**
  *
@@ -26,6 +27,7 @@ import se.backede.scoreboard.admin.resources.dto.GameType;
 public class GameController extends CrudController<Game> implements Serializable {
 
     private GameType selectedGameType;
+    private GameType selectedscoreCalculation;
 
     @Inject
     private GameRestClientController gameClient;
@@ -38,6 +40,10 @@ public class GameController extends CrudController<Game> implements Serializable
 
     public GameType[] getGameTypes() {
         return GameType.values();
+    }
+
+    public ScoreCalculation[] getCalculationTypes() {
+        return ScoreCalculation.values();
     }
 
     @Override

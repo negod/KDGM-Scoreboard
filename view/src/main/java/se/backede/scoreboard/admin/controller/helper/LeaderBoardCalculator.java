@@ -204,12 +204,24 @@ public class LeaderBoardCalculator {
         return Optional.of(groupedMap);
     }
     
+    /**
+     * Creates a MatchResults based on a list of teams and all results for the competition
+     * @param matches
+     * @param results
+     * @return 
+     */
     public static List<MatchResult> pairMatchResultsWithResults(List<Match> matches, List<Result> results) {
         return matches.stream()
                 .map(match -> pairResultsWithMatchAndCreateMatchResult(match, results))
                 .collect(Collectors.toList());
     }
     
+    /**
+     * Filters all results on the team and the players in the team and creates a Match result for tha team
+     * @param match
+     * @param results
+     * @return 
+     */
     public static MatchResult pairResultsWithMatchAndCreateMatchResult(Match match, List<Result> results) {
         
         List<Result> playerResults = results.stream()
@@ -227,9 +239,15 @@ public class LeaderBoardCalculator {
                 .build();
     }
     
-    public static TeamResult buildTeamResult(Team team, List<Result> playerResults) {
+    /**
+     * Builds a Team result based om the players in the team
+     * @param team The team with players
+     * @param results All the results
+     * @return 
+     */
+    public static TeamResult buildTeamResult(Team team, List<Result> results) {
         List<Result> teamPlayerResults = team.getPlayers().stream()
-                .flatMap(player -> getPlayerResultForPlayer(player, playerResults).stream())
+                .flatMap(player -> getPlayerResultForPlayer(player, results).stream())
                 .collect(Collectors.toList());
         
         Optional<Long> calculatedScore = calculateTeamScore(teamPlayerResults);
@@ -241,14 +259,25 @@ public class LeaderBoardCalculator {
                 .build();
     }
     
+    /**
+     * Gets all results for a specific player
+     * @param player The player to fiter the reults on
+     * @param results The results to be filtered
+     * @return 
+     */
     public static List<Result> getPlayerResultForPlayer(Player player, List<Result> results) {
         return results.stream()
                 .filter(result -> result.getPlayer().getId().equals(player.getId()))
                 .collect(Collectors.toList());
     }
     
-    public static Optional<Long> calculateTeamScore(List<Result> teamPlayerResults) {
-        long sum = teamPlayerResults.stream()
+    /**
+     * Calulates the total score value from the Resultslist
+     * @param results A list of Rssults
+     * @return 
+     */
+    public static Optional<Long> calculateTeamScore(List<Result> results) {
+        long sum = results.stream()
                 .map(Result::getScoreValue)
                 .filter(score -> score != null) // Filter out null scores
                 .mapToLong(Long::longValue)

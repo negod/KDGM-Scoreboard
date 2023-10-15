@@ -23,8 +23,11 @@
             <column name="gametype" type="varchar(10)">
                 <constraints unique="false" nullable="false"/>
             </column>
-              <column name="teamScore" type="varchar(10)">
+            <column name="calculationtype" type="varchar(10)">
                 <constraints unique="false" nullable="false"/>
+            </column>
+            <column name="rules" type="varchar(1000)">
+                <constraints unique="false" nullable="true"/>
             </column>
 
         </createTable>

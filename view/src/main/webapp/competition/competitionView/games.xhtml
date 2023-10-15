@@ -31,27 +31,38 @@
                 <p:commandButton value="Next Game" action="#{viewCompetitionController.gamesIndex.nextStep}" update=":form" disabled="#{viewCompetitionController.gamesIndex.disabled()}" />
             </div>
 
+            <br/>
+            <br/>
 
-            <ui:include src="resultBoard.xhtml" id="resultBoard">
-                <ui:param name="controller" value="#{teamLeaderBoardController}"/>
-                <ui:param name="indexController" value="#{viewCompetitionController}"/>
-            </ui:include>
+            <p:accordionPanel multiple="true" id="panel">
 
-            <ui:include src="teamLeaderBoard.xhtml" id="teamLeaderBoard">
-                <ui:param name="controller" value="#{teamLeaderBoardController}"/>
-                <ui:param name="indexController" value="#{viewCompetitionController}"/>
-            </ui:include>
-            
-            <ui:include src="personLeaderBoard.xhtml" id="personLeaderBoard">
-                <ui:param name="controller" value="#{teamLeaderBoardController}"/>
-                <ui:param name="indexController" value="#{viewCompetitionController}"/>
-            </ui:include>
+                <p:tab title="Match results">
+                    <ui:include src="resultBoard.xhtml" id="resultBoard">
+                        <ui:param name="controller" value="#{teamLeaderBoardController}"/>
+                        <ui:param name="indexController" value="#{viewCompetitionController}"/>
+                    </ui:include>
+                </p:tab>
 
-            <ui:include src="addResultDialog.xhtml" id="editDialog">
-                <ui:param name="controller" value="#{viewCompetitionController}"/>
-                <ui:param name="indexController" value="#{viewCompetitionController}"/>
-            </ui:include>
+                <p:tab title="Team leaderboard for game">
+                    <ui:include src="teamLeaderBoard.xhtml" id="teamLeaderBoard">
+                        <ui:param name="controller" value="#{teamLeaderBoardController}"/>
+                        <ui:param name="indexController" value="#{viewCompetitionController}"/>
+                    </ui:include>
+                </p:tab>
 
+                <p:tab title="Player Leaderboard for game">
+                    <ui:include src="personLeaderBoard.xhtml" id="personLeaderBoard">
+                        <ui:param name="controller" value="#{teamLeaderBoardController}"/>
+                        <ui:param name="indexController" value="#{viewCompetitionController}"/>
+                    </ui:include>
+                </p:tab>
+
+                <ui:include src="addResultDialog.xhtml" id="editDialog">
+                    <ui:param name="controller" value="#{viewCompetitionController}"/>
+                    <ui:param name="indexController" value="#{viewCompetitionController}"/>
+                </ui:include>
+
+            </p:accordionPanel>
 
         </h:form>
     </ui:define>

@@ -4,6 +4,7 @@ package se.backede.scoreboard.admin.controller;
 
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import se.backede.scoreboard.admin.controller.helper.ToggleHelper;
 import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -32,10 +33,15 @@ public class CreateCompetitionController implements Serializable {
     CompetitionController competition;
 
     @Inject
+    GameController game;
+
+    @Inject
     PlayerController player;
 
     @Inject
     TeamController team;
+
+    ToggleHelper teamToggle = new ToggleHelper();
 
     List<Team> createdTeams = new ArrayList<>();
 
