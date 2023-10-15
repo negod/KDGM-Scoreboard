@@ -152,9 +152,9 @@ public class LeaderBoardCalculator {
             Map<String, Long> aggregatedPlayerScores = new HashMap<>();
 
             for (MatchResult matchResult : results.get(gameId)) { // Gå igenom alla Matchresults, där alla teamens poäng redan är kalkylerad
+                
                 for (TeamResult teamResult : matchResult.getTeamResults()) {// Lägg teamets namn som nyckel och lägg till teamets poäng
                     for (Result playerResult : teamResult.getResults()) {
-
                         aggregatedPlayerScores.compute(playerResult.getPlayer().getName(), (key, currentScore) -> {
                             if (currentScore == null) {
                                 if (playerResult.getScoreValue() == null) {

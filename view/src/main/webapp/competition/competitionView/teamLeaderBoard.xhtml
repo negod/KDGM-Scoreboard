@@ -19,13 +19,13 @@
         <c:choose>
 
             <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'TIME'}">
-                <p:column headerText="Time">
+                <p:column headerText="#{teamLeaderBoardController.getHeaderText(indexController.gamesIndex.activeIndexGameId())}">
                     <h:outputText value="${teamResult.teamScore}" converter="timeConverter"/>
                 </p:column>
             </c:when>
 
             <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'SCORE'}">
-                <p:column headerText="Score">
+                <p:column headerText="#{teamLeaderBoardController.getHeaderText(indexController.gamesIndex.activeIndexGameId())}">
                     <h:outputText value="${teamResult.teamScore}" style="text-align: right;"/>
                 </p:column>
             </c:when>

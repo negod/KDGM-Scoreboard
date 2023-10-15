@@ -112,7 +112,7 @@
                 </configuration>
             </plugin>
             
-            <!--plugin>
+            <plugin>
                 <groupId>fish.payara.maven.plugins</groupId>
                 <artifactId>payara-micro-maven-plugin</artifactId>
                 <version>${version.payara.maven.plugin}</version>
@@ -128,7 +128,7 @@
                     <contextRoot>/view</contextRoot>
                     <payaraVersion>${version.payara}</payaraVersion>
                 </configuration>
-            </plugin-->
+            </plugin>
             
         </plugins>
     </build>
