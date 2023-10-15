@@ -50,7 +50,7 @@ public class TeamLeaderBoardController implements Serializable {
     Map<String, List<MatchResult>> results = new HashMap<>();
     Map<String, List<TeamLeaderBoard>> teamResults = new HashMap<>();
     Map<String, List<PlayerLeaderBoard>> playerResults = new HashMap<>();
-    Map<String, GameType> gameMap = new HashMap<>();
+    Map<String, Game> gameMap = new HashMap<>();
 
     @PostConstruct
     public void init() {
@@ -58,17 +58,15 @@ public class TeamLeaderBoardController implements Serializable {
 
         List<String> gameIds = new ArrayList<>(viewCompetitionController.getGamesIndex().getIndexGameId().values());
         for (String gameId : gameIds) {
-            gameMap.put(gameId, viewCompetitionController.getGameController().getItemById(gameId).getGametype());
+            gameMap.put(gameId, viewCompetitionController.getGameController().getItemById(gameId));
         }
 
         updateData();
     }
-    
-    
 
     public GameType getGameType(String gameId) {
         Game game = viewCompetitionController.getGameController().getItemById(gameId);
-        return game.gametype;
+        return game.getGametype();
     }
 
     public void updateData() {

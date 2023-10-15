@@ -18,7 +18,7 @@
         </p:selectOneMenu>
     </div>
     <div class="field">
-        <p:outputLabel for="calculationType">Game Type</p:outputLabel>
+        <p:outputLabel for="calculationType">Calculation Type</p:outputLabel>
         <p:selectOneMenu value="#{controller.selectedItem.calculationtype}" var="calculationType" id="calculationType">
             <!--f:selectItem itemLabel="Select Game Type" /-->
             <f:selectItems var="calculationType" value="#{controller.calculationTypes}" itemValue="#{calculationType}" itemLabel="#{calculationType}" />
@@ -26,8 +26,8 @@
         </p:selectOneMenu>
     </div>
     <div class="field">
-        <p:outputLabel for="name">Name</p:outputLabel>
-        <p:inputTextarea rows="5" cols="30" counter="display" maxlength="1000"
+        <p:outputLabel for="rulesTextBox">Rules and other info</p:outputLabel>
+        <p:inputTextarea id="rulesTextBox" rows="5" cols="30" counter="display" maxlength="1000"
                          counterTemplate="{0} characters remaining." autoResize="true" value="#{controller.selectedItem.rules}"/>
         <h:outputText id="display" class="block" />
     </div>

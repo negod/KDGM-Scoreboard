@@ -25,8 +25,8 @@ import se.backede.scoreboard.admin.commons.GenericDto;
 public class Game extends GenericDto {
 
     private String name;
-    public GameType gametype;
-    public Integer gameOrder;
+    private GameType gametype;
+    private Integer gameOrder;
     private ScoreCalculation calculationtype;
     private String rules;
 
