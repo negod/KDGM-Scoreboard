@@ -93,6 +93,37 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <postgres.url>${dev.postgres.url}</postgres.url>
+                <postgres.adress>${dev.postgres.adress}</postgres.adress>
+                <postgres.databaseName>${dev.postgres.databaseName}</postgres.databaseName>
+                <postgres.port>${dev.postgres.port}</postgres.port>
+                <postgres.username>${dev.postgres.username}</postgres.username>
+                <postgres.password>${dev.postgres.password}</postgres.password>
+                <postgres.defaultSchema>${dev.postgres.defaultSchema}</postgres.defaultSchema>
+                <referenceUsername>${dev.postgres.username}</referenceUsername>
+                <referencePassword>${dev.postgres.password}</referencePassword>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <postgres.url>${prod.postgres.url}</postgres.url>
+                <postgres.adress>${prod.postgres.adress}</postgres.adress>
+                <postgres.databaseName>${prod.postgres.databaseName}</postgres.databaseName>
+                <postgres.port>${prod.postgres.port}</postgres.port>
+                <postgres.username>${prod.postgres.username}</postgres.username>
+                <postgres.password>${prod.postgres.password}</postgres.password>
+                <postgres.defaultSchema>${prod.postgres.defaultSchema}</postgres.defaultSchema>
+                <referenceUsername>${prod.postgres.username}</referenceUsername>
+                <referencePassword>${prod.postgres.password}</referencePassword>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         
@@ -118,7 +149,7 @@
                     <password>${postgres.password}</password>
                     <defaultSchemaName>${postgres.defaultSchema}</defaultSchemaName>
                     <referenceUrl>${postgres.url}</referenceUrl>
-                    <referenceDefaultSchemaName>kggnempty</referenceDefaultSchemaName>
+                    <!--referenceDefaultSchemaName></referenceDefaultSchemaName-->
                     <referenceUsername>${postgres.username}</referenceUsername>
                     <referencePassword>${postgres.password}</referencePassword>
                     <outputChangeLogFile>db.changelog-diff.xml</outputChangeLogFile>
@@ -177,6 +208,8 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <deployWar>false</deployWar>
+                    <domainConfig>${project.build.directory}/${project.build.finalName}/MICRO-INF/domain/domain.xml</domainConfig>
                     <payaraVersion>${version.payara}</payaraVersion>
                     <contextRoot></contextRoot>
                     <customJars>

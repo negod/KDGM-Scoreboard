@@ -76,6 +76,21 @@
         </dependency>
     </dependencies>
     
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <restapi.url>${dev.restapi.url}</restapi.url>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <restapi.url>${prod.restapi.url}</restapi.url>
+            </properties>
+        </profile>
+    </profiles>
+    
     <build>
         <plugins>
             
@@ -131,5 +146,13 @@
             </plugin>
             
         </plugins>
+        
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        
     </build>
 </project>

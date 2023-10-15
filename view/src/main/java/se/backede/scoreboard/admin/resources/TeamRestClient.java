@@ -22,7 +22,7 @@ import se.backede.scoreboard.admin.resources.dto.Team;
 @Path("/rest-service/team")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@RegisterRestClient(baseUri = "http://192.168.2.140:8083")
+@RegisterRestClient(configKey = "restEndpoint")
 public interface TeamRestClient {
 
     @GET

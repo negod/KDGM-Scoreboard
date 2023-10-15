@@ -14,7 +14,8 @@
     <include file="tables/match.xml" relativeToChangelogFile="true"/>
     <include file="tables/result.xml" relativeToChangelogFile="true"/>
     
-    
+    <!-- SAMPLE DATA UNCOMMENT TO USE -->
+    <!--
     <include file="sampledata/teamdata.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/playerdata.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/gamedata.xml" relativeToChangelogFile="true"/>
@@ -24,6 +25,6 @@
     <include file="sampledata/player_team_data.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/matchdata.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/resultdata.xml" relativeToChangelogFile="true"/>
-    
+    -->
 </databaseChangeLog>
 

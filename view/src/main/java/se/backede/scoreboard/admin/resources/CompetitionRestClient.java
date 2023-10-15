@@ -22,8 +22,7 @@ import se.backede.scoreboard.admin.resources.dto.Competition;
 @Path("/rest-service/competition")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@RegisterRestClient(baseUri = "http://192.168.2.140:8083")
-//@RegisterRestClient(baseUri = "https://08f7998b-377a-4e55-bf0f-a34286b8a290.mock.pstmn.io")
+@RegisterRestClient(configKey = "restEndpoint")
 public interface CompetitionRestClient {
 
     @GET

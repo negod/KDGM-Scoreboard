@@ -22,7 +22,7 @@ import se.backede.scoreboard.admin.resources.dto.Match;
 @Path("/rest-service/match")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@RegisterRestClient(baseUri = "http://192.168.2.140:8083")
+@RegisterRestClient(configKey = "restEndpoint")
 public interface MatchRestClient {
 
     @GET
