@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <changeSet id="teamnames" author="Joakim Backede">
+        <insert tableName="teamnames">
+            <column name="name" value="The Questionables"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pestilence"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="BasketBrawlers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Team Team"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="No Pong Intended"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="I’d Hit That"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="I Might Be Wrong"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Talent Pool"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Know Eye Deer"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Ithering Bidiots"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Quagmires"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Body Odor"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Watercooler"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Bye Week"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Hell On Heels"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Call Me A Cab"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Whiskeypedia"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Heart and Sole"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Junkyard Divas"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="That’s My Stapler"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="When Harry Met Alli"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="A Bigot or Two"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="God Fearing Nuns"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Intolerant Men"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Non-stop Small Talk"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Big Show"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Gravy Stains"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Saturday Workers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="My Ball Zach Ertz"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Ass-Savers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Triviaholics"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Mullet Mafia"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Cereal Killers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Compensation Nation"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Swish Kebabs"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Chaffing A Dream"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Buns of Steel"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Shot In The Dark"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Dribblers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Risky Quizness"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Tenacious Turtles"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Attention Deficit"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Team Dis"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Cunning Stunts"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Egg-cellent Team"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Public Scratchers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Mansplainers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Polite Misogynists"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Sweep the Leg"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Ladies In Labor"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pavement Princesses"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Bitchy And Bossy"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Out Of The Cubicle"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Wok N’ Roll"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Straight Trash Homies"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Crybabies"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Unpleasant Women"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Chicks With Kicks"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Fo Shizzle My Quizzle"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Tequila Mockingbird"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Hot Shots"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Team Back Hair"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Technophobes"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Proud Farters"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Big Net Worth"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Cheesy Feet"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Man Haters"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Master Batters"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Sweaty And Sexy"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Slumdog Slingers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Not In The Face"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Speed Banks"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Makeup Factory"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Dangerous Dynamos"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Drunk Wives Matter"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Titanic Swim Team"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Trivia Tramps"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Empty Coffee Cups"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Drunk Damsels"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Know It Ales"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Fat Fellows"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pregnant Men"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="And The Wiener Is"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Creative Females"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Agony of De Feet"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Yo’ Momma"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Smooth Operators"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Know Nothing"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Open Zippers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Stink Bomb"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Mug Shots"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="To Kill a Rocking Serve"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Baked Goods Providers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Baby Got Track"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Team Booblicious"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Critical Failures"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Your Local Prostitutes"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pompous Assets"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Gin And Topics"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Baby Got Dak"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Rhymes With Orange"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Role Models"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Aerobically Challenged"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Comedy Central"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pop-Up Blockers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Space Jam"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pique Blinders"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="All Dodge, No Balls"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The He-she’s"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Achy Breaky"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Desktop Bandits"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Social Media Experts"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Kroos Control"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Some Spike It Hot"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pippen Ain’t Easy"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Cubicle Crew"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Can’t Afford A Bus Pass"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pencil Pushers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Innovation Evasio"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Rehab Is For Quitters"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Jalapeno Hotties"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Fat Married People"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Two And A Half Men"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pacemakers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Avo-Cardio"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Straight Cash Homie"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Drawing Blanks"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Inter-Nets"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Mission Unblockable"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Abusement Park"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Excused"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Sets In The City"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Douchebags"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="50 Shades of Greatness"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Dak to the Future"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Paper Pushers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Furniture"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pull My Finger"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Here We Go Again"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pick N’ Flick"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="East of the Equator"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Flamin"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Hardcore Sissies"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Whatever’s Clean"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Latecomers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Chips and Guac"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Bye Bye Week"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Breaking Balls"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="9 Inch Males"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Break Room Riot"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Idea Crushers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Alcoholichicks"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="We Will Block You"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="A Man Will Fix It"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Drop It Now"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="We Overslept"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Logistical Nightmare"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Cupcakes Anonymous"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Access Denied"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Pin-Ups"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Not Fast, Just Furious"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="TriviYeah"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="EXCEL-arators"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Must Get Beers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Quizlamic Extremists"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Madams Of Mayhem"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Selective Listeners"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Net Results"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Big Dills"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Basic Pitches"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Alternative Facts"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Grumpers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Team Double Dips"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Headaches"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Escapists"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="All About That Ace"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="That Was Quick"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Hangovers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="A Bunch Of Dirks"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="RazzMaTazz"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Out On Lunch"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Spreadsheet Consultants"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Communists"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pitch Please"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Estrogen Express"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="One Hit Wonders"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Easier Said Than Run"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Snap, Crackle, Pop"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Agatha Quiztie"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Indecent Dressers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Looking Illegal"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Pigs Fly"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Dirty Beards"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Nothing But Dicks"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Out Of Eligibility"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Green Phlegm"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Power To The Gal"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Abortion Survivors"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Hermits"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Dude Club"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Better Halves"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Bone Crushing Ballerinas"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Sluggers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Office Trolls"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Lunachicks"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Expert Shoppers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Gluttonous Ones"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="No Punt Intended"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Let’s Get Fiscal"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Fire Breathing Kittens"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Innovation Sensation"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Darth Taters"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Fielder of Dreams"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Ketchup If You Can"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Alley-Oops"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Forgot to Warm-up"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Drinking To Divorce"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Class Clowns"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Salty Pretzels"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Male-Ficence"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Five Second Rule"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Butt Nuggets"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Game Of Loans"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="To Infinity and B-Pong"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Something Offensive"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Abbey-Normal"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Babes With Books"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Sarcasm Providers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Functional Alcoholics"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Trivia Smivia"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Axis of No Talent"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Incredibelles"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Ball Girls"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Comfortable Bollocks"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Staff Infection"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Quizzley Bears"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Quiz In My Pants"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Nose Pickers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Bromance Central"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Speech Makers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Trash Talking Trio"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Game Over"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Sky’s The Limit"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Game of Throws"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Smooth Snalin’"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Chauvinists"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Chug-ettes"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Coffee Zombies"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Traveling Men"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Drilling Me Softly"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Butter Back Off"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Caboose"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="John Trivialta"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Man Love"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Yellow Toilet Seats"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Unlimited Chatters"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Les Quizerables"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Bat Attitudes"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Game of Drones"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Insecure Men"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Must Have Caffeine"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Smells Like Team Spirit"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Google it"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Think Tank"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Grand Slammers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Back That Pass Up"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="You Wine Some,"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Accidental Volunteers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Loose Ends"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Detectives"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="You Booze Some"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Meme Team"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Shooting Stars"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="And Into The Fire"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Overnight Sensations"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Sole Sisters"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Mixed Bag of Nuts"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Uber Was Busy"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Fragrance Appreciators"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="After Shockers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="The Space Invaders"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="In it for the Swag"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Run Like the Winded"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Victorious Secret"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="Babes And Beers"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="You Petr Cech Yourself"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="And in First Place"/>
+        </insert>
+        <insert tableName="teamnames">
+            <column name="name" value="A Team with No Name"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -209,7 +209,6 @@
                 </executions>
                 <configuration>
                     <deployWar>false</deployWar>
-                    <domainConfig>${project.build.directory}/${project.build.finalName}/MICRO-INF/domain/domain.xml</domainConfig>
                     <payaraVersion>${version.payara}</payaraVersion>
                     <contextRoot></contextRoot>
                     <customJars>

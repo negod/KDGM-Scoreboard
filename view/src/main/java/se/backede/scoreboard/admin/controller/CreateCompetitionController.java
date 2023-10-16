@@ -39,10 +39,9 @@ public class CreateCompetitionController implements Serializable {
     PlayerController player;
 
     @Inject
-    TeamController team;
+    TeamController teamController;
 
     ToggleHelper teamToggle = new ToggleHelper();
-
     List<Team> createdTeams = new ArrayList<>();
 
     private int playersInEachTeam;
@@ -74,10 +73,10 @@ public class CreateCompetitionController implements Serializable {
         int numberOfTeams = shuffledPlayers.size() / playersInEachTeam;
 
         for (int i = 0; i < numberOfTeams; i++) {
-            // skapa ett nytt team
-            Team team = new Team("Team " + String.valueOf(i + 1));
+            // skapa ett nytt teamController
+            Team team = new Team(teamController.getRandomTeamName().getName());
 
-            // plocka ut spelare för detta team baserat på index i den blandade listan
+            // plocka ut spelare för detta teamController baserat på index i den blandade listan
             List<Player> playersForThisTeam = shuffledPlayers.subList(i * playersInEachTeam, (i + 1) * playersInEachTeam);
             team.setPlayers(new ArrayList<>(playersForThisTeam));
 
@@ -120,7 +119,7 @@ public class CreateCompetitionController implements Serializable {
         // Fix GameOrder
         List<Team> persistedTeams = new ArrayList<>();
         for (Team createdTeam : createdTeams) {
-            team.saveItem(createdTeam).ifPresent(item -> {
+            teamController.saveItem(createdTeam).ifPresent(item -> {
                 persistedTeams.add(item);
             });
         }

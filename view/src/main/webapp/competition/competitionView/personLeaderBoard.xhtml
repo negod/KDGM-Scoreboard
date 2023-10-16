@@ -15,17 +15,17 @@
         <p:column headerText="Player">
             <h:outputText value="#{personResult.playerName}" />
         </p:column>
-
+        
         <c:choose>
 
             <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'TIME'}">
-                <p:column headerText="Time">
+                <p:column headerText="#{teamLeaderBoardController.getHeaderText(indexController.gamesIndex.activeIndexGameId())}">
                     <h:outputText value="${personResult.score}" converter="timeConverter"/>
                 </p:column>
             </c:when>
 
             <c:when test="#{teamLeaderBoardController.getGameType(indexController.gamesIndex.activeIndexGameId()) == 'SCORE'}">
-                <p:column headerText="Score">
+                <p:column headerText="#{teamLeaderBoardController.getHeaderText(indexController.gamesIndex.activeIndexGameId())}">
                     <h:outputText value="${personResult.score}" style="text-align: right;"/>
                 </p:column>
             </c:when>
@@ -35,6 +35,7 @@
                     <h:outputText value="${personResult.score}" />
                 </p:column>
             </c:otherwise>
+            
         </c:choose>
 
     </p:dataTable>

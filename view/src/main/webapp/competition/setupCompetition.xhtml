@@ -61,7 +61,7 @@
             <ui:fragment rendered="#{createCompetitionController.activeIndex == 2}">
                 <p:fieldset legend="#{createCompetitionController.competition.selectedItem.name}">
                     <p:pickList id="playerPickList" 
-                                value="#{createCompetitionController.team.player.dualList}" 
+                                value="#{createCompetitionController.teamController.player.dualList}" 
                                 var="player" 
                                 itemValue="#{player}" 
                                 itemLabel="#{player.name}"
@@ -77,7 +77,7 @@
                                 responsive="true">
                         <f:facet name="sourceCaption">Available Players</f:facet>
                         <f:facet name="targetCaption">Selected Players</f:facet>
-                        <p:ajax event="transfer" listener="#{createCompetitionController.team.onDualListChange}" />
+                        <p:ajax event="transfer" listener="#{createCompetitionController.teamController.onDualListChange}" />
                     </p:pickList>
                 </p:fieldset>
             </ui:fragment>

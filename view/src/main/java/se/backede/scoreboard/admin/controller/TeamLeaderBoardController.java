@@ -137,10 +137,10 @@ public class TeamLeaderBoardController implements Serializable {
                     .scoreValue(player.getScore())
                     .build();
 
-            if (playerResult.isPresent()) {
-                viewCompetitionController.getResultController().getResultClient().update(result);
-            } else {
+            if (result.getId() == null) {
                 viewCompetitionController.getResultController().getResultClient().create(result);
+            } else {
+                viewCompetitionController.getResultController().getResultClient().update(result);
             }
         });
 

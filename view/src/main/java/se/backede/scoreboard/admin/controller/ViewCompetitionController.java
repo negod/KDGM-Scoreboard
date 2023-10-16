@@ -8,9 +8,11 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.model.menu.BaseMenuModel;
@@ -106,8 +108,10 @@ public class ViewCompetitionController implements Serializable {
             resultList = getResultsForMatchesOrderedByMatchId(matchList);
             MatchHelper.enrichMatchesWithPlayerRestults(matchList, resultList);
         } else {
+
             matchList = MatchHelper.createMatches(selectedCompetition.getGames(), selectedCompetition.getTeams());
 
+            List<Match> persistedMatches = new ArrayList<>();
             for (Map.Entry<String, List<Match>> entry : matchList.entrySet()) {
 
                 //TODO Match Order
@@ -115,21 +119,18 @@ public class ViewCompetitionController implements Serializable {
                 for (Match matche : entry.getValue()) {
                     matche.setCompetition(selectedCompetition);
                     matche.setOrder(order);
-                    match.getMatchClient().create(matche);
+                    Optional<Match> persistedMatch = match.getMatchClient().create(matche);
                     order++;
                 }
 
             }
 
+            this.matchList = MatchHelper.getMatchesGroupedOnGameId(persistedMatches);
             selectedCompetition.setStarted(Boolean.TRUE);
             competitionController.getCompetitionClient().update(selectedCompetition);
         }
 
         prepareSteps();
-    }
-
-    public void enrichDataWithScores() {
-
     }
 
     public List<Match> getSelectedGameMatches() {

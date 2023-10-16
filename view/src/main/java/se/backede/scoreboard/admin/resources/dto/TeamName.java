@@ -2,8 +2,9 @@
  */
 package se.backede.scoreboard.admin.resources.dto;
 
-import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -12,11 +13,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Builder
-public class PlayerLeaderBoard {
+@EqualsAndHashCode
+@RequiredArgsConstructor
+public class TeamName {
 
-    String teamName;
-    String playerName;
-    Long score;
+    String name;
 
 }

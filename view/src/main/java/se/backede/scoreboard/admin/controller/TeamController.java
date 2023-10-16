@@ -10,6 +10,7 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import org.primefaces.model.DualListModel;
 import se.backede.scoreboard.admin.resources.controller.TeamRestClientController;
 import se.backede.scoreboard.admin.resources.dto.Player;
 import se.backede.scoreboard.admin.resources.dto.Team;
+import se.backede.scoreboard.admin.resources.dto.TeamName;
 
 /**
  *
@@ -36,10 +38,23 @@ public class TeamController extends CrudController<Team> implements Serializable
     @Inject
     PlayerController player;
 
+    private List<TeamName> teamNames = new ArrayList<>();
+
     @PostConstruct
     @Override
     public void init() {
         super.setupController(teamClient);
+
+        teamClient.getAllTeamNames().ifPresent(teamNames -> {
+            this.teamNames = teamNames;
+        });
+
+    }
+
+    public TeamName getRandomTeamName() {
+        Random rand = new Random();
+        int randomIndex = rand.nextInt(teamNames.size()); // generera ett index mellan 0 och (teamNames.size() - 1)
+        return teamNames.get(randomIndex);
     }
 
     @Override

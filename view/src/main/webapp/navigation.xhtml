@@ -25,22 +25,24 @@
             <p:accordionPanel multiple="false" id="panel" style="margin-top: 20px; margin-right: 30px; margin-bottom: 40px; margin-left: 50px;" activeIndex="null">
                 <p:tab  title="How scores are calculated" >
                     <section>
-                        <h2>Basic Structure</h2>
+                        <h3>Basic Structure</h3>
                         <ul>
                             <li>A <strong>competition</strong> titled e.g., "Kode gubbz gaming night" comprises one or several <strong>games</strong> (e.g., Bowling, StarCraft).</li>
-                            <li>Each game contains several <strong>matches</strong>. In these matches, every team competes against each other exactly once.</li>
+                            <li>Each game contains several <strong>matches</strong> in order for all teams to face each other.</li>
+                            <li>One <strong>match</strong> always consists of two teams competing against each other.</li>
+                            <li>In these matches, every team competes against each other exactly once.</li>
                         </ul>
                     </section>
 
                     <section>
-                        <h2>Score Calculation for Each Match</h2>
-                        <h3>Time-based Games:</h3>
+                        <h3>Score Calculation for Each Match</h3>
+                        <h4>Time-based Games:</h4>
                         <ul>
-                            <li>If the game's scoring is based on time (e.g., fastest lap in a car game), the team with the least cumulative time wins the match. This is based on the combined times of all players in a team.</li>
+                            <li>If the game's scoring is based on time (e.g., fastest lap in a car game), the team with the least cumulative time wins the match. This is calculated from the scores of all players in the team.</li>
                             <li>The team with the least total time receives 100 points, followed by 90 points for the next least time, and so on.</li>
                         </ul>
 
-                        <h3>Score-based Games:</h3>
+                        <h4>Score-based Games:</h4>
                         <ul>
                             <li>If the game's scoring is determined by a score (e.g., total pins in bowling), the team with the highest cumulative score wins the match. This is calculated from the scores of all players in the team.</li>
                             <li>The team with the highest total score gets 100 points, followed by 90 points for the next highest score, and so on.</li>
@@ -48,34 +50,39 @@
                     </section>
 
                     <section>
-                        <h2>Total Team Score Calculation (Leaderboard)</h2>
+                        <h3><strong>Total</strong> Team Score Calculation (Leaderboard)</h3>
                         <ul>
-                            <li>The overall score is derived from the cumulative score of each team across all <strong>games</strong>.</li>
-                            <li>In instances where teams have uneven member counts, the score for each <strong>match</strong> will be determined by average.</li>
+                            <li>The overall score is derived from the cumulative total score of each team across all <strong>games</strong>.</li>
+                            <li>In instances where teams have uneven member counts, the score for each <strong>match</strong> will be determined by average for all teams.</li>
                             <li>For example, if one team has 3 members and another has 2, scores will be averaged based on 3 players for the first team and 2 players for the second.</li>
                         </ul>
 
-                        <h3>Time-based Games:</h3>
+                        <h4>Time-based Games:</h4>
                         <ul>
-                            <li>The team with the least cumulative time across a <strong>game</strong> earns 100 points. The next least time gets 90 points, and so forth.</li>
+                            <li>The team with the least combined cumulative time across a <strong>game</strong> earns 100 points. The next least time gets 90 points, and so forth.</li>
                         </ul>
 
-                        <h3>Score-based Games:</h3>
+                        <h4>Score-based Games:</h4>
                         <ul>
-                            <li>The team with the highest cumulative score across a <strong>game</strong> receives 100 points, while the next highest score is awarded 90 points, and so on.</li>
+                            <li>The team with the highest combined cumulative score across a <strong>game</strong> receives 100 points, while the next highest score is awarded 90 points, and so on.</li>
                         </ul>
                     </section>
 
                     <section>
-                        <h2>Total Player Score Calculation (Leaderboard)</h2>
-                        <h3>Time-based Games:</h3>
+                        <h3><strong>Total</strong> Player Score Calculation (Leaderboard)</h3>
+                        <li>The overall score is derived from the cumulative total score of each player across all <strong>games</strong>.</li>
+                        <li>In instances where teams have uneven member counts, the score for each <strong>match</strong> will be determined by average for all players.</li>
+                        <li>For example, if one team has 3 members and another has 2, scores will be averaged based on 3 players for the first team and 2 players for the second.</li>
+
+                        <h4>Time-based Games:</h4>
                         <ul>
-                            <li>The player with the least total time across a <strong>game</strong> is awarded 100 points, with the next least time getting 90 points, and so forth.</li>
+                            <li>The player with the combined least total time across a <strong>game</strong> is awarded 100 points, with the next least time getting 90 points, and so forth.</li>
                         </ul>
 
-                        <h3>Score-based Games:</h3>
+                        <h4>Score-based Games:</h4>
                         <ul>
-                            <li>The player with the highest total score in a <strong>game</strong> secures 100 points. The subsequent highest scorer gets 90 points, continuing in this pattern.</li>
+                            <li>The player with the combined highest total score in a <strong>game</strong> secures 100 points. The subsequent highest scorer gets 90 points, continuing in this pattern.</li>
+
                         </ul>
                     </section>
                 </p:tab>

@@ -13,6 +13,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+import se.backede.scoreboard.admin.resources.dto.TeamName;
 import se.backede.scoreboard.admin.resources.dto.Team;
 
 /**
@@ -40,5 +41,9 @@ public interface TeamRestClient {
     @DELETE
     @Path("{id}")
     Boolean delete(@PathParam(value = "id") String id);
+
+    @GET
+    @Path("/teamname")
+    List<TeamName> getAllTeamNames();
 
 }

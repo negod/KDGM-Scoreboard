@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import se.backede.scoreboard.admin.commons.GenericRestClient;
 import se.backede.scoreboard.admin.resources.TeamRestClient;
+import se.backede.scoreboard.admin.resources.dto.TeamName;
 import se.backede.scoreboard.admin.resources.dto.Team;
 
 /**
@@ -69,6 +70,15 @@ public class TeamRestClientController implements GenericRestClient<Team> {
     public Optional<Boolean> delete(String id) {
         try {
             return Optional.ofNullable(client.delete(id));
+        } catch (WebApplicationException e) {
+            Logger.getLogger(TeamRestClientController.class.getName()).log(Level.SEVERE, "Error when deleting all in RestClient", e);
+            return Optional.empty();
+        }
+    }
+
+    public Optional<List<TeamName>> getAllTeamNames() {
+        try {
+            return Optional.ofNullable(client.getAllTeamNames());
         } catch (WebApplicationException e) {
             Logger.getLogger(TeamRestClientController.class.getName()).log(Level.SEVERE, "Error when deleting all in RestClient", e);
             return Optional.empty();
