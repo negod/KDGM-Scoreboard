@@ -127,7 +127,6 @@
                 </configuration>
             </plugin>
             
-            <!--
             <plugin>
                 <groupId>fish.payara.maven.plugins</groupId>
                 <artifactId>payara-micro-maven-plugin</artifactId>
@@ -145,7 +144,6 @@
                     <payaraVersion>${version.payara}</payaraVersion>
                 </configuration>
             </plugin>
-            -->
         </plugins>
         
         <resources>
@@ -156,4 +154,12 @@
         </resources>
         
     </build>
+            
+    <scm>
+        <connection>scm:git:https://github.com/negod/KDGM-Scoreboard.git</connection>
+        <developerConnection>scm:git:https://github.com/negod/KDGM-Scoreboard.git</developerConnection>
+        <url>scm:git:https://github.com/negod/KDGM-Scoreboard.git</url>
+        <tag>HEAD</tag>
+    </scm>
+    
 </project>
