@@ -5,7 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <p:dialog header="Details" showEffect="fade" modal="true" widgetVar="manageItemDialog" responsive="true">
-        <p:outputPanel id="manage-item-content" class="ui-fluid">
+        <p:outputPanel id="manage-item-content" class="ui-fluid" style="overflow:auto; height:400px;">
             <p:outputPanel rendered="#{not empty controller.selectedItem}">
 
                 <ui:include src="#{edit}">

@@ -26,5 +26,6 @@
     <include file="sampledata/matchdata.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/resultdata.xml" relativeToChangelogFile="true"/>
     <include file="sampledata/teamname_data.xml" relativeToChangelogFile="true"/>
+    
 </databaseChangeLog>
 
